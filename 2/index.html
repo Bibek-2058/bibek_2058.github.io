@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibek Pandey - Portfolio</title>
+    <title>Bibek Pandey - Environmental Specialist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap">
     <style>
@@ -217,7 +218,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            background-color: #e0f2e9;
+            background: linear-gradient(45deg, #e0f2e9, #c8e6c9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--primary-color);
         }
 
         .home-content h1 {
@@ -268,7 +274,7 @@
             transform: translateY(-5px);
         }
 
-        /* CV Page */
+        /* Resume Page */
         .cv-content {
             display: flex;
             flex-direction: column;
@@ -442,142 +448,138 @@
             color: #aaa;
         }
 
-        /* Work Experience Page */
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: var(--primary-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-            opacity: 0.3;
-        }
-
-        .timeline-item {
-            padding: 20px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-        }
-
-        .timeline-item:nth-child(odd) {
-            left: 0;
-        }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: var(--card-bg);
-            border: 4px solid var(--primary-color);
-            top: 25px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .timeline-item:nth-child(odd)::after {
-            right: -12px;
-        }
-
-        .timeline-item:nth-child(even)::after {
-            left: -12px;
-        }
-
-        .timeline-content {
-            padding: 25px;
+        /* Experience Page */
+        .experience-list {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
+            padding: 35px;
             box-shadow: var(--shadow);
         }
 
-        .timeline-content h3 {
+        .experience-list h2 {
             color: var(--primary-color);
-            margin-bottom: 10px;
-            font-size: 1.3rem;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-color);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
         }
 
-        .timeline-content ul {
+        .experience-item {
+            margin-bottom: 25px;
+            padding-left: 25px;
+            position: relative;
+            border-left: 3px solid var(--primary-color);
             padding-left: 20px;
-            margin-top: 10px;
+            padding-bottom: 15px;
         }
 
-        .timeline-content li {
-            margin-bottom: 8px;
+        .experience-item:last-child {
+            margin-bottom: 0;
+            border-left: 3px solid transparent;
         }
 
-        /* Portfolio Page */
-        .portfolio-grid {
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        .experience-item h3 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .experience-item .location {
+            color: #777;
+            font-style: italic;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .dark-mode .experience-item .location {
+            color: #aaa;
+        }
+
+        /* Research Page */
+        .research-content {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            box-shadow: var(--shadow);
+        }
+
+        .research-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-color);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+        }
+
+        .research-intro {
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .research-topics {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 30px;
         }
 
-        .portfolio-item {
-            background-color: var(--card-bg);
+        .research-topic {
+            background: linear-gradient(to bottom right, rgba(44, 119, 68, 0.05), transparent);
             border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
+            padding: 25px;
             transition: transform 0.3s ease;
         }
 
-        .portfolio-item:hover {
-            transform: translateY(-10px);
+        .research-topic:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
         }
 
-        .portfolio-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #e0f2e9;
-        }
-
-        .portfolio-info {
-            padding: 25px;
-        }
-
-        .portfolio-info h3 {
-            margin-bottom: 12px;
-            font-size: 1.25rem;
+        .research-topic h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
             color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .portfolio-info p {
+        .research-topic h3 i {
+            font-size: 1.2rem;
+        }
+
+        .research-topic p {
             margin-bottom: 15px;
             color: #777;
+            line-height: 1.7;
         }
 
-        .dark-mode .portfolio-info p {
+        .dark-mode .research-topic p {
             color: #aaa;
         }
 
-        .portfolio-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .portfolio-tag {
-            background-color: rgba(44, 119, 68, 0.1);
-            color: var(--primary-color);
-            padding: 5px 14px;
+        .research-topic .status {
+            display: inline-block;
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 500;
+            background-color: rgba(44, 119, 68, 0.1);
+            color: var(--primary-color);
         }
 
         /* Footer */
@@ -601,28 +603,14 @@
                 font-size: 2.2rem;
             }
             
-            .timeline::after {
-                left: 31px;
+            .personal-info-grid {
+                grid-template-columns: 1fr;
             }
             
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
+            .skills-container {
+                grid-template-columns: 1fr;
             }
             
-            .timeline-item:nth-child(even) {
-                left: 0;
-            }
-            
-            .timeline-item::after {
-                left: 21px;
-            }
-            
-            .timeline-item:nth-child(even)::after {
-                left: 21px;
-            }
-
             .cv-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -658,6 +646,10 @@
             .cv-section {
                 padding: 25px;
             }
+            
+            .research-topics {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -672,9 +664,10 @@
                 </div>
                 <div class="nav-links">
                     <a href="#" class="nav-link active" data-page="home">Home</a>
-                    <a href="#" class="nav-link" data-page="cv">Experience</a>
-                    <a href="#" class="nav-link" data-page="work">Resume</a>
-                    <a href="#" class="nav-link" data-page="portfolio">Portfolio</a>
+                   <a href="#" class="nav-link" data-page="resume">Resume</a>
+                    <a href="#" class="nav-link" data-page="experience">Experience</a>
+                    
+                    <a href="#" class="nav-link" data-page="research">Research</a>
                 </div>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
@@ -689,7 +682,9 @@
         <section id="home" class="page active">
             <div class="home-content">
                 <div class="profile-container">
-                    <div class="profile-pic"></div>
+                    <div class="profile-pic">
+                         <img src="E:\BIBEK PANDEY.JPG" alt="" class="profile-pic">
+                    </div>
                 </div>
                 <div>
                     <h1>Bibek Pandey</h1>
@@ -697,52 +692,69 @@
                     <p>I am a dedicated Forestry professional with expertise in Environmental Impact Assessment (EIA) and Initial Environmental Examination (IEE) for hydropower, transmission line, and infrastructure projects. With hands-on experience in various regions of Nepal, I am committed to sustainable development and environmental conservation.</p>
                     <p>My technical skills include GIS applications, forest management, and environmental planning, complemented by strong communication and coordination abilities.</p>
                 </div>
-                <div class="cv-content">
-                <div class="cv-header">
-                    
-                    <a href="BIBEK PANDEY CV.pdf" class="download-btn" download>
-                          <i class="fas fa-eye"></i> View CV
-                    </a>
-                </div>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/bibek-pandey-455464324/"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/bibek-pandey-455464324/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:bibekpandey936@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
+                <a href="file:///C:/Users/bibek/OneDrive/Desktop/rob/BIBEK%20PANDEY%20CV.pdf" class="download-btn" target="_blank">
+                    <i class="fas fa-eye"></i> View CV
+                </a>
+        
+               
+    
             </div>
         </section>
 
         <!-- Experience Page -->
-        <section id="cv" class="page">     
-  
-                <!-- IEE/EIA Experience -->
-                <div class="cv-section">
-                    <h2>IEE/EIA Experience</h2>
-                    <div class="cv-item">
-                        <h3>Forest Technician for EIA of Solu-Dudhkoshi Transmission Line, Solukhumbhu</h3>
-                    </div>
-                    <div class="cv-item">
-                        <h3>Forest Technician for EIA of Budi Gandaki Hydropower Project, Jagat, Gorkha</h3>
-                    </div>
-                    <div class="cv-item">
-                        <h3>Forest Technician for IEE of Super Inkhu & Mathillo Inkhu Hydropower Project, Solukhumbhu</h3>
-                    </div>
-                    <div class="cv-item">
-                        <h3>Forest Technician for IEE of Thalleri Nam Road Project, Thalleri, Solukhumbhu</h3>
-                    </div>
-                    <div class="cv-item">
-                        <h3>Forest Technician for EIA of Thulo Bheri Hydropower Project, Jajarkot</h3>
-                    </div>
-                    <div class="cv-item">
-                        <h3>Forest Technician at different community forests (Sindhuli & Rasuwa) for OP preparation</h3>
-                    </div>
-                </div>    
-        </section>
+        <section id="experience" class="page">
+            <h1 class="section-title">Professional Experience</h1>
+            <div class="experience-list">
+                <h2>IEE/EIA Experience</h2>
+                <div class="experience-item">
+                    <h3>Forest Technician for EIA of Solu-Dudhkoshi Transmission Line</h3>
+                    <div class="location">Solukhumbhu, Nepal</div>
+                </div>
+                <div class="experience-item">
+                    <h3>Forest Technician for EIA of Budi Gandaki Hydropower Project</h3>
+                    <div class="location">Jagat, Gorkha, Nepal</div>
+                </div>
+                <div class="experience-item">
+                    <h3>Forest Technician for IEE of Super Inkhu & Mathillo Inkhu Hydropower Project</h3>
+                    <div class="location">Solukhumbhu, Nepal</div>
+                </div>
+                <div class="experience-item">
+                    <h3>Forest Technician for IEE of Thalleri Nam Road Project</h3>
+                    <div class="location">Thalleri, Solukhumbhu, Nepal</div>
+                </div>
+                <div class="experience-item">
+                    <h3>Forest Technician for EIA of Thulo Bheri Hydropower Project</h3>
+                    <div class="location">Jajarkot, Nepal</div>
+                </div>
 
-      <!-- Resume Page -->
-                 <div class="cv-section">
-                    <h1>Personal Information</h1>
+                <div class="experience-list">
+                    <h2>CF Work Experience </h2>
+                     <div class="experience-item">
+                    <h3>COmmunity Forest Operational Plan preparation</h3>
+                    <div class="location">Sindhuli, Nepal</div>
+                    <div class="location">Rasuwa, Nepal</div>
+                    
+                </div>
+                <div class="experience-item">
+             <h3>Conducted Thinning Plot Verification at Tilaurakot Collaborative Forest </h3>
+        <div class="location">Kapilvastu, Nepal</div>
+                </div>
+                </div>
+            </section>
+
+        <!-- Resume Page -->
+        <section id="resume" class="page">
+            <h1 class="section-title">Resume</h1>
+            <div class="cv-content">
+                <!-- Personal Information -->
+                <div class="cv-section">
+                    <h2>Personal Information</h2>
                     <div class="personal-info-grid">
                         <div class="info-item">
                             <i class="fas fa-user"></i>
@@ -791,12 +803,12 @@
                             <div class="info-content">
                                 <h4>Nationality</h4>
                                 <p>Nepali</p>
-                    
                             </div>
                         </div>
                     </div>
                 </div>
-         <!-- Education -->
+                
+                <!-- Education -->
                 <div class="cv-section">
                     <h2>Education</h2>
                     <div class="cv-item">
@@ -809,39 +821,20 @@
                         <div class="date">2017 - 2019</div>
                         <p>Mahakavi Devkota Model Secondary School, Sunwal, Nawalparasi</p>
                     </div>
-                    
                 </div>
                 
                 <!-- Skills -->
                 <div class="cv-section">
                     <h2>Personal Skills</h2>
                     <div class="skills-container">
-                        <div class="skill-category">
-                            <h4><i class="fas fa-language"></i> Languages</h4>
-                            <div class="skills">
-                                <div class="skill-tag">
-                                    <i class="fas fa-comment"></i> Nepali (Native)
-                                </div>
-                                <div class="skill-tag">
-                                    <i class="fas fa-comment"></i> English (Fluent)
-                                </div>
-                            </div>
-                        </div>
+                        
                         
                         <div class="skill-category">
                             <h4><i class="fas fa-laptop-code"></i> Technical Skills</h4>
                             <div class="skills">
+                              
                                 <div class="skill-tag">
-                                    <i class="fas fa-file-word"></i> Microsoft Word
-                                </div>
-                                <div class="skill-tag">
-                                    <i class="fas fa-file-powerpoint"></i> PowerPoint
-                                </div>
-                                <div class="skill-tag">
-                                    <i class="fas fa-envelope"></i> Email
-                                </div>
-                                <div class="skill-tag">
-                                    <i class="fas fa-globe"></i> Internet
+                                    <i class="fas fa-globe"></i> Earth Engine
                                 </div>
                                 <div class="skill-tag">
                                     <i class="fas fa-map"></i> ArcGIS
@@ -867,58 +860,25 @@
                             </div>
                         </div>
                     </div>
-</div></section>
+                </div>
+            </div>
+        </section>
 
-        <!-- Portfolio Page -->
-        <section id="portfolio" class="page">
-            <h1 class="section-title">Portfolio</h1>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-img"></div>
-                    <div class="portfolio-info">
-                        <h3>Environmental Impact Assessment</h3>
-                        <p>Comprehensive EIAs for hydropower projects including ecological surveys, impact analysis, and mitigation planning.</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">EIA</span>
-                            <span class="portfolio-tag">Hydropower</span>
-                            <span class="portfolio-tag">Biodiversity</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-img"></div>
-                    <div class="portfolio-info">
-                        <h3>Transmission Line Environmental Studies</h3>
-                        <p>Environmental studies for transmission line projects focusing on forest conservation and route optimization.</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">Transmission</span>
-                            <span class="portfolio-tag">Forest Impact</span>
-                            <span class="portfolio-tag">GIS Mapping</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-img"></div>
-                    <div class="portfolio-info">
-                        <h3>Community Forest Management</h3>
-                        <p>Development of operational plans for community forests in Nepal, promoting sustainable resource use.</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">Community Forestry</span>
-                            <span class="portfolio-tag">OP Preparation</span>
-                            <span class="portfolio-tag">Sustainability</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-img"></div>
-                    <div class="portfolio-info">
-                        <h3>Road Project Environmental Studies</h3>
-                        <p>IEE for road construction projects with focus on minimizing ecological disruption and erosion control.</p>
-                        <div class="portfolio-tags">
-                            <span class="portfolio-tag">IEE</span>
-                            <span class="portfolio-tag">Infrastructure</span>
-                            <span class="portfolio-tag">Erosion Control</span>
-                        </div>
+        <!-- Research Page -->          
+        <section id="research" class="page">
+              <h1 class="section-title"> Ongoing Research</h1>
+        
+               
+                <div class="Research-list">             
+            <h3> Effect of Topography on Above ground Biomass</h3>
+                  
+</div>
+             </div>
+
+                <h2 class="section-title">Published Paper</h2>
+                <p> Currently No paper Published</p>
+                    
+                
                     </div>
                 </div>
             </div>
@@ -929,7 +889,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 Bibek Pandey. All rights reserved.</p>
-            <p>Ramgram-18, Nawalparasi | +977 9848603665</p>
+            <p>Ramgram-18, Nawalparasi </p>
         </div>
     </footer>
 
