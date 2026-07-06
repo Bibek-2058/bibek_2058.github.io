@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PDF Pro Suite – Free PDF Tools</title>
+    <title>DocuMagic – Free PDF Tools</title>
     
-    <!-- Google AdSense (replace YOUR_PUB_ID) -->
+    <!-- Google AdSense (replace YOUR_PUB_ID when you get it) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID" crossorigin="anonymous">
     </script>
     
@@ -322,7 +322,7 @@
         <div class="header">
             <div class="logo">
                 <i class="fas fa-file-pdf"></i>
-                <h1>PDF<span>Pro</span> Suite</h1>
+                <h1>Docu<span>Magic</span></h1>
             </div>
             <div class="tagline">
                 <i class="fas fa-check-circle"></i> 100% free · secure · no sign-up
@@ -392,7 +392,7 @@
         // ================================================================
         // 1. BACKEND SIMULATION (in-memory file storage & conversion)
         // ================================================================
-        const fileStore = new Map(); // toolName -> { blob, name, size }
+        const fileStore = new Map();
 
         // Simulated conversion functions (each returns a proper Blob)
         function convertPDFtoWord(fileBlob) {
@@ -675,7 +675,7 @@
 
         // Demo download (sample file)
         function downloadDemo() {
-            const demoBlob = new Blob(['Sample PDF content – generated from PDF Pro Suite'], { type: 'application/pdf' });
+            const demoBlob = new Blob(['Sample PDF content – generated from DocuMagic'], { type: 'application/pdf' });
             const url = URL.createObjectURL(demoBlob);
             const a = document.createElement('a');
             a.href = url;
@@ -696,7 +696,7 @@
             }
         });
 
-        console.log('🚀 PDF Pro Suite loaded successfully!');
+        console.log('🚀 DocuMagic loaded successfully!');
         console.log('📁 File storage (simulated backend):', fileStore);
         console.log('💡 All conversions are simulated in your browser.');
         console.log('📢 Replace YOUR_PUB_ID with your Google AdSense ID to earn money.');
