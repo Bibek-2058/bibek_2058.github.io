@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DocuMagic – Free PDF Tools</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
+    <style>
+        /* ===== COMPLETE STYLES ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f6f8fc; padding: 20px; color: #1a1f36; }
+        .container { max-width: 1280px; margin: 0 auto; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo i { font-size: 2.5rem; color: #2a5cff; background: #e8edff; padding: 14px; border-radius: 16px; }
+        .logo h1 { font-size: 2rem; font-weight: 700; }
+        .logo span { color: #2a5cff; }
+        .tagline { background: white; padding: 10px 24px; border-radius: 40px; font-weight: 500; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .tagline i { color: #2a5cff; }
+        
+        .ad-banner { background: white; border-radius: 16px; padding: 16px; margin: 20px 0 30px; text-align: center; border: 2px dashed #d0d9e8; min-height: 100px; display: flex; align-items: center; justify-content: center; }
+        .ad-banner .ad-label { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; margin: 30px 0; }
+        .tool-card { background: white; border-radius: 24px; padding: 28px 24px; box-shadow: 0 8px 24px rgba(0,20,60,0.06); border: 1px solid #edf2f7; transition: 0.3s; }
+        .tool-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(42,92,255,0.1); }
+        .tool-icon { font-size: 2.4rem; color: #2a5cff; background: #f0f4ff; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 18px; margin-bottom: 16px; }
+        .tool-card h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 6px; }
+        .tool-card p { color: #4a5568; font-size: 0.95rem; margin-bottom: 18px; min-height: 45px; }
+        .tool-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        
+        .btn { padding: 10px 18px; border-radius: 40px; border: none; font-weight: 600; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.15s; flex: 1; justify-content: center; }
+        .btn-primary { background: #2a5cff; color: white; box-shadow: 0 4px 12px rgba(42,92,255,0.25); }
+        .btn-primary:hover:not(:disabled) { background: #1a4adf; transform: scale(1.02); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-download { background: #eaf6ea; color: #1e7a3a; }
+        .btn-download:hover:not(:disabled) { background: #d4edd4; }
+        .btn-download:disabled { opacity: 0.4; cursor: not-allowed; }
+        .file-input-hidden { display: none; }
+        
+        .progress-container { margin-top: 12px; display: none; }
+        .progress-bar { width: 100%; height: 6px; background: #e9eef6; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #2a5cff, #6c8cff); width: 0%; transition: width 0.3s; border-radius: 10px; }
+        .progress-text { font-size: 0.8rem; color: #4a5568; margin-top: 4px; }
+        
+        .demo-section { background: white; border-radius: 24px; padding: 28px 32px; margin-top: 20px; border: 1px solid #edf2f7; }
+        .demo-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 16px; }
+        .demo-header h2 { font-size: 1.4rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .demo-header h2 i { color: #2a5cff; }
+        .result-list { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+        .result-item { background: #f8faff; padding: 10px 20px; border-radius: 40px; display: flex; align-items: center; gap: 14px; border: 1px solid #e9eef6; }
+        .result-item .file-name { font-weight: 500; color: #1a2b5e; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .result-item .file-size { color: #6b7a93; font-size: 0.85rem; }
+        .badge { background: #eaf6ea; color: #1e7a3a; padding: 4px 12px; border-radius: 30px; font-size: 0.75rem; font-weight: 600; }
+        
+        .status-message { padding: 8px 16px; border-radius: 8px; margin-top: 10px; font-size: 0.9rem; display: none; }
+        .status-success { background: #eaf6ea; color: #1e7a3a; }
+        .status-error { background: #fde8e8; color: #c0392b; }
+        
+        .footer { margin-top: 40px; text-align: center; color: #6b7a93; border-top: 1px solid #e2e8f0; padding-top: 30px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .footer i { color: #2a5cff; }
+        
+        @media (max-width: 650px) {
+            .header { flex-direction: column; align-items: start; }
+            .tool-grid { grid-template-columns: 1fr; }
+            .result-item { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-file-pdf"></i>
+                <h1>Docu<span>Magic</span></h1>
+            </div>
+            <div class="tagline">
+                <i class="fas fa-check-circle"></i> 100% free · secure · no sign-up
+            </div>
+        </div>
+
+        <!-- AD BANNER -->
+        <div class="ad-banner">
+            <div>
+                <div class="ad-label">— Advertisement —</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-2333465940330507"
+                     data-ad-slot="YOUR_AD_SLOT"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true">
+                </ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </div>
+
+        <!-- TOOLS GRID -->
+        <div class="tool-grid" id="toolGrid"></div>
+
+        <!-- ACTIVITY SECTION -->
+        <div class="demo-section">
+            <div class="demo-header">
+                <h2><i class="fas fa-clock"></i> Recent Activity</h2>
+                <span style="color:#6b7a93; font-size:0.9rem;">
+                    <i class="fas fa-circle" style="color:#2a5cff; font-size:0.6rem;"></i> ready for download
+                </span>
+            </div>
+            <div class="result-list" id="resultList">
+                <div class="result-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <span class="file-name">sample.pdf</span>
+                    <span class="file-size">2.4 MB</span>
+                    <span class="badge"><i class="fas fa-check"></i> processed</span>
+                    <button class="btn btn-download" style="padding:6px 16px;" onclick="downloadDemo()">
+                        <i class="fas fa-download"></i> DL
+                    </button>
+                </div>
+            </div>
+            <p style="margin-top:16px; color:#4a5568; font-size:0.9rem; display:flex; gap:20px; flex-wrap:wrap;">
+                <span><i class="fas fa-shield-alt" style="color:#2a5cff;"></i> encrypted processing</span>
+                <span><i class="fas fa-trash-alt" style="color:#2a5cff;"></i> auto-deleted after 1 hour</span>
+                <span><i class="fas fa-users" style="color:#2a5cff;"></i> 100% free forever</span>
+            </p>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <span><i class="fas fa-check-circle"></i> 5 powerful tools</span>
+            <span><i class="fas fa-download"></i> Download results anytime</span>
+            <span><i class="fas fa-user-shield"></i> 100% private</span>
+            <span><i class="fas fa-ad"></i> Support us by disabling ad-blocker ❤️</span>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT – WITH CONVERTAPI SDK INTEGRATION -->
+    <!-- ============================================================ -->
+    <script>
+        // ================================================================
+        // CONFIGURATION
+        // ================================================================
+        // 🔑 GET YOUR FREE API KEY FROM: https://www.convertapi.com
+        // You get 250 free conversions with no credit card required!
+        const CONVERTAPI_KEY = 'YOUR_API_KEY_HERE'; // Replace with your API key
+
+        // ================================================================
+        // TOOL CONFIGURATION
+        // ================================================================
+        const tools = [{
+            id: 'pdf-to-word',
+            icon: 'fa-file-word',
+            title: 'PDF to Word',
+            desc: 'Convert PDF to editable Word (.docx) with perfect layout retention.',
+            accept: '.pdf',
+            btnText: 'Upload & Convert',
+            fromFormat: 'pdf',
+            toFormat: 'docx'
+        }, {
+            id: 'word-to-pdf',
+            icon: 'fa-file-pdf',
+            title: 'Word to PDF',
+            desc: 'Instantly turn your Word documents into high-quality PDF files.',
+            accept: '.docx,.doc',
+            btnText: 'Upload & Convert',
+            fromFormat: 'docx',
+            toFormat: 'pdf'
+        }, {
+            id: 'compress-pdf',
+            icon: 'fa-compress-arrows-alt',
+            title: 'Compress PDF',
+            desc: 'Reduce PDF file size without losing quality. Optimize for web & email.',
+            accept: '.pdf',
+            btnText: 'Upload & Compress',
+            fromFormat: 'pdf',
+            toFormat: 'pdf'
+        }, {
+            id: 'extract-pages',
+            icon: 'fa-cut',
+            title: 'Extract Pages',
+            desc: 'Extract all pages from your PDF to create a new document.',
+            accept: '.pdf',
+            btnText: 'Extract All Pages',
+            fromFormat: 'pdf',
+            toFormat: 'pdf'
+        }, {
+            id: 'split-pdf',
+            icon: 'fa-code-branch',
+            title: 'Split PDF',
+            desc: 'Split large PDF into multiple smaller files by page range.',
+            accept: '.pdf',
+            btnText: 'Upload & Split',
+            fromFormat: 'pdf',
+            toFormat: 'pdf'
+        }];
+
+        // ================================================================
+        // CONVERTAPI SDK INTEGRATION
+        // ================================================================
+        async function convertWithConvertAPI(file, fromFormat, toFormat, toolId) {
+            // Check if API key is set
+            if (CONVERTAPI_KEY === 'YOUR_API_KEY_HERE') {
+                throw new Error('Please set your ConvertAPI key in the code. Get a free key at convertapi.com');
+            }
+
+            // Validate file size
+            if (file.size > 100 * 1024 * 1024) {
+                throw new Error('File is too large. Maximum size is 100MB.');
+            }
+
+            updateProgress(toolId, 10);
+
+            try {
+                // Create FormData for API request
+                const formData = new FormData();
+                formData.append('file', file);
+
+                // Step 1: Upload and convert
+                const response = await fetch(
+                    `https://v2.convertapi.com/convert/${fromFormat}/${toFormat}?api_key=${CONVERTAPI_KEY}`,
+                    {
+                        method: 'POST',
+                        body: formData
+                    }
+                );
+
+                updateProgress(toolId, 40);
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Conversion failed');
+                }
+
+                const result = await response.json();
+                updateProgress(toolId, 70);
+
+                // Step 2: Get the converted file
+                if (!result.files || result.files.length === 0) {
+                    throw new Error('No file returned from ConvertAPI');
+                }
+
+                const fileUrl = result.files[0].url;
+                const fileResponse = await fetch(fileUrl);
+                const blob = await fileResponse.blob();
+
+                updateProgress(toolId, 100);
+
+                return {
+                    blob: blob,
+                    fileName: file.name.replace(/\.[^.]+$/, '') + '_converted.' + toFormat,
+                    size: blob.size
+                };
+
+            } catch (error) {
+                console.error('ConvertAPI Error:', error);
+                throw error;
+            }
+        }
+
+        // ================================================================
+        // RENDER TOOLS
+        // ================================================================
+        const toolGrid = document.getElementById('toolGrid');
+
+        tools.forEach(tool => {
+            const card = document.createElement('div');
+            card.className = 'tool-card';
+            card.dataset.tool = tool.id;
+            card.innerHTML = `
+                <div class="tool-icon"><i class="fas ${tool.icon}"></i></div>
+                <h3>${tool.title}</h3>
+                <p>${tool.desc}</p>
+                <div class="tool-actions">
+                    <input type="file" class="file-input-hidden" accept="${tool.accept}" data-tool="${tool.id}">
+                    <button class="btn btn-primary upload-btn" data-tool="${tool.id}">
+                        <i class="fas fa-upload"></i> ${tool.btnText}
+                    </button>
+                    <button class="btn btn-download download-btn" data-tool="${tool.id}" disabled>
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+                <div class="progress-container" id="progress-${tool.id}">
+                    <div class="progress-bar"><div class="progress-fill" id="progress-fill-${tool.id}"></div></div>
+                    <div class="progress-text" id="progress-text-${tool.id}">0%</div>
+                </div>
+                <div class="status-message" id="status-${tool.id}"></div>
+            `;
+            toolGrid.appendChild(card);
+        });
+
+        // ================================================================
+        // EVENT HANDLERS
+        // ================================================================
+        const fileStore = new Map();
+
+        document.querySelectorAll('.tool-card').forEach(card => {
+            const toolId = card.dataset.tool;
+            const fileInput = card.querySelector('.file-input-hidden');
+            const uploadBtn = card.querySelector('.upload-btn');
+            const downloadBtn = card.querySelector('.download-btn');
+
+            uploadBtn.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', async function(e) {
+                const file = this.files[0];
+                if (!file) return;
+
+                const tool = tools.find(t => t.id === toolId);
+                const validTypes = tool.accept.split(',').map(t => t.trim());
+                const ext = file.name.split('.').pop().toLowerCase();
+
+                if (!validTypes.some(type => type.includes(ext))) {
+                    showStatus(toolId, `Please upload a valid file (${tool.accept})`, 'error');
+                    this.value = '';
+                    return;
+                }
+
+                uploadBtn.disabled = true;
+                downloadBtn.disabled = true;
+                showStatus(toolId, `Processing: ${file.name} (${(file.size / 1024).toFixed(2)} KB)...`, 'success');
+                document.getElementById(`progress-${toolId}`).style.display = 'block';
+                updateProgress(toolId, 0);
+
+                try {
+                    let result;
+
+                    // Convert using ConvertAPI
+                    result = await convertWithConvertAPI(file, tool.fromFormat, tool.toFormat, toolId);
+
+                    // Store result
+                    fileStore.set(toolId, {
+                        blob: result.blob,
+                        name: result.fileName,
+                        size: result.size
+                    });
+
+                    downloadBtn.disabled = false;
+
+                    const originalSize = (file.size / 1024 / 1024).toFixed(2);
+                    const newSize = (result.size / 1024 / 1024).toFixed(2);
+                    showStatus(toolId, `✅ Complete! ${result.fileName} (${newSize} MB) created from ${file.name} (${originalSize} MB)`, 'success');
+                    addActivity(result.fileName, newSize + ' MB', toolId);
+
+                    setTimeout(() => downloadFile(toolId), 1500);
+
+                } catch (error) {
+                    showStatus(toolId, `❌ Error: ${error.message}`, 'error');
+                    console.error('Conversion error:', error);
+                } finally {
+                    uploadBtn.disabled = false;
+                    this.value = '';
+                    setTimeout(() => {
+                        document.getElementById(`progress-${toolId}`).style.display = 'none';
+                        updateProgress(toolId, 0);
+                    }, 3000);
+                }
+            });
+
+            downloadBtn.addEventListener('click', () => downloadFile(toolId));
+        });
+
+        // ================================================================
+        // UTILITY FUNCTIONS
+        // ================================================================
+        function downloadFile(toolId) {
+            const stored = fileStore.get(toolId);
+            if (!stored) {
+                showStatus(toolId, 'No converted file found. Please upload first.', 'error');
+                return;
+            }
+            const { blob, name } = stored;
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        function showStatus(toolId, message, type) {
+            const statusDiv = document.getElementById(`status-${toolId}`);
+            if (!statusDiv) return;
+            statusDiv.style.display = 'block';
+            statusDiv.className = `status-message status-${type}`;
+            statusDiv.textContent = message;
+            if (type === 'error') {
+                setTimeout(() => statusDiv.style.display = 'none', 8000);
+            }
+        }
+
+        function updateProgress(toolId, percent) {
+            const fill = document.getElementById(`progress-fill-${toolId}`);
+            const text = document.getElementById(`progress-text-${toolId}`);
+            if (fill) fill.style.width = percent + '%';
+            if (text) text.textContent = percent + '%';
+        }
+
+        function addActivity(fileName, size, toolId) {
+            const list = document.getElementById('resultList');
+            const item = document.createElement('div');
+            item.className = 'result-item';
+            const icon = toolId === 'pdf-to-word' ? 'fa-file-word' : 'fa-file-pdf';
+            item.innerHTML = `
+                <i class="fas ${icon}"></i>
+                <span class="file-name">${fileName}</span>
+                <span class="file-size">${size}</span>
+                <span class="badge"><i class="fas fa-check"></i> ready</span>
+                <button class="btn btn-download" style="padding:6px 16px;" onclick="downloadFile('${toolId}')">
+                    <i class="fas fa-download"></i> DL
+                </button>
+            `;
+            list.prepend(item);
+            while (list.children.length > 6) {
+                list.removeChild(list.lastChild);
+            }
+        }
+
+        function downloadDemo() {
+            const demoBlob = new Blob(['Sample PDF content – generated from DocuMagic'], { type: 'application/pdf' });
+            const url = URL.createObjectURL(demoBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'demo_' + Date.now() + '.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        // ================================================================
+        // INITIALIZATION
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DocuMagic loaded successfully!');
+            console.log('📢 ConvertAPI integration is ready!');
+            console.log('⚡ Get your free API key at: https://www.convertapi.com');
+            
+            if (CONVERTAPI_KEY === 'YOUR_API_KEY_HERE') {
+                console.warn('⚠️ Please set your ConvertAPI key in the code!');
+                document.querySelectorAll('.tool-card').forEach(card => {
+                    const statusDiv = card.querySelector('.status-message');
+                    if (statusDiv) {
+                        statusDiv.style.display = 'block';
+                        statusDiv.className = 'status-message status-error';
+                        statusDiv.textContent = '⚠️ Set your ConvertAPI key in the JavaScript code (line ~100)';
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
