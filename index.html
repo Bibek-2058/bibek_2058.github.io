@@ -333,7 +333,6 @@
         <div class="ad-banner">
             <div>
                 <div class="ad-label">— Advertisement —</div>
-                <!-- Google AdSense Unit -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-2333465940330507"
@@ -387,49 +386,104 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- ===== JAVASCRIPT – FULL BACKEND SIMULATION + FRONTEND ===== -->
+    <!-- ===== JAVASCRIPT – FIXED WITH PROPER FILE SIZES ===== -->
     <!-- ============================================================ -->
     <script>
         // ================================================================
-        // 1. BACKEND SIMULATION (in-memory file storage & conversion)
+        // 1. BACKEND SIMULATION (NOW WITH PROPER FILE SIZES)
         // ================================================================
         const fileStore = new Map();
 
-        // Simulated conversion functions (each returns a proper Blob)
+        // IMPROVED: These functions now preserve file size information
         function convertPDFtoWord(fileBlob) {
-            return new Blob(
-                ['[CONVERTED] PDF to Word content from file of size: ' + fileBlob.size + ' bytes'],
-                { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }
-            );
+            // Create a proper Word document with the original file name and size
+            const content = `
+                CONVERTED DOCUMENT
+                ==================
+                Original file: ${fileBlob.name || 'unknown.pdf'}
+                Original size: ${(fileBlob.size / 1024).toFixed(2)} KB
+                Conversion date: ${new Date().toLocaleString()}
+                
+                This is a simulated conversion. In production, this would be a real Word document.
+                The actual file conversion would preserve formatting, images, and layout.
+            `;
+            
+            // Create a blob with proper Word MIME type
+            return new Blob([content], { 
+                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            });
         }
 
         function convertWordToPDF(fileBlob) {
-            return new Blob(
-                ['[CONVERTED] Word to PDF content from file of size: ' + fileBlob.size + ' bytes'],
-                { type: 'application/pdf' }
-            );
+            const content = `
+                CONVERTED PDF DOCUMENT
+                ======================
+                Original file: ${fileBlob.name || 'unknown.docx'}
+                Original size: ${(fileBlob.size / 1024).toFixed(2)} KB
+                Conversion date: ${new Date().toLocaleString()}
+                
+                This is a simulated PDF conversion.
+                In production, this would preserve all formatting.
+            `;
+            
+            return new Blob([content], { type: 'application/pdf' });
         }
 
         function compressPDF(fileBlob) {
-            const smallerSize = Math.max(100, Math.floor(fileBlob.size * 0.6));
-            return new Blob(
-                ['[COMPRESSED] PDF (original size: ' + fileBlob.size + ' bytes, new size: ' + smallerSize + ' bytes)'],
-                { type: 'application/pdf' }
-            );
+            // Simulate compression by creating a smaller blob
+            const compressionRatio = 0.4; // 40% of original size
+            const newSize = Math.max(1024, Math.floor(fileBlob.size * compressionRatio));
+            
+            const content = `
+                COMPRESSED PDF
+                ==============
+                Original file: ${fileBlob.name || 'unknown.pdf'}
+                Original size: ${(fileBlob.size / 1024).toFixed(2)} KB
+                Compressed size: ${(newSize / 1024).toFixed(2)} KB
+                Compression ratio: ${(compressionRatio * 100).toFixed(0)}%
+                Date: ${new Date().toLocaleString()}
+                
+                This is a simulated compressed PDF.
+                The file size has been reduced significantly.
+            `;
+            
+            // Fill with extra content to simulate file size
+            const paddingSize = Math.max(0, newSize - content.length);
+            const padding = 'X'.repeat(paddingSize);
+            
+            return new Blob([content + padding], { type: 'application/pdf' });
         }
 
         function extractPages(fileBlob) {
-            return new Blob(
-                ['[EXTRACTED PAGES] from file of size: ' + fileBlob.size + ' bytes – all pages extracted'],
-                { type: 'application/pdf' }
-            );
+            const content = `
+                EXTRACTED PAGES
+                ===============
+                Original file: ${fileBlob.name || 'unknown.pdf'}
+                Original size: ${(fileBlob.size / 1024).toFixed(2)} KB
+                Extracted pages: All pages
+                Date: ${new Date().toLocaleString()}
+                
+                This is a simulated page extraction.
+                All pages from the original document are included here.
+            `;
+            
+            return new Blob([content], { type: 'application/pdf' });
         }
 
         function splitPDF(fileBlob) {
-            return new Blob(
-                ['[SPLIT PART 1] from file of size: ' + fileBlob.size + ' bytes'],
-                { type: 'application/pdf' }
-            );
+            const content = `
+                SPLIT PDF - PART 1
+                ==================
+                Original file: ${fileBlob.name || 'unknown.pdf'}
+                Original size: ${(fileBlob.size / 1024).toFixed(2)} KB
+                Split part: Part 1 of 2
+                Date: ${new Date().toLocaleString()}
+                
+                This is a simulated split operation.
+                The original file has been split into two parts.
+            `;
+            
+            return new Blob([content], { type: 'application/pdf' });
         }
 
         // Map tool names to conversion functions
@@ -513,7 +567,7 @@
         });
 
         // ================================================================
-        // 4. EVENT HANDLERS (Frontend + Backend Simulation)
+        // 4. EVENT HANDLERS
         // ================================================================
         document.querySelectorAll('.tool-card').forEach(card => {
             const toolId = card.dataset.tool;
@@ -528,7 +582,7 @@
             // Click upload button → trigger file input
             uploadBtn.addEventListener('click', () => fileInput.click());
 
-            // File selected → process (simulated backend)
+            // File selected → process
             fileInput.addEventListener('change', async function(e) {
                 const file = this.files[0];
                 if (!file) return;
@@ -543,55 +597,71 @@
                     return;
                 }
 
+                // Show file info
+                console.log(`📁 Uploading: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`);
+
                 // Disable buttons, show progress
                 uploadBtn.disabled = true;
                 downloadBtn.disabled = true;
-                showStatus(toolId, 'Uploading and converting...', 'success');
+                showStatus(toolId, `Uploading: ${file.name} (${(file.size / 1024).toFixed(2)} KB)...`, 'success');
                 progressContainer.style.display = 'block';
                 updateProgress(toolId, 10);
 
-                // Simulate backend processing with delay
-                await new Promise(resolve => setTimeout(resolve, 500));
-                updateProgress(toolId, 30);
-                await new Promise(resolve => setTimeout(resolve, 500));
-                updateProgress(toolId, 60);
-                await new Promise(resolve => setTimeout(resolve, 500));
-                updateProgress(toolId, 80);
-                await new Promise(resolve => setTimeout(resolve, 500));
-
                 try {
-                    // 1. Read file as ArrayBuffer (simulate upload)
+                    // Simulate upload progress
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    updateProgress(toolId, 25);
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    updateProgress(toolId, 50);
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    updateProgress(toolId, 75);
+                    await new Promise(resolve => setTimeout(resolve, 300));
+
+                    // Read file
                     const arrayBuffer = await file.arrayBuffer();
                     const fileBlob = new Blob([arrayBuffer], { type: file.type });
+                    
+                    // Add the file name to the blob for reference
+                    fileBlob.name = file.name;
 
-                    // 2. Convert using the appropriate function (backend simulation)
+                    // Convert
                     const converter = conversionMap[toolId];
                     if (!converter) throw new Error('No converter for ' + toolId);
+                    
+                    updateProgress(toolId, 85);
                     const resultBlob = converter(fileBlob);
+                    updateProgress(toolId, 95);
 
-                    // 3. Store result in memory
+                    // Store result with proper name
                     const fileName = file.name.replace(/\.[^.]+$/, '') +
                         (toolId === 'pdf-to-word' ? '_converted.docx' : '_converted.pdf');
+                    
                     fileStore.set(toolId, {
                         blob: resultBlob,
                         name: fileName,
                         size: resultBlob.size,
+                        originalName: file.name,
+                        originalSize: file.size,
                     });
 
-                    // 4. Enable download button
+                    // Enable download
                     downloadBtn.disabled = false;
 
-                    // 5. Update progress to 100%
-                    updateProgress(toolId, 100);
+                    // Show success with file sizes
+                    const originalSize = (file.size / 1024 / 1024).toFixed(2);
+                    const newSize = (resultBlob.size / 1024 / 1024).toFixed(2);
+                    showStatus(
+                        toolId, 
+                        `✅ Complete! ${fileName} (${newSize} MB) created from ${file.name} (${originalSize} MB)`, 
+                        'success'
+                    );
+                    
+                    addActivity(fileName, newSize + ' MB', toolId);
 
-                    // 6. Show success and add to activity
-                    showStatus(toolId, `✅ Complete! File size: ${(resultBlob.size / 1024 / 1024).toFixed(2)} MB`, 'success');
-                    addActivity(fileName, (resultBlob.size / 1024 / 1024).toFixed(1) + ' MB', toolId);
-
-                    // 7. Auto-download after 1 second
+                    // Auto-download after 1 second
                     setTimeout(() => {
                         downloadFile(toolId);
-                    }, 1000);
+                    }, 1500);
 
                 } catch (error) {
                     showStatus(toolId, `❌ Error: ${error.message}`, 'error');
@@ -599,7 +669,6 @@
                 } finally {
                     uploadBtn.disabled = false;
                     this.value = '';
-                    // Hide progress after delay
                     setTimeout(() => {
                         progressContainer.style.display = 'none';
                         updateProgress(toolId, 0);
@@ -615,14 +684,16 @@
         // 5. SHARED FUNCTIONS
         // ================================================================
 
-        // Download a converted file from storage
         function downloadFile(toolId) {
             const stored = fileStore.get(toolId);
             if (!stored) {
                 showStatus(toolId, 'No converted file found. Please upload first.', 'error');
                 return;
             }
-            const { blob, name } = stored;
+            const { blob, name, size } = stored;
+            
+            console.log(`📥 Downloading: ${name} (${(size / 1024).toFixed(2)} KB)`);
+            
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -631,9 +702,10 @@
             a.click();
             document.body.removeChild(a);
             setTimeout(() => URL.revokeObjectURL(url), 1000);
+            
+            showStatus(toolId, `📥 Downloaded: ${name}`, 'success');
         }
 
-        // Show status message for a tool
         function showStatus(toolId, message, type) {
             const statusDiv = document.getElementById(`status-${toolId}`);
             if (!statusDiv) return;
@@ -641,11 +713,10 @@
             statusDiv.className = `status-message status-${type}`;
             statusDiv.textContent = message;
             if (type === 'error') {
-                setTimeout(() => statusDiv.style.display = 'none', 6000);
+                setTimeout(() => statusDiv.style.display = 'none', 8000);
             }
         }
 
-        // Update progress bar
         function updateProgress(toolId, percent) {
             const fill = document.getElementById(`progress-fill-${toolId}`);
             const text = document.getElementById(`progress-text-${toolId}`);
@@ -653,7 +724,6 @@
             if (text) text.textContent = percent + '%';
         }
 
-        // Add item to recent activity
         function addActivity(fileName, size, toolId) {
             const list = document.getElementById('resultList');
             const item = document.createElement('div');
@@ -674,7 +744,6 @@
             }
         }
 
-        // Demo download (sample file)
         function downloadDemo() {
             const demoBlob = new Blob(['Sample PDF content – generated from DocuMagic'], { type: 'application/pdf' });
             const url = URL.createObjectURL(demoBlob);
@@ -699,8 +768,7 @@
 
         console.log('🚀 DocuMagic loaded successfully!');
         console.log('📁 File storage (simulated backend):', fileStore);
-        console.log('💡 All conversions are simulated in your browser.');
-        console.log('📢 Google AdSense is active with Publisher ID: ca-pub-2333465940330507');
+        console.log('✅ File sizes are now properly tracked and displayed.');
     </script>
 
 </body>
