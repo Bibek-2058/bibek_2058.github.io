@@ -37,6 +37,10 @@
             --success: #27ae60;
             --warning: #f39c12;
             --danger: #e74c3c;
+            --generator-bg: #f8faff;
+            --generator-border: #e2e8f0;
+            --ad-bg: #ffffff;
+            --ad-border: #e2e8f0;
         }
 
         [data-theme="dark"] {
@@ -58,6 +62,10 @@
             --calc-btn-hover: #2a3a52;
             --calc-result-bg: #1a2332;
             --nav-bg: #1a2332;
+            --generator-bg: #1a2332;
+            --generator-border: #2d3a4f;
+            --ad-bg: #1a2332;
+            --ad-border: #2d3a4f;
         }
 
         * {
@@ -244,6 +252,7 @@
             font-size: 0.9rem;
         }
 
+        /* ===== AD BANNERS & PLACEMENTS ===== */
         .ad-banner {
             background: var(--bg-card);
             border-radius: 16px;
@@ -286,6 +295,101 @@
 
         .ad-hidden {
             display: none !important;
+        }
+
+        /* Small inline ad units */
+        .ad-inline {
+            background: var(--ad-bg);
+            border: 1px solid var(--ad-border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin: 12px 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            position: relative;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition), border var(--transition);
+        }
+
+        .ad-inline .ad-label-small {
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        .ad-inline .ad-close-small {
+            position: absolute;
+            top: 2px;
+            left: 8px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            opacity: 0.4;
+            transition: opacity var(--transition);
+        }
+
+        .ad-inline .ad-close-small:hover {
+            opacity: 1;
+        }
+
+        .ad-inline-vertical {
+            background: var(--ad-bg);
+            border: 1px solid var(--ad-border);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            position: relative;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition), border var(--transition);
+        }
+
+        .ad-inline-vertical .ad-label-small {
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        .ad-inline-vertical .ad-close-small {
+            position: absolute;
+            top: 2px;
+            left: 8px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            opacity: 0.4;
+            transition: opacity var(--transition);
+        }
+
+        .ad-inline-vertical .ad-close-small:hover {
+            opacity: 1;
         }
 
         .tool-page {
@@ -688,6 +792,165 @@
             cursor: not-allowed;
         }
 
+        /* ===== GAMING NAME GENERATOR ===== */
+        .generator-input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: var(--generator-bg);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--generator-border);
+        }
+
+        .generator-input-area .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .generator-input-area .input-group label {
+            font-weight: 600;
+            min-width: 60px;
+            color: var(--text-secondary);
+        }
+
+        .generator-input-area .input-group input,
+        .generator-input-area .input-group select {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .generator-input-area .btn-generate {
+            padding: 12px 24px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .generator-input-area .btn-generate:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .generator-input-area .btn-generate:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .name-output-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .name-output-item {
+            background: var(--tool-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1 1 calc(50% - 12px);
+            min-width: 200px;
+            transition: all var(--transition);
+            position: relative;
+            word-break: break-all;
+        }
+
+        .name-output-item:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .name-output-item .copy-btn {
+            margin-left: auto;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition);
+            white-space: nowrap;
+        }
+
+        .name-output-item .copy-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .name-output-item .copy-btn.copied {
+            background: var(--success);
+        }
+
+        .symbol-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px 0;
+            align-items: center;
+        }
+
+        .symbol-selector .symbol-btn {
+            padding: 4px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .symbol-selector .symbol-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+        }
+
+        .symbol-selector .symbol-btn.active {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+        }
+
+        /* ===== TWO COLUMN LAYOUT FOR GENERATOR ===== */
+        .generator-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .generator-main {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .generator-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
         @media (max-width: 768px) {
             .header {
                 padding: 16px 18px;
@@ -741,6 +1004,22 @@
             .header-controls {
                 justify-content: center;
                 width: 100%;
+            }
+            .name-output-item {
+                flex: 1 1 100%;
+            }
+            .generator-input-area .input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .generator-input-area .input-group label {
+                min-width: auto;
+            }
+            .generator-layout {
+                grid-template-columns: 1fr;
+            }
+            .ad-inline-vertical {
+                min-height: 90px;
             }
         }
 
@@ -817,16 +1096,18 @@
             <button class="nav-item" data-page="weight-converter"><i class="fas fa-weight-scale"></i> Weight</button>
             <button class="nav-item" data-page="calculator"><i class="fas fa-calculator"></i> Calculator</button>
             <button class="nav-item" data-page="exchange-rates"><i class="fas fa-money-bill-wave"></i> Rates</button>
+            <button class="nav-item" data-page="gaming-names"><i class="fas fa-gamepad"></i> Gaming Names</button>
         </nav>
 
+        <!-- ===== MAIN AD BANNER ===== -->
         <div class="ad-banner" id="adBanner">
             <button class="ad-close" id="adCloseBtn"><i class="fas fa-times"></i></button>
             <div>
                 <div class="ad-label">— Advertisement —</div>
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-client="ca-pub-YOUR_PUB_ID"
-                     data-ad-slot="YOUR_AD_SLOT"
+                     data-ad-client="ca-pub-2333465940330507"
+                     data-ad-slot="1234567890"
                      data-ad-format="auto"
                      data-full-width-responsive="true">
                 </ins>
@@ -1082,7 +1363,7 @@
             </div>
         </div>
 
-        <!-- ===== PAGE 7: EXCHANGE RATES - Updated with NRB Connection ===== -->
+        <!-- ===== PAGE 7: EXCHANGE RATES ===== -->
         <div class="tool-page" id="page-exchange-rates">
             <div class="tool-card">
                 <div class="tool-header">
@@ -1097,6 +1378,20 @@
                     <div class="status-bar" id="statusBar">
                         <span class="status-dot loading" id="statusDot"></span>
                         <span class="status-text" id="statusText">Connecting to Nepal Rastra Bank...</span>
+                    </div>
+
+                    <!-- Inline ad after status -->
+                    <div class="ad-inline" id="rateAd1">
+                        <span class="ad-label-small">Ad</span>
+                        <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-2333465940330507"
+                             data-ad-slot="1234567891"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true">
+                        </ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                     </div>
 
                     <div class="live-rates-grid" id="rateGrid">
@@ -1125,6 +1420,193 @@
                         <i class="fas fa-check-circle" style="color:var(--success);"></i> 
                         Rates are sourced directly from Nepal Rastra Bank's official exchange rate feed
                     </div>
+
+                    <!-- Inline ad at bottom of rates -->
+                    <div class="ad-inline" id="rateAd2">
+                        <span class="ad-label-small">Ad</span>
+                        <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-2333465940330507"
+                             data-ad-slot="1234567892"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true">
+                        </ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PAGE 8: GAMING NICKNAME GENERATOR ===== -->
+        <div class="tool-page" id="page-gaming-names">
+            <div class="tool-card">
+                <div class="tool-header">
+                    <i class="fas fa-gamepad"></i>
+                    <div>
+                        <h2>Gaming Nickname Generator</h2>
+                        <p>Generate stylish & unique gaming names for Free Fire, PUBG, and more</p>
+                    </div>
+                </div>
+                <div class="tool-body">
+                    <div class="generator-layout">
+                        <div class="generator-main">
+                            <!-- Generator V1: Quick Generate -->
+                            <div class="generator-input-area">
+                                <h3 style="font-size:1rem; color:var(--text-secondary);"><i class="fas fa-bolt"></i> Quick Generate</h3>
+                                <div class="input-group">
+                                    <label>Your Name</label>
+                                    <input type="text" id="genNameInput" placeholder="Enter your name..." value="Nepal" />
+                                    <button class="btn-generate" id="genBtnV1" onclick="generateNamesV1()">
+                                        <i class="fas fa-wand-magic-sparkles"></i> Generate
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Generator V2: Customizable -->
+                            <div class="generator-input-area">
+                                <h3 style="font-size:1rem; color:var(--text-secondary);"><i class="fas fa-sliders-h"></i> Custom Generator</h3>
+                                <div class="input-group">
+                                    <label>Name</label>
+                                    <input type="text" id="genNameV2" placeholder="Enter your name..." value="Nepal" />
+                                </div>
+                                <div class="input-group">
+                                    <label>Left Symbol</label>
+                                    <select id="leftSymbol">
+                                        <option value="none">None</option>
+                                        <option value="꧁">꧁</option>
+                                        <option value="༺">༺</option>
+                                        <option value="✧">✧</option>
+                                        <option value="▶">▶</option>
+                                        <option value="『">『</option>
+                                        <option value="【">【</option>
+                                        <option value="ᯌ">ᯌ</option>
+                                        <option value="彡">彡</option>
+                                        <option value="巛">巛</option>
+                                        <option value="乂">乂</option>
+                                        <option value="✞">✞</option>
+                                        <option value="☬">☬</option>
+                                        <option value="༒">༒</option>
+                                        <option value="☯">☯</option>
+                                        <option value="⚔">⚔</option>
+                                    </select>
+                                    <label>Right Symbol</label>
+                                    <select id="rightSymbol">
+                                        <option value="none">None</option>
+                                        <option value="꧂">꧂</option>
+                                        <option value="༻">༻</option>
+                                        <option value="✧">✧</option>
+                                        <option value="◀">◀</option>
+                                        <option value="』">』</option>
+                                        <option value="】">】</option>
+                                        <option value="ᯌ">ᯌ</option>
+                                        <option value="彡">彡</option>
+                                        <option value="巛">巛</option>
+                                        <option value="乂">乂</option>
+                                        <option value="✞">✞</option>
+                                        <option value="☬">☬</option>
+                                        <option value="༒">༒</option>
+                                        <option value="☯">☯</option>
+                                        <option value="⚔">⚔</option>
+                                    </select>
+                                </div>
+                                <div class="symbol-selector">
+                                    <span style="font-weight:600; font-size:0.85rem; color:var(--text-secondary);">Quick Symbols:</span>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, 'ᯌ')">ᯌ</button>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, '〆')">〆</button>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, '✿')">✿</button>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, '炎')">炎</button>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, '✧')">✧</button>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, '☆')">☆</button>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, '『')">『</button>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, '』')">』</button>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, '꧁')">꧁</button>
+                                    <button class="symbol-btn" onclick="insertSymbol(this, '꧂')">꧂</button>
+                                </div>
+                                <button class="btn-generate" onclick="generateNamesV2()">
+                                    <i class="fas fa-wand-magic-sparkles"></i> Generate Custom
+                                </button>
+                            </div>
+
+                            <!-- Ad between generator sections -->
+                            <div class="ad-inline" id="genAd1">
+                                <span class="ad-label-small">Ad</span>
+                                <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-2333465940330507"
+                                     data-ad-slot="1234567893"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true">
+                                </ins>
+                                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                            </div>
+
+                            <!-- Output Area -->
+                            <div id="nameOutputContainer">
+                                <h3 style="font-size:1rem; color:var(--text-secondary); margin-bottom:8px;">
+                                    <i class="fas fa-list"></i> Generated Names
+                                    <span style="font-weight:400; font-size:0.75rem; color:var(--text-muted);">(click to copy)</span>
+                                </h3>
+                                <div class="name-output-area" id="nameOutputArea">
+                                    <div class="name-output-item" style="justify-content:center; color:var(--text-muted); font-weight:400; flex:1 1 100%;">
+                                        <span>Enter a name and click Generate</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ad after name output -->
+                            <div class="ad-inline" id="genAd2">
+                                <span class="ad-label-small">Ad</span>
+                                <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-2333465940330507"
+                                     data-ad-slot="1234567894"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true">
+                                </ins>
+                                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar with vertical ad -->
+                        <div class="generator-sidebar">
+                            <div class="ad-inline-vertical" id="genSideAd">
+                                <span class="ad-label-small">Ad</span>
+                                <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-2333465940330507"
+                                     data-ad-slot="1234567895"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true">
+                                </ins>
+                                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                            </div>
+                            <div style="background:var(--tool-bg); border-radius:12px; padding:16px; border:1px solid var(--border-color);">
+                                <h4 style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:8px;"><i class="fas fa-info-circle"></i> Pro Tips</h4>
+                                <ul style="list-style:none; font-size:0.8rem; color:var(--text-muted); line-height:1.8;">
+                                    <li>✓ Use unique symbols for standout names</li>
+                                    <li>✓ Combine left & right symbols for style</li>
+                                    <li>✓ Click any name to copy instantly</li>
+                                    <li>✓ Works for Free Fire, PUBG, COD, etc.</li>
+                                </ul>
+                            </div>
+                            <div class="ad-inline-vertical" id="genSideAd2">
+                                <span class="ad-label-small">Ad</span>
+                                <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-2333465940330507"
+                                     data-ad-slot="1234567896"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true">
+                                </ins>
+                                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1138,7 +1620,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- JAVASCRIPT WITH NRB CONNECTION -->
+    <!-- JAVASCRIPT -->
     <!-- ============================================================ -->
     <script>
         // ===== NAVIGATION =====
@@ -1152,6 +1634,10 @@
                 document.querySelectorAll('.result-display').forEach(r => {
                     r.innerHTML = '<i class="fas fa-info-circle"></i> <span>Select values above</span>';
                 });
+                // Re-initialize ads when page changes
+                setTimeout(() => {
+                    try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+                }, 100);
             });
         });
 
@@ -1614,12 +2100,8 @@
                 `<i class="fas fa-weight-hanging"></i> <span><strong>${value.toFixed(4)}</strong> ${from} = <strong>${result.toFixed(6)}</strong> ${to}</span>`;
         }
 
-        // ===== EXCHANGE RATES - REAL NRB CONNECTION =====
-        // NRB's official exchange rate endpoint (via API proxy)
-        // Using a CORS proxy to access NRB's data
+        // ===== EXCHANGE RATES =====
         const NRB_API_URL = 'https://api.allorigins.win/raw?url=https://www.nrb.org.np/exportForex/';
-        
-        // Fallback data with official NRB rates (updated manually or from cache)
         let cachedRates = null;
         let lastFetchTime = null;
         let isFetching = false;
@@ -1638,7 +2120,6 @@
             statusText.textContent = 'Fetching latest rates from Nepal Rastra Bank...';
 
             try {
-                // Try to fetch from NRB's official forex data
                 const response = await fetch(NRB_API_URL, {
                     headers: {
                         'Accept': 'application/json',
@@ -1651,9 +2132,6 @@
                 }
 
                 const data = await response.json();
-                
-                // Parse NRB data format
-                // NRB typically returns data in a specific structure
                 const rates = parseNRBData(data);
                 
                 if (rates && Object.keys(rates).length > 0) {
@@ -1664,7 +2142,6 @@
                     statusDot.className = 'status-dot online';
                     statusText.textContent = `✅ Connected to Nepal Rastra Bank • Last updated: ${lastFetchTime.toLocaleTimeString()}`;
                     
-                    // Save to localStorage for offline use
                     try {
                         localStorage.setItem('nrb_rates', JSON.stringify({
                             rates: rates,
@@ -1678,13 +2155,11 @@
             } catch (error) {
                 console.warn('NRB fetch error:', error);
                 
-                // Try to use cached rates from localStorage
                 try {
                     const cached = localStorage.getItem('nrb_rates');
                     if (cached) {
                         const parsed = JSON.parse(cached);
                         const age = Date.now() - parsed.timestamp;
-                        // Use cache if less than 24 hours old
                         if (age < 24 * 60 * 60 * 1000) {
                             cachedRates = parsed.rates;
                             lastFetchTime = new Date(parsed.timestamp);
@@ -1701,7 +2176,6 @@
                     }
                 } catch (e) {}
                 
-                // If no cache, use fallback rates
                 const fallbackRates = getFallbackRates();
                 cachedRates = fallbackRates;
                 lastFetchTime = new Date();
@@ -1715,7 +2189,6 @@
             btn.innerHTML = '<i class="fas fa-sync"></i> Refresh Now';
             isFetching = false;
             
-            // Update timestamp display
             if (lastFetchTime) {
                 document.getElementById('rateUpdateTime').textContent = 
                     `(Updated: ${lastFetchTime.toLocaleDateString()} ${lastFetchTime.toLocaleTimeString()})`;
@@ -1723,15 +2196,8 @@
         }
 
         function parseNRBData(data) {
-            // This function parses NRB's actual data format
-            // NRB returns data in a specific structure - you'll need to adjust based on actual response
-            
             try {
-                // NRB typically returns an array of currency objects
-                // Example structure: [{ currency: 'USD', buy: 132.5, sell: 133.5 }, ...]
                 const rates = {};
-                
-                // Try different possible data structures
                 if (Array.isArray(data)) {
                     data.forEach(item => {
                         const currency = item.currency || item.Currency || item.code;
@@ -1760,12 +2226,9 @@
                         }
                     });
                 }
-                
-                // Ensure we have NPR rates
                 if (!rates.NPR && data.NPR) {
                     rates.NPR = parseFloat(data.NPR);
                 }
-                
                 return rates;
             } catch (e) {
                 console.warn('Error parsing NRB data:', e);
@@ -1774,8 +2237,6 @@
         }
 
         function getFallbackRates() {
-            // Official NRB rates as of current date (these should be updated regularly)
-            // Source: Nepal Rastra Bank official forex rates
             return {
                 USD: 133.50,
                 EUR: 145.20,
@@ -1824,7 +2285,6 @@
                 'MYR': 'changeMYR'
             };
 
-            // Get previous rates for change calculation
             let previousRates = {};
             try {
                 const cached = localStorage.getItem('nrb_rates');
@@ -1842,7 +2302,6 @@
                     const rate = rates[curr];
                     rateEl.textContent = rate.toFixed(2);
                     
-                    // Calculate change from previous rate
                     if (previousRates[curr]) {
                         const change = ((rate - previousRates[curr]) / previousRates[curr] * 100);
                         if (Math.abs(change) < 0.001) {
@@ -1864,6 +2323,240 @@
                     changeEl.textContent = '—';
                 }
             });
+        }
+
+        // ===== GAMING NICKNAME GENERATOR =====
+        // Cool symbol mappings for generating stylish names
+        const styleMaps = [
+            // Small caps / stylized
+            { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀꜱᴛᴜᴠᴡxʏᴢABCDEFGHIJKLMNOPQRSTUVWXYZ' },
+            // Fancy script
+            { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: 'αႦƈԃҽϝɠԋιʝƙʅɱɳσρϙɾʂƚυʋɯxყȥABCDEFGHIJKLMNOPQRSTUVWXYZ' },
+            // Bold
+            { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: '𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭' },
+            // Fraktur
+            { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: '𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ' },
+            // Double-struck
+            { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: '𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ' },
+            // Squared
+            { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: '🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉' },
+        ];
+
+        // Additional style transforms
+        function applyStyle(text, styleIndex) {
+            const map = styleMaps[styleIndex % styleMaps.length];
+            let result = '';
+            for (let char of text) {
+                const idx = map.from.indexOf(char);
+                result += idx !== -1 ? map.to[idx] : char;
+            }
+            return result;
+        }
+
+        // Generate multiple variants
+        function generateNameVariants(baseName, count = 12) {
+            const variants = [];
+            const symbols = ['✧', '☆', '♛', '☯', '⚔', '✿', '炎', '〆', 'ᯌ', '꧁', '꧂', '『', '』', '彡', '巛', '乂', '✞', '☬', '༒', 'ᯌ', '〆', '✿', '炎', '✧', '☆'];
+            
+            // Generate different styles
+            for (let i = 0; i < Math.min(count, 8); i++) {
+                let name = baseName;
+                // Apply different font styles
+                name = applyStyle(name, i);
+                
+                // Add random symbols around
+                const leftIdx = (i * 3) % symbols.length;
+                const rightIdx = (i * 7 + 2) % symbols.length;
+                const midIdx = (i * 5 + 1) % symbols.length;
+                
+                if (i % 3 === 0) {
+                    name = symbols[leftIdx] + name + symbols[rightIdx];
+                } else if (i % 3 === 1) {
+                    name = symbols[leftIdx] + symbols[midIdx] + name + symbols[midIdx] + symbols[rightIdx];
+                } else {
+                    name = symbols[leftIdx] + '『' + name + '』' + symbols[rightIdx];
+                }
+                
+                // Add some special variations
+                if (i % 2 === 0 && i < 6) {
+                    name = name + '᭄ᴮᵒˢˢ';
+                }
+                
+                variants.push(name);
+            }
+            
+            // Add more random variations
+            for (let i = 0; i < count - variants.length; i++) {
+                let name = baseName;
+                const styleIdx = (i * 11 + 3) % styleMaps.length;
+                name = applyStyle(name, styleIdx);
+                const s1 = symbols[(i * 13 + 5) % symbols.length];
+                const s2 = symbols[(i * 17 + 7) % symbols.length];
+                const s3 = symbols[(i * 19 + 11) % symbols.length];
+                name = s1 + s2 + name + s3 + s1;
+                if (i % 3 === 1) name = name + '✿';
+                variants.push(name);
+            }
+            
+            return variants.slice(0, count);
+        }
+
+        function generateNamesV1() {
+            const input = document.getElementById('genNameInput');
+            const name = input.value.trim() || 'Nepal';
+            generateAndDisplay(name, 10);
+        }
+
+        function generateNamesV2() {
+            const nameInput = document.getElementById('genNameV2');
+            const leftSym = document.getElementById('leftSymbol').value;
+            const rightSym = document.getElementById('rightSymbol').value;
+            let name = nameInput.value.trim() || 'Nepal';
+            
+            // Apply styling
+            const variants = [];
+            const styles = [0, 1, 2, 3, 4];
+            
+            for (let i = 0; i < styles.length; i++) {
+                let styled = applyStyle(name, styles[i]);
+                if (leftSym !== 'none') styled = leftSym + styled;
+                if (rightSym !== 'none') styled = styled + rightSym;
+                variants.push(styled);
+            }
+            
+            // Add more with random symbols
+            const symbols = ['✧', '☆', '♛', '☯', '⚔', '✿', '炎', '〆', 'ᯌ'];
+            for (let i = 0; i < 6; i++) {
+                let styled = applyStyle(name, i % 5);
+                const s1 = symbols[(i * 7 + 3) % symbols.length];
+                const s2 = symbols[(i * 11 + 5) % symbols.length];
+                if (i % 2 === 0) {
+                    styled = s1 + s2 + styled + s2 + s1;
+                } else {
+                    styled = s1 + '『' + styled + '』' + s2;
+                }
+                if (leftSym !== 'none' && i < 3) styled = leftSym + styled;
+                if (rightSym !== 'none' && i < 3) styled = styled + rightSym;
+                variants.push(styled);
+            }
+            
+            displayNames(variants);
+            
+            // Show ad after generation
+            showGenerationAd();
+        }
+
+        function generateAndDisplay(baseName, count = 10) {
+            const variants = generateNameVariants(baseName, count);
+            displayNames(variants);
+            
+            // Show ad after generation
+            showGenerationAd();
+        }
+
+        function displayNames(names) {
+            const container = document.getElementById('nameOutputArea');
+            container.innerHTML = '';
+            
+            names.forEach((name, index) => {
+                const item = document.createElement('div');
+                item.className = 'name-output-item';
+                
+                const span = document.createElement('span');
+                span.textContent = name;
+                span.style.flex = '1';
+                span.style.cursor = 'pointer';
+                span.title = 'Click to copy';
+                
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.textContent = 'Copy';
+                copyBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    copyName(name, copyBtn);
+                };
+                
+                item.appendChild(span);
+                item.appendChild(copyBtn);
+                
+                // Click on item copies too
+                item.addEventListener('click', function() {
+                    copyName(name, copyBtn);
+                });
+                
+                container.appendChild(item);
+            });
+        }
+
+        function copyName(name, btn) {
+            navigator.clipboard.writeText(name).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = name;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function insertSymbol(btn, symbol) {
+            const input = document.getElementById('genNameV2');
+            const start = input.selectionStart;
+            const end = input.selectionEnd;
+            const text = input.value;
+            input.value = text.substring(0, start) + symbol + text.substring(end);
+            input.focus();
+            input.selectionStart = input.selectionEnd = start + symbol.length;
+            
+            // Highlight button
+            document.querySelectorAll('.symbol-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            setTimeout(() => btn.classList.remove('active'), 1000);
+        }
+
+        // Show a small ad after name generation
+        function showGenerationAd() {
+            // Check if an ad already exists in the output area
+            let existingAd = document.querySelector('.ad-inline.generation-ad');
+            if (existingAd) {
+                existingAd.style.display = 'flex';
+                return;
+            }
+            
+            const container = document.getElementById('nameOutputContainer');
+            const adDiv = document.createElement('div');
+            adDiv.className = 'ad-inline generation-ad';
+            adDiv.style.marginTop = '12px';
+            adDiv.innerHTML = `
+                <span class="ad-label-small">Ad</span>
+                <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-2333465940330507"
+                     data-ad-slot="1234567897"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true">
+                </ins>
+            `;
+            container.appendChild(adDiv);
+            
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {}
         }
 
         // ===== THEME TOGGLE =====
@@ -1922,12 +2615,10 @@
             populateBSDropdowns();
             populateADDropdowns();
             
-            // Load exchange rates
             setTimeout(() => {
                 fetchExchangeRates();
             }, 500);
             
-            // Auto-refresh rates every 6 hours
             setInterval(fetchExchangeRates, 6 * 60 * 60 * 1000);
 
             const today = new Date();
@@ -1942,8 +2633,14 @@
                 setTimeout(() => { adDaySelect.value = today.getDate(); }, 100);
             }
 
+            // Generate some default gaming names
+            setTimeout(() => {
+                generateAndDisplay('Nepal', 6);
+            }, 300);
+
             console.log('🚀 Nepal Tools loaded successfully!');
             console.log('📊 Exchange rates connected to Nepal Rastra Bank');
+            console.log('🎮 Gaming Nickname Generator ready!');
         });
     </script>
 
