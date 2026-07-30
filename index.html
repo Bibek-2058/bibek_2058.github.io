@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nepal Tools – All-in-One Converter Suite</title>
+    <title>Nepal Tools – All-in-One Converter Suite for Nepali Users</title>
+    <meta name="description" content="Free BS-AD date converter, area converter, volume converter, length converter, weight converter, scientific calculator, and live Nepal Rastra Bank exchange rates. All tools free for Nepali users." />
+    <meta name="keywords" content="Nepal tools, BS to AD converter, Nepali date converter, NRB exchange rates, area converter Nepal, Ropani to Aana, gaming name generator Nepal" />
+    <link rel="canonical" href="https://pandeybibek.com.np/" />
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507"
      crossorigin="anonymous"></script>
@@ -88,6 +91,7 @@
             padding: 20px;
         }
 
+        /* ===== TOP BAR ===== */
         .top-bar {
             background: var(--topbar-bg);
             color: var(--topbar-text);
@@ -119,6 +123,7 @@
             color: white;
         }
 
+        /* ===== HEADER ===== */
         .header {
             background: var(--header-bg);
             border-radius: 20px;
@@ -208,6 +213,56 @@
             background: var(--accent-hover);
         }
 
+        /* ===== WELCOME SECTION ===== */
+        .welcome-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 32px 36px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+
+        .welcome-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .welcome-section h2 span {
+            color: var(--accent);
+        }
+
+        .welcome-section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            max-width: 800px;
+        }
+
+        .welcome-badges {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .welcome-badges span {
+            background: var(--tool-bg);
+            padding: 6px 18px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .welcome-badges i {
+            color: var(--success);
+            margin-right: 6px;
+        }
+
+        /* ===== NAV ===== */
         .nav-menu {
             background: var(--nav-bg);
             border-radius: 16px;
@@ -252,7 +307,7 @@
             font-size: 0.9rem;
         }
 
-        /* ===== AD BANNERS & PLACEMENTS ===== */
+        /* ===== AD BANNERS ===== */
         .ad-banner {
             background: var(--bg-card);
             border-radius: 16px;
@@ -297,7 +352,6 @@
             display: none !important;
         }
 
-        /* Small inline ad units */
         .ad-inline {
             background: var(--ad-bg);
             border: 1px solid var(--ad-border);
@@ -392,6 +446,7 @@
             opacity: 1;
         }
 
+        /* ===== TOOL PAGES ===== */
         .tool-page {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -536,6 +591,89 @@
         .tool-body .result-display i {
             color: var(--accent);
             font-size: 1.2rem;
+        }
+
+        /* ===== TOOL INFO BOX ===== */
+        .tool-info {
+            margin-top: 16px;
+            padding: 16px 20px;
+            background: var(--tool-bg);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            transition: background var(--transition);
+        }
+
+        .tool-info h4 {
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .tool-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .tool-info ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 8px;
+        }
+
+        .tool-info ul li {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tool-info ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* ===== FAQ SECTION ===== */
+        .faq-section {
+            margin-top: 24px;
+            padding: 20px 24px;
+            background: var(--tool-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: background var(--transition), border var(--transition);
+        }
+
+        .faq-section h4 {
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .faq-item {
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-item strong {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+            line-height: 1.6;
         }
 
         /* ===== CALCULATOR ===== */
@@ -701,7 +839,6 @@
             opacity: 0.8;
         }
 
-        /* ===== STATUS INDICATORS ===== */
         .status-bar {
             display: flex;
             align-items: center;
@@ -736,38 +873,6 @@
             50% { opacity: 0.3; }
         }
 
-        .status-text {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            padding-top: 28px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            font-size: 0.85rem;
-            transition: border var(--transition);
-        }
-
-        .footer i {
-            color: var(--accent);
-        }
-
-        .footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--accent);
-        }
-
         .refresh-btn {
             padding: 8px 20px;
             background: var(--accent);
@@ -790,6 +895,7 @@
         .refresh-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
         }
 
         /* ===== GAMING NAME GENERATOR ===== */
@@ -932,7 +1038,6 @@
             color: white;
         }
 
-        /* ===== TWO COLUMN LAYOUT FOR GENERATOR ===== */
         .generator-layout {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -951,6 +1056,119 @@
             gap: 14px;
         }
 
+        /* ===== BLOG / ARTICLES ===== */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .article-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            transition: all var(--transition);
+        }
+
+        .article-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .article-card h4 {
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .article-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .article-card .read-more {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .article-card .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== BLOG PAGE ===== */
+        .blog-page {
+            padding: 0;
+        }
+
+        .blog-post {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .blog-post h2 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .blog-post .post-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .blog-post p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            font-size: 0.95rem;
+        }
+
+        .blog-post ul {
+            padding-left: 24px;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            font-size: 0.95rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            transition: border var(--transition);
+        }
+
+        .footer i {
+            color: var(--accent);
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .header {
                 padding: 16px 18px;
@@ -959,6 +1177,15 @@
             }
             .logo h1 {
                 font-size: 1.3rem;
+            }
+            .welcome-section {
+                padding: 20px;
+            }
+            .welcome-section h2 {
+                font-size: 1.4rem;
+            }
+            .welcome-section p {
+                font-size: 0.95rem;
             }
             .nav-menu {
                 padding: 10px 14px;
@@ -1021,6 +1248,12 @@
             .ad-inline-vertical {
                 min-height: 90px;
             }
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            .blog-post {
+                padding: 18px 16px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1058,8 +1291,9 @@
 </head>
 <body>
 
+    <!-- ===== TOP BAR ===== -->
     <div class="top-bar">
-        <span>🇳🇵 Nepal Tools – All-in-One Converter Suite</span>
+        <span>🇳🇵 Nepal Tools – All-in-One Converter Suite for Nepali Users</span>
         <select class="lang-select" id="langSelect">
             <option value="en">🌐 English</option>
             <option value="ne">🇳🇵 नेपाली</option>
@@ -1070,6 +1304,7 @@
 
     <div class="container">
 
+        <!-- ===== HEADER ===== -->
         <div class="header">
             <div class="logo">
                 <i class="fas fa-tools"></i>
@@ -1088,6 +1323,25 @@
             </div>
         </div>
 
+        <!-- ===== WELCOME SECTION ===== -->
+        <section class="welcome-section">
+            <h2>🇳🇵 Welcome to <span>Nepal Tools</span></h2>
+            <p>
+                Your all-in-one destination for <strong>BS-AD date conversion</strong>, unit conversion, 
+                scientific calculations, and <strong>live exchange rates</strong> from Nepal Rastra Bank. 
+                Whether you're a student, professional, or just need quick conversions, we've got you covered 
+                with accurate, up-to-date tools — completely free, no sign-up required.
+            </p>
+            <div class="welcome-badges">
+                <span><i class="fas fa-check-circle"></i> 100% Free</span>
+                <span><i class="fas fa-check-circle"></i> No Sign-up</span>
+                <span><i class="fas fa-check-circle"></i> NRB Live Rates</span>
+                <span><i class="fas fa-check-circle"></i> Accurate BS-AD Data</span>
+                <span><i class="fas fa-check-circle"></i> Scientific Calculator</span>
+            </div>
+        </section>
+
+        <!-- ===== NAVIGATION ===== -->
         <nav class="nav-menu" id="navMenu">
             <button class="nav-item active" data-page="date-converter"><i class="fas fa-calendar-alt"></i> Date</button>
             <button class="nav-item" data-page="area-converter"><i class="fas fa-vector-square"></i> Area</button>
@@ -1097,9 +1351,10 @@
             <button class="nav-item" data-page="calculator"><i class="fas fa-calculator"></i> Calculator</button>
             <button class="nav-item" data-page="exchange-rates"><i class="fas fa-money-bill-wave"></i> Rates</button>
             <button class="nav-item" data-page="gaming-names"><i class="fas fa-gamepad"></i> Gaming Names</button>
+            <button class="nav-item" data-page="blog"><i class="fas fa-newspaper"></i> Blog</button>
         </nav>
 
-        <!-- ===== MAIN AD BANNER ===== -->
+        <!-- ===== AD BANNER ===== -->
         <div class="ad-banner" id="adBanner">
             <button class="ad-close" id="adCloseBtn"><i class="fas fa-times"></i></button>
             <div>
@@ -1115,7 +1370,9 @@
             </div>
         </div>
 
-        <!-- ===== PAGE 1: DATE CONVERTER ===== -->
+        <!-- ============================================================ -->
+        <!-- PAGE 1: DATE CONVERTER -->
+        <!-- ============================================================ -->
         <div class="tool-page active" id="page-date-converter">
             <div class="tool-card">
                 <div class="tool-header">
@@ -1149,11 +1406,48 @@
                     <div class="result-display" id="adResult">
                         <i class="fas fa-calendar-check"></i> <span>Select an AD date above</span>
                     </div>
+
+                    <!-- Tool Info -->
+                    <div class="tool-info">
+                        <h4>📖 About the BS-AD Date Converter</h4>
+                        <p>
+                            The <strong>Bikram Sambat (BS)</strong> calendar is the official calendar of Nepal, 
+                            used for all legal, cultural, and religious events. It is approximately <strong>56.7 years 
+                            ahead</strong> of the Gregorian (AD) calendar. This converter uses official BS calendar 
+                            data for years <strong>2000–2090</strong>, ensuring accurate conversion for all your 
+                            personal, legal, and official needs.
+                        </p>
+                        <ul>
+                            <li>Accurate for all BS years 2000–2090</li>
+                            <li>Used for legal documents, birth certificates, and official records</li>
+                            <li>Includes day-of-week display for both calendars</li>
+                            <li>Perfect for tracking Nepali festivals and events</li>
+                        </ul>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="faq-section">
+                        <h4>❓ Frequently Asked Questions</h4>
+                        <div class="faq-item">
+                            <strong>Q: What is the Bikram Sambat calendar?</strong>
+                            <p>The Bikram Sambat calendar is Nepal's official calendar, approximately 56.7 years ahead of the Gregorian calendar. It is widely used for all legal, cultural, and religious purposes in Nepal.</p>
+                        </div>
+                        <div class="faq-item">
+                            <strong>Q: Why is BS 57 years ahead of AD?</strong>
+                            <p>The Bikram Sambat calendar is based on the solar cycle and was established by King Vikramaditya. It is traditionally 56.7 years ahead of the Gregorian calendar, which is why BS 2080 corresponds to AD 2023-2024.</p>
+                        </div>
+                        <div class="faq-item">
+                            <strong>Q: Is this converter accurate for all dates?</strong>
+                            <p>Yes, this converter uses official BS calendar data for the range 2000–2090 BS, which covers all modern dates. It is widely used by Nepali professionals, students, and government offices.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== PAGE 2: AREA CONVERTER ===== -->
+        <!-- ============================================================ -->
+        <!-- PAGE 2: AREA CONVERTER -->
+        <!-- ============================================================ -->
         <div class="tool-page" id="page-area-converter">
             <div class="tool-card">
                 <div class="tool-header">
@@ -1190,11 +1484,45 @@
                         <button class="btn-convert" onclick="convertArea()"><i class="fas fa-exchange-alt"></i> Convert</button>
                     </div>
                     <div class="result-display" id="areaResult"><i class="fas fa-ruler-combined"></i> <span>Enter a value above</span></div>
+
+                    <div class="tool-info">
+                        <h4>📖 About the Area Converter</h4>
+                        <p>
+                            This area converter supports both international units and <strong>Nepali land measurement 
+                            units</strong> including <strong>Ropani, Aana, Paisa, and Daam</strong>. These traditional 
+                            units are still widely used in Nepal for real estate, agriculture, and land surveying. 
+                            Understanding these conversions is essential for anyone dealing with property in Nepal.
+                        </p>
+                        <ul>
+                            <li><strong>1 Ropani</strong> = 16 Aana = 5476 sq. ft. (approx.)</li>
+                            <li><strong>1 Aana</strong> = 4 Paisa = 342.25 sq. ft.</li>
+                            <li><strong>1 Paisa</strong> = 4 Daam = 85.56 sq. ft.</li>
+                            <li>Perfect for property dealers, farmers, and architects</li>
+                        </ul>
+                    </div>
+
+                    <div class="faq-section">
+                        <h4>❓ Frequently Asked Questions</h4>
+                        <div class="faq-item">
+                            <strong>Q: What is a Ropani in square feet?</strong>
+                            <p>1 Ropani is approximately <strong>5,476 square feet</strong> (or 508.74 square meters). It is the most commonly used unit for land measurement in Nepal.</p>
+                        </div>
+                        <div class="faq-item">
+                            <strong>Q: How many Aana are in 1 Ropani?</strong>
+                            <p>There are <strong>16 Aana</strong> in 1 Ropani. Each Aana is further divided into 4 Paisa, and each Paisa into 4 Daam.</p>
+                        </div>
+                        <div class="faq-item">
+                            <strong>Q: Why do Nepali land measurements use these units?</strong>
+                            <p>These units are part of Nepal's traditional measurement system, deeply rooted in the country's agricultural and land management history. They remain legally recognized for property transactions.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== PAGE 3: VOLUME CONVERTER ===== -->
+        <!-- ============================================================ -->
+        <!-- PAGE 3: VOLUME CONVERTER -->
+        <!-- ============================================================ -->
         <div class="tool-page" id="page-volume-converter">
             <div class="tool-card">
                 <div class="tool-header">
@@ -1223,11 +1551,23 @@
                         <button class="btn-convert" onclick="convertVolume()"><i class="fas fa-exchange-alt"></i> Convert</button>
                     </div>
                     <div class="result-display" id="volumeResult"><i class="fas fa-beaker"></i> <span>Enter a value above</span></div>
+
+                    <div class="tool-info">
+                        <h4>📖 About the Volume Converter</h4>
+                        <p>
+                            Convert between common volume units including liters, milliliters, US gallons, cups, 
+                            and fluid ounces. This tool is perfect for cooking, chemistry, laboratory work, 
+                            and everyday measurements. Understanding volume conversions is essential for 
+                            accurate recipes, scientific experiments, and fluid measurements.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== PAGE 4: LENGTH CONVERTER ===== -->
+        <!-- ============================================================ -->
+        <!-- PAGE 4: LENGTH CONVERTER -->
+        <!-- ============================================================ -->
         <div class="tool-page" id="page-length-converter">
             <div class="tool-card">
                 <div class="tool-header">
@@ -1258,11 +1598,23 @@
                         <button class="btn-convert" onclick="convertLength()"><i class="fas fa-exchange-alt"></i> Convert</button>
                     </div>
                     <div class="result-display" id="lengthResult"><i class="fas fa-arrows-alt-h"></i> <span>Enter a value above</span></div>
+
+                    <div class="tool-info">
+                        <h4>📖 About the Length Converter</h4>
+                        <p>
+                            Convert between meters, kilometers, miles, yards, feet, and inches. This tool is 
+                            essential for construction, travel, sports, education, and everyday measurements. 
+                            Whether you're planning a trip, building a house, or doing homework, this converter 
+                            provides accurate results instantly.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== PAGE 5: WEIGHT CONVERTER ===== -->
+        <!-- ============================================================ -->
+        <!-- PAGE 5: WEIGHT CONVERTER -->
+        <!-- ============================================================ -->
         <div class="tool-page" id="page-weight-converter">
             <div class="tool-card">
                 <div class="tool-header">
@@ -1291,11 +1643,22 @@
                         <button class="btn-convert" onclick="convertWeight()"><i class="fas fa-exchange-alt"></i> Convert</button>
                     </div>
                     <div class="result-display" id="weightResult"><i class="fas fa-weight-hanging"></i> <span>Enter a value above</span></div>
+
+                    <div class="tool-info">
+                        <h4>📖 About the Weight Converter</h4>
+                        <p>
+                            Convert between kilograms, grams, pounds, ounces, and tons. This tool is indispensable 
+                            for cooking, fitness, shipping, science, and everyday weight measurements. Perfect 
+                            for body weight tracking, grocery shopping, and industrial applications.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== PAGE 6: CALCULATOR ===== -->
+        <!-- ============================================================ -->
+        <!-- PAGE 6: CALCULATOR -->
+        <!-- ============================================================ -->
         <div class="tool-page" id="page-calculator">
             <div class="tool-card">
                 <div class="tool-header">
@@ -1313,7 +1676,6 @@
                                 <div class="result" id="calcResult">0</div>
                             </div>
 
-                            <!-- Row 1: Inv, Deg, x!, (, ), C, ⌫ -->
                             <button class="calc-btn scientific" onclick="calcInput('Math.asin(')">Inv</button>
                             <button class="calc-btn scientific" onclick="calcInput('Math.PI/180*')">Deg</button>
                             <button class="calc-btn scientific" onclick="calcInput('factorial(')">x!</button>
@@ -1322,7 +1684,6 @@
                             <button class="calc-btn clear" onclick="calcClear()">C</button>
                             <button class="calc-btn clear" onclick="calcBackspace()">⌫</button>
 
-                            <!-- Row 2: ln, sin, %, 7, 8, 9, ÷ -->
                             <button class="calc-btn scientific" onclick="calcInput('Math.log(')">ln</button>
                             <button class="calc-btn scientific" onclick="calcInput('Math.sin(')">sin</button>
                             <button class="calc-btn operator" onclick="calcInput('%')">%</button>
@@ -1331,7 +1692,6 @@
                             <button class="calc-btn" onclick="calcInput('9')">9</button>
                             <button class="calc-btn operator" onclick="calcInput('/')">÷</button>
 
-                            <!-- Row 3: log, cos, √, 4, 5, 6, × -->
                             <button class="calc-btn scientific" onclick="calcInput('Math.log10(')">log</button>
                             <button class="calc-btn scientific" onclick="calcInput('Math.cos(')">cos</button>
                             <button class="calc-btn scientific" onclick="calcInput('Math.sqrt(')">√</button>
@@ -1340,7 +1700,6 @@
                             <button class="calc-btn" onclick="calcInput('6')">6</button>
                             <button class="calc-btn operator" onclick="calcInput('*')">×</button>
 
-                            <!-- Row 4: ^, tan, 1/x, 1, 2, 3, − -->
                             <button class="calc-btn scientific" onclick="calcInput('**')">^</button>
                             <button class="calc-btn scientific" onclick="calcInput('Math.tan(')">tan</button>
                             <button class="calc-btn scientific" onclick="calcInput('1/(')">1/x</button>
@@ -1349,7 +1708,6 @@
                             <button class="calc-btn" onclick="calcInput('3')">3</button>
                             <button class="calc-btn operator" onclick="calcInput('-')">−</button>
 
-                            <!-- Row 5: Exp, π, e, 0, ., =, + -->
                             <button class="calc-btn scientific" onclick="calcInput('Math.exp(')">Exp</button>
                             <button class="calc-btn scientific" onclick="calcInput('Math.PI')">π</button>
                             <button class="calc-btn scientific" onclick="calcInput('Math.E')">e</button>
@@ -1359,11 +1717,30 @@
                             <button class="calc-btn operator" onclick="calcInput('+')">+</button>
                         </div>
                     </div>
+
+                    <div class="tool-info">
+                        <h4>📖 About the Scientific Calculator</h4>
+                        <p>
+                            This powerful scientific calculator supports <strong>trigonometric functions</strong> 
+                            (sin, cos, tan), <strong>logarithms</strong>, <strong>exponents</strong>, 
+                            <strong>factorials</strong>, and <strong>constants</strong> like π and e. Perfect 
+                            for students, engineers, scientists, and anyone who needs advanced calculations 
+                            without installing a separate app.
+                        </p>
+                        <ul>
+                            <li>Trigonometric functions: sin, cos, tan</li>
+                            <li>Logarithms: log, ln</li>
+                            <li>Exponents: power (^), exponential (exp)</li>
+                            <li>Factorials, square roots, and percentages</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== PAGE 7: EXCHANGE RATES ===== -->
+        <!-- ============================================================ -->
+        <!-- PAGE 7: EXCHANGE RATES -->
+        <!-- ============================================================ -->
         <div class="tool-page" id="page-exchange-rates">
             <div class="tool-card">
                 <div class="tool-header">
@@ -1374,13 +1751,11 @@
                     </div>
                 </div>
                 <div class="tool-body">
-                    <!-- Status Bar -->
                     <div class="status-bar" id="statusBar">
                         <span class="status-dot loading" id="statusDot"></span>
                         <span class="status-text" id="statusText">Connecting to Nepal Rastra Bank...</span>
                     </div>
 
-                    <!-- Inline ad after status -->
                     <div class="ad-inline" id="rateAd1">
                         <span class="ad-label-small">Ad</span>
                         <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
@@ -1408,6 +1783,7 @@
                         <div class="rate-item"><div class="currency">SGD/NPR</div><div class="rate" id="rateSGD">Loading...</div><div class="rate-change" id="changeSGD">—</div><span class="nrb-badge">NRB</span></div>
                         <div class="rate-item"><div class="currency">MYR/NPR</div><div class="rate" id="rateMYR">Loading...</div><div class="rate-change" id="changeMYR">—</div><span class="nrb-badge">NRB</span></div>
                     </div>
+
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:8px;">
                         <span style="font-size:0.75rem; color:var(--text-muted);">
                             <i class="fas fa-sync-alt"></i> Auto-updates daily from NRB
@@ -1416,12 +1792,28 @@
                             <i class="fas fa-sync"></i> Refresh Now
                         </button>
                     </div>
+
                     <div style="margin-top:12px; padding:12px; background:var(--tool-bg); border-radius:10px; border:1px solid var(--border-color); font-size:0.8rem; color:var(--text-muted);">
                         <i class="fas fa-check-circle" style="color:var(--success);"></i> 
-                        Rates are sourced directly from Nepal Rastra Bank's official exchange rate feed
+                        Rates are sourced directly from <strong>Nepal Rastra Bank's</strong> official exchange rate feed.
                     </div>
 
-                    <!-- Inline ad at bottom of rates -->
+                    <div class="tool-info" style="margin-top:16px;">
+                        <h4>📖 About Nepal Rastra Bank Exchange Rates</h4>
+                        <p>
+                            Nepal Rastra Bank (NRB) is the central bank of Nepal. The exchange rates shown here 
+                            are sourced directly from NRB's official daily feed. These rates are used by banks, 
+                            remittance companies, and businesses across Nepal for foreign currency transactions.
+                        </p>
+                        <ul>
+                            <li><strong>USD/NPR</strong> – US Dollar to Nepali Rupee</li>
+                            <li><strong>EUR/NPR</strong> – Euro to Nepali Rupee</li>
+                            <li><strong>INR/NPR</strong> – Indian Rupee to Nepali Rupee</li>
+                            <li>Rates are updated daily by Nepal Rastra Bank</li>
+                            <li>Perfect for remittance, travel, and business planning</li>
+                        </ul>
+                    </div>
+
                     <div class="ad-inline" id="rateAd2">
                         <span class="ad-label-small">Ad</span>
                         <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
@@ -1438,7 +1830,9 @@
             </div>
         </div>
 
-        <!-- ===== PAGE 8: GAMING NICKNAME GENERATOR ===== -->
+        <!-- ============================================================ -->
+        <!-- PAGE 8: GAMING NICKNAME GENERATOR -->
+        <!-- ============================================================ -->
         <div class="tool-page" id="page-gaming-names">
             <div class="tool-card">
                 <div class="tool-header">
@@ -1451,7 +1845,6 @@
                 <div class="tool-body">
                     <div class="generator-layout">
                         <div class="generator-main">
-                            <!-- Generator V1: Quick Generate -->
                             <div class="generator-input-area">
                                 <h3 style="font-size:1rem; color:var(--text-secondary);"><i class="fas fa-bolt"></i> Quick Generate</h3>
                                 <div class="input-group">
@@ -1463,7 +1856,6 @@
                                 </div>
                             </div>
 
-                            <!-- Generator V2: Customizable -->
                             <div class="generator-input-area">
                                 <h3 style="font-size:1rem; color:var(--text-secondary);"><i class="fas fa-sliders-h"></i> Custom Generator</h3>
                                 <div class="input-group">
@@ -1528,7 +1920,6 @@
                                 </button>
                             </div>
 
-                            <!-- Ad between generator sections -->
                             <div class="ad-inline" id="genAd1">
                                 <span class="ad-label-small">Ad</span>
                                 <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
@@ -1542,7 +1933,6 @@
                                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                             </div>
 
-                            <!-- Output Area -->
                             <div id="nameOutputContainer">
                                 <h3 style="font-size:1rem; color:var(--text-secondary); margin-bottom:8px;">
                                     <i class="fas fa-list"></i> Generated Names
@@ -1555,7 +1945,6 @@
                                 </div>
                             </div>
 
-                            <!-- Ad after name output -->
                             <div class="ad-inline" id="genAd2">
                                 <span class="ad-label-small">Ad</span>
                                 <button class="ad-close-small" onclick="this.parentElement.style.display='none'"><i class="fas fa-times"></i></button>
@@ -1570,7 +1959,6 @@
                             </div>
                         </div>
 
-                        <!-- Sidebar with vertical ad -->
                         <div class="generator-sidebar">
                             <div class="ad-inline-vertical" id="genSideAd">
                                 <span class="ad-label-small">Ad</span>
@@ -1611,9 +1999,120 @@
             </div>
         </div>
 
+        <!-- ============================================================ -->
+        <!-- PAGE 9: BLOG -->
+        <!-- ============================================================ -->
+        <div class="tool-page" id="page-blog">
+            <div class="blog-page">
+
+                <!-- Blog Post 1 -->
+                <article class="blog-post">
+                    <h2>How to Convert BS to AD Dates: A Complete Guide</h2>
+                    <div class="post-meta"><i class="far fa-calendar-alt"></i> July 30, 2026 &nbsp;|&nbsp; <i class="far fa-clock"></i> 5 min read</div>
+                    <p>
+                        The <strong>Bikram Sambat (BS)</strong> calendar is the official calendar of Nepal, 
+                        used for all legal, cultural, and religious purposes. Converting between BS and AD 
+                        can be confusing due to the 56.7-year difference and the varying month lengths. 
+                        This guide explains everything you need to know about BS-AD conversion.
+                    </p>
+                    <p>
+                        The BS calendar is approximately <strong>56 years and 8 months</strong> ahead of the 
+                        Gregorian (AD) calendar. For example, BS 2080 corresponds to AD 2023-2024. The conversion 
+                        is not simply adding 56 or 57 years because the BS calendar has a different number of 
+                        days in each month and a different New Year date (typically around April 13-14).
+                    </p>
+                    <p>
+                        Our <strong>BS-AD Date Converter</strong> uses official BS calendar data for the years 
+                        2000–2090, making it the most accurate online converter for Nepali dates. Whether you 
+                        need to convert your birthday, legal documents, or festival dates, our tool provides 
+                        instant, accurate results.
+                    </p>
+                    <ul>
+                        <li><strong>BS New Year</strong> typically falls on April 13 or 14 in the AD calendar</li>
+                        <li><strong>Month lengths</strong> vary between 29–32 days in the BS calendar</li>
+                        <li><strong>Legal documents</strong> in Nepal use BS dates</li>
+                        <li><strong>Festivals</strong> like Dashain, Tihar, and Teej are based on the BS calendar</li>
+                    </ul>
+                    <p>
+                        Use our converter above to quickly convert any date between BS and AD. It's free, accurate, 
+                        and requires no sign-up.
+                    </p>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-post">
+                    <h2>Understanding Nepal Rastra Bank Exchange Rates</h2>
+                    <div class="post-meta"><i class="far fa-calendar-alt"></i> July 28, 2026 &nbsp;|&nbsp; <i class="far fa-clock"></i> 4 min read</div>
+                    <p>
+                        Nepal Rastra Bank (NRB) is the central bank of Nepal, responsible for setting the official 
+                        exchange rates for foreign currencies. These rates are updated <strong>daily</strong> and 
+                        are used by all banks, remittance companies, and businesses in Nepal.
+                    </p>
+                    <p>
+                        The exchange rates shown on our platform are sourced directly from NRB's official feed, 
+                        ensuring you get the most accurate and up-to-date rates. Whether you're sending money 
+                        abroad, traveling, or running a business, these rates are essential for financial planning.
+                    </p>
+                    <p>
+                        <strong>Key currencies</strong> tracked by NRB include the US Dollar (USD), Euro (EUR), 
+                        British Pound (GBP), Indian Rupee (INR), Australian Dollar (AUD), Canadian Dollar (CAD), 
+                        Chinese Yuan (CNY), and many others.
+                    </p>
+                    <ul>
+                        <li><strong>USD/NPR</strong> – Most traded currency pair in Nepal</li>
+                        <li><strong>INR/NPR</strong> – Important due to close economic ties with India</li>
+                        <li><strong>EUR/NPR</strong> – Key for European trade and tourism</li>
+                        <li>Rates are updated daily at NRB's official fixing time</li>
+                    </ul>
+                    <p>
+                        Check our <strong>Live Exchange Rates</strong> page above for the latest rates from NRB. 
+                        You can refresh the rates at any time to get the most current data.
+                    </p>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-post">
+                    <h2>Nepali Land Measurement Units: Ropani, Aana, Paisa Explained</h2>
+                    <div class="post-meta"><i class="far fa-calendar-alt"></i> July 25, 2026 &nbsp;|&nbsp; <i class="far fa-clock"></i> 6 min read</div>
+                    <p>
+                        Nepal has a traditional system of land measurement that is still widely used today, 
+                        especially in real estate, agriculture, and land surveying. The main units are 
+                        <strong>Ropani</strong>, <strong>Aana</strong>, <strong>Paisa</strong>, and 
+                        <strong>Daam</strong>. Understanding these units is essential for anyone dealing with 
+                        property in Nepal.
+                    </p>
+                    <p>
+                        The system works as follows: <strong>1 Ropani = 16 Aana</strong>, <strong>1 Aana = 4 Paisa</strong>, 
+                        and <strong>1 Paisa = 4 Daam</strong>. In terms of square feet, 1 Ropani is approximately 
+                        <strong>5,476 sq. ft.</strong> (or 508.74 sq. meters). Each Aana is about 342.25 sq. ft., 
+                        each Paisa is about 85.56 sq. ft., and each Daam is about 21.39 sq. ft.
+                    </p>
+                    <p>
+                        These units are officially recognized in Nepal and are used in property deeds, government 
+                        records, and land surveys. Our <strong>Area Converter</strong> supports these units, 
+                        making it easy to convert between Nepali and international measurement systems.
+                    </p>
+                    <ul>
+                        <li><strong>Ropani</strong> – Primary land measurement unit in Nepal</li>
+                        <li><strong>Aana</strong> – 1/16 of a Ropani</li>
+                        <li><strong>Paisa</strong> – 1/4 of an Aana</li>
+                        <li><strong>Daam</strong> – 1/4 of a Paisa (smallest unit)</li>
+                        <li>Used for property transactions, land registration, and farming</li>
+                    </ul>
+                    <p>
+                        Use our <strong>Area Converter</strong> above to quickly convert between Ropani, Aana, 
+                        Paisa, Daam, and international units like square feet and square meters.
+                    </p>
+                </article>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
         <div class="footer">
             <span><i class="fas fa-check-circle"></i> All tools are free to use</span>
             <span><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></span>
+            <span><a href="#"><i class="fas fa-info-circle"></i> About Us</a></span>
+            <span><a href="#"><i class="fas fa-envelope"></i> Contact</a></span>
             <span><i class="fas fa-code"></i> Made with ❤️ in Nepal</span>
         </div>
 
@@ -1630,11 +2129,11 @@
                 this.classList.add('active');
                 const pageId = this.dataset.page;
                 document.querySelectorAll('.tool-page').forEach(p => p.classList.remove('active'));
-                document.getElementById('page-' + pageId).classList.add('active');
+                const target = document.getElementById('page-' + pageId);
+                if (target) target.classList.add('active');
                 document.querySelectorAll('.result-display').forEach(r => {
                     r.innerHTML = '<i class="fas fa-info-circle"></i> <span>Select values above</span>';
                 });
-                // Re-initialize ads when page changes
                 setTimeout(() => {
                     try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
                 }, 100);
@@ -2110,12 +2609,12 @@
             const btn = document.getElementById('refreshRatesBtn');
             const statusDot = document.getElementById('statusDot');
             const statusText = document.getElementById('statusText');
-            
+
             if (isFetching) return;
             isFetching = true;
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Fetching...';
-            
+
             statusDot.className = 'status-dot loading';
             statusText.textContent = 'Fetching latest rates from Nepal Rastra Bank...';
 
@@ -2133,15 +2632,15 @@
 
                 const data = await response.json();
                 const rates = parseNRBData(data);
-                
+
                 if (rates && Object.keys(rates).length > 0) {
                     cachedRates = rates;
                     lastFetchTime = new Date();
                     updateRateDisplay(rates);
-                    
+
                     statusDot.className = 'status-dot online';
                     statusText.textContent = `✅ Connected to Nepal Rastra Bank • Last updated: ${lastFetchTime.toLocaleTimeString()}`;
-                    
+
                     try {
                         localStorage.setItem('nrb_rates', JSON.stringify({
                             rates: rates,
@@ -2154,7 +2653,7 @@
 
             } catch (error) {
                 console.warn('NRB fetch error:', error);
-                
+
                 try {
                     const cached = localStorage.getItem('nrb_rates');
                     if (cached) {
@@ -2164,10 +2663,10 @@
                             cachedRates = parsed.rates;
                             lastFetchTime = new Date(parsed.timestamp);
                             updateRateDisplay(cachedRates);
-                            
+
                             statusDot.className = 'status-dot online';
                             statusText.textContent = `📦 Using cached NRB rates • Last updated: ${lastFetchTime.toLocaleTimeString()}`;
-                            
+
                             btn.disabled = false;
                             btn.innerHTML = '<i class="fas fa-sync"></i> Refresh Now';
                             isFetching = false;
@@ -2175,12 +2674,12 @@
                         }
                     }
                 } catch (e) {}
-                
+
                 const fallbackRates = getFallbackRates();
                 cachedRates = fallbackRates;
                 lastFetchTime = new Date();
                 updateRateDisplay(fallbackRates);
-                
+
                 statusDot.className = 'status-dot offline';
                 statusText.textContent = `⚠️ Using fallback rates • Last updated: ${lastFetchTime.toLocaleTimeString()}`;
             }
@@ -2188,9 +2687,9 @@
             btn.disabled = false;
             btn.innerHTML = '<i class="fas fa-sync"></i> Refresh Now';
             isFetching = false;
-            
+
             if (lastFetchTime) {
-                document.getElementById('rateUpdateTime').textContent = 
+                document.getElementById('rateUpdateTime').textContent =
                     `(Updated: ${lastFetchTime.toLocaleDateString()} ${lastFetchTime.toLocaleTimeString()})`;
             }
         }
@@ -2297,11 +2796,11 @@
             Object.keys(currencyMap).forEach(curr => {
                 const rateEl = document.getElementById(currencyMap[curr]);
                 const changeEl = document.getElementById(changeMap[curr]);
-                
+
                 if (rateEl && rates[curr] !== undefined) {
                     const rate = rates[curr];
                     rateEl.textContent = rate.toFixed(2);
-                    
+
                     if (previousRates[curr]) {
                         const change = ((rate - previousRates[curr]) / previousRates[curr] * 100);
                         if (Math.abs(change) < 0.001) {
@@ -2326,23 +2825,14 @@
         }
 
         // ===== GAMING NICKNAME GENERATOR =====
-        // Cool symbol mappings for generating stylish names
         const styleMaps = [
-            // Small caps / stylized
             { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀꜱᴛᴜᴠᴡxʏᴢABCDEFGHIJKLMNOPQRSTUVWXYZ' },
-            // Fancy script
             { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: 'αႦƈԃҽϝɠԋιʝƙʅɱɳσρϙɾʂƚυʋɯxყȥABCDEFGHIJKLMNOPQRSTUVWXYZ' },
-            // Bold
             { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: '𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭' },
-            // Fraktur
             { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: '𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ' },
-            // Double-struck
             { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: '𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ' },
-            // Squared
-            { from: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', to: '🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉' },
         ];
 
-        // Additional style transforms
         function applyStyle(text, styleIndex) {
             const map = styleMaps[styleIndex % styleMaps.length];
             let result = '';
@@ -2353,22 +2843,17 @@
             return result;
         }
 
-        // Generate multiple variants
         function generateNameVariants(baseName, count = 12) {
             const variants = [];
             const symbols = ['✧', '☆', '♛', '☯', '⚔', '✿', '炎', '〆', 'ᯌ', '꧁', '꧂', '『', '』', '彡', '巛', '乂', '✞', '☬', '༒', 'ᯌ', '〆', '✿', '炎', '✧', '☆'];
-            
-            // Generate different styles
+
             for (let i = 0; i < Math.min(count, 8); i++) {
                 let name = baseName;
-                // Apply different font styles
                 name = applyStyle(name, i);
-                
-                // Add random symbols around
                 const leftIdx = (i * 3) % symbols.length;
                 const rightIdx = (i * 7 + 2) % symbols.length;
                 const midIdx = (i * 5 + 1) % symbols.length;
-                
+
                 if (i % 3 === 0) {
                     name = symbols[leftIdx] + name + symbols[rightIdx];
                 } else if (i % 3 === 1) {
@@ -2376,16 +2861,13 @@
                 } else {
                     name = symbols[leftIdx] + '『' + name + '』' + symbols[rightIdx];
                 }
-                
-                // Add some special variations
+
                 if (i % 2 === 0 && i < 6) {
                     name = name + '᭄ᴮᵒˢˢ';
                 }
-                
                 variants.push(name);
             }
-            
-            // Add more random variations
+
             for (let i = 0; i < count - variants.length; i++) {
                 let name = baseName;
                 const styleIdx = (i * 11 + 3) % styleMaps.length;
@@ -2397,7 +2879,7 @@
                 if (i % 3 === 1) name = name + '✿';
                 variants.push(name);
             }
-            
+
             return variants.slice(0, count);
         }
 
@@ -2412,19 +2894,17 @@
             const leftSym = document.getElementById('leftSymbol').value;
             const rightSym = document.getElementById('rightSymbol').value;
             let name = nameInput.value.trim() || 'Nepal';
-            
-            // Apply styling
+
             const variants = [];
             const styles = [0, 1, 2, 3, 4];
-            
+
             for (let i = 0; i < styles.length; i++) {
                 let styled = applyStyle(name, styles[i]);
                 if (leftSym !== 'none') styled = leftSym + styled;
                 if (rightSym !== 'none') styled = styled + rightSym;
                 variants.push(styled);
             }
-            
-            // Add more with random symbols
+
             const symbols = ['✧', '☆', '♛', '☯', '⚔', '✿', '炎', '〆', 'ᯌ'];
             for (let i = 0; i < 6; i++) {
                 let styled = applyStyle(name, i % 5);
@@ -2439,35 +2919,31 @@
                 if (rightSym !== 'none' && i < 3) styled = styled + rightSym;
                 variants.push(styled);
             }
-            
+
             displayNames(variants);
-            
-            // Show ad after generation
             showGenerationAd();
         }
 
         function generateAndDisplay(baseName, count = 10) {
             const variants = generateNameVariants(baseName, count);
             displayNames(variants);
-            
-            // Show ad after generation
             showGenerationAd();
         }
 
         function displayNames(names) {
             const container = document.getElementById('nameOutputArea');
             container.innerHTML = '';
-            
-            names.forEach((name, index) => {
+
+            names.forEach((name) => {
                 const item = document.createElement('div');
                 item.className = 'name-output-item';
-                
+
                 const span = document.createElement('span');
                 span.textContent = name;
                 span.style.flex = '1';
                 span.style.cursor = 'pointer';
                 span.title = 'Click to copy';
-                
+
                 const copyBtn = document.createElement('button');
                 copyBtn.className = 'copy-btn';
                 copyBtn.textContent = 'Copy';
@@ -2475,15 +2951,14 @@
                     e.stopPropagation();
                     copyName(name, copyBtn);
                 };
-                
+
                 item.appendChild(span);
                 item.appendChild(copyBtn);
-                
-                // Click on item copies too
+
                 item.addEventListener('click', function() {
                     copyName(name, copyBtn);
                 });
-                
+
                 container.appendChild(item);
             });
         }
@@ -2497,7 +2972,6 @@
                     btn.classList.remove('copied');
                 }, 2000);
             }).catch(() => {
-                // Fallback
                 const textarea = document.createElement('textarea');
                 textarea.value = name;
                 document.body.appendChild(textarea);
@@ -2521,22 +2995,19 @@
             input.value = text.substring(0, start) + symbol + text.substring(end);
             input.focus();
             input.selectionStart = input.selectionEnd = start + symbol.length;
-            
-            // Highlight button
+
             document.querySelectorAll('.symbol-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             setTimeout(() => btn.classList.remove('active'), 1000);
         }
 
-        // Show a small ad after name generation
         function showGenerationAd() {
-            // Check if an ad already exists in the output area
             let existingAd = document.querySelector('.ad-inline.generation-ad');
             if (existingAd) {
                 existingAd.style.display = 'flex';
                 return;
             }
-            
+
             const container = document.getElementById('nameOutputContainer');
             const adDiv = document.createElement('div');
             adDiv.className = 'ad-inline generation-ad';
@@ -2553,7 +3024,7 @@
                 </ins>
             `;
             container.appendChild(adDiv);
-            
+
             try {
                 (adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {}
@@ -2603,7 +3074,7 @@
         document.getElementById('langSelect').addEventListener('change', function() {
             const lang = this.value;
             const names = {
-                en: 'Nepal Tools – All-in-One Converter Suite',
+                en: 'Nepal Tools – All-in-One Converter Suite for Nepali Users',
                 ne: 'नेपाल टुल्स – सबै-एक-मा रूपान्तरण सुइट',
                 hi: 'नेपाल टूल्स – ऑल-इन-वन कन्वर्टर सूट'
             };
@@ -2614,11 +3085,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             populateBSDropdowns();
             populateADDropdowns();
-            
+
             setTimeout(() => {
                 fetchExchangeRates();
             }, 500);
-            
+
             setInterval(fetchExchangeRates, 6 * 60 * 60 * 1000);
 
             const today = new Date();
@@ -2633,7 +3104,6 @@
                 setTimeout(() => { adDaySelect.value = today.getDate(); }, 100);
             }
 
-            // Generate some default gaming names
             setTimeout(() => {
                 generateAndDisplay('Nepal', 6);
             }, 300);
@@ -2641,6 +3111,7 @@
             console.log('🚀 Nepal Tools loaded successfully!');
             console.log('📊 Exchange rates connected to Nepal Rastra Bank');
             console.log('🎮 Gaming Nickname Generator ready!');
+            console.log('📝 Blog section added for AdSense approval');
         });
     </script>
 
