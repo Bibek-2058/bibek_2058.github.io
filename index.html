@@ -6,7 +6,7 @@
   <title>StatsMaster · Standard Deviation & Similar Tools</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507"
      crossorigin="anonymous"></script>
   <style>
     * {
@@ -315,6 +315,16 @@
       align-items: center;
       text-align: center;
       box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+      cursor: pointer;
+      text-decoration: none;
+      color: #1e293b;
+    }
+
+    .tool-card:hover {
+      background: #f1f7ff;
+      border-color: #94b9ff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.04);
     }
 
     .tool-card i {
@@ -327,7 +337,6 @@
       font-size: 0.8rem;
       font-weight: 500;
       line-height: 1.3;
-      color: #1e293b;
     }
 
     .tool-card .badge {
@@ -460,66 +469,116 @@
 
 <script>
   (function() {
-    // ----- Similar tools data (based on MiniWebtool list) -----
+    // ----- Similar tools data with calculation page URLs (simulated) -----
     const toolList = [
-      { name: 'ANOVA Calculator', icon: 'fa-vial' },
-      { name: 'Arithmetic Mean', icon: 'fa-calculator' },
-      { name: 'Average Calculator', icon: 'fa-chart-bar', featured: true },
-      { name: 'Average Deviation', icon: 'fa-arrow-right-arrow-left' },
-      { name: 'Box & Whisker Plot', icon: 'fa-box' },
-      { name: 'Chi-Square Test', icon: 'fa-square-root-variable' },
-      { name: 'Coefficient of Variation', icon: 'fa-percent' },
-      { name: 'Cohen\'s d', icon: 'fa-ruler' },
-      { name: 'Confidence Interval', icon: 'fa-bullseye' },
-      { name: 'Correlation Coefficient', icon: 'fa-arrow-trend-up' },
-      { name: 'Geometric Mean', icon: 'fa-cube' },
-      { name: 'Gini Coefficient', icon: 'fa-chart-pie' },
-      { name: 'Histogram Maker', icon: 'fa-chart-column' },
-      { name: 'Interquartile Range', icon: 'fa-arrows-left-right' },
-      { name: 'Linear Regression', icon: 'fa-chart-scatter' },
-      { name: 'Mean Median Mode', icon: 'fa-list-ol' },
-      { name: 'Outlier Calculator', icon: 'fa-circle-exclamation', featured: true },
-      { name: 'Population Std Dev', icon: 'fa-people-group' },
-      { name: 'Quartile Calculator', icon: 'fa-divide' },
-      { name: 'Sample Size', icon: 'fa-up-down' },
-      { name: 'Scatter Plot', icon: 'fa-chart-scatter' },
-      { name: 'Standard Error', icon: 'fa-arrow-pointer' },
-      { name: 't-Test', icon: 'fa-flask' },
-      { name: 'Variance Calculator', icon: 'fa-square' },
-      { name: 'Z-Score', icon: 'fa-z' },
-      { name: 'p-Value', icon: 'fa-p' },
-      { name: 'Normal Distribution', icon: 'fa-bell' },
-      { name: 'Percentile', icon: 'fa-100' },
-      { name: 'Bar Graph Maker', icon: 'fa-chart-simple' },
-      { name: 'Pie Chart Maker', icon: 'fa-chart-pie' },
-      { name: 'Line Graph Maker', icon: 'fa-chart-line' },
-      { name: 'Bayes\' Theorem', icon: 'fa-arrow-right-to-bracket' },
-      { name: 'F-Test', icon: 'fa-f' },
-      { name: 'Spearman Rank', icon: 'fa-ranking-star' },
-      { name: 'Odds Ratio', icon: 'fa-ratio' },
-      { name: 'A/B Test Significance', icon: 'fa-abacus' },
-      { name: 'Six Sigma Process', icon: 'fa-sigma' },
+      { name: 'ANOVA Calculator', icon: 'fa-vial', url: '#tool-anova' },
+      { name: 'Arithmetic Mean', icon: 'fa-calculator', url: '#tool-mean' },
+      { name: 'Average Calculator', icon: 'fa-chart-bar', featured: true, url: '#tool-average' },
+      { name: 'Average Deviation', icon: 'fa-arrow-right-arrow-left', url: '#tool-avgdev' },
+      { name: 'Box & Whisker Plot', icon: 'fa-box', url: '#tool-boxplot' },
+      { name: 'Chi-Square Test', icon: 'fa-square-root-variable', url: '#tool-chisq' },
+      { name: 'Coefficient of Variation', icon: 'fa-percent', url: '#tool-cv' },
+      { name: 'Cohen\'s d', icon: 'fa-ruler', url: '#tool-cohen' },
+      { name: 'Confidence Interval', icon: 'fa-bullseye', url: '#tool-ci' },
+      { name: 'Correlation Coefficient', icon: 'fa-arrow-trend-up', url: '#tool-correlation' },
+      { name: 'Geometric Mean', icon: 'fa-cube', url: '#tool-geomean' },
+      { name: 'Gini Coefficient', icon: 'fa-chart-pie', url: '#tool-gini' },
+      { name: 'Histogram Maker', icon: 'fa-chart-column', url: '#tool-histogram' },
+      { name: 'Interquartile Range', icon: 'fa-arrows-left-right', url: '#tool-iqr' },
+      { name: 'Linear Regression', icon: 'fa-chart-scatter', url: '#tool-regression' },
+      { name: 'Mean Median Mode', icon: 'fa-list-ol', url: '#tool-mmm' },
+      { name: 'Outlier Calculator', icon: 'fa-circle-exclamation', featured: true, url: '#tool-outlier' },
+      { name: 'Population Std Dev', icon: 'fa-people-group', url: '#tool-popstd' },
+      { name: 'Quartile Calculator', icon: 'fa-divide', url: '#tool-quartile' },
+      { name: 'Sample Size', icon: 'fa-up-down', url: '#tool-samplesize' },
+      { name: 'Scatter Plot', icon: 'fa-chart-scatter', url: '#tool-scatter' },
+      { name: 'Standard Error', icon: 'fa-arrow-pointer', url: '#tool-sem' },
+      { name: 't-Test', icon: 'fa-flask', url: '#tool-ttest' },
+      { name: 'Variance Calculator', icon: 'fa-square', url: '#tool-variance' },
+      { name: 'Z-Score', icon: 'fa-z', url: '#tool-zscore' },
+      { name: 'p-Value', icon: 'fa-p', url: '#tool-pvalue' },
+      { name: 'Normal Distribution', icon: 'fa-bell', url: '#tool-normal' },
+      { name: 'Percentile', icon: 'fa-100', url: '#tool-percentile' },
+      { name: 'Bar Graph Maker', icon: 'fa-chart-simple', url: '#tool-bargraph' },
+      { name: 'Pie Chart Maker', icon: 'fa-chart-pie', url: '#tool-piechart' },
+      { name: 'Line Graph Maker', icon: 'fa-chart-line', url: '#tool-linegraph' },
+      { name: 'Bayes\' Theorem', icon: 'fa-arrow-right-to-bracket', url: '#tool-bayes' },
+      { name: 'F-Test', icon: 'fa-f', url: '#tool-ftest' },
+      { name: 'Spearman Rank', icon: 'fa-ranking-star', url: '#tool-spearman' },
+      { name: 'Odds Ratio', icon: 'fa-ratio', url: '#tool-odds' },
+      { name: 'A/B Test Significance', icon: 'fa-abacus', url: '#tool-abtest' },
+      { name: 'Six Sigma Process', icon: 'fa-sigma', url: '#tool-sixsigma' },
     ];
 
     const toolsGrid = document.getElementById('toolsGrid');
     toolList.forEach(t => {
-      const card = document.createElement('div');
+      const card = document.createElement('a');
       card.className = 'tool-card' + (t.featured ? ' featured' : '');
+      card.href = t.url;
+      card.target = '_blank';  // opens in new tab
       card.innerHTML = `
         <i class="fas ${t.icon}"></i>
         <span>${t.name}</span>
         ${t.featured ? '<div class="badge">featured</div>' : ''}
       `;
+      // click handler to simulate "calculation page" if it's a fragment link
+      card.addEventListener('click', function(e) {
+        // if it's a fragment, open a simulated page with tool name
+        if (this.hash && this.hash.startsWith('#tool-')) {
+          e.preventDefault();
+          const toolName = this.querySelector('span')?.innerText || 'Tool';
+          const url = new URL(window.location.href);
+          url.hash = '';
+          // open a new window with a simple generated page
+          const newWindow = window.open('', '_blank');
+          if (newWindow) {
+            newWindow.document.write(`
+              <!DOCTYPE html>
+              <html>
+              <head><title>${toolName} · StatsMaster</title>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+              <style>
+                body { font-family: system-ui; max-width: 700px; margin: 3rem auto; padding: 2rem; background: #f8faff; color: #1e293b; }
+                .card { background: white; border-radius: 28px; padding: 2.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.06); border: 1px solid #e9edf4; }
+                h1 { display: flex; gap: 1rem; align-items: center; }
+                i { color: #2563eb; }
+                .demo-input { background: #f1f5f9; padding: 1.2rem; border-radius: 16px; margin: 1.5rem 0; }
+                .btn { background: #2563eb; color: white; border: none; padding: 0.6rem 2rem; border-radius: 40px; font-weight: 600; cursor: default; }
+                .back { margin-top: 2rem; display: inline-block; color: #2563eb; text-decoration: none; }
+              </style>
+              </head>
+              <body>
+                <div class="card">
+                  <h1><i class="fas ${t.icon}"></i> ${toolName}</h1>
+                  <p><i class="fas fa-info-circle"></i> This is a simulation page for <strong>${toolName}</strong>. In a full implementation, this would contain the specific calculator.</p>
+                  <div class="demo-input">
+                    <i class="fas fa-database"></i> Sample data placeholder: 10, 20, 30, 40, 50
+                  </div>
+                  <button class="btn"><i class="fas fa-play"></i> Calculate (demo)</button>
+                  <div style="margin-top: 1.5rem; background: #eef2ff; padding: 1rem; border-radius: 12px;">
+                    <strong>Result: </strong> ${toolName} calculation would appear here.
+                  </div>
+                  <a href="#" onclick="window.close(); return false;" class="back"><i class="fas fa-arrow-left"></i> Close this window</a>
+                </div>
+                <p style="margin-top: 2rem; font-size: 0.8rem; color: #64748b;"><i class="fas fa-copyright"></i> StatsMaster · simulated tool page</p>
+              </body>
+              </html>
+            `);
+            newWindow.document.close();
+          } else {
+            alert('Please allow popups to see the tool page.');
+          }
+        }
+      });
       toolsGrid.appendChild(card);
     });
 
-    // ----- Calculator logic -----
+    // ----- Calculator logic (same as before) -----
     const dataInput = document.getElementById('dataInput');
     const calcBtn = document.getElementById('calcBtn');
     const clearBtn = document.getElementById('clearBtn');
     const modeRadios = document.querySelectorAll('input[name="mode"]');
 
-    // result fields
     const countDisplay = document.getElementById('countDisplay');
     const meanVal = document.getElementById('meanVal');
     const stdVal = document.getElementById('stdVal');
@@ -540,18 +599,15 @@
       if (n === 0) return null;
       const mean = arr.reduce((a,b) => a + b, 0) / n;
       const sorted = [...arr].sort((a,b) => a - b);
-      // deviations squared
       const sqDiffs = arr.map(x => (x - mean) ** 2);
       const sumSq = sqDiffs.reduce((a,b) => a + b, 0);
       const variance = isSample ? sumSq / (n - 1) : sumSq / n;
       const std = Math.sqrt(variance);
       const sem = std / Math.sqrt(n);
       const cv = (std / mean) * 100;
-      // quartiles
       const q1 = percentile(sorted, 0.25);
       const q2 = percentile(sorted, 0.50);
       const q3 = percentile(sorted, 0.75);
-      // 95% CI (approx using t for small n, but we use normal approximation for demo)
       const z = 1.96;
       const ciLower = mean - z * sem;
       const ciUpper = mean + z * sem;
@@ -580,7 +636,6 @@
       const rawText = dataInput.value;
       const data = parseData(rawText);
       if (data.length === 0) {
-        // reset to placeholder?
         return;
       }
       const isSample = document.querySelector('input[name="mode"]:checked').value === 'sample';
@@ -597,7 +652,6 @@
       ciVal.textContent = `[${stats.ciLower.toFixed(2)}, ${stats.ciUpper.toFixed(2)}]`;
       quartileVal.textContent = `${stats.q1.toFixed(2)} / ${stats.q2.toFixed(2)} / ${stats.q3.toFixed(2)}`;
 
-      // step-by-step
       const method = isSample ? 'sample (n-1)' : 'population (N)';
       const sqSum = stats.sumSq.toFixed(2);
       const varDisplay = stats.variance.toFixed(2);
@@ -619,12 +673,8 @@
       stepText.textContent = 'Enter data and click Calculate.';
     });
 
-    // initial calculation
-    updateUI();
-
-    // re-calc on radio change
     modeRadios.forEach(r => r.addEventListener('change', updateUI));
-
+    updateUI();
   })();
 </script>
 </body>
