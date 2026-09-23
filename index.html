@@ -1,687 +1,265 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Assist - Educational Resources & Math Tools</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Notes Download Section</title>
     <style>
-        :root {
-            --bg-color: #f8f9fa;
-            --text-color: #212529;
-            --card-bg: #ffffff;
-            --navbar-bg: #0d6efd;
-            --navbar-text: #ffffff;
-            --border-color: #dee2e6;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --navbar-bg: #1b2a4a;
-            --navbar-text: #ffffff;
-            --border-color: #333333;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
+            background-color: #f4f6f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #1a2530;
+            border-bottom: 2px solid #eef2f5;
+            padding-bottom: 10px;
+        }
+
+        .pdf-list {
+            list-style: none;
+        }
+
+        .pdf-item {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
         }
 
-        .navbar {
-            background-color: var(--navbar-bg) !important;
+        .pdf-item:hover {
+            border-color: #cbd5e1;
+            background-color: #f1f5f9;
         }
 
-        .card {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border-color: var(--border-color);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: background-color 0.3s, border-color 0.3s;
+        .pdf-title {
+            font-size: 15px;
+            color: #334155;
+            font-weight: 500;
+            padding-right: 15px;
         }
 
-        .theme-toggle-btn {
-            cursor: pointer;
+        .btn-download {
+            background-color: #2563eb;
+            color: white;
             border: none;
-            background: transparent;
-            color: var(--navbar-text);
-            font-size: 1.2rem;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            white-space: nowrap;
         }
 
-        .ads-container {
-            background-color: var(--card-bg);
-            border: 1px dashed var(--border-color);
-            padding: 15px;
+        .btn-download:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Ad Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .ad-box {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
             text-align: center;
-            color: #888;
-            border-radius: 5px;
-            margin: 15px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
         }
 
-        .nav-link {
+        .ad-header {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .ad-content {
+            min-height: 200px;
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #64748b;
+        }
+
+        .countdown-text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .btn-continue {
+            background-color: #94a3b8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: not-allowed;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .btn-continue.enabled {
+            background-color: #16a34a;
             cursor: pointer;
         }
 
-        .table-custom {
-            color: var(--text-color);
-        }
-
-        .table-custom td, .table-custom th {
-            border-color: var(--border-color);
-        }
-
-        footer {
-            margin-top: auto;
-            background-color: var(--card-bg);
-            border-top: 1px solid var(--border-color);
+        .btn-continue.enabled:hover {
+            background-color: #15803d;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header / Navigation -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
-            <div class="container">
-                <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-graduation-cap me-2"></i>Study Assist</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="nav-notes" onclick="switchTab('notes')"><i class="fa-solid fa-book me-1"></i> Notes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="nav-tools" onclick="switchTab('tools')"><i class="fa-solid fa-calculator me-1"></i> Mathematical Tools</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex align-items-center gap-3">
-                        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-                            <i class="fa-solid fa-moon"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+<div class="container">
+    <h2>Notes Download Section</h2>
+    <ul class="pdf-list">
+        <li class="pdf-item">
+            <span class="pdf-title">1.1 Physical, socio-cultural and economic geography and demography of Nepal</span>
+            <button class="btn-download" onclick="startDownload('1.1 physical, socio-cultural and economic geography and demography of nepal.pdf')">Download PDF</button>
+        </li>
+        <li class="pdf-item">
+            <span class="pdf-title">1.2 Major natural resources of Nepal</span>
+            <button class="btn-download" onclick="startDownload('1.2 Major natural resources of Nepal.pdf')">Download PDF</button>
+        </li>
+        <li class="pdf-item">
+            <span class="pdf-title">1.3 Geographical diversity, climatic conditions, and livelihood & lifestyle of people</span>
+            <button class="btn-download" onclick="startDownload('1.3 Geographical diversity, climatic conditions, and livelihood & lifestyle of people.pdf')">Download PDF</button>
+        </li>
+        <li class="pdf-item">
+            <span class="pdf-title">1.4 Notable events and personalities, social, cultural and economic conditions in modern history of Nepal</span>
+            <button class="btn-download" onclick="startDownload('1.4 Notable events and personalities, social, cultural and economic conditions in modern history of Nepal.pdf')">Download PDF</button>
+        </li>
+        <li class="pdf-item">
+            <span class="pdf-title">1.5 Socio-economic and policy aspects of forest, wildlife, and watershed management in Nepal</span>
+            <button class="btn-download" onclick="startDownload('1.5 Socio-economic and policy aspects of forest, wildlife, and watershed management in Nepal.pdf')">Download PDF</button>
+        </li>
+        <li class="pdf-item">
+            <span class="pdf-title">1.6 Information on sustainable development, environment, pollution, climate change, biodiversity, science and technology</span>
+            <button class="btn-download" onclick="startDownload('1.6 Information on sustainable development, environment, pollution, climate change, biodiversity, science and technology.pdf')">Download PDF</button>
+        </li>
+        <li class="pdf-item">
+            <span class="pdf-title">1.7 Nepal's international affairs and general information on the UNO, SAARC & BIMSTEC</span>
+            <button class="btn-download" onclick="startDownload('1.7 Nepal\'s international affairs and general information on the UNO, SAARC & BIMSTEC.pdf')">Download PDF</button>
+        </li>
+        <li class="pdf-item">
+            <span class="pdf-title">1.8 The Constitution of Nepal (From Part 1 to 5, 20 and 26 and Schedules)</span>
+            <button class="btn-download" onclick="startDownload('1.8 The Constitution of Nepal (From Part 1 to 5, 20 and 26 and Schedules).pdf')">Download PDF</button>
+        </li>
+        <li class="pdf-item">
+            <span class="pdf-title">1.9 Governance system and Government (Federal, Provincial and Local)</span>
+            <button class="btn-download" onclick="startDownload('1.9 Governance system and Government (Federal, Provincial and Local).pdf')">Download PDF</button>
+        </li>
+        <li class="pdf-item">
+            <span class="pdf-title">1.10 Provisions of civil service act and regulation relating to constitution of civil service, organizational structure, posts of service, fulfillment of vacancy and code of conduct</span>
+            <button class="btn-download" onclick="startDownload('1.10 Provisions of civil service act and regulation relating to constitution of civil service, organizational structure, posts of service, fulfillment of vacancy and code of conduct.pdf')">Download PDF</button>
+        </li>
+    </ul>
+</div>
 
-    <!-- Main Content -->
-    <main class="container my-4">
-
-        <!-- Top Ad Space (AdSense Compliant Structure) -->
-        <div class="ads-container">
-            <small><i class="fa-solid fa-ad me-1"></i> Advertisement Area</small>
+<!-- Ad Modal Container -->
+<div class="modal-overlay" id="adModal">
+    <div class="ad-box">
+        <div class="ad-header">Advertisement</div>
+        <div class="ad-content">
+            <!-- Replace this placeholder with your AdSense / Ad script code -->
+            <p>Your Advertisement / Google AdSense Here</p>
         </div>
+        <div class="countdown-text" id="countdownText">Please wait 5 seconds...</div>
+        <button class="btn-continue" id="continueBtn" disabled onclick="triggerFileDownload()">Skip Ad & Download</button>
+    </div>
+</div>
 
-        <!-- SECTION 1: NOTES SECTION -->
-        <section id="notesSection">
-            <div class="row mb-4">
-                <div class="col-md-8 mx-auto">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-text bg-primary text-white"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" id="searchInput" class="form-control" placeholder="Search notes by subject, title, or topic..." onkeyup="filterNotes()">
-                    </div>
-                </div>
-            </div>
+<script>
+    let currentPdfFile = '';
+    let countdownTimer;
+    let secondsLeft = 5;
 
-            <div class="row g-4" id="notesList">
-                <!-- Note 1 -->
-                <div class="col-md-6 col-lg-4 note-card" data-title="general mathematics fundamental statistics" data-category="Mathematics">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <span class="badge bg-primary mb-2 w-auto align-self-start">Mathematics</span>
-                            <h5 class="card-title">General Mathematics & Statistics</h5>
-                            <p class="card-text text-muted flex-grow-1">Comprehensive formulas, standard deviations, means, and probability concepts for students.</p>
-                            <button onclick="downloadPDF('General_Mathematics_Notes.pdf')" class="btn btn-outline-primary w-100 mt-2">
-                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    function startDownload(fileName) {
+        currentPdfFile = fileName;
+        secondsLeft = 5;
+        
+        const modal = document.getElementById('adModal');
+        const continueBtn = document.getElementById('continueBtn');
+        const countdownText = document.getElementById('countdownText');
 
-                <!-- Note 2 -->
-                <div class="col-md-6 col-lg-4 note-card" data-title="computer science database management system dbms" data-category="Computer Science">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <span class="badge bg-success mb-2 w-auto align-self-start">Computer Science</span>
-                            <h5 class="card-title">Database Management Systems (DBMS)</h5>
-                            <p class="card-text text-muted flex-grow-1">Key concepts of relational databases, SQL queries, normalization, and ACID properties.</p>
-                            <button onclick="downloadPDF('DBMS_Complete_Notes.pdf')" class="btn btn-outline-primary w-100 mt-2">
-                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        continueBtn.disabled = true;
+        continueBtn.classList.remove('enabled');
+        countdownText.innerText = `Please wait ${secondsLeft} seconds...`;
+        
+        modal.classList.add('active');
 
-                <!-- Note 3 -->
-                <div class="col-md-6 col-lg-4 note-card" data-title="environmental science ecosystem study material" data-category="Environmental Science">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <span class="badge bg-warning text-dark mb-2 w-auto align-self-start">Science</span>
-                            <h5 class="card-title">Environmental Science Basics</h5>
-                            <p class="card-text text-muted flex-grow-1">Core study notes on ecosystems, biodiversity conservation, and natural resource management.</p>
-                            <button onclick="downloadPDF('Environmental_Science_Basics.pdf')" class="btn btn-outline-primary w-100 mt-2">
-                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Note 4 -->
-                <div class="col-md-6 col-lg-4 note-card" data-title="microeconomics and macroeconomics principles" data-category="Economics">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <span class="badge bg-info text-dark mb-2 w-auto align-self-start">Economics</span>
-                            <h5 class="card-title">Principles of Economics</h5>
-                            <p class="card-text text-muted flex-grow-1">Fundamental principles of microeconomics and macroeconomics with diagrams and definitions.</p>
-                            <button onclick="downloadPDF('Principles_of_Economics.pdf')" class="btn btn-outline-primary w-100 mt-2">
-                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Note 5 -->
-                <div class="col-md-6 col-lg-4 note-card" data-title="research methodology data analysis statistics" data-category="Research">
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <span class="badge bg-secondary mb-2 w-auto align-self-start">Research</span>
-                            <h5 class="card-title">Research Methodology & Analysis</h5>
-                            <p class="card-text text-muted flex-grow-1">Guide to qualitative and quantitative research designs, sampling techniques, and analytical tools.</p>
-                            <button onclick="downloadPDF('Research_Methodology_Guide.pdf')" class="btn btn-outline-primary w-100 mt-2">
-                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="noResults" class="text-center my-5 d-none">
-                <i class="fa-solid fa-circle-exclamation fa-3x text-muted mb-3"></i>
-                <h5 class="text-muted">No notes match your search criteria.</h5>
-            </div>
-        </section>
-
-        <!-- SECTION 2: MATHEMATICAL TOOLS SECTION -->
-        <section id="toolsSection" class="d-none">
-            <ul class="nav nav-pills nav-fill mb-4 p-2 card flex-row" id="toolsTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active fw-bold" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats-panel" type="button"><i class="fa-solid fa-calculator me-2"></i>Statistical Calculations</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link fw-bold" id="charts-tab" data-bs-toggle="tab" data-bs-target="#charts-panel" type="button"><i class="fa-solid fa-chart-pie me-2"></i>Chart Generator</button>
-                </li>
-            </ul>
-
-            <div class="tab-content" id="toolsTabContent">
-                <!-- Statistical Calculations Sub-Tab -->
-                <div class="tab-pane fade show active" id="stats-panel" role="tabpanel">
-                    <div class="card p-4">
-                        <h4 class="mb-3 border-bottom pb-2"><i class="fa-solid fa-square-root-variable me-2"></i>Statistical Calculator</h4>
-                        
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-4">
-                                <label for="seriesType" class="form-label fw-bold">Select Series Type:</label>
-                                <select class="form-select" id="seriesType" onchange="adjustInputFields()">
-                                    <option value="individual">Individual Series (e.g., 10, 20, 30)</option>
-                                    <option value="discrete">Discrete Series (X and Frequency)</option>
-                                    <option value="continuous">Continuous Series (Class Intervals and Frequency)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div id="dynamicInputArea">
-                            <!-- Dynamic Inputs Injected via JavaScript -->
-                        </div>
-
-                        <button class="btn btn-primary btn-lg mt-3" onclick="calculateStatistics()"><i class="fa-solid fa-gears me-2"></i>Calculate All Statistics</button>
-
-                        <!-- Results Panel -->
-                        <div class="mt-4 d-none" id="statsResults">
-                            <h5 class="fw-bold border-bottom pb-2">Calculation Results</h5>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <div class="card bg-light text-dark p-3 text-center border-start border-primary border-4">
-                                        <small class="text-muted fw-bold">MEAN (X̅)</small>
-                                        <h3 id="resMean" class="m-0 mt-1 fw-bold text-primary">-</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="card bg-light text-dark p-3 text-center border-start border-success border-4">
-                                        <small class="text-muted fw-bold">MEDIAN (M)</small>
-                                        <h3 id="resMedian" class="m-0 mt-1 fw-bold text-success">-</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="card bg-light text-dark p-3 text-center border-start border-warning border-4">
-                                        <small class="text-muted fw-bold">MEAN DEVIATION (MD)</small>
-                                        <h3 id="resMD" class="m-0 mt-1 fw-bold text-warning">-</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="card bg-light text-dark p-3 text-center border-start border-danger border-4">
-                                        <small class="text-muted fw-bold">STANDARD DEVIATION (σ)</small>
-                                        <h3 id="resSD" class="m-0 mt-1 fw-bold text-danger">-</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chart Generator Sub-Tab -->
-                <div class="tab-pane fade" id="charts-panel" role="tabpanel">
-                    <div class="row g-4">
-                        <div class="col-md-5">
-                            <div class="card p-4 h-100">
-                                <h4 class="mb-3 border-bottom pb-2"><i class="fa-solid fa-sliders me-2"></i>Chart Settings</h4>
-                                
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">Chart Title</label>
-                                    <input type="text" id="chartTitle" class="form-control" value="Sample Distribution Chart">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">Chart Type</label>
-                                    <select id="chartTypeSelect" class="form-select">
-                                        <option value="bar">Bar Diagram</option>
-                                        <option value="pie">Pie Chart</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">Data Entries (Editable)</label>
-                                    <div id="chartDataRows">
-                                        <!-- Data row inputs will be generated here -->
-                                    </div>
-                                    <button class="btn btn-outline-secondary btn-sm mt-2" onclick="addChartDataRow()">
-                                        <i class="fa-solid fa-plus me-1"></i>Add Row
-                                    </button>
-                                </div>
-
-                                <button class="btn btn-success w-100 mt-2" onclick="renderChart()">
-                                    <i class="fa-solid fa-rotate me-2"></i>Update Chart
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="col-md-7">
-                            <div class="card p-4 text-center h-100 d-flex flex-column justify-content-between">
-                                <div>
-                                    <h4 class="mb-3 border-bottom pb-2">Visualization</h4>
-                                    <div class="position-relative" style="min-height: 320px;">
-                                        <canvas id="customChart"></canvas>
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <button class="btn btn-primary" onclick="downloadChart()">
-                                        <i class="fa-solid fa-download me-2"></i>Download Chart Image
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bottom Ad Space -->
-        <div class="ads-container">
-            <small><i class="fa-solid fa-ad me-1"></i> Advertisement Area</small>
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="py-4">
-        <div class="container text-center">
-            <p class="mb-1">&copy; 2026 Study Assist. All Rights Reserved.</p>
-            <p class="small text-muted mb-0">
-                <a href="#" class="text-decoration-none text-muted me-2">Privacy Policy</a> | 
-                <a href="#" class="text-decoration-none text-muted me-2 ms-2">Terms of Service</a> | 
-                <a href="#" class="text-decoration-none text-muted ms-2">Contact Us</a>
-            </p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        // --- Theme Toggle Logic ---
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', targetTheme);
-            
-            const icon = document.getElementById('themeToggleBtn').querySelector('i');
-            if (targetTheme === 'dark') {
-                icon.className = 'fa-solid fa-sun';
+        countdownTimer = setInterval(() => {
+            secondsLeft--;
+            if (secondsLeft > 0) {
+                countdownText.innerText = `Please wait ${secondsLeft} seconds...`;
             } else {
-                icon.className = 'fa-solid fa-moon';
+                clearInterval(countdownTimer);
+                countdownText.innerText = "Your download is ready!";
+                continueBtn.disabled = false;
+                continueBtn.classList.add('enabled');
             }
-        }
+        }, 1000);
+    }
 
-        // --- Navigation Switcher ---
-        function switchTab(tab) {
-            const notesSec = document.getElementById('notesSection');
-            const toolsSec = document.getElementById('toolsSection');
-            const navNotes = document.getElementById('nav-notes');
-            const navTools = document.getElementById('nav-tools');
+    function triggerFileDownload() {
+        const modal = document.getElementById('adModal');
+        modal.classList.remove('active');
 
-            if (tab === 'notes') {
-                notesSec.classList.remove('d-none');
-                toolsSec.classList.add('d-none');
-                navNotes.classList.add('active');
-                navTools.classList.remove('active');
-            } else {
-                notesSec.classList.add('d-none');
-                toolsSec.classList.remove('d-none');
-                navNotes.classList.remove('active');
-                navTools.classList.add('active');
-                // Adjust dynamic inputs on first view
-                if(!document.getElementById('inputValues')) adjustInputFields();
-            }
-        }
+        // Creates a link to trigger the actual file download
+        const link = document.createElement('a');
+        link.href = currentPdfFile; // Ensure PDF files are in the same folder or pass the full URL path
+        link.download = currentPdfFile;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
 
-        // --- Notes Search Filter ---
-        function filterNotes() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.note-card');
-            let hasVisible = false;
-
-            cards.forEach(card => {
-                const title = card.getAttribute('data-title').toLowerCase();
-                const text = card.textContent.toLowerCase();
-                if (title.includes(query) || text.includes(query)) {
-                    card.classList.remove('d-none');
-                    hasVisible = true;
-                } else {
-                    card.classList.add('d-none');
-                }
-            });
-
-            const noResults = document.getElementById('noResults');
-            if (hasVisible) {
-                noResults.classList.add('d-none');
-            } else {
-                noResults.classList.remove('d-none');
-            }
-        }
-
-        // --- PDF Download Simulation ---
-        function downloadPDF(filename) {
-            const blob = new Blob([`This is a simulated PDF download content for ${filename}.`], { type: 'application/pdf' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = filename;
-            link.click();
-            URL.revokeObjectURL(link.href);
-        }
-
-        // --- Statistical Calculations Logic ---
-        function adjustInputFields() {
-            const type = document.getElementById('seriesType').value;
-            const container = document.getElementById('dynamicInputArea');
-
-            if (type === 'individual') {
-                container.innerHTML = `
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Enter Data Values (X) [Comma Separated]:</label>
-                        <input type="text" id="inputValues" class="form-control" placeholder="e.g., 12, 15, 18, 22, 25, 30">
-                    </div>
-                `;
-            } else if (type === 'discrete') {
-                container.innerHTML = `
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Values (X) [Comma Separated]:</label>
-                            <input type="text" id="inputX" class="form-control" placeholder="e.g., 10, 20, 30, 40, 50">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Frequencies (f) [Comma Separated]:</label>
-                            <input type="text" id="inputF" class="form-control" placeholder="e.g., 2, 5, 8, 4, 1">
-                        </div>
-                    </div>
-                `;
-            } else if (type === 'continuous') {
-                container.innerHTML = `
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Class Intervals (e.g., 0-10, 10-20) [Comma Separated]:</label>
-                            <input type="text" id="inputCI" class="form-control" placeholder="e.g., 0-10, 10-20, 20-30, 30-40">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Frequencies (f) [Comma Separated]:</label>
-                            <input type="text" id="inputF" class="form-control" placeholder="e.g., 3, 7, 12, 5">
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        function calculateStatistics() {
-            const type = document.getElementById('seriesType').value;
-            let mean = 0, median = 0, md = 0, sd = 0;
-
-            try {
-                if (type === 'individual') {
-                    const raw = document.getElementById('inputValues').value;
-                    const data = raw.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n)).sort((a, b) => a - b);
-                    if (data.length === 0) return alert('Please enter valid numerical data.');
-
-                    const N = data.length;
-                    mean = data.reduce((a, b) => a + b, 0) / N;
-
-                    // Median
-                    if (N % 2 === 0) {
-                        median = (data[N / 2 - 1] + data[N / 2]) / 2;
-                    } else {
-                        median = data[Math.floor(N / 2)];
-                    }
-
-                    // Mean Deviation
-                    md = data.reduce((acc, x) => acc + Math.abs(x - mean), 0) / N;
-
-                    // Standard Deviation
-                    const variance = data.reduce((acc, x) => acc + Math.pow(x - mean, 2), 0) / N;
-                    sd = Math.sqrt(variance);
-
-                } else if (type === 'discrete') {
-                    const X = document.getElementById('inputX').value.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
-                    const F = document.getElementById('inputF').value.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
-
-                    if (X.length === 0 || X.length !== F.length) return alert('X and F frequency lengths must match.');
-
-                    const N = F.reduce((a, b) => a + b, 0);
-                    let fxSum = 0;
-                    for (let i = 0; i < X.length; i++) fxSum += X[i] * F[i];
-                    mean = fxSum / N;
-
-                    // Cumulative Frequencies & Median
-                    let cf = [];
-                    let cum = 0;
-                    for (let i = 0; i < F.length; i++) {
-                        cum += F[i];
-                        cf.push(cum);
-                    }
-                    const medPos = N / 2;
-                    for (let i = 0; i < cf.length; i++) {
-                        if (cf[i] >= medPos) {
-                            median = X[i];
-                            break;
-                        }
-                    }
-
-                    // Mean Deviation & SD
-                    let devSum = 0, sqDevSum = 0;
-                    for (let i = 0; i < X.length; i++) {
-                        devSum += F[i] * Math.abs(X[i] - mean);
-                        sqDevSum += F[i] * Math.pow(X[i] - mean, 2);
-                    }
-                    md = devSum / N;
-                    sd = Math.sqrt(sqDevSum / N);
-
-                } else if (type === 'continuous') {
-                    const CIRaw = document.getElementById('inputCI').value.split(',').map(s => s.trim());
-                    const F = document.getElementById('inputF').value.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
-
-                    if (CIRaw.length === 0 || CIRaw.length !== F.length) return alert('Class Interval and Frequency count must match.');
-
-                    let X = [], L = [], U = [];
-                    for (let item of CIRaw) {
-                        const parts = item.split('-').map(n => parseFloat(n.trim()));
-                        if (parts.length !== 2 || isNaN(parts[0]) || isNaN(parts[1])) return alert('Invalid Class Interval Format. Use format like 0-10');
-                        L.push(parts[0]);
-                        U.push(parts[1]);
-                        X.push((parts[0] + parts[1]) / 2); // Midpoint
-                    }
-
-                    const N = F.reduce((a, b) => a + b, 0);
-                    let fxSum = 0;
-                    for (let i = 0; i < X.length; i++) fxSum += X[i] * F[i];
-                    mean = fxSum / N;
-
-                    // Cumulative Frequencies & Continuous Median Calculation
-                    let cf = [F[0]];
-                    for (let i = 1; i < F.length; i++) cf.push(cf[i - 1] + F[i]);
-
-                    const medPos = N / 2;
-                    let mIdx = 0;
-                    for (let i = 0; i < cf.length; i++) {
-                        if (cf[i] >= medPos) {
-                            mIdx = i;
-                            break;
-                        }
-                    }
-
-                    const L_med = L[mIdx];
-                    const cf_prev = mIdx === 0 ? 0 : cf[mIdx - 1];
-                    const f_med = F[mIdx];
-                    const h = U[mIdx] - L[mIdx];
-
-                    median = L_med + (((N / 2) - cf_prev) / f_med) * h;
-
-                    // Mean Deviation & SD
-                    let devSum = 0, sqDevSum = 0;
-                    for (let i = 0; i < X.length; i++) {
-                        devSum += F[i] * Math.abs(X[i] - mean);
-                        sqDevSum += F[i] * Math.pow(X[i] - mean, 2);
-                    }
-                    md = devSum / N;
-                    sd = Math.sqrt(sqDevSum / N);
-                }
-
-                // Display Results
-                document.getElementById('resMean').innerText = mean.toFixed(2);
-                document.getElementById('resMedian').innerText = median.toFixed(2);
-                document.getElementById('resMD').innerText = md.toFixed(2);
-                document.getElementById('resSD').innerText = sd.toFixed(2);
-                document.getElementById('statsResults').classList.remove('d-none');
-
-            } catch (err) {
-                alert('Invalid Data Format. Please check your inputs.');
-            }
-        }
-
-        // --- Chart Generator Logic ---
-        let chartInstance = null;
-
-        function initChartRows() {
-            const container = document.getElementById('chartDataRows');
-            container.innerHTML = '';
-            const defaultData = [
-                { label: 'Category A', value: 40 },
-                { label: 'Category B', value: 25 },
-                { label: 'Category C', value: 35 }
-            ];
-
-            defaultData.forEach(item => addChartDataRow(item.label, item.value));
-        }
-
-        function addChartDataRow(label = '', value = '') {
-            const container = document.getElementById('chartDataRows');
-            const div = document.createElement('div');
-            div.className = 'input-group mb-2 chart-row';
-            div.innerHTML = `
-                <input type="text" class="form-control chart-label" placeholder="Label" value="${label}">
-                <input type="number" class="form-control chart-val" placeholder="Value" value="${value}">
-                <button class="btn btn-outline-danger" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></button>
-            `;
-            container.appendChild(div);
-        }
-
-        function renderChart() {
-            const labels = [];
-            const data = [];
-            
-            document.querySelectorAll('.chart-row').forEach(row => {
-                const l = row.querySelector('.chart-label').value.trim();
-                const v = parseFloat(row.querySelector('.chart-val').value);
-                if (l && !isNaN(v)) {
-                    labels.push(l);
-                    data.push(v);
-                }
-            });
-
-            const chartType = document.getElementById('chartTypeSelect').value;
-            const title = document.getElementById('chartTitle').value;
-            const ctx = document.getElementById('customChart').getContext('2d');
-
-            if (chartInstance) chartInstance.destroy();
-
-            chartInstance = new Chart(ctx, {
-                type: chartType,
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: title,
-                        data: data,
-                        backgroundColor: [
-                            '#0d6efd', '#198754', '#ffc107', '#dc3545', '#0dcaf0', '#6c757d'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: title
-                        }
-                    }
-                }
-            });
-        }
-
-        function downloadChart() {
-            if (!chartInstance) return alert('Generate a chart first.');
-            const link = document.createElement('a');
-            link.download = 'chart.png';
-            link.href = chartInstance.toBase64Image();
-            link.click();
-        }
-
-        // Initialize App Setup
-        window.onload = () => {
-            initChartRows();
-            renderChart();
-        };
-    </script>
 </body>
 </html>
