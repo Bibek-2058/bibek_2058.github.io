@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StatsMaster · Statistical Analysis Suite</title>
-  <!-- Font Awesome 6 (free) -->
+  <title>StatsMaster & Study Notes · Statistical Analysis & PSC Notes</title>
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -129,80 +129,20 @@
       padding: 0.7rem 1.2rem;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    @media (max-width: 820px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-    }
-
-    .input-area {
-      background: #f9fcff;
-      padding: 1.5rem;
-      border-radius: 20px;
-      border: 1px solid #e2e9f3;
-    }
-
-    .input-area label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-    }
-
-    .input-area textarea {
-      width: 100%;
-      border: 1px solid #d1ddee;
-      border-radius: 16px;
-      padding: 0.9rem 1.2rem;
-      font-size: 1rem;
-      min-height: 110px;
-      resize: vertical;
-      background: white;
-      transition: 0.2s;
-    }
-
-    .input-area textarea:focus {
-      outline: 2px solid #2563eb;
-      border-color: transparent;
-    }
-
-    .helper-text {
-      font-size: 0.85rem;
-      color: #64748b;
-      margin-top: 0.3rem;
-      display: flex;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-    }
-
-    .action-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1.2rem;
-      align-items: center;
-    }
-
     .btn {
       background: white;
       border: 1px solid #cbd5e1;
-      padding: 0.5rem 1.5rem;
+      padding: 0.6rem 1.5rem;
       border-radius: 40px;
       font-size: 0.9rem;
       font-weight: 500;
       color: #1e293b;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
       transition: all 0.15s;
       cursor: pointer;
+      text-decoration: none;
       box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
@@ -212,353 +152,71 @@
       color: white;
     }
 
-    .btn-primary i {
+    .btn-primary:hover {
+      background: #1d4ed8;
       color: white;
     }
 
-    .btn-outline {
-      background: transparent;
-      border-color: #94a3b8;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .results-area {
-      background: #f9fcff;
-      padding: 1.5rem;
-      border-radius: 20px;
-      border: 1px solid #e2e9f3;
-    }
-
-    .stat-grid {
+    /* Notes Page Specific Styling */
+    .notes-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8rem 1.2rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .stat-item {
-      background: white;
-      padding: 0.7rem 1rem;
-      border-radius: 14px;
-      border: 1px solid #e9edf4;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .stat-item .label {
-      font-size: 0.85rem;
-      color: #475569;
-    }
-
-    .stat-item .value {
-      font-weight: 700;
-      font-size: 1rem;
-      color: #0f172a;
-    }
-
-    .stat-item .value small {
-      font-weight: 400;
-      color: #64748b;
-      font-size: 0.75rem;
-      margin-left: 0.2rem;
-    }
-
-    .full-width {
-      grid-column: 1 / -1;
-    }
-
-    .step-solution {
-      background: #f1f5f9;
-      border-radius: 16px;
-      padding: 1rem 1.2rem;
-      margin-top: 0.8rem;
-      font-size: 0.9rem;
-      border-left: 4px solid #2563eb;
-    }
-
-    .step-solution strong {
-      display: block;
-      margin-bottom: 0.4rem;
-    }
-
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
       margin-top: 1rem;
     }
 
-    .tool-card {
-      background: white;
-      border-radius: 16px;
-      padding: 0.8rem;
-      border: 1px solid #e2e9f3;
-      text-align: center;
-      text-decoration: none;
-      color: #1e293b;
-      transition: 0.15s;
+    .note-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .note-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      border-color: #cbd5e1;
+    }
+
+    .note-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+      display: flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.5rem;
     }
 
-    .tool-card:hover {
-      background: #f1f7ff;
-      border-color: #94b9ff;
-      transform: translateY(-2px);
-    }
-
-    .tool-card i {
-      font-size: 1.5rem;
+    .note-title i {
       color: #2563eb;
     }
 
-    .tool-card span {
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-
-    .tool-card .badge {
-      font-size: 0.6rem;
-      background: #dbeafe;
-      padding: 0.1rem 0.6rem;
-      border-radius: 30px;
-      color: #1e4f9b;
-    }
-
-    /* Chart styles */
-    .chart-maker {
-      background: white;
-      border-radius: 28px;
-      padding: 2rem;
-      border: 1px solid #e9edf4;
-      margin-top: 1.5rem;
-    }
-
-    .chart-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      align-items: flex-start;
-      margin-bottom: 1.5rem;
-      background: #f8fafc;
-      padding: 1.2rem;
-      border-radius: 18px;
-      border: 1px solid #e2e9f3;
-    }
-
-    .chart-controls .control-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      min-width: 120px;
-    }
-
-    .chart-controls label {
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: #334155;
-    }
-
-    .chart-controls input, .chart-controls select {
-      padding: 0.4rem 0.7rem;
-      border-radius: 10px;
-      border: 1px solid #d1ddee;
-      background: white;
+    .note-desc {
       font-size: 0.9rem;
+      color: #475569;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
     }
 
-    .color-palettes {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .color-palettes button {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: 0.15s;
-      font-size: 0.7rem;
-    }
-
-    .color-palettes button:hover { transform: scale(1.1); }
-    .color-palettes button.active {
-      border-color: #1e293b;
-      box-shadow: 0 0 0 2px white, 0 0 0 4px #2563eb;
-    }
-
-    .chart-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: flex-start;
-      justify-content: center;
-    }
-
-    .chart-container {
-      position: relative;
-      width: 380px;
-      height: 380px;
-    }
-
-    .chart-container.bar-chart {
-      width: 500px;
-      height: 380px;
-    }
-
-    .chart-container.pie-3d {
-      perspective: 800px;
-    }
-    .chart-container.pie-3d canvas {
-      transform: rotateX(5deg) rotateY(2deg);
-      transition: transform 0.3s;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    }
-
-    .legend-editor {
-      min-width: 180px;
-      background: #f9fcff;
-      padding: 1rem;
-      border-radius: 16px;
-      border: 1px solid #e2e9f3;
-    }
-
-    .legend-editor h4 {
-      font-size: 0.9rem;
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .legend-item-edit {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .legend-item-edit .color-swatch {
-      width: 14px;
-      height: 14px;
-      border-radius: 4px;
-      flex-shrink: 0;
-    }
-
-    .legend-item-edit input[type="text"] {
-      flex: 1;
-      padding: 0.2rem 0.4rem;
-      border: 1px solid #d1ddee;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      background: white;
-    }
-
-    .legend-item-edit input[type="color"] {
-      width: 24px;
-      height: 24px;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      background: none;
-    }
-
-    .legend-item-edit .remove-item {
-      cursor: pointer;
-      color: #94a3b8;
-      font-size: 0.8rem;
-    }
-    .legend-item-edit .remove-item:hover { color: #ef4444; }
-
-    .add-item-row {
+    .note-tags {
       display: flex;
       gap: 0.4rem;
-      margin-top: 0.5rem;
       flex-wrap: wrap;
+      margin-bottom: 1.2rem;
     }
 
-    .add-item-row input {
-      padding: 0.2rem 0.6rem;
-      border-radius: 8px;
-      border: 1px solid #d1ddee;
-      font-size: 0.8rem;
-    }
-
-    .add-item-row .btn-small {
-      padding: 0.2rem 0.8rem;
+    .tag {
+      background: #e0e7ff;
+      color: #3730a3;
+      font-size: 0.75rem;
+      padding: 0.23rem 0.7rem;
       border-radius: 20px;
-      background: #eef2ff;
-      border: 1px solid #cbd5e1;
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-
-    .chart-title-input {
-      text-align: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .chart-title-input input {
-      width: 100%;
-      text-align: center;
-      padding: 0.3rem;
-      border: 1px solid #d1ddee;
-      border-radius: 8px;
-      font-size: 1rem;
       font-weight: 600;
-      background: transparent;
-    }
-
-    .chart-download-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1.5rem;
-      justify-content: center;
-    }
-
-    .tab-buttons {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .tab-buttons .btn {
-      cursor: pointer;
-      background: #f1f5f9;
-      border: 1px solid #d1ddee;
-      padding: 0.4rem 1.2rem;
-      border-radius: 30px;
-      font-size: 0.85rem;
-    }
-
-    .tab-buttons .btn.active {
-      background: #2563eb;
-      color: white;
-      border-color: #2563eb;
-    }
-
-    .chart-tab { display: none; }
-    .chart-tab.active { display: block; }
-
-    .three-d-toggle {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .three-d-toggle input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: #2563eb;
     }
 
     footer {
@@ -571,153 +229,6 @@
       font-size: 0.85rem;
       color: #475569;
     }
-
-    @media (max-width: 600px) {
-      .card { padding: 1.5rem; }
-      .stat-grid { grid-template-columns: 1fr; }
-      .chart-container, .chart-container.bar-chart { width: 100%; height: 300px; }
-      .nav-bar { flex-direction: column; gap: 0.8rem; align-items: stretch; }
-      .nav-links { justify-content: center; }
-    }
-
-    /* Electricity Bill Calculator specific styles */
-    .elec-form-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem 1.5rem;
-      background: #f9fcff;
-      padding: 1.5rem 1.2rem;
-      border-radius: 24px;
-      margin-bottom: 2rem;
-      border: 1px solid #e2edf5;
-    }
-    .elec-field {
-      flex: 1 0 160px;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-    .elec-field label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      color: #1d4a6b;
-    }
-    .elec-field select, .elec-field input {
-      background: white;
-      border: 1px solid #cbdde9;
-      border-radius: 40px;
-      padding: 0.7rem 1rem;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: #0b2b3f;
-      outline: none;
-      transition: 0.15s;
-    }
-    .elec-field select:focus, .elec-field input:focus {
-      border-color: #1f7ea3;
-      box-shadow: 0 0 0 3px rgba(26, 115, 160, 0.15);
-    }
-    .elec-field input { width: 100%; }
-    .elec-calc-btn {
-      background: #1a6d8f;
-      border: none;
-      border-radius: 60px;
-      padding: 0.8rem 2.2rem;
-      font-weight: 600;
-      font-size: 1rem;
-      color: white;
-      cursor: pointer;
-      transition: 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 8px rgba(21, 94, 128, 0.2);
-      margin-top: 0.5rem;
-      align-self: flex-end;
-    }
-    .elec-calc-btn:hover { background: #0f5a7a; transform: scale(0.97); }
-    .elec-result-area {
-      background: #f3f9ff;
-      border-radius: 24px;
-      padding: 1.8rem 1.5rem 1.5rem;
-      border: 1px solid #d4e3ee;
-      margin-top: 0.5rem;
-    }
-    .elec-result-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      margin-bottom: 1.2rem;
-    }
-    .elec-result-header h2 {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #0b2b4a;
-    }
-    .elec-total-amount {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #0a4a6b;
-      background: white;
-      padding: 0.2rem 1.4rem;
-      border-radius: 60px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-    .elec-breakdown {
-      background: white;
-      border-radius: 18px;
-      padding: 0.8rem 0.2rem 0.2rem 0.2rem;
-    }
-    .elec-breakdown-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.6rem 1rem;
-      border-bottom: 1px solid #ecf3f9;
-      font-size: 0.95rem;
-    }
-    .elec-breakdown-item:last-child { border-bottom: none; }
-    .elec-breakdown-item .label { color: #1d4057; }
-    .elec-breakdown-item .value { font-weight: 600; color: #0a2b3f; }
-    .elec-breakdown-item.total {
-      border-top: 2px solid #c7dceb;
-      margin-top: 0.5rem;
-      padding-top: 0.9rem;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-    .elec-vat-note {
-      font-size: 0.8rem;
-      color: #2d688b;
-      background: #e3f0f9;
-      padding: 0.4rem 1rem;
-      border-radius: 30px;
-      display: inline-block;
-      margin-top: 0.5rem;
-    }
-    .elec-footnote {
-      margin-top: 1.5rem;
-      font-size: 0.78rem;
-      color: #3c657f;
-      border-top: 1px solid #d4e3ee;
-      padding-top: 1.2rem;
-      text-align: center;
-    }
-    .elec-error-msg {
-      background: #ffe9e9;
-      color: #a13d3d;
-      padding: 0.5rem 1rem;
-      border-radius: 60px;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-    }
-    @media (max-width: 480px) {
-      .elec-form-grid { flex-direction: column; gap: 1rem; }
-      .elec-field { flex: 1 1 auto; }
-      .elec-calc-btn { align-self: stretch; justify-content: center; }
-    }
   </style>
 </head>
 <body>
@@ -728,6 +239,7 @@
     <div class="nav-brand"><i class="fas fa-chart-line"></i> StatsMaster</div>
     <div class="nav-links">
       <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
+      <a href="#" data-page="notes"><i class="fas fa-book-open"></i> Notes</a> <!-- नँया पृष्ठ थपिएको -->
       <a href="#" data-page="pie"><i class="fas fa-chart-pie"></i> Pie Chart</a>
       <a href="#" data-page="bar"><i class="fas fa-chart-bar"></i> Bar Chart</a>
       <a href="#" data-page="electricity"><i class="fas fa-bolt"></i> Electricity Bill</a>
@@ -740,237 +252,82 @@
     <div class="card">
       <h1><i class="fas fa-calculator"></i> Standard Deviation Calculator</h1>
       <div class="subhead">Population · Sample · Variance · SEM · CV · Quartiles · Confidence Interval</div>
+      <p>Welcome to StatsMaster. Use our navigation menu above to access statistical tools or study notes.</p>
+    </div>
+  </div>
 
-      <div class="grid-2">
-        <div class="input-area">
-          <label for="dataInput"><i class="fas fa-database"></i> Enter data (comma or space separated)</label>
-          <textarea id="dataInput" placeholder="e.g. 12, 15, 18, 22, 30">12, 15, 18, 22, 30</textarea>
-          <div class="helper-text">
-            <span><i class="fas fa-arrow-right"></i> sample (default)</span>
-            <span><i class="fas fa-arrow-right"></i> population: check below</span>
-          </div>
-          <div style="display:flex; flex-wrap:wrap; gap:1rem; margin:0.8rem 0 0.2rem;">
-            <label style="display:flex; align-items:center; gap:0.4rem; font-weight:400;">
-              <input type="radio" name="mode" value="sample" checked> Sample (n-1)
-            </label>
-            <label style="display:flex; align-items:center; gap:0.4rem; font-weight:400;">
-              <input type="radio" name="mode" value="population"> Population (N)
-            </label>
-          </div>
-          <div class="action-row">
-            <button id="calcBtn" class="btn btn-primary"><i class="fas fa-play"></i> Calculate</button>
-            <button id="clearBtn" class="btn btn-outline"><i class="fas fa-undo-alt"></i> Clear</button>
-          </div>
-        </div>
+  <!-- ===== NEW NOTES PAGE ===== -->
+  <div id="page-notes" class="page">
+    <div class="card">
+      <h1><i class="fas fa-file-pdf"></i> Study Notes & PSC Resources</h1>
+      <div class="subhead">लोकसेवा तथा विभिन्न परीक्षा उपयोगी अध्ययन सामाग्रीहरू डाउनलोड गर्नुहोस्</div>
 
-        <div class="results-area">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-weight:600;"><i class="fas fa-chart-simple"></i> Statistics</span>
-            <span style="font-size:0.75rem; background:#e2e8f0; padding:0.2rem 0.8rem; border-radius:30px;">n = <span id="countDisplay">5</span></span>
+      <div class="notes-grid">
+        <!-- Constitution Note Card -->
+        <div class="note-card">
+          <div>
+            <div class="note-title">
+              <i class="fas fa-book-bookmark"></i> नेपालको संविधान - पूर्ण अध्ययन नोट
+            </div>
+            <div class="note-desc">
+              भाग १, २, ३, ४, ५, २०, २५ का सबै धाराहरू र ९ वटै अनुसूचीहरू (उपधारा सहित) लोकसेवा परीक्षा उपयोगी विशेष सामाग्री।
+            </div>
+            <div class="note-tags">
+              <span class="tag">PSC Exam</span>
+              <span class="tag">Constitution</span>
+              <span class="tag">PDF</span>
+            </div>
           </div>
-          <div class="stat-grid">
-            <div class="stat-item"><span class="label">Mean (μ/x̄)</span><span class="value" id="meanVal">19.40</span></div>
-            <div class="stat-item"><span class="label">Std Dev</span><span class="value" id="stdVal">6.73 <small>sample</small></span></div>
-            <div class="stat-item"><span class="label">Variance</span><span class="value" id="varVal">45.30</span></div>
-            <div class="stat-item"><span class="label">Std Error (SEM)</span><span class="value" id="semVal">3.01</span></div>
-            <div class="stat-item"><span class="label">Coeff. of Var (CV)</span><span class="value" id="cvVal">34.7%</span></div>
-            <div class="stat-item"><span class="label">95% CI (mean)</span><span class="value" id="ciVal">[11.94, 26.86]</span></div>
-            <div class="stat-item full-width"><span class="label">Q1 / Median / Q3</span><span class="value" id="quartileVal">13.50 / 18.00 / 26.00</span></div>
-          </div>
-          <div class="step-solution">
-            <strong><i class="fas fa-list-check"></i> Step-by-step (sample)</strong>
-            <span id="stepText">Mean = 19.40 · sum squared deviations = 181.20 · variance = 45.30 · std = 6.73</span>
-          </div>
+          <!-- Download Link / Button -->
+          <a href="Nepal_Constitution_Notes.pdf" download="Nepal_Constitution_Notes.pdf" class="btn btn-primary">
+            <i class="fas fa-download"></i> PDF डाउनलोड गर्नुहोस्
+          </a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== PIE CHART PAGE ===== -->
+  <!-- ===== OTHER PAGES (PIE, BAR, ELECTRICITY, TOOLS) ===== -->
   <div id="page-pie" class="page">
     <div class="card">
       <h1><i class="fas fa-chart-pie"></i> Pie Chart Maker</h1>
       <div class="subhead">Editable title · legend · colors · 3D · download</div>
-
-      <div class="chart-maker">
-        <div class="chart-controls">
-          <div class="control-group">
-            <label>Color Palette</label>
-            <div class="color-palettes" id="piePaletteButtons">
-              <button class="active" data-palette="default" style="background:conic-gradient(#3b82f6,#8b5cf6,#ec4899,#f59e0b,#10b981,#6366f1);">🎨</button>
-              <button data-palette="pastel" style="background:conic-gradient(#fbbf24,#f472b6,#60a5fa,#a78bfa,#34d399,#f87171);">🌸</button>
-              <button data-palette="dark" style="background:conic-gradient(#1e293b,#334155,#475569,#64748b,#94a3b8,#cbd5e1);">🌙</button>
-              <button data-palette="vibrant" style="background:conic-gradient(#ef4444,#f97316,#eab308,#22c55e,#3b82f6,#8b5cf6);">🌈</button>
-              <button data-palette="mono" style="background:conic-gradient(#1e3a5f,#2a4f7a,#3b6b9e,#4d88c2,#6aa5d9,#8fc2e8);">🔵</button>
-            </div>
-          </div>
-          <div class="control-group">
-            <label>Style</label>
-            <select id="pieDesignSelect">
-              <option value="pie">Classic Pie</option>
-              <option value="doughnut">Doughnut</option>
-              <option value="polar">Polar Area</option>
-            </select>
-          </div>
-          <div class="control-group three-d-toggle">
-            <label>3D Effect</label>
-            <input type="checkbox" id="pie3dToggle" checked>
-          </div>
-          <div class="control-group">
-            <label>Title</label>
-            <input type="text" id="pieTitleInput" value="Sales Distribution" style="width:140px;">
-          </div>
-        </div>
-
-        <div class="chart-wrapper">
-          <div class="chart-container pie-3d" id="pieContainer3d">
-            <div class="chart-title-input">
-              <input type="text" id="pieTitleDisplay" value="Sales Distribution" readonly style="background:transparent; border:none; font-size:1.2rem; font-weight:700; text-align:center;">
-            </div>
-            <canvas id="pieChartCanvas"></canvas>
-          </div>
-          <div class="legend-editor">
-            <h4><i class="fas fa-list-ul"></i> Legend (editable)</h4>
-            <div id="pieLegendItems"></div>
-            <div class="add-item-row">
-              <input type="text" id="pieNewLabel" placeholder="Label" value="New Item">
-              <input type="number" id="pieNewValue" placeholder="Value" value="10" style="width:70px;">
-              <button class="btn-small" id="pieAddItem"><i class="fas fa-plus"></i> Add</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="chart-download-options">
-          <button class="btn btn-primary" id="pieDownloadPng"><i class="fas fa-image"></i> PNG</button>
-          <button class="btn" id="pieDownloadJpg"><i class="fas fa-file-image"></i> JPG</button>
-          <button class="btn" id="pieDownloadSvg"><i class="fas fa-code"></i> SVG</button>
-          <button class="btn btn-outline" id="pieDownloadCsv"><i class="fas fa-table"></i> CSV</button>
-        </div>
-      </div>
     </div>
   </div>
 
-  <!-- ===== BAR CHART PAGE ===== -->
   <div id="page-bar" class="page">
     <div class="card">
       <h1><i class="fas fa-chart-bar"></i> Bar Chart Maker</h1>
       <div class="subhead">Editable title · legend · colors · horizontal/vertical · download</div>
-
-      <div class="chart-maker">
-        <div class="chart-controls">
-          <div class="control-group">
-            <label>Color Palette</label>
-            <div class="color-palettes" id="barPaletteButtons">
-              <button class="active" data-palette="default" style="background:conic-gradient(#3b82f6,#8b5cf6,#ec4899,#f59e0b,#10b981,#6366f1);">🎨</button>
-              <button data-palette="pastel" style="background:conic-gradient(#fbbf24,#f472b6,#60a5fa,#a78bfa,#34d399,#f87171);">🌸</button>
-              <button data-palette="dark" style="background:conic-gradient(#1e293b,#334155,#475569,#64748b,#94a3b8,#cbd5e1);">🌙</button>
-              <button data-palette="vibrant" style="background:conic-gradient(#ef4444,#f97316,#eab308,#22c55e,#3b82f6,#8b5cf6);">🌈</button>
-            </div>
-          </div>
-          <div class="control-group">
-            <label>Bar Style</label>
-            <select id="barDesignSelect">
-              <option value="bar">Vertical</option>
-              <option value="horizontalBar">Horizontal</option>
-            </select>
-          </div>
-          <div class="control-group">
-            <label>Title</label>
-            <input type="text" id="barTitleInput" value="Monthly Revenue" style="width:140px;">
-          </div>
-        </div>
-
-        <div class="chart-wrapper">
-          <div class="chart-container bar-chart">
-            <div class="chart-title-input">
-              <input type="text" id="barTitleDisplay" value="Monthly Revenue" readonly style="background:transparent; border:none; font-size:1.2rem; font-weight:700; text-align:center;">
-            </div>
-            <canvas id="barChartCanvas"></canvas>
-          </div>
-          <div class="legend-editor">
-            <h4><i class="fas fa-list-ul"></i> Legend (editable)</h4>
-            <div id="barLegendItems"></div>
-            <div class="add-item-row">
-              <input type="text" id="barNewLabel" placeholder="Label" value="New">
-              <input type="number" id="barNewValue" placeholder="Value" value="20" style="width:70px;">
-              <button class="btn-small" id="barAddItem"><i class="fas fa-plus"></i> Add</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="chart-download-options">
-          <button class="btn btn-primary" id="barDownloadPng"><i class="fas fa-image"></i> PNG</button>
-          <button class="btn" id="barDownloadJpg"><i class="fas fa-file-image"></i> JPG</button>
-          <button class="btn" id="barDownloadSvg"><i class="fas fa-code"></i> SVG</button>
-          <button class="btn btn-outline" id="barDownloadCsv"><i class="fas fa-table"></i> CSV</button>
-        </div>
-      </div>
     </div>
   </div>
 
-  <!-- ===== ELECTRICITY BILL CALCULATOR PAGE ===== -->
   <div id="page-electricity" class="page">
     <div class="card">
       <h1><i class="fas fa-bolt"></i> NEA Bill Calculator</h1>
-      <div class="subhead">Nepal Electricity Authority · tariff rates updated Aug 2026</div>
-
-      <div class="elec-form-grid">
-        <div class="elec-field">
-          <label for="ampereSelect">Ampere rating</label>
-          <select id="ampereSelect">
-            <option value="5">5 A (residential)</option>
-            <option value="15">15 A</option>
-            <option value="30">30 A</option>
-            <option value="60">60 A</option>
-          </select>
-        </div>
-        <div class="elec-field">
-          <label for="unitsInput">Units consumed (kWh)</label>
-          <input type="number" id="unitsInput" min="0" step="0.1" value="50" placeholder="e.g. 50">
-        </div>
-        <div class="elec-field" style="flex:0 0 auto; justify-content: flex-end;">
-          <button class="elec-calc-btn" id="elecCalcBtn"><i class="fas fa-calculator"></i> Calculate bill</button>
-        </div>
-      </div>
-
-      <div class="elec-result-area" id="resultArea">
-        <div class="elec-result-header">
-          <h2>📋 Bill breakdown</h2>
-          <span class="elec-total-amount" id="totalDisplay">Rs. 335</span>
-        </div>
-        <div class="elec-breakdown" id="breakdownContainer">
-          <div class="elec-breakdown-item static-item"><span class="label">Minimum charge</span><span class="value" id="minChargeDisplay">Rs. 50.00</span></div>
-          <div class="elec-breakdown-item static-item"><span class="label">Energy charge</span><span class="value" id="energyDisplay">Rs. 335.00</span></div>
-          <div class="elec-breakdown-item static-item" id="vatRow"><span class="label">VAT (5% of cost above 50 + min charge)</span><span class="value" id="vatDisplay">Rs. 0.00</span></div>
-          <div class="elec-breakdown-item total static-item"><span class="label">Total (incl. VAT)</span><span class="value" id="totalBreakdownDisplay">Rs. 335.00</span></div>
-        </div>
-        <div id="vatNoteContainer" class="elec-vat-note">✅ VAT exempt (up to 50 units)</div>
-        <div id="elecErrorMessage" class="elec-error-msg" style="display:none;"></div>
-        <div class="elec-footnote">* Residential 5–60 A · Total = min charge + energy charge + VAT · effective 17 July 2026</div>
-      </div>
+      <div class="subhead">Nepal Electricity Authority · tariff rates updated</div>
     </div>
   </div>
 
-  <!-- ===== TOOLS PAGE ===== -->
   <div id="page-tools" class="page">
     <div class="card">
       <h1><i class="fas fa-th-large"></i> Statistics & Data Analysis Tools</h1>
       <div class="subhead">Explore our suite of statistical calculators and visualizers</div>
-      <div class="tools-grid" id="toolsGrid"></div>
     </div>
   </div>
 
   <footer>
-    <span><i class="fas fa-copyright"></i> StatsMaster · Statistical Analysis Suite</span>
+    <span><i class="fas fa-copyright"></i> StatsMaster · Statistical Analysis & Study Suite</span>
     <span><i class="fas fa-code"></i> API · <i class="fas fa-book"></i> Resources</span>
   </footer>
 </div>
 
 <script>
   (function() {
-    // ----- Navigation -----
+    // Navigation logic
     const pages = {
       home: document.getElementById('page-home'),
+      notes: document.getElementById('page-notes'),
       pie: document.getElementById('page-pie'),
       bar: document.getElementById('page-bar'),
       electricity: document.getElementById('page-electricity'),
@@ -986,719 +343,8 @@
         Object.keys(pages).forEach(key => {
           pages[key].classList.toggle('active', key === page);
         });
-        if (page === 'pie') renderPie();
-        if (page === 'bar') renderBar();
-        if (page === 'electricity') handleElecCalculate();
       });
     });
-
-    // ----- Tools list -----
-    const toolList = [
-      { name: 'ANOVA Calculator', icon: 'fa-vial' },
-      { name: 'Arithmetic Mean', icon: 'fa-calculator' },
-      { name: 'Average Calculator', icon: 'fa-chart-bar' },
-      { name: 'Average Deviation', icon: 'fa-arrow-right-arrow-left' },
-      { name: 'Box & Whisker Plot', icon: 'fa-box' },
-      { name: 'Coefficient of Variation', icon: 'fa-percent' },
-      { name: 'Cohen\'s d', icon: 'fa-ruler' },
-      { name: 'Confidence Interval', icon: 'fa-bullseye' },
-      { name: 'Correlation Coefficient', icon: 'fa-arrow-trend-up' },
-      { name: 'Geometric Mean', icon: 'fa-cube' },
-      { name: 'Gini Coefficient', icon: 'fa-chart-pie' },
-      { name: 'Histogram Maker', icon: 'fa-chart-column' },
-      { name: 'Interquartile Range', icon: 'fa-arrows-left-right' },
-      { name: 'Linear Regression', icon: 'fa-chart-scatter' },
-      { name: 'Mean Median Mode', icon: 'fa-list-ol' },
-      { name: 'Outlier Calculator', icon: 'fa-circle-exclamation' },
-      { name: 'Population Std Dev', icon: 'fa-people-group' },
-      { name: 'Quartile Calculator', icon: 'fa-divide' },
-      { name: 'Sample Size', icon: 'fa-up-down' },
-      { name: 'Scatter Plot', icon: 'fa-chart-scatter' },
-      { name: 'Standard Error', icon: 'fa-arrow-pointer' },
-      { name: 'Variance Calculator', icon: 'fa-square' },
-      { name: 'Z-Score', icon: 'fa-z' },
-      { name: 'p-Value', icon: 'fa-p' },
-      { name: 'Normal Distribution', icon: 'fa-bell' },
-      { name: 'Percentile', icon: 'fa-100' },
-      { name: 'Line Graph Maker', icon: 'fa-chart-line' },
-      { name: 'Bayes\' Theorem', icon: 'fa-arrow-right-to-bracket' },
-      { name: 'Spearman Rank', icon: 'fa-ranking-star' },
-      { name: 'Odds Ratio', icon: 'fa-ratio' },
-      { name: 'A/B Test Significance', icon: 'fa-abacus' },
-      { name: 'Six Sigma Process', icon: 'fa-sigma' }
-    ];
-
-    const toolsGrid = document.getElementById('toolsGrid');
-    toolList.forEach(t => {
-      const card = document.createElement('a');
-      card.className = 'tool-card';
-      card.href = '#';
-      card.innerHTML = `<i class="fas ${t.icon}"></i><span>${t.name}</span>`;
-      card.addEventListener('click', function(e) {
-        e.preventDefault();
-        alert(`🔧 ${t.name}\nThis is a fully functional tool page.\nIn production, it would contain the complete calculator.`);
-      });
-      toolsGrid.appendChild(card);
-    });
-
-    // ----- Standard Deviation Calculator -----
-    const dataInput = document.getElementById('dataInput');
-    const calcBtn = document.getElementById('calcBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const modeRadios = document.querySelectorAll('input[name="mode"]');
-
-    const countDisplay = document.getElementById('countDisplay');
-    const meanVal = document.getElementById('meanVal');
-    const stdVal = document.getElementById('stdVal');
-    const varVal = document.getElementById('varVal');
-    const semVal = document.getElementById('semVal');
-    const cvVal = document.getElementById('cvVal');
-    const ciVal = document.getElementById('ciVal');
-    const quartileVal = document.getElementById('quartileVal');
-    const stepText = document.getElementById('stepText');
-
-    function parseData(text) {
-      const raw = text.split(/[,\s]+/).map(s => s.trim()).filter(s => s !== '');
-      return raw.map(Number).filter(n => !isNaN(n) && isFinite(n));
-    }
-
-    function computeStats(arr, isSample) {
-      const n = arr.length;
-      if (n === 0) return null;
-      const mean = arr.reduce((a,b) => a + b, 0) / n;
-      const sorted = [...arr].sort((a,b) => a - b);
-      const sqDiffs = arr.map(x => (x - mean) ** 2);
-      const sumSq = sqDiffs.reduce((a,b) => a + b, 0);
-      const variance = isSample ? sumSq / (n - 1) : sumSq / n;
-      const std = Math.sqrt(variance);
-      const sem = std / Math.sqrt(n);
-      const cv = (std / mean) * 100;
-      const q1 = percentile(sorted, 0.25);
-      const q2 = percentile(sorted, 0.50);
-      const q3 = percentile(sorted, 0.75);
-      const z = 1.96;
-      const ciLower = mean - z * sem;
-      const ciUpper = mean + z * sem;
-      return { n, mean, sumSq, variance, std, sem, cv, q1, q2, q3, ciLower, ciUpper };
-    }
-
-    function percentile(sorted, p) {
-      if (sorted.length === 0) return NaN;
-      const pos = (sorted.length - 1) * p;
-      const base = Math.floor(pos);
-      const rest = pos - base;
-      if (base + 1 < sorted.length) {
-        return sorted[base] + rest * (sorted[base + 1] - sorted[base]);
-      }
-      return sorted[base];
-    }
-
-    function updateUI() {
-      const rawText = dataInput.value;
-      const data = parseData(rawText);
-      if (data.length === 0) return;
-      const isSample = document.querySelector('input[name="mode"]:checked').value === 'sample';
-      const stats = computeStats(data, isSample);
-      if (!stats) return;
-      countDisplay.textContent = stats.n;
-      meanVal.textContent = stats.mean.toFixed(4);
-      const stdLabel = isSample ? 'sample' : 'population';
-      stdVal.innerHTML = `${stats.std.toFixed(4)} <small>${stdLabel}</small>`;
-      varVal.textContent = stats.variance.toFixed(4);
-      semVal.textContent = stats.sem.toFixed(4);
-      cvVal.textContent = stats.cv.toFixed(2) + '%';
-      ciVal.textContent = `[${stats.ciLower.toFixed(2)}, ${stats.ciUpper.toFixed(2)}]`;
-      quartileVal.textContent = `${stats.q1.toFixed(2)} / ${stats.q2.toFixed(2)} / ${stats.q3.toFixed(2)}`;
-      const method = isSample ? 'sample (n-1)' : 'population (N)';
-      stepText.textContent = `Mean = ${stats.mean.toFixed(4)} · sum squared deviations = ${stats.sumSq.toFixed(2)} · variance = ${stats.variance.toFixed(2)} · std = ${stats.std.toFixed(2)}  (${method})`;
-    }
-
-    calcBtn.addEventListener('click', updateUI);
-    clearBtn.addEventListener('click', function() {
-      dataInput.value = '';
-      countDisplay.textContent = '0';
-      meanVal.textContent = '—';
-      stdVal.innerHTML = '—';
-      varVal.textContent = '—';
-      semVal.textContent = '—';
-      cvVal.textContent = '—';
-      ciVal.textContent = '[—]';
-      quartileVal.textContent = '— / — / —';
-      stepText.textContent = 'Enter data and click Calculate.';
-    });
-    modeRadios.forEach(r => r.addEventListener('change', updateUI));
-    updateUI();
-
-    // ----- PIE CHART -----
-    const palettes = {
-      default: ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#6366f1'],
-      pastel: ['#fbbf24', '#f472b6', '#60a5fa', '#a78bfa', '#34d399', '#f87171'],
-      dark: ['#1e293b', '#334155', '#475569', '#64748b', '#94a3b8', '#cbd5e1'],
-      vibrant: ['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6'],
-      mono: ['#1e3a5f', '#2a4f7a', '#3b6b9e', '#4d88c2', '#6aa5d9', '#8fc2e8']
-    };
-
-    let pieChart = null;
-    let pieData = { labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product E'], values: [30, 25, 20, 15, 10] };
-    let piePalette = 'default';
-    let pieDesign = 'pie';
-    let pie3d = true;
-
-    function getColors(paletteName, count) {
-      const palette = palettes[paletteName] || palettes.default;
-      const colors = [];
-      for (let i = 0; i < count; i++) colors.push(palette[i % palette.length]);
-      return colors;
-    }
-
-    function renderPie() {
-      const colors = getColors(piePalette, pieData.labels.length);
-      const container = document.getElementById('pieContainer3d');
-      pie3d ? container.classList.add('pie-3d') : container.classList.remove('pie-3d');
-      document.getElementById('pieTitleDisplay').value = document.getElementById('pieTitleInput').value;
-
-      const legendDiv = document.getElementById('pieLegendItems');
-      legendDiv.innerHTML = '';
-      pieData.labels.forEach((label, i) => {
-        const div = document.createElement('div');
-        div.className = 'legend-item-edit';
-        div.innerHTML = `
-          <span class="color-swatch" style="background:${colors[i % colors.length]}"></span>
-          <input type="text" value="${label}" data-index="${i}" class="pie-label-edit">
-          <input type="color" value="${colors[i % colors.length]}" data-index="${i}" class="pie-color-edit">
-          <span class="remove-item" data-index="${i}"><i class="fas fa-times"></i></span>
-        `;
-        legendDiv.appendChild(div);
-      });
-
-      document.querySelectorAll('.pie-label-edit').forEach(inp => {
-        inp.addEventListener('change', function() {
-          pieData.labels[parseInt(this.dataset.index)] = this.value;
-          buildPieChart();
-        });
-      });
-      document.querySelectorAll('.pie-color-edit').forEach(inp => {
-        inp.addEventListener('input', function() {
-          const idx = parseInt(this.dataset.index);
-          const colors2 = getColors(piePalette, pieData.labels.length);
-          colors2[idx] = this.value;
-          buildPieChart(colors2);
-        });
-      });
-      document.querySelectorAll('.pie-legend-items .remove-item').forEach(el => {
-        el.addEventListener('click', function() {
-          const idx = parseInt(this.dataset.index);
-          pieData.labels.splice(idx, 1);
-          pieData.values.splice(idx, 1);
-          renderPie();
-          buildPieChart();
-        });
-      });
-      buildPieChart();
-    }
-
-    function buildPieChart(customColors = null) {
-      const colors = customColors || getColors(piePalette, pieData.labels.length);
-      const ctx = document.getElementById('pieChartCanvas').getContext('2d');
-      if (pieChart) pieChart.destroy();
-      const typeMap = { pie: 'pie', doughnut: 'doughnut', polar: 'polarArea' };
-      pieChart = new Chart(ctx, {
-        type: typeMap[pieDesign] || 'pie',
-        data: {
-          labels: pieData.labels,
-          datasets: [{ data: pieData.values, backgroundColor: colors, borderColor: '#ffffff', borderWidth: 2 }]
-        },
-        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } } }
-      });
-    }
-
-    document.querySelectorAll('#piePaletteButtons button').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('#piePaletteButtons button').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        piePalette = this.dataset.palette;
-        renderPie();
-      });
-    });
-    document.getElementById('pieDesignSelect').addEventListener('change', function() {
-      pieDesign = this.value;
-      renderPie();
-    });
-    document.getElementById('pie3dToggle').addEventListener('change', function() {
-      pie3d = this.checked;
-      renderPie();
-    });
-    document.getElementById('pieTitleInput').addEventListener('input', function() {
-      document.getElementById('pieTitleDisplay').value = this.value;
-    });
-    document.getElementById('pieAddItem').addEventListener('click', function() {
-      const label = document.getElementById('pieNewLabel').value.trim() || 'Item';
-      const value = parseFloat(document.getElementById('pieNewValue').value) || 10;
-      pieData.labels.push(label);
-      pieData.values.push(value);
-      renderPie();
-    });
-
-    // ----- BAR CHART -----
-    let barChart = null;
-    let barData = { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], values: [45, 52, 38, 65, 48] };
-    let barPalette = 'default';
-    let barDesign = 'bar';
-
-    function renderBar() {
-      const colors = getColors(barPalette, barData.labels.length);
-      document.getElementById('barTitleDisplay').value = document.getElementById('barTitleInput').value;
-
-      const legendDiv = document.getElementById('barLegendItems');
-      legendDiv.innerHTML = '';
-      barData.labels.forEach((label, i) => {
-        const div = document.createElement('div');
-        div.className = 'legend-item-edit';
-        div.innerHTML = `
-          <span class="color-swatch" style="background:${colors[i % colors.length]}"></span>
-          <input type="text" value="${label}" data-index="${i}" class="bar-label-edit">
-          <input type="color" value="${colors[i % colors.length]}" data-index="${i}" class="bar-color-edit">
-          <span class="remove-item" data-index="${i}"><i class="fas fa-times"></i></span>
-        `;
-        legendDiv.appendChild(div);
-      });
-
-      document.querySelectorAll('.bar-label-edit').forEach(inp => {
-        inp.addEventListener('change', function() {
-          barData.labels[parseInt(this.dataset.index)] = this.value;
-          buildBarChart();
-        });
-      });
-      document.querySelectorAll('.bar-color-edit').forEach(inp => {
-        inp.addEventListener('input', function() {
-          const idx = parseInt(this.dataset.index);
-          const colors2 = getColors(barPalette, barData.labels.length);
-          colors2[idx] = this.value;
-          buildBarChart(colors2);
-        });
-      });
-      document.querySelectorAll('.bar-legend-items .remove-item').forEach(el => {
-        el.addEventListener('click', function() {
-          const idx = parseInt(this.dataset.index);
-          barData.labels.splice(idx, 1);
-          barData.values.splice(idx, 1);
-          renderBar();
-          buildBarChart();
-        });
-      });
-      buildBarChart();
-    }
-
-    function buildBarChart(customColors = null) {
-      const colors = customColors || getColors(barPalette, barData.labels.length);
-      const ctx = document.getElementById('barChartCanvas').getContext('2d');
-      if (barChart) barChart.destroy();
-      const isHorizontal = barDesign === 'horizontalBar';
-      barChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: barData.labels,
-          datasets: [{ label: 'Value', data: barData.values, backgroundColor: colors, borderColor: '#ffffff', borderWidth: 1 }]
-        },
-        options: {
-          indexAxis: isHorizontal ? 'y' : 'x',
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: { legend: { display: false } }
-        }
-      });
-    }
-
-    document.querySelectorAll('#barPaletteButtons button').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('#barPaletteButtons button').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        barPalette = this.dataset.palette;
-        renderBar();
-      });
-    });
-    document.getElementById('barDesignSelect').addEventListener('change', function() {
-      barDesign = this.value;
-      renderBar();
-    });
-    document.getElementById('barTitleInput').addEventListener('input', function() {
-      document.getElementById('barTitleDisplay').value = this.value;
-    });
-    document.getElementById('barAddItem').addEventListener('click', function() {
-      const label = document.getElementById('barNewLabel').value.trim() || 'Item';
-      const value = parseFloat(document.getElementById('barNewValue').value) || 20;
-      barData.labels.push(label);
-      barData.values.push(value);
-      renderBar();
-    });
-
-    // Download helpers
-    function downloadChart(canvasId, format) {
-      const canvas = document.getElementById(canvasId);
-      const link = document.createElement('a');
-      link.download = `chart.${format}`;
-      link.href = format === 'svg' ? canvas.toDataURL('image/svg+xml') : canvas.toDataURL(`image/${format}`, 0.95);
-      link.click();
-    }
-
-    function downloadCsv(data, filename) {
-      let csv = 'Label,Value\n';
-      data.labels.forEach((l, i) => csv += `${l},${data.values[i]}\n`);
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const link = document.createElement('a');
-      link.download = filename;
-      link.href = URL.createObjectURL(blob);
-      link.click();
-    }
-
-    document.getElementById('pieDownloadPng').addEventListener('click', () => downloadChart('pieChartCanvas', 'png'));
-    document.getElementById('pieDownloadJpg').addEventListener('click', () => downloadChart('pieChartCanvas', 'jpeg'));
-    document.getElementById('pieDownloadSvg').addEventListener('click', () => downloadChart('pieChartCanvas', 'svg'));
-    document.getElementById('pieDownloadCsv').addEventListener('click', () => downloadCsv(pieData, 'pie-data.csv'));
-
-    document.getElementById('barDownloadPng').addEventListener('click', () => downloadChart('barChartCanvas', 'png'));
-    document.getElementById('barDownloadJpg').addEventListener('click', () => downloadChart('barChartCanvas', 'jpeg'));
-    document.getElementById('barDownloadSvg').addEventListener('click', () => downloadChart('barChartCanvas', 'svg'));
-    document.getElementById('barDownloadCsv').addEventListener('click', () => downloadCsv(barData, 'bar-data.csv'));
-
-    // ----- ELECTRICITY BILL CALCULATOR -----
-    const TARIFFS = {
-      5: {
-        getMinCharge: function(units) {
-          if (units <= 10) return 30;
-          else if (units <= 20) return 30;
-          else if (units <= 30) return 50;
-          else if (units <= 50) return 50;
-          else if (units <= 100) return 75;
-          else if (units <= 250) return 100;
-          else return 150;
-        },
-        rates: [
-          { limit: 10, rate: 0 },
-          { limit: 20, rate: 3.00 },
-          { limit: 30, rate: 6.50 },
-          { limit: 50, rate: 8.00 },
-          { limit: 100, rate: 9.50 },
-          { limit: 250, rate: 9.50 },
-          { limit: Infinity, rate: 11.00 }
-        ],
-        applySpecialRule: true
-      },
-      15: {
-        getMinCharge: function(units) {
-          if (units <= 20) return 50;
-          else if (units <= 30) return 75;
-          else if (units <= 50) return 75;
-          else if (units <= 100) return 100;
-          else if (units <= 250) return 125;
-          else return 175;
-        },
-        rates: [
-          { limit: 20, rate: 4.00 },
-          { limit: 30, rate: 6.50 },
-          { limit: 50, rate: 8.00 },
-          { limit: 100, rate: 9.50 },
-          { limit: 250, rate: 9.50 },
-          { limit: Infinity, rate: 11.00 }
-        ],
-        applySpecialRule: false
-      },
-      30: {
-        getMinCharge: function(units) {
-          if (units <= 20) return 75;
-          else if (units <= 30) return 100;
-          else if (units <= 50) return 100;
-          else if (units <= 100) return 125;
-          else if (units <= 250) return 150;
-          else return 200;
-        },
-        rates: [
-          { limit: 20, rate: 5.00 },
-          { limit: 30, rate: 6.50 },
-          { limit: 50, rate: 8.00 },
-          { limit: 100, rate: 9.50 },
-          { limit: 250, rate: 9.50 },
-          { limit: Infinity, rate: 11.00 }
-        ],
-        applySpecialRule: false
-      },
-      60: {
-        getMinCharge: function(units) {
-          if (units <= 20) return 125;
-          else if (units <= 30) return 125;
-          else if (units <= 50) return 125;
-          else if (units <= 100) return 150;
-          else if (units <= 250) return 200;
-          else return 250;
-        },
-        rates: [
-          { limit: 20, rate: 6.00 },
-          { limit: 30, rate: 6.50 },
-          { limit: 50, rate: 8.00 },
-          { limit: 100, rate: 9.50 },
-          { limit: 250, rate: 9.50 },
-          { limit: Infinity, rate: 11.00 }
-        ],
-        applySpecialRule: false
-      }
-    };
-
-    function computeEnergyCharge(units, ampere) {
-      const tariff = TARIFFS[ampere];
-      const rates = tariff.rates;
-      
-      if (ampere === 5 && units > 20) {
-        let newEnergy = 0;
-        let newSlabDetails = [];
-        let rem = units;
-        
-        const firstUnits = Math.min(rem, 20);
-        const cost1 = firstUnits * 3.00;
-        newEnergy += cost1;
-        newSlabDetails.push({
-          range: `1-20`,
-          units: firstUnits,
-          rate: 3.00,
-          cost: cost1
-        });
-        rem -= firstUnits;
-        
-        if (rem > 0) {
-          let prev = 20;
-          for (let i = 0; i < rates.length; i++) {
-            const slab = rates[i];
-            const limit = slab.limit;
-            if (limit <= 20) continue;
-            let unitsInSlab = 0;
-            if (limit === Infinity) {
-              unitsInSlab = rem;
-            } else {
-              const width = limit - prev;
-              if (width <= 0) continue;
-              unitsInSlab = Math.min(rem, width);
-            }
-            if (unitsInSlab > 0) {
-              const cost = unitsInSlab * slab.rate;
-              newEnergy += cost;
-              newSlabDetails.push({
-                range: `${prev+1}-${limit === Infinity ? '∞' : limit}`,
-                units: unitsInSlab,
-                rate: slab.rate,
-                cost: cost
-              });
-              rem -= unitsInSlab;
-            }
-            prev = limit;
-            if (rem <= 0) break;
-          }
-        }
-        return { energy: newEnergy, slabDetails: newSlabDetails };
-      }
-      
-      let energy = 0;
-      let remaining = units;
-      let prevLimit = 0;
-      const slabDetails = [];
-
-      for (let i = 0; i < rates.length; i++) {
-        const slab = rates[i];
-        const limit = slab.limit;
-        const rate = slab.rate;
-        let unitsInSlab = 0;
-
-        if (remaining <= 0) break;
-
-        if (limit === Infinity) {
-          unitsInSlab = remaining;
-        } else {
-          const width = limit - prevLimit;
-          if (width <= 0) continue;
-          unitsInSlab = Math.min(remaining, width);
-        }
-
-        if (unitsInSlab > 0) {
-          const cost = unitsInSlab * rate;
-          energy += cost;
-          slabDetails.push({
-            range: prevLimit === 0 ? `1-${limit}` : `${prevLimit+1}-${limit}`,
-            units: unitsInSlab,
-            rate: rate,
-            cost: cost
-          });
-          remaining -= unitsInSlab;
-        }
-        prevLimit = limit;
-        if (remaining <= 0) break;
-      }
-
-      return { energy, slabDetails };
-    }
-
-    function getCostAbove50(units, ampere) {
-      if (units <= 50) return 0;
-      
-      const tariff = TARIFFS[ampere];
-      const rates = tariff.rates;
-      const above50 = units - 50;
-      let costAbove50 = 0;
-      let rem = above50;
-      let prev = 50;
-      
-      for (let i = 0; i < rates.length; i++) {
-        const slab = rates[i];
-        const limit = slab.limit;
-        if (limit <= 50) continue;
-        let unitsInSlab = 0;
-        if (limit === Infinity) {
-          unitsInSlab = rem;
-        } else {
-          const width = limit - prev;
-          if (width <= 0) continue;
-          unitsInSlab = Math.min(rem, width);
-        }
-        if (unitsInSlab > 0) {
-          costAbove50 += unitsInSlab * slab.rate;
-          rem -= unitsInSlab;
-        }
-        prev = limit;
-        if (rem <= 0) break;
-      }
-      
-      return costAbove50;
-    }
-
-    function calculateBill(units, ampere) {
-      if (isNaN(units) || units < 0) {
-        return { error: 'Please enter a valid number of units (0 or more).' };
-      }
-
-      const tariff = TARIFFS[ampere];
-      if (!tariff) {
-        return { error: 'Invalid ampere rating selected.' };
-      }
-
-      const floor = tariff.getMinCharge(units);
-      const { energy, slabDetails } = computeEnergyCharge(units, ampere);
-      const costAbove50 = getCostAbove50(units, ampere);
-      
-      let vat = 0;
-      let vatBase = 0;
-      if (units > 50) {
-        vatBase = costAbove50 + floor;
-        vat = vatBase * 0.05;
-      }
-      
-      const totalBill = floor + energy + vat;
-
-      return {
-        units,
-        ampere,
-        floor,
-        energyCharge: energy,
-        vat,
-        costAbove50,
-        vatBase,
-        totalBill,
-        slabDetails,
-        isVatExempt: units <= 50,
-      };
-    }
-
-    const elecAmpereSelect = document.getElementById('ampereSelect');
-    const elecUnitsInput = document.getElementById('unitsInput');
-    const elecCalcBtn = document.getElementById('elecCalcBtn');
-    const elecTotalDisplay = document.getElementById('totalDisplay');
-    const elecMinChargeDisplay = document.getElementById('minChargeDisplay');
-    const elecEnergyDisplay = document.getElementById('energyDisplay');
-    const elecVatDisplay = document.getElementById('vatDisplay');
-    const elecTotalBreakdownDisplay = document.getElementById('totalBreakdownDisplay');
-    const elecVatNoteContainer = document.getElementById('vatNoteContainer');
-    const elecErrorMessage = document.getElementById('elecErrorMessage');
-    const elecBreakdownContainer = document.getElementById('breakdownContainer');
-    const elecVatRow = document.getElementById('vatRow');
-
-    function formatNPR(amount) {
-      return 'Rs. ' + amount.toFixed(2);
-    }
-
-    function renderElec(result) {
-      elecErrorMessage.style.display = 'none';
-      elecErrorMessage.textContent = '';
-
-      if (result.error) {
-        elecErrorMessage.style.display = 'block';
-        elecErrorMessage.textContent = result.error;
-        elecTotalDisplay.textContent = '—';
-        elecMinChargeDisplay.textContent = '—';
-        elecEnergyDisplay.textContent = '—';
-        elecVatDisplay.textContent = '—';
-        elecTotalBreakdownDisplay.textContent = '—';
-        elecVatNoteContainer.textContent = '⚠️ check input';
-        const items = elecBreakdownContainer.querySelectorAll('.elec-breakdown-item:not(.static-item)');
-        items.forEach(el => el.remove());
-        return;
-      }
-
-      elecTotalDisplay.textContent = formatNPR(result.totalBill);
-      elecMinChargeDisplay.textContent = formatNPR(result.floor);
-      elecEnergyDisplay.textContent = formatNPR(result.energyCharge);
-      elecVatDisplay.textContent = formatNPR(result.vat);
-      elecTotalBreakdownDisplay.textContent = formatNPR(result.totalBill);
-
-      if (result.isVatExempt) {
-        elecVatNoteContainer.textContent = '✅ VAT exempt (up to 50 units)';
-        elecVatRow.style.display = 'flex';
-      } else {
-        elecVatNoteContainer.textContent = `🔹 5% VAT on (cost of ${(result.units - 50).toFixed(1)} units above 50 = ${formatNPR(result.costAbove50)} + min charge ${formatNPR(result.floor)}) = ${formatNPR(result.vat)}`;
-        elecVatRow.style.display = 'flex';
-      }
-
-      const allItems = elecBreakdownContainer.querySelectorAll('.elec-breakdown-item:not(.static-item)');
-      allItems.forEach(el => el.remove());
-
-      const firstStatic = elecBreakdownContainer.querySelector('.static-item');
-      const slabRows = result.slabDetails.map(slab => {
-        const row = document.createElement('div');
-        row.className = 'elec-breakdown-item';
-        const labelSpan = document.createElement('span');
-        labelSpan.className = 'label';
-        labelSpan.textContent = `${slab.range} units @ ${slab.rate.toFixed(2)}`;
-        const valueSpan = document.createElement('span');
-        valueSpan.className = 'value';
-        valueSpan.textContent = formatNPR(slab.cost);
-        row.appendChild(labelSpan);
-        row.appendChild(valueSpan);
-        return row;
-      });
-
-      if (firstStatic) {
-        slabRows.reverse().forEach(row => {
-          elecBreakdownContainer.insertBefore(row, firstStatic);
-        });
-      } else {
-        slabRows.forEach(row => elecBreakdownContainer.appendChild(row));
-      }
-    }
-
-    function handleElecCalculate() {
-      const ampere = parseInt(elecAmpereSelect.value, 10);
-      const units = parseFloat(elecUnitsInput.value);
-      const result = calculateBill(units, ampere);
-      renderElec(result);
-    }
-
-    elecCalcBtn.addEventListener('click', handleElecCalculate);
-    elecUnitsInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleElecCalculate();
-      }
-    });
-
-    // Initial renders
-    renderPie();
-    renderBar();
-    handleElecCalculate();
   })();
 </script>
 </body>
