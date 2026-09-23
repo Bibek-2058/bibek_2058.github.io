@@ -30,7 +30,7 @@
       margin: 0 auto;
     }
 
-    /* Navigation */
+    /* Navigation Header */
     .nav-bar {
       background: white;
       border-radius: 20px;
@@ -93,7 +93,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Cards */
+    /* Primary Cards Layout */
     .card {
       background: white;
       border-radius: 24px;
@@ -150,24 +150,77 @@
 
     .btn-primary:hover { background: #1d4ed8; }
 
-    /* Notes Detailed Formatting */
-    .notes-container {
-      display: flex;
-      flex-direction: column;
+    /* Topic Cards Grid (Notes Main View) */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.5rem;
+      margin-top: 1rem;
     }
 
-    .note-header-box {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 16px;
+    .topic-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
       padding: 1.5rem;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     }
+
+    .topic-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px rgba(37,99,235,0.08);
+      border-color: #bfdbfe;
+    }
+
+    .topic-icon {
+      width: 48px;
+      height: 48px;
+      background: #eff6ff;
+      color: #2563eb;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .topic-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+    }
+
+    .topic-desc {
+      font-size: 0.88rem;
+      color: #64748b;
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .tag-badge {
+      display: inline-block;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* Article View (Inside Topic) */
+    .back-btn {
+      margin-bottom: 1.5rem;
+      background: #f1f5f9;
+    }
+    .back-btn:hover { background: #e2e8f0; }
 
     .article-section {
       background: #fafafa;
@@ -179,7 +232,7 @@
 
     .article-section h2 {
       color: #1e3a8a;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       border-bottom: 2px solid #3b82f6;
       padding-bottom: 0.4rem;
       margin-bottom: 1rem;
@@ -197,9 +250,7 @@
       margin-bottom: 0.6rem;
     }
 
-    .article-section ul {
-      padding-left: 1.2rem;
-    }
+    .article-section ul { padding-left: 1.2rem; }
 
     .constitution-table {
       width: 100%;
@@ -219,7 +270,7 @@
       color: #0f172a;
     }
 
-    /* Modals for Legal Pages */
+    /* Policy Modals */
     .modal {
       display: none;
       position: fixed;
@@ -250,6 +301,7 @@
       color: #64748b;
     }
 
+    /* Footer */
     footer {
       margin-top: 3rem;
       border-top: 1px solid #dce3ed;
@@ -281,7 +333,7 @@
 
 <div class="container">
 
-  <!-- Navigation -->
+  <!-- Header Navigation Bar -->
   <nav class="nav-bar">
     <div class="nav-brand"><i class="fas fa-chart-line"></i> StatsMaster</div>
     <div class="nav-links">
@@ -294,38 +346,83 @@
     </div>
   </nav>
 
-  <!-- ===== HOME PAGE ===== -->
+  <!-- HOME PAGE -->
   <div id="page-home" class="page active">
     <div class="card">
       <h1><i class="fas fa-calculator"></i> Standard Deviation & Statistics Suite</h1>
       <div class="subhead">Free Online Statistical Calculators, Data Visualization & Public Service Exam Notes</div>
-      <p>StatsMaster provides statistical calculators, interactive charting tools, and high-quality preparation materials for various exams.</p>
+      <p>Welcome to StatsMaster. We provide statistical tools, interactive charting engines, and preparation materials for professional examinations.</p>
     </div>
   </div>
 
-  <!-- ===== NOTES PAGE (RICH CONTENT FOR ADSENSE) ===== -->
+  <!-- MAIN NOTES PAGE -->
   <div id="page-notes" class="page">
     <div class="card">
-      <h1><i class="fas fa-file-pdf"></i> लोकसेवा तयारी: नेपालको संविधान - पूर्ण अध्ययन नोट</h1>
-      <div class="subhead">नेपालको संविधानका महत्वपूर्ण भागहरू, धाराहरू र ९ वटै अनुसूचीहरूको परीक्षा उपयोगी विवरण[cite: 2]</div>
+      <h1><i class="fas fa-book-open"></i> Study Notes & Public Service Resources</h1>
+      <div class="subhead">अध्ययन गर्न चाहेको विषय छनोट गर्नुहोस्</div>
 
-      <div class="notes-container">
+      <!-- VIEW 1: TOPICS LIST -->
+      <div id="notes-topics-view" class="topics-grid">
         
-        <!-- Top Download Box -->
-        <div class="note-header-box">
+        <!-- Topic 1: Constitution of Nepal -->
+        <div class="topic-card" onclick="showNoteDetail('constitution-note')">
           <div>
-            <h3 style="color:#1e3a8a; margin-bottom:0.3rem;"><i class="fas fa-file-pdf"></i> नेपालको संविधान पूर्ण अध्ययन नोट (PDF)</h3>
-            <p style="font-size:0.85rem; color:#475569;">अफलाइन अध्ययनका लागि संविधानको सम्पूर्ण नोट PDF ढाँचामा डाउनलोड गर्नुहोस्।[cite: 2]</p>
+            <div class="topic-icon"><i class="fas fa-landmark"></i></div>
+            <span class="tag-badge">PSC Special</span>
+            <div class="topic-title">नेपालको संविधान (Constitution of Nepal)</div>
+            <div class="topic-desc">भाग १, २, ३, ४, ५, २०, २५ का सबै धाराहरू र ९ वटै अनुसूचीहरूको पूर्ण अध्ययन नोट र PDF।[cite: 2]</div>
+          </div>
+          <button class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fas fa-arrow-right"></i> अध्ययन गर्नुहोस्
+          </button>
+        </div>
+
+        <!-- Topic 2: Forest Biometrics & Forestry (Sample Topic) -->
+        <div class="topic-card" onclick="showNoteDetail('forestry-note')">
+          <div>
+            <div class="topic-icon"><i class="fas fa-tree"></i></div>
+            <span class="tag-badge">Forestry</span>
+            <div class="topic-title">Forest Biometrics & Inventory</div>
+            <div class="topic-desc">Principles of forest biometrics, tree girth, height measurements, and relative frequency calculations.</div>
+          </div>
+          <button class="btn" style="width:100%; justify-content:center;">
+            <i class="fas fa-arrow-right"></i> अध्ययन गर्नुहोस्
+          </button>
+        </div>
+
+        <!-- Topic 3: General Knowledge & Public Management (Sample Topic) -->
+        <div class="topic-card" onclick="showNoteDetail('gk-note')">
+          <div>
+            <div class="topic-icon"><i class="fas fa-globe"></i></div>
+            <span class="tag-badge">GK & Governance</span>
+            <div class="topic-title">सामान्य ज्ञान तथा सार्वजनिक व्यवस्थापन</div>
+            <div class="topic-desc">नेपालको भूगोल, इतिहास, सामाजिक व्यवस्था र प्रशासनिक संयन्त्र सम्बन्धी महत्वपूर्ण सामाग्री।</div>
+          </div>
+          <button class="btn" style="width:100%; justify-content:center;">
+            <i class="fas fa-arrow-right"></i> अध्ययन गर्नुहोस्
+          </button>
+        </div>
+
+      </div>
+
+      <!-- VIEW 2: DETAILED NOTE CONTENT (Hidden by default) -->
+      
+      <!-- Constitution Detail Note -->
+      <div id="constitution-note" class="note-detail-content" style="display:none;">
+        <button class="btn back-btn" onclick="hideNoteDetail()"><i class="fas fa-arrow-left"></i> विषयहरूको सूचीमा फर्कनुहोस्</button>
+        
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 16px; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+          <div>
+            <h2 style="color:#1e3a8a; font-size:1.3rem; margin-bottom:0.3rem;"><i class="fas fa-file-pdf"></i> नेपालको संविधान - पूर्ण अध्ययन नोट</h2>
+            <p style="font-size:0.85rem; color:#475569;">लोकसेवा परीक्षा उपयोगी पूर्ण PDF फाइल डाउनलोड गर्नुहोस्।[cite: 2]</p>
           </div>
           <a href="Nepal_Constitution_Notes.pdf" download="Nepal_Constitution_Notes.pdf" class="btn btn-primary">
             <i class="fas fa-download"></i> PDF डाउनलोड गर्नुहोस्
           </a>
         </div>
 
-        <!-- Full Text Content (To Prevent Low Value Content Issue) -->
         <div class="article-section">
-          <h2>भाग-१: प्रारम्भिक (धारा १ देखि ९ सम्म)[cite: 2]</h2>
-          
+          <h2>भाग-१: प्रारम्भिक (धारा १ देखि ९)[cite: 2]</h2>
           <h3>धारा १: संविधान मूल कानून[cite: 2]</h3>
           <p><strong>उपधारा (१):</strong> यो संविधान नेपालको मूल कानून हो। यस संविधानसँग बाझिने कानून बाझिएको हदसम्म अमान्य हुनेछ।[cite: 2]</p>
           <p><strong>उपधारा (२):</strong> संविधानको पालना गर्नु प्रत्येक व्यक्तिको कर्तव्य हुनेछ।[cite: 2]</p>
@@ -345,11 +442,11 @@
 
           <h3>धारा ६ र ७: भाषा[cite: 2]</h3>
           <p><strong>धारा ६:</strong> नेपालमा बोलिने सबै मातृभाषाहरू राष्ट्रभाषा हुन्।[cite: 2]</p>
-          <p><strong>धारा ७:</strong> देवनागरी लिपिमा लेखिने नेपाली भाषा सरकारी कामकाजको भाषा हुनेछ।[cite: 2]</p>
+          <p><strong>धारा ७:</strong> देवनागरी लिपिमा लेखिने नेपाली भाषा नेपालको सरकारी कामकाजको भाषा हुनेछ।[cite: 2]</p>
         </div>
 
         <div class="article-section">
-          <h2>भाग-२: नागरिकता (धारा १० देखि १५ सम्म)[cite: 2]</h2>
+          <h2>भाग-२: नागरिकता (धारा १० देखि १५)[cite: 2]</h2>
           <ul>
             <li><strong>धारा १०:</strong> कुनै पनि नेपाली नागरिकलाई नागरिकता प्राप्त गर्ने हकबाट बञ्चित गरिने छैन। नेपालमा प्रादेशिक पहिचान सहितको एकल सङ्घीय नागरिकताको व्यवस्था छ।[cite: 2]</li>
             <li><strong>धारा ११:</strong> वंशज, जन्म, अङ्गीकृत र गैरआवासीय नागरिकता सम्बन्धी प्रावधानहरू।[cite: 2]</li>
@@ -360,7 +457,6 @@
 
         <div class="article-section">
           <h2>भाग-३: मौलिक हक र कर्तव्य (धारा १६ देखि ४८ सम्मका मुख्य हकहरू)[cite: 2]</h2>
-          <p>संविधानमा कुल ३३ वटा मौलिक हकहरूको व्यवस्था गरिएको छ:[cite: 2]</p>
           <ul>
             <li><strong>धारा १६:</strong> सम्मानपूर्वक बाँच्न पाउने हक[cite: 2]</li>
             <li><strong>धारा १७:</strong> स्वतन्त्रताको हक[cite: 2]</li>
@@ -369,7 +465,7 @@
             <li><strong>धारा २७:</strong> सूचनाको हक[cite: 2]</li>
             <li><strong>धारा ३१:</strong> शिक्षा सम्बन्धी हक[cite: 2]</li>
             <li><strong>धारा ३५:</strong> स्वास्थ्य सम्बन्धी हक[cite: 2]</li>
-            <li><strong>धारा ४८:</strong> नागरिकका कर्तव्यहरू (राष्ट्रियताको रक्षा, संविधान पालना आदि)[cite: 2]</li>
+            <li><strong>धारा ४८:</strong> नागरिकका कर्तव्यहरू[cite: 2]</li>
           </ul>
         </div>
 
@@ -396,18 +492,36 @@
             </tbody>
           </table>
         </div>
-
       </div>
+
+      <!-- Forestry Sample Detail Note -->
+      <div id="forestry-note" class="note-detail-content" style="display:none;">
+        <button class="btn back-btn" onclick="hideNoteDetail()"><i class="fas fa-arrow-left"></i> विषयहरूको सूचीमा फर्कनुहोस्</button>
+        <div class="article-section">
+          <h2>Forest Biometrics & Inventory Metrics</h2>
+          <p>Forest biometrics deals with the measurement of forest stands, tree girth (DBH), total height, and calculating metrics like Relative Frequency (RF), basal area, and volume estimation.</p>
+        </div>
+      </div>
+
+      <!-- GK Sample Detail Note -->
+      <div id="gk-note" class="note-detail-content" style="display:none;">
+        <button class="btn back-btn" onclick="hideNoteDetail()"><i class="fas fa-arrow-left"></i> विषयहरूको सूचीमा फर्कनुहोस्</button>
+        <div class="article-section">
+          <h2>नेपालको भूगोल तथा सार्वजनिक व्यवस्थापन</h2>
+          <p>नेपालको भौगोलिक अवस्था, ७ प्रदेश, ७७ जिल्ला र प्रदेश तथा स्थानीय तह बीचको अन्तरसम्बन्ध सम्बन्धी सामान्य ज्ञान नोट्स।[cite: 2]</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- OTHER PAGES -->
+  <!-- AUXILIARY PAGES -->
   <div id="page-pie" class="page"><div class="card"><h1><i class="fas fa-chart-pie"></i> Pie Chart Maker</h1></div></div>
   <div id="page-bar" class="page"><div class="card"><h1><i class="fas fa-chart-bar"></i> Bar Chart Maker</h1></div></div>
   <div id="page-electricity" class="page"><div class="card"><h1><i class="fas fa-bolt"></i> NEA Electricity Calculator</h1></div></div>
-  <div id="page-tools" class="page"><div class="card"><h1><i class="fas fa-th-large"></i> All Tools</h1></div></div>
+  <div id="page-tools" class="page"><div class="card"><h1><i class="fas fa-th-large"></i> All Statistical Tools</h1></div></div>
 
-  <!-- FOOTER WITH MANDATORY LEGAL LINKS FOR ADSENSE -->
+  <!-- FOOTER NAVIGATION -->
   <footer>
     <div class="footer-links">
       <a onclick="openModal('privacyModal')">Privacy Policy</a> | 
@@ -425,7 +539,7 @@
   <div class="modal-content">
     <span class="close-modal" onclick="closeModal('privacyModal')">&times;</span>
     <h2>Privacy Policy</h2>
-    <p>At StatsMaster, we respect your privacy. We use Google AdSense to serve ads. Google may use cookies to personalize ads based on your browsing history. We do not collect or share personal data without consent.</p>
+    <p>At StatsMaster, we respect user privacy. We utilize Google AdSense to display advertisements. Third-party vendors may use cookies to serve ads based on prior user visits.</p>
   </div>
 </div>
 
@@ -433,7 +547,7 @@
   <div class="modal-content">
     <span class="close-modal" onclick="closeModal('aboutModal')">&times;</span>
     <h2>About Us</h2>
-    <p>StatsMaster provides free, user-friendly statistical calculators, charting engines, and Public Service Commission (PSC) examination study notes to assist students and professionals.</p>
+    <p>StatsMaster provides accessible online statistical engines, visualization tools, and educational material tailored for public service examinations.</p>
   </div>
 </div>
 
@@ -441,7 +555,7 @@
   <div class="modal-content">
     <span class="close-modal" onclick="closeModal('contactModal')">&times;</span>
     <h2>Contact Us</h2>
-    <p>If you have any questions or feedback, please email us at <strong>contact@yourdomain.com</strong>.</p>
+    <p>For inquiries, please write to us at: <strong>contact@yourdomain.com</strong></p>
   </div>
 </div>
 
@@ -449,12 +563,12 @@
   <div class="modal-content">
     <span class="close-modal" onclick="closeModal('disclaimerModal')">&times;</span>
     <h2>Disclaimer</h2>
-    <p>The notes provided on this website are for educational purposes only. While we strive for accuracy, users are advised to refer to official government documents for legal compliance.</p>
+    <p>The notes provided here serve educational and preparation purposes. Users should consult official government publications for statutory interpretations.</p>
   </div>
 </div>
 
 <script>
-  // Page Switcher
+  // Page Switching Mechanism
   const pages = {
     home: document.getElementById('page-home'),
     notes: document.getElementById('page-notes'),
@@ -473,8 +587,24 @@
       Object.keys(pages).forEach(key => {
         pages[key].classList.toggle('active', key === page);
       });
+      // Reset Notes View when navigating back to Notes tab
+      if(page === 'notes') {
+        hideNoteDetail();
+      }
     });
   });
+
+  // Notes Dynamic View Switcher
+  function showNoteDetail(noteId) {
+    document.getElementById('notes-topics-view').style.display = 'none';
+    document.querySelectorAll('.note-detail-content').forEach(el => el.style.display = 'none');
+    document.getElementById(noteId).style.display = 'block';
+  }
+
+  function hideNoteDetail() {
+    document.querySelectorAll('.note-detail-content').forEach(el => el.style.display = 'none');
+    document.getElementById('notes-topics-view').style.display = 'grid';
+  }
 
   // Modal Functions
   function openModal(id) { document.getElementById(id).style.display = 'flex'; }
