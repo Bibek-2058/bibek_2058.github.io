@@ -1,615 +1,687 @@
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StatsMaster & PSC Study Notes · Statistical Tools & Exam Notes</title>
-  <!-- Font Awesome 6 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <!-- Google AdSense Code -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Assist - Educational Resources & Math Tools</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
 
-    body {
-      background: #f8faff;
-      color: #1e293b;
-      padding: 1.5rem 1rem;
-      line-height: 1.6;
-    }
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+            --navbar-bg: #0d6efd;
+            --navbar-text: #ffffff;
+            --border-color: #dee2e6;
+        }
 
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
-    }
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --navbar-bg: #1b2a4a;
+            --navbar-text: #ffffff;
+            --border-color: #333333;
+        }
 
-    /* Navigation Header */
-    .nav-bar {
-      background: white;
-      border-radius: 20px;
-      padding: 0.8rem 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-      border: 1px solid #e9edf4;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .nav-brand {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #2563eb;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+        .navbar {
+            background-color: var(--navbar-bg) !important;
+        }
 
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-    }
+        .card {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-color: var(--border-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
 
-    .nav-links a {
-      padding: 0.5rem 1rem;
-      border-radius: 40px;
-      text-decoration: none;
-      color: #475569;
-      font-weight: 500;
-      font-size: 0.88rem;
-      transition: all 0.15s;
-    }
+        .theme-toggle-btn {
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--navbar-text);
+            font-size: 1.2rem;
+        }
 
-    .nav-links a:hover {
-      background: #eef2ff;
-      color: #2563eb;
-    }
+        .ads-container {
+            background-color: var(--card-bg);
+            border: 1px dashed var(--border-color);
+            padding: 15px;
+            text-align: center;
+            color: #888;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
 
-    .nav-links a.active {
-      background: #2563eb;
-      color: white;
-    }
+        .nav-link {
+            cursor: pointer;
+        }
 
-    .page {
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
+        .table-custom {
+            color: var(--text-color);
+        }
 
-    .page.active {
-      display: block;
-    }
+        .table-custom td, .table-custom th {
+            border-color: var(--border-color);
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Primary Cards Layout */
-    .card {
-      background: white;
-      border-radius: 24px;
-      padding: 2rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-      margin-bottom: 2rem;
-      border: 1px solid #e9edf4;
-    }
-
-    .card h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.4rem;
-      color: #0f172a;
-    }
-
-    .card h1 i { color: #2563eb; }
-
-    .subhead {
-      color: #475569;
-      font-size: 0.95rem;
-      border-left: 4px solid #2563eb;
-      margin-top: 0.2rem;
-      margin-bottom: 1.8rem;
-      background: #f8fafc;
-      border-radius: 0 10px 10px 0;
-      padding: 0.6rem 1rem;
-    }
-
-    .btn {
-      background: white;
-      border: 1px solid #cbd5e1;
-      padding: 0.6rem 1.4rem;
-      border-radius: 40px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: #1e293b;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.15s;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: #2563eb;
-      border-color: #2563eb;
-      color: white;
-    }
-
-    .btn-primary:hover { background: #1d4ed8; }
-
-    /* Topic Cards Grid (Notes Main View) */
-    .topics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .topic-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 20px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-    }
-
-    .topic-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 20px rgba(37,99,235,0.08);
-      border-color: #bfdbfe;
-    }
-
-    .topic-icon {
-      width: 48px;
-      height: 48px;
-      background: #eff6ff;
-      color: #2563eb;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-    }
-
-    .topic-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 0.4rem;
-    }
-
-    .topic-desc {
-      font-size: 0.88rem;
-      color: #64748b;
-      margin-bottom: 1.2rem;
-      line-height: 1.5;
-    }
-
-    .tag-badge {
-      display: inline-block;
-      background: #f1f5f9;
-      color: #475569;
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 12px;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    /* Article View (Inside Topic) */
-    .back-btn {
-      margin-bottom: 1.5rem;
-      background: #f1f5f9;
-    }
-    .back-btn:hover { background: #e2e8f0; }
-
-    .article-section {
-      background: #fafafa;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .article-section h2 {
-      color: #1e3a8a;
-      font-size: 1.25rem;
-      border-bottom: 2px solid #3b82f6;
-      padding-bottom: 0.4rem;
-      margin-bottom: 1rem;
-    }
-
-    .article-section h3 {
-      color: #2563eb;
-      font-size: 1.05rem;
-      margin: 0.8rem 0 0.4rem 0;
-    }
-
-    .article-section p, .article-section ul {
-      font-size: 0.93rem;
-      color: #334155;
-      margin-bottom: 0.6rem;
-    }
-
-    .article-section ul { padding-left: 1.2rem; }
-
-    .constitution-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .constitution-table th, .constitution-table td {
-      border: 1px solid #cbd5e1;
-      padding: 0.6rem 0.8rem;
-      text-align: left;
-    }
-
-    .constitution-table th {
-      background: #f1f5f9;
-      color: #0f172a;
-    }
-
-    /* Policy Modals */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 20px;
-      max-width: 700px;
-      width: 100%;
-      max-height: 80vh;
-      overflow-y: auto;
-      padding: 2rem;
-      position: relative;
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 1rem; right: 1.2rem;
-      font-size: 1.4rem;
-      cursor: pointer;
-      color: #64748b;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 3rem;
-      border-top: 1px solid #dce3ed;
-      padding-top: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      align-items: center;
-      font-size: 0.85rem;
-      color: #475569;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: #2563eb;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .footer-links a:hover { text-decoration: underline; }
-  </style>
+        footer {
+            margin-top: auto;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
+    <!-- Header / Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-graduation-cap me-2"></i>Study Assist</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="nav-notes" onclick="switchTab('notes')"><i class="fa-solid fa-book me-1"></i> Notes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="nav-tools" onclick="switchTab('tools')"><i class="fa-solid fa-calculator me-1"></i> Mathematical Tools</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-3">
+                        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                            <i class="fa-solid fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Header Navigation Bar -->
-  <nav class="nav-bar">
-    <div class="nav-brand"><i class="fas fa-chart-line"></i> StatsMaster</div>
-    <div class="nav-links">
-      <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a>
-      <a href="#" data-page="notes"><i class="fas fa-book-open"></i> Notes</a>
-      <a href="#" data-page="pie"><i class="fas fa-chart-pie"></i> Pie Chart</a>
-      <a href="#" data-page="bar"><i class="fas fa-chart-bar"></i> Bar Chart</a>
-      <a href="#" data-page="electricity"><i class="fas fa-bolt"></i> Electricity Bill</a>
-      <a href="#" data-page="tools"><i class="fas fa-th-large"></i> Tools</a>
-    </div>
-  </nav>
+    <!-- Main Content -->
+    <main class="container my-4">
 
-  <!-- HOME PAGE -->
-  <div id="page-home" class="page active">
-    <div class="card">
-      <h1><i class="fas fa-calculator"></i> Standard Deviation & Statistics Suite</h1>
-      <div class="subhead">Free Online Statistical Calculators, Data Visualization & Public Service Exam Notes</div>
-      <p>Welcome to StatsMaster. We provide statistical tools, interactive charting engines, and preparation materials for professional examinations.</p>
-    </div>
-  </div>
-
-  <!-- MAIN NOTES PAGE -->
-  <div id="page-notes" class="page">
-    <div class="card">
-      <h1><i class="fas fa-book-open"></i> Study Notes & Public Service Resources</h1>
-      <div class="subhead">अध्ययन गर्न चाहेको विषय छनोट गर्नुहोस्</div>
-
-      <!-- VIEW 1: TOPICS LIST -->
-      <div id="notes-topics-view" class="topics-grid">
-        
-        <!-- Topic 1: Constitution of Nepal -->
-        <div class="topic-card" onclick="showNoteDetail('constitution-note')">
-          <div>
-            <div class="topic-icon"><i class="fas fa-landmark"></i></div>
-            <span class="tag-badge">PSC Special</span>
-            <div class="topic-title">नेपालको संविधान (Constitution of Nepal)</div>
-            <div class="topic-desc">भाग १, २, ३, ४, ५, २०, २५ का सबै धाराहरू र ९ वटै अनुसूचीहरूको पूर्ण अध्ययन नोट र PDF।[cite: 2]</div>
-          </div>
-          <button class="btn btn-primary" style="width:100%; justify-content:center;">
-            <i class="fas fa-arrow-right"></i> अध्ययन गर्नुहोस्
-          </button>
+        <!-- Top Ad Space (AdSense Compliant Structure) -->
+        <div class="ads-container">
+            <small><i class="fa-solid fa-ad me-1"></i> Advertisement Area</small>
         </div>
 
-        <!-- Topic 2: Forest Biometrics & Forestry (Sample Topic) -->
-        <div class="topic-card" onclick="showNoteDetail('forestry-note')">
-          <div>
-            <div class="topic-icon"><i class="fas fa-tree"></i></div>
-            <span class="tag-badge">Forestry</span>
-            <div class="topic-title">Forest Biometrics & Inventory</div>
-            <div class="topic-desc">Principles of forest biometrics, tree girth, height measurements, and relative frequency calculations.</div>
-          </div>
-          <button class="btn" style="width:100%; justify-content:center;">
-            <i class="fas fa-arrow-right"></i> अध्ययन गर्नुहोस्
-          </button>
+        <!-- SECTION 1: NOTES SECTION -->
+        <section id="notesSection">
+            <div class="row mb-4">
+                <div class="col-md-8 mx-auto">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text bg-primary text-white"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search notes by subject, title, or topic..." onkeyup="filterNotes()">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4" id="notesList">
+                <!-- Note 1 -->
+                <div class="col-md-6 col-lg-4 note-card" data-title="general mathematics fundamental statistics" data-category="Mathematics">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-primary mb-2 w-auto align-self-start">Mathematics</span>
+                            <h5 class="card-title">General Mathematics & Statistics</h5>
+                            <p class="card-text text-muted flex-grow-1">Comprehensive formulas, standard deviations, means, and probability concepts for students.</p>
+                            <button onclick="downloadPDF('General_Mathematics_Notes.pdf')" class="btn btn-outline-primary w-100 mt-2">
+                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note 2 -->
+                <div class="col-md-6 col-lg-4 note-card" data-title="computer science database management system dbms" data-category="Computer Science">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-success mb-2 w-auto align-self-start">Computer Science</span>
+                            <h5 class="card-title">Database Management Systems (DBMS)</h5>
+                            <p class="card-text text-muted flex-grow-1">Key concepts of relational databases, SQL queries, normalization, and ACID properties.</p>
+                            <button onclick="downloadPDF('DBMS_Complete_Notes.pdf')" class="btn btn-outline-primary w-100 mt-2">
+                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note 3 -->
+                <div class="col-md-6 col-lg-4 note-card" data-title="environmental science ecosystem study material" data-category="Environmental Science">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-warning text-dark mb-2 w-auto align-self-start">Science</span>
+                            <h5 class="card-title">Environmental Science Basics</h5>
+                            <p class="card-text text-muted flex-grow-1">Core study notes on ecosystems, biodiversity conservation, and natural resource management.</p>
+                            <button onclick="downloadPDF('Environmental_Science_Basics.pdf')" class="btn btn-outline-primary w-100 mt-2">
+                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note 4 -->
+                <div class="col-md-6 col-lg-4 note-card" data-title="microeconomics and macroeconomics principles" data-category="Economics">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-info text-dark mb-2 w-auto align-self-start">Economics</span>
+                            <h5 class="card-title">Principles of Economics</h5>
+                            <p class="card-text text-muted flex-grow-1">Fundamental principles of microeconomics and macroeconomics with diagrams and definitions.</p>
+                            <button onclick="downloadPDF('Principles_of_Economics.pdf')" class="btn btn-outline-primary w-100 mt-2">
+                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note 5 -->
+                <div class="col-md-6 col-lg-4 note-card" data-title="research methodology data analysis statistics" data-category="Research">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-secondary mb-2 w-auto align-self-start">Research</span>
+                            <h5 class="card-title">Research Methodology & Analysis</h5>
+                            <p class="card-text text-muted flex-grow-1">Guide to qualitative and quantitative research designs, sampling techniques, and analytical tools.</p>
+                            <button onclick="downloadPDF('Research_Methodology_Guide.pdf')" class="btn btn-outline-primary w-100 mt-2">
+                                <i class="fa-solid fa-file-pdf me-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="noResults" class="text-center my-5 d-none">
+                <i class="fa-solid fa-circle-exclamation fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No notes match your search criteria.</h5>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MATHEMATICAL TOOLS SECTION -->
+        <section id="toolsSection" class="d-none">
+            <ul class="nav nav-pills nav-fill mb-4 p-2 card flex-row" id="toolsTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active fw-bold" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats-panel" type="button"><i class="fa-solid fa-calculator me-2"></i>Statistical Calculations</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-bold" id="charts-tab" data-bs-toggle="tab" data-bs-target="#charts-panel" type="button"><i class="fa-solid fa-chart-pie me-2"></i>Chart Generator</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="toolsTabContent">
+                <!-- Statistical Calculations Sub-Tab -->
+                <div class="tab-pane fade show active" id="stats-panel" role="tabpanel">
+                    <div class="card p-4">
+                        <h4 class="mb-3 border-bottom pb-2"><i class="fa-solid fa-square-root-variable me-2"></i>Statistical Calculator</h4>
+                        
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label for="seriesType" class="form-label fw-bold">Select Series Type:</label>
+                                <select class="form-select" id="seriesType" onchange="adjustInputFields()">
+                                    <option value="individual">Individual Series (e.g., 10, 20, 30)</option>
+                                    <option value="discrete">Discrete Series (X and Frequency)</option>
+                                    <option value="continuous">Continuous Series (Class Intervals and Frequency)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="dynamicInputArea">
+                            <!-- Dynamic Inputs Injected via JavaScript -->
+                        </div>
+
+                        <button class="btn btn-primary btn-lg mt-3" onclick="calculateStatistics()"><i class="fa-solid fa-gears me-2"></i>Calculate All Statistics</button>
+
+                        <!-- Results Panel -->
+                        <div class="mt-4 d-none" id="statsResults">
+                            <h5 class="fw-bold border-bottom pb-2">Calculation Results</h5>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <div class="card bg-light text-dark p-3 text-center border-start border-primary border-4">
+                                        <small class="text-muted fw-bold">MEAN (X̅)</small>
+                                        <h3 id="resMean" class="m-0 mt-1 fw-bold text-primary">-</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-light text-dark p-3 text-center border-start border-success border-4">
+                                        <small class="text-muted fw-bold">MEDIAN (M)</small>
+                                        <h3 id="resMedian" class="m-0 mt-1 fw-bold text-success">-</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-light text-dark p-3 text-center border-start border-warning border-4">
+                                        <small class="text-muted fw-bold">MEAN DEVIATION (MD)</small>
+                                        <h3 id="resMD" class="m-0 mt-1 fw-bold text-warning">-</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card bg-light text-dark p-3 text-center border-start border-danger border-4">
+                                        <small class="text-muted fw-bold">STANDARD DEVIATION (σ)</small>
+                                        <h3 id="resSD" class="m-0 mt-1 fw-bold text-danger">-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Generator Sub-Tab -->
+                <div class="tab-pane fade" id="charts-panel" role="tabpanel">
+                    <div class="row g-4">
+                        <div class="col-md-5">
+                            <div class="card p-4 h-100">
+                                <h4 class="mb-3 border-bottom pb-2"><i class="fa-solid fa-sliders me-2"></i>Chart Settings</h4>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Chart Title</label>
+                                    <input type="text" id="chartTitle" class="form-control" value="Sample Distribution Chart">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Chart Type</label>
+                                    <select id="chartTypeSelect" class="form-select">
+                                        <option value="bar">Bar Diagram</option>
+                                        <option value="pie">Pie Chart</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Data Entries (Editable)</label>
+                                    <div id="chartDataRows">
+                                        <!-- Data row inputs will be generated here -->
+                                    </div>
+                                    <button class="btn btn-outline-secondary btn-sm mt-2" onclick="addChartDataRow()">
+                                        <i class="fa-solid fa-plus me-1"></i>Add Row
+                                    </button>
+                                </div>
+
+                                <button class="btn btn-success w-100 mt-2" onclick="renderChart()">
+                                    <i class="fa-solid fa-rotate me-2"></i>Update Chart
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                            <div class="card p-4 text-center h-100 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h4 class="mb-3 border-bottom pb-2">Visualization</h4>
+                                    <div class="position-relative" style="min-height: 320px;">
+                                        <canvas id="customChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <button class="btn btn-primary" onclick="downloadChart()">
+                                        <i class="fa-solid fa-download me-2"></i>Download Chart Image
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Ad Space -->
+        <div class="ads-container">
+            <small><i class="fa-solid fa-ad me-1"></i> Advertisement Area</small>
         </div>
 
-        <!-- Topic 3: General Knowledge & Public Management (Sample Topic) -->
-        <div class="topic-card" onclick="showNoteDetail('gk-note')">
-          <div>
-            <div class="topic-icon"><i class="fas fa-globe"></i></div>
-            <span class="tag-badge">GK & Governance</span>
-            <div class="topic-title">सामान्य ज्ञान तथा सार्वजनिक व्यवस्थापन</div>
-            <div class="topic-desc">नेपालको भूगोल, इतिहास, सामाजिक व्यवस्था र प्रशासनिक संयन्त्र सम्बन्धी महत्वपूर्ण सामाग्री।</div>
-          </div>
-          <button class="btn" style="width:100%; justify-content:center;">
-            <i class="fas fa-arrow-right"></i> अध्ययन गर्नुहोस्
-          </button>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4">
+        <div class="container text-center">
+            <p class="mb-1">&copy; 2026 Study Assist. All Rights Reserved.</p>
+            <p class="small text-muted mb-0">
+                <a href="#" class="text-decoration-none text-muted me-2">Privacy Policy</a> | 
+                <a href="#" class="text-decoration-none text-muted me-2 ms-2">Terms of Service</a> | 
+                <a href="#" class="text-decoration-none text-muted ms-2">Contact Us</a>
+            </p>
         </div>
+    </footer>
 
-      </div>
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-      <!-- VIEW 2: DETAILED NOTE CONTENT (Hidden by default) -->
-      
-      <!-- Constitution Detail Note -->
-      <div id="constitution-note" class="note-detail-content" style="display:none;">
-        <button class="btn back-btn" onclick="hideNoteDetail()"><i class="fas fa-arrow-left"></i> विषयहरूको सूचीमा फर्कनुहोस्</button>
-        
-        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 16px; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-          <div>
-            <h2 style="color:#1e3a8a; font-size:1.3rem; margin-bottom:0.3rem;"><i class="fas fa-file-pdf"></i> नेपालको संविधान - पूर्ण अध्ययन नोट</h2>
-            <p style="font-size:0.85rem; color:#475569;">लोकसेवा परीक्षा उपयोगी पूर्ण PDF फाइल डाउनलोड गर्नुहोस्।[cite: 2]</p>
-          </div>
-          <a href="Nepal_Constitution_Notes.pdf" download="Nepal_Constitution_Notes.pdf" class="btn btn-primary">
-            <i class="fas fa-download"></i> PDF डाउनलोड गर्नुहोस्
-          </a>
-        </div>
+    <script>
+        // --- Theme Toggle Logic ---
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', targetTheme);
+            
+            const icon = document.getElementById('themeToggleBtn').querySelector('i');
+            if (targetTheme === 'dark') {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        }
 
-        <div class="article-section">
-          <h2>भाग-१: प्रारम्भिक (धारा १ देखि ९)[cite: 2]</h2>
-          <h3>धारा १: संविधान मूल कानून[cite: 2]</h3>
-          <p><strong>उपधारा (१):</strong> यो संविधान नेपालको मूल कानून हो। यस संविधानसँग बाझिने कानून बाझिएको हदसम्म अमान्य हुनेछ।[cite: 2]</p>
-          <p><strong>उपधारा (२):</strong> संविधानको पालना गर्नु प्रत्येक व्यक्तिको कर्तव्य हुनेछ।[cite: 2]</p>
+        // --- Navigation Switcher ---
+        function switchTab(tab) {
+            const notesSec = document.getElementById('notesSection');
+            const toolsSec = document.getElementById('toolsSection');
+            const navNotes = document.getElementById('nav-notes');
+            const navTools = document.getElementById('nav-tools');
 
-          <h3>धारा २: सार्वभौमसत्ता र राजकीयसत्ता[cite: 2]</h3>
-          <p>नेपालको सार्वभौमसत्ता र राजकीयसत्ता नेपाली जनतामा निहित रहेको छ।[cite: 2]</p>
+            if (tab === 'notes') {
+                notesSec.classList.remove('d-none');
+                toolsSec.classList.add('d-none');
+                navNotes.classList.add('active');
+                navTools.classList.remove('active');
+            } else {
+                notesSec.classList.add('d-none');
+                toolsSec.classList.remove('d-none');
+                navNotes.classList.remove('active');
+                navTools.classList.add('active');
+                // Adjust dynamic inputs on first view
+                if(!document.getElementById('inputValues')) adjustInputFields();
+            }
+        }
 
-          <h3>धारा ३: राष्ट्र[cite: 2]</h3>
-          <p>बहुजातीय, बहुभाषिक, बहुधार्मिक, बहुसांस्कृतिक विशेषतायुक्त, भौगोलिक विविधतामा आबद्ध नेपाली जनता समष्टिमा राष्ट्र हो।[cite: 2]</p>
+        // --- Notes Search Filter ---
+        function filterNotes() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.note-card');
+            let hasVisible = false;
 
-          <h3>धारा ४: नेपाल राज्य[cite: 2]</h3>
-          <p><strong>उपधारा (१):</strong> नेपाल स्वतन्त्र, अविभाज्य, सार्वभौमसत्तासम्पन्न, धर्मनिरपेक्ष, समावेशी, लोकतन्त्रात्मक, समाजवादउन्मुख, सङ्घीय लोकतान्त्रिक गणतन्त्रात्मक राज्य हो।[cite: 2]</p>
-          <p><strong>उपधारा (२):</strong> नेपालको क्षेत्र संविधान प्रारम्भ हुँदाका बखतको क्षेत्र र पछि प्राप्त हुने क्षेत्र हुनेछ।[cite: 2]</p>
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const text = card.textContent.toLowerCase();
+                if (title.includes(query) || text.includes(query)) {
+                    card.classList.remove('d-none');
+                    hasVisible = true;
+                } else {
+                    card.classList.add('d-none');
+                }
+            });
 
-          <h3>धारा ५: राष्ट्रिय हित[cite: 2]</h3>
-          <p>नेपालको स्वतन्त्रता, सार्वभौमसत्ता, भौगोलिक अखण्डता, राष्ट्रियता, स्वाधीनता, स्वाभिमान, नेपालीको हक हितको रक्षा, सीमा सुरक्षा आदि राष्ट्रिय हितका आधारभूत विषय हुन्।[cite: 2]</p>
+            const noResults = document.getElementById('noResults');
+            if (hasVisible) {
+                noResults.classList.add('d-none');
+            } else {
+                noResults.classList.remove('d-none');
+            }
+        }
 
-          <h3>धारा ६ र ७: भाषा[cite: 2]</h3>
-          <p><strong>धारा ६:</strong> नेपालमा बोलिने सबै मातृभाषाहरू राष्ट्रभाषा हुन्।[cite: 2]</p>
-          <p><strong>धारा ७:</strong> देवनागरी लिपिमा लेखिने नेपाली भाषा नेपालको सरकारी कामकाजको भाषा हुनेछ।[cite: 2]</p>
-        </div>
+        // --- PDF Download Simulation ---
+        function downloadPDF(filename) {
+            const blob = new Blob([`This is a simulated PDF download content for ${filename}.`], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
 
-        <div class="article-section">
-          <h2>भाग-२: नागरिकता (धारा १० देखि १५)[cite: 2]</h2>
-          <ul>
-            <li><strong>धारा १०:</strong> कुनै पनि नेपाली नागरिकलाई नागरिकता प्राप्त गर्ने हकबाट बञ्चित गरिने छैन। नेपालमा प्रादेशिक पहिचान सहितको एकल सङ्घीय नागरिकताको व्यवस्था छ।[cite: 2]</li>
-            <li><strong>धारा ११:</strong> वंशज, जन्म, अङ्गीकृत र गैरआवासीय नागरिकता सम्बन्धी प्रावधानहरू।[cite: 2]</li>
-            <li><strong>धारा १२:</strong> बाबु वा आमाको नामबाट लैङ्गिक पहिचान सहितको नागरिकता प्राप्त गर्न सकिने।[cite: 2]</li>
-            <li><strong>धारा १४:</strong> गैरआवासीय नेपाली (NRN) नागरिकताको व्यवस्था।[cite: 2]</li>
-          </ul>
-        </div>
+        // --- Statistical Calculations Logic ---
+        function adjustInputFields() {
+            const type = document.getElementById('seriesType').value;
+            const container = document.getElementById('dynamicInputArea');
 
-        <div class="article-section">
-          <h2>भाग-३: मौलिक हक र कर्तव्य (धारा १६ देखि ४८ सम्मका मुख्य हकहरू)[cite: 2]</h2>
-          <ul>
-            <li><strong>धारा १६:</strong> सम्मानपूर्वक बाँच्न पाउने हक[cite: 2]</li>
-            <li><strong>धारा १७:</strong> स्वतन्त्रताको हक[cite: 2]</li>
-            <li><strong>धारा १८:</strong> समानताको हक[cite: 2]</li>
-            <li><strong>धारा २५:</strong> सम्पत्तिको हक[cite: 2]</li>
-            <li><strong>धारा २७:</strong> सूचनाको हक[cite: 2]</li>
-            <li><strong>धारा ३१:</strong> शिक्षा सम्बन्धी हक[cite: 2]</li>
-            <li><strong>धारा ३५:</strong> स्वास्थ्य सम्बन्धी हक[cite: 2]</li>
-            <li><strong>धारा ४८:</strong> नागरिकका कर्तव्यहरू[cite: 2]</li>
-          </ul>
-        </div>
+            if (type === 'individual') {
+                container.innerHTML = `
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Enter Data Values (X) [Comma Separated]:</label>
+                        <input type="text" id="inputValues" class="form-control" placeholder="e.g., 12, 15, 18, 22, 25, 30">
+                    </div>
+                `;
+            } else if (type === 'discrete') {
+                container.innerHTML = `
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Values (X) [Comma Separated]:</label>
+                            <input type="text" id="inputX" class="form-control" placeholder="e.g., 10, 20, 30, 40, 50">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Frequencies (f) [Comma Separated]:</label>
+                            <input type="text" id="inputF" class="form-control" placeholder="e.g., 2, 5, 8, 4, 1">
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'continuous') {
+                container.innerHTML = `
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Class Intervals (e.g., 0-10, 10-20) [Comma Separated]:</label>
+                            <input type="text" id="inputCI" class="form-control" placeholder="e.g., 0-10, 10-20, 20-30, 30-40">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Frequencies (f) [Comma Separated]:</label>
+                            <input type="text" id="inputF" class="form-control" placeholder="e.g., 3, 7, 12, 5">
+                        </div>
+                    </div>
+                `;
+            }
+        }
 
-        <div class="article-section">
-          <h2>नेपालको संविधानका अनुसूचीहरू (अनुसूची १ देखि ९ सम्म)[cite: 2]</h2>
-          <table class="constitution-table">
-            <thead>
-              <tr>
-                <th>अनुसूची</th>
-                <th>विषय / शीर्षक</th>
-                <th>सम्बन्धित धारा[cite: 2]</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>अनुसूची-१</td><td>नेपालको राष्ट्रिय झण्डा</td><td>धारा ८ (२)[cite: 2]</td></tr>
-              <tr><td>अनुसूची-२</td><td>नेपालको राष्ट्रिय गान</td><td>धारा ९ (१)[cite: 2]</td></tr>
-              <tr><td>अनुसूची-३</td><td>नेपालको निशान छाप</td><td>धारा ९ (२)[cite: 2]</td></tr>
-              <tr><td>अनुसूची-४</td><td>प्रदेश र सम्बन्धित जिल्लाहरू (७ प्रदेश)</td><td>धारा ५६ (३)[cite: 2]</td></tr>
-              <tr><td>अनुसूची-५</td><td>सङ्घको अधिकारको सूची (३५ वटा)</td><td>धारा ५७ (१)[cite: 2]</td></tr>
-              <tr><td>अनुसूची-६</td><td>प्रदेशको अधिकारको सूची (२१ वटा)</td><td>धारा ५७ (२)[cite: 2]</td></tr>
-              <tr><td>अनुसूची-७</td><td>सङ्घ र प्रदेशको साझा अधिकार (२५ वटा)</td><td>धारा ५७ (३)[cite: 2]</td></tr>
-              <tr><td>अनुसूची-८</td><td>स्थानीय तहको अधिकारको सूची (२२ वटा)</td><td>धारा ५७ (४)[cite: 2]</td></tr>
-              <tr><td>अनुसूची-९</td><td>तीनै तहको साझा अधिकारको सूची (१५ वटा)</td><td>धारा ५७ (५)[cite: 2]</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+        function calculateStatistics() {
+            const type = document.getElementById('seriesType').value;
+            let mean = 0, median = 0, md = 0, sd = 0;
 
-      <!-- Forestry Sample Detail Note -->
-      <div id="forestry-note" class="note-detail-content" style="display:none;">
-        <button class="btn back-btn" onclick="hideNoteDetail()"><i class="fas fa-arrow-left"></i> विषयहरूको सूचीमा फर्कनुहोस्</button>
-        <div class="article-section">
-          <h2>Forest Biometrics & Inventory Metrics</h2>
-          <p>Forest biometrics deals with the measurement of forest stands, tree girth (DBH), total height, and calculating metrics like Relative Frequency (RF), basal area, and volume estimation.</p>
-        </div>
-      </div>
+            try {
+                if (type === 'individual') {
+                    const raw = document.getElementById('inputValues').value;
+                    const data = raw.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n)).sort((a, b) => a - b);
+                    if (data.length === 0) return alert('Please enter valid numerical data.');
 
-      <!-- GK Sample Detail Note -->
-      <div id="gk-note" class="note-detail-content" style="display:none;">
-        <button class="btn back-btn" onclick="hideNoteDetail()"><i class="fas fa-arrow-left"></i> विषयहरूको सूचीमा फर्कनुहोस्</button>
-        <div class="article-section">
-          <h2>नेपालको भूगोल तथा सार्वजनिक व्यवस्थापन</h2>
-          <p>नेपालको भौगोलिक अवस्था, ७ प्रदेश, ७७ जिल्ला र प्रदेश तथा स्थानीय तह बीचको अन्तरसम्बन्ध सम्बन्धी सामान्य ज्ञान नोट्स।[cite: 2]</p>
-        </div>
-      </div>
+                    const N = data.length;
+                    mean = data.reduce((a, b) => a + b, 0) / N;
 
-    </div>
-  </div>
+                    // Median
+                    if (N % 2 === 0) {
+                        median = (data[N / 2 - 1] + data[N / 2]) / 2;
+                    } else {
+                        median = data[Math.floor(N / 2)];
+                    }
 
-  <!-- AUXILIARY PAGES -->
-  <div id="page-pie" class="page"><div class="card"><h1><i class="fas fa-chart-pie"></i> Pie Chart Maker</h1></div></div>
-  <div id="page-bar" class="page"><div class="card"><h1><i class="fas fa-chart-bar"></i> Bar Chart Maker</h1></div></div>
-  <div id="page-electricity" class="page"><div class="card"><h1><i class="fas fa-bolt"></i> NEA Electricity Calculator</h1></div></div>
-  <div id="page-tools" class="page"><div class="card"><h1><i class="fas fa-th-large"></i> All Statistical Tools</h1></div></div>
+                    // Mean Deviation
+                    md = data.reduce((acc, x) => acc + Math.abs(x - mean), 0) / N;
 
-  <!-- FOOTER NAVIGATION -->
-  <footer>
-    <div class="footer-links">
-      <a onclick="openModal('privacyModal')">Privacy Policy</a> | 
-      <a onclick="openModal('aboutModal')">About Us</a> | 
-      <a onclick="openModal('contactModal')">Contact Us</a> | 
-      <a onclick="openModal('disclaimerModal')">Disclaimer</a>
-    </div>
-    <div>© 2026 StatsMaster · All Rights Reserved</div>
-  </footer>
+                    // Standard Deviation
+                    const variance = data.reduce((acc, x) => acc + Math.pow(x - mean, 2), 0) / N;
+                    sd = Math.sqrt(variance);
 
-</div>
+                } else if (type === 'discrete') {
+                    const X = document.getElementById('inputX').value.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+                    const F = document.getElementById('inputF').value.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
 
-<!-- MANDATORY LEGAL MODALS -->
-<div id="privacyModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('privacyModal')">&times;</span>
-    <h2>Privacy Policy</h2>
-    <p>At StatsMaster, we respect user privacy. We utilize Google AdSense to display advertisements. Third-party vendors may use cookies to serve ads based on prior user visits.</p>
-  </div>
-</div>
+                    if (X.length === 0 || X.length !== F.length) return alert('X and F frequency lengths must match.');
 
-<div id="aboutModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('aboutModal')">&times;</span>
-    <h2>About Us</h2>
-    <p>StatsMaster provides accessible online statistical engines, visualization tools, and educational material tailored for public service examinations.</p>
-  </div>
-</div>
+                    const N = F.reduce((a, b) => a + b, 0);
+                    let fxSum = 0;
+                    for (let i = 0; i < X.length; i++) fxSum += X[i] * F[i];
+                    mean = fxSum / N;
 
-<div id="contactModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('contactModal')">&times;</span>
-    <h2>Contact Us</h2>
-    <p>For inquiries, please write to us at: <strong>contact@yourdomain.com</strong></p>
-  </div>
-</div>
+                    // Cumulative Frequencies & Median
+                    let cf = [];
+                    let cum = 0;
+                    for (let i = 0; i < F.length; i++) {
+                        cum += F[i];
+                        cf.push(cum);
+                    }
+                    const medPos = N / 2;
+                    for (let i = 0; i < cf.length; i++) {
+                        if (cf[i] >= medPos) {
+                            median = X[i];
+                            break;
+                        }
+                    }
 
-<div id="disclaimerModal" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal('disclaimerModal')">&times;</span>
-    <h2>Disclaimer</h2>
-    <p>The notes provided here serve educational and preparation purposes. Users should consult official government publications for statutory interpretations.</p>
-  </div>
-</div>
+                    // Mean Deviation & SD
+                    let devSum = 0, sqDevSum = 0;
+                    for (let i = 0; i < X.length; i++) {
+                        devSum += F[i] * Math.abs(X[i] - mean);
+                        sqDevSum += F[i] * Math.pow(X[i] - mean, 2);
+                    }
+                    md = devSum / N;
+                    sd = Math.sqrt(sqDevSum / N);
 
-<script>
-  // Page Switching Mechanism
-  const pages = {
-    home: document.getElementById('page-home'),
-    notes: document.getElementById('page-notes'),
-    pie: document.getElementById('page-pie'),
-    bar: document.getElementById('page-bar'),
-    electricity: document.getElementById('page-electricity'),
-    tools: document.getElementById('page-tools')
-  };
+                } else if (type === 'continuous') {
+                    const CIRaw = document.getElementById('inputCI').value.split(',').map(s => s.trim());
+                    const F = document.getElementById('inputF').value.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
 
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const page = this.dataset.page;
-      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-      this.classList.add('active');
-      Object.keys(pages).forEach(key => {
-        pages[key].classList.toggle('active', key === page);
-      });
-      // Reset Notes View when navigating back to Notes tab
-      if(page === 'notes') {
-        hideNoteDetail();
-      }
-    });
-  });
+                    if (CIRaw.length === 0 || CIRaw.length !== F.length) return alert('Class Interval and Frequency count must match.');
 
-  // Notes Dynamic View Switcher
-  function showNoteDetail(noteId) {
-    document.getElementById('notes-topics-view').style.display = 'none';
-    document.querySelectorAll('.note-detail-content').forEach(el => el.style.display = 'none');
-    document.getElementById(noteId).style.display = 'block';
-  }
+                    let X = [], L = [], U = [];
+                    for (let item of CIRaw) {
+                        const parts = item.split('-').map(n => parseFloat(n.trim()));
+                        if (parts.length !== 2 || isNaN(parts[0]) || isNaN(parts[1])) return alert('Invalid Class Interval Format. Use format like 0-10');
+                        L.push(parts[0]);
+                        U.push(parts[1]);
+                        X.push((parts[0] + parts[1]) / 2); // Midpoint
+                    }
 
-  function hideNoteDetail() {
-    document.querySelectorAll('.note-detail-content').forEach(el => el.style.display = 'none');
-    document.getElementById('notes-topics-view').style.display = 'grid';
-  }
+                    const N = F.reduce((a, b) => a + b, 0);
+                    let fxSum = 0;
+                    for (let i = 0; i < X.length; i++) fxSum += X[i] * F[i];
+                    mean = fxSum / N;
 
-  // Modal Functions
-  function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-  function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-</script>
+                    // Cumulative Frequencies & Continuous Median Calculation
+                    let cf = [F[0]];
+                    for (let i = 1; i < F.length; i++) cf.push(cf[i - 1] + F[i]);
 
+                    const medPos = N / 2;
+                    let mIdx = 0;
+                    for (let i = 0; i < cf.length; i++) {
+                        if (cf[i] >= medPos) {
+                            mIdx = i;
+                            break;
+                        }
+                    }
+
+                    const L_med = L[mIdx];
+                    const cf_prev = mIdx === 0 ? 0 : cf[mIdx - 1];
+                    const f_med = F[mIdx];
+                    const h = U[mIdx] - L[mIdx];
+
+                    median = L_med + (((N / 2) - cf_prev) / f_med) * h;
+
+                    // Mean Deviation & SD
+                    let devSum = 0, sqDevSum = 0;
+                    for (let i = 0; i < X.length; i++) {
+                        devSum += F[i] * Math.abs(X[i] - mean);
+                        sqDevSum += F[i] * Math.pow(X[i] - mean, 2);
+                    }
+                    md = devSum / N;
+                    sd = Math.sqrt(sqDevSum / N);
+                }
+
+                // Display Results
+                document.getElementById('resMean').innerText = mean.toFixed(2);
+                document.getElementById('resMedian').innerText = median.toFixed(2);
+                document.getElementById('resMD').innerText = md.toFixed(2);
+                document.getElementById('resSD').innerText = sd.toFixed(2);
+                document.getElementById('statsResults').classList.remove('d-none');
+
+            } catch (err) {
+                alert('Invalid Data Format. Please check your inputs.');
+            }
+        }
+
+        // --- Chart Generator Logic ---
+        let chartInstance = null;
+
+        function initChartRows() {
+            const container = document.getElementById('chartDataRows');
+            container.innerHTML = '';
+            const defaultData = [
+                { label: 'Category A', value: 40 },
+                { label: 'Category B', value: 25 },
+                { label: 'Category C', value: 35 }
+            ];
+
+            defaultData.forEach(item => addChartDataRow(item.label, item.value));
+        }
+
+        function addChartDataRow(label = '', value = '') {
+            const container = document.getElementById('chartDataRows');
+            const div = document.createElement('div');
+            div.className = 'input-group mb-2 chart-row';
+            div.innerHTML = `
+                <input type="text" class="form-control chart-label" placeholder="Label" value="${label}">
+                <input type="number" class="form-control chart-val" placeholder="Value" value="${value}">
+                <button class="btn btn-outline-danger" onclick="this.parentElement.remove()"><i class="fa-solid fa-trash"></i></button>
+            `;
+            container.appendChild(div);
+        }
+
+        function renderChart() {
+            const labels = [];
+            const data = [];
+            
+            document.querySelectorAll('.chart-row').forEach(row => {
+                const l = row.querySelector('.chart-label').value.trim();
+                const v = parseFloat(row.querySelector('.chart-val').value);
+                if (l && !isNaN(v)) {
+                    labels.push(l);
+                    data.push(v);
+                }
+            });
+
+            const chartType = document.getElementById('chartTypeSelect').value;
+            const title = document.getElementById('chartTitle').value;
+            const ctx = document.getElementById('customChart').getContext('2d');
+
+            if (chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: chartType,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        backgroundColor: [
+                            '#0d6efd', '#198754', '#ffc107', '#dc3545', '#0dcaf0', '#6c757d'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title
+                        }
+                    }
+                }
+            });
+        }
+
+        function downloadChart() {
+            if (!chartInstance) return alert('Generate a chart first.');
+            const link = document.createElement('a');
+            link.download = 'chart.png';
+            link.href = chartInstance.toBase64Image();
+            link.click();
+        }
+
+        // Initialize App Setup
+        window.onload = () => {
+            initChartRows();
+            renderChart();
+        };
+    </script>
 </body>
 </html>
