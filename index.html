@@ -7,6 +7,11 @@
     
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .select-text { user-select: text; -webkit-user-select: text; }
@@ -26,8 +31,9 @@
                     <span class="text-[10px] block text-gray-400 -mt-1 font-semibold uppercase tracking-wider">Educational Hub</span>
                 </div>
             </div>
-            <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
-                <i class="fa-solid fa-moon"></i>
+            <!-- Working Theme Toggle Button -->
+            <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                <i id="theme-icon" class="fa-solid fa-moon"></i>
             </button>
         </div>
     </header>
@@ -41,17 +47,17 @@
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Interactive articles and PDF references synchronized with GitHub.</p>
                 </div>
                 <div class="relative w-full md:w-80">
-                    <input type="text" id="searchInput" onkeyup="filterNotes()" placeholder="Search topics..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                    <input type="text" id="searchInput" onkeyup="filterNotes()" placeholder="Search topics..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
                 </div>
             </div>
 
-            <!-- Dynamic Notes Grid (No Edit Icons) -->
+            <!-- Dynamic Notes Grid -->
             <div id="notesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
         </section>
     </main>
 
-    <!-- FULL ARTICLE VIEW (Target for New Tab) -->
+    <!-- FULL ARTICLE VIEW -->
     <main id="articleView" class="hidden flex-grow max-w-4xl w-full mx-auto px-4 py-8">
         <div class="mb-4 flex items-center justify-between">
             <a href="index.html" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
@@ -86,15 +92,43 @@
 
             <!-- Article Body (Copyable) -->
             <div id="articleContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200 space-y-4 select-text"></div>
+
+            <!-- FEEDBACK SECTION -->
+            <div class="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                    <h3 class="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-1">
+                        <i class="fa-regular fa-comment-dots text-blue-600"></i> Leave Feedback
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Spotted a typo, have a question, or need improvements on this note? Send your feedback below.</p>
+                    
+                    <form id="feedbackForm" onsubmit="submitFeedback(event)" class="space-y-3">
+                        <input type="hidden" id="feedbackNoteId">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input type="text" id="fbName" placeholder="Your Name (Optional)" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <select id="fbRating" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                                <option value="4">⭐⭐⭐⭐ Good</option>
+                                <option value="3">⭐⭐⭐ Needs Improvement</option>
+                                <option value="2">⭐⭐ Poor</option>
+                                <option value="1">⭐ Inaccurate</option>
+                            </select>
+                        </div>
+                        <textarea id="fbMessage" rows="3" required placeholder="Write your feedback or suggestions here..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        <button type="submit" id="fbSubmitBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Submit Feedback
+                        </button>
+                    </form>
+                </div>
+            </div>
         </article>
     </main>
 
-    <!-- Footer -->
+    <!-- Clean Footer (Shortcut Text Removed) -->
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
-        <p>&copy; 2026 Study Assist. Press <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 border rounded">Ctrl + Shift + A</kbd> for Admin Portal.</p>
+        <p>&copy; 2026 Study Assist. All rights reserved.</p>
     </footer>
 
-    <!-- GITHUB ADMIN DASHBOARD MODAL -->
+    <!-- GITHUB ADMIN DASHBOARD MODAL (Accessible via Ctrl + Shift + A) -->
     <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">
@@ -164,7 +198,27 @@
     <script>
         let globalNotes = [];
 
-        // Credentials
+        // Dark / Light Mode Initialization
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun text-amber-400';
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-moon text-gray-600';
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-gray-600';
+        }
+
+        // Initialize admin credentials
         document.getElementById('ghRepo').value = localStorage.getItem('gh_repo') || '';
         document.getElementById('ghToken').value = localStorage.getItem('gh_token') || '';
 
@@ -174,7 +228,6 @@
                 const res = await fetch('data/notes.json?t=' + Date.now());
                 globalNotes = await res.json();
                 
-                // Route check: check URL parameter ?noteId=1
                 const urlParams = new URLSearchParams(window.location.search);
                 const noteId = urlParams.get('noteId');
 
@@ -188,7 +241,7 @@
             }
         }
 
-        // Render Main Grid (Without Edit Button)
+        // Render Main Grid
         function renderNotes() {
             document.getElementById('catalogView').classList.remove('hidden');
             document.getElementById('articleView').classList.add('hidden');
@@ -237,6 +290,7 @@
             document.getElementById('articleTitle').textContent = note.title;
             document.getElementById('articleDesc').textContent = note.desc;
             document.getElementById('articleContent').innerHTML = note.content;
+            document.getElementById('feedbackNoteId').value = note.id;
 
             const pdfBanner = document.getElementById('pdfBanner');
             const pdfBtn = document.getElementById('pdfDownloadBtn');
@@ -260,7 +314,85 @@
             });
         }
 
-        // GitHub API Save Handler
+        // FEEDBACK SUBMISSION ENGINE (Appends to data/feedback.json)
+        async function submitFeedback(e) {
+            e.preventDefault();
+            const btn = document.getElementById('fbSubmitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+            const repo = localStorage.getItem('gh_repo');
+            const token = localStorage.getItem('gh_token');
+
+            if (!repo || !token) {
+                alert("Feedback service currently requires GitHub configuration. Please open Admin Panel (Ctrl+Shift+A) to configure repository settings.");
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Feedback';
+                return;
+            }
+
+            try {
+                // Fetch existing feedback
+                let existingFeedback = [];
+                let sha = null;
+                try {
+                    const res = await fetch(`https://api.github.com/repos/${repo}/contents/data/feedback.json`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (res.ok) {
+                        const fileData = await res.json();
+                        sha = fileData.sha;
+                        existingFeedback = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
+                    }
+                } catch (e) {
+                    console.warn("data/feedback.json file not initialized yet.");
+                }
+
+                // Add new feedback entry
+                const newFeedback = {
+                    id: Date.now().toString(),
+                    noteId: document.getElementById('feedbackNoteId').value,
+                    name: document.getElementById('fbName').value.trim() || 'Anonymous',
+                    rating: document.getElementById('fbRating').value,
+                    message: document.getElementById('fbMessage').value.trim(),
+                    timestamp: new Date().toISOString()
+                };
+
+                existingFeedback.push(newFeedback);
+
+                // Commit back to data/feedback.json
+                const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(existingFeedback, null, 2))));
+                await uploadToGitHub(repo, token, 'data/feedback.json', jsonContent, `New feedback for Note #${newFeedback.noteId}`, sha);
+
+                alert("Thank you! Your feedback has been recorded.");
+                document.getElementById('feedbackForm').reset();
+            } catch (err) {
+                alert("Failed to submit feedback: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Feedback';
+            }
+        }
+
+        // GitHub REST API Upload Helper
+        async function uploadToGitHub(repo, token, path, contentBase64, message, sha = null) {
+            const url = `https://api.github.com/repos/${repo}/contents/${path}`;
+            const body = { message, content: contentBase64 };
+            if (sha) body.sha = sha;
+
+            const res = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+            if (!res.ok) throw new Error(await res.text());
+            return res.json();
+        }
+
+        // GitHub Admin Save Handler
         async function handleGitHubSave(e) {
             e.preventDefault();
             const btn = document.getElementById('saveBtn');
@@ -326,23 +458,6 @@
             });
         }
 
-        async function uploadToGitHub(repo, token, path, contentBase64, message, sha = null) {
-            const url = `https://api.github.com/repos/${repo}/contents/${path}`;
-            const body = { message, content: contentBase64 };
-            if (sha) body.sha = sha;
-
-            const res = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            });
-            if (!res.ok) throw new Error(await res.text());
-            return res.json();
-        }
-
         async function getFileSHA(repo, token, path) {
             try {
                 const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
@@ -356,14 +471,10 @@
             return null;
         }
 
-        function toggleTheme() {
-            document.documentElement.classList.toggle('dark');
-        }
-
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // Keyboard Shortcut for Admin Portal: Ctrl + Shift + A
+        // Shortcut Key: Ctrl + Shift + A
         document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
                 e.preventDefault();
@@ -371,7 +482,10 @@
             }
         });
 
-        window.onload = loadNotes;
+        window.onload = () => {
+            initTheme();
+            loadNotes();
+        };
     </script>
 </body>
 </html>
