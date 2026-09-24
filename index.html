@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Assist - Educational Notes & Statistical Tools</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507"
-     crossorigin="anonymous"></script>
+    
+    <!-- Google AdSense Verification -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
+    
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,7 +34,7 @@
                     <span class="text-[10px] block text-gray-400 -mt-1 font-semibold uppercase tracking-wider">Educational Hub</span>
                 </div>
             </div>
-            <!-- Working Theme Toggle Button -->
+            <!-- Theme Toggle Button -->
             <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
                 <i id="theme-icon" class="fa-solid fa-moon"></i>
             </button>
@@ -64,7 +66,13 @@
             <a href="index.html" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
                 <i class="fa-solid fa-arrow-left"></i> Back to Catalog
             </a>
-            <span id="articleCode" class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-md text-xs font-bold uppercase"></span>
+            <div class="flex items-center gap-2">
+                <!-- Secret Article Edit Button (Hidden by default) -->
+                <button id="articleEditBtn" onclick="" class="secret-edit-btn hidden text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1 px-3 rounded-lg transition shadow-sm flex items-center gap-1">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit Note
+                </button>
+                <span id="articleCode" class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-md text-xs font-bold uppercase"></span>
+            </div>
         </div>
 
         <article class="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
@@ -91,7 +99,7 @@
                 </a>
             </div>
 
-            <!-- Article Body (Copyable) -->
+            <!-- Article Body -->
             <div id="articleContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200 space-y-4 select-text"></div>
 
             <!-- FEEDBACK SECTION -->
@@ -124,88 +132,97 @@
         </article>
     </main>
 
-    <!-- Clean Footer (Shortcut Text Removed) -->
+    <!-- Footer with AdSense Mandatory Policy Links -->
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
+        <div class="flex justify-center items-center space-x-4 mb-3">
+            <a href="about.html" class="hover:underline">About Us</a>
+            <span>•</span>
+            <a href="contact.html" class="hover:underline">Contact Us</a>
+            <span>•</span>
+            <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
+        </div>
         <p>&copy; 2026 Study Assist. All rights reserved.</p>
     </footer>
 
-   <!-- GITHUB ADMIN DASHBOARD MODAL -->
-<div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
-        <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                <i class="fa-brands fa-github text-blue-600"></i> GitHub Content Admin
-            </h3>
-            <button onclick="closeModal('adminModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+    <!-- GITHUB ADMIN DASHBOARD MODAL -->
+    <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
+            <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-brands fa-github text-blue-600"></i> GitHub Content Admin
+                </h3>
+                <button onclick="closeModal('adminModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <form id="githubAdminForm" onsubmit="handleGitHubSave(event)" class="space-y-4">
+                <input type="hidden" id="editNoteId">
+                
+                <!-- GitHub Credentials -->
+                <div class="p-3 bg-blue-50 dark:bg-gray-900/50 rounded-xl space-y-3 border border-blue-100 dark:border-gray-700">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">GitHub Owner/Repo</label>
+                            <input type="text" id="ghRepo" required placeholder="username/repository" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Personal Access Token</label>
+                            <input type="password" id="ghToken" required placeholder="ghp_xxxxxxxxxxxx" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Selector for Editing -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Select Action / Existing Note</label>
+                    <select id="selectNoteToEdit" onchange="populateFormForEdit()" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-semibold text-blue-600 dark:text-blue-400">
+                        <option value="">➕ Create New Blog Post</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Topic Code</label>
+                        <input type="text" id="formCode" required placeholder="e.g. Topic 1.1" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">FontAwesome Icon</label>
+                        <input type="text" id="formIcon" required placeholder="fa-solid fa-book" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Title</label>
+                    <input type="text" id="formTitle" required placeholder="Note Title" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Short Description</label>
+                    <input type="text" id="formDesc" required placeholder="Brief preview text" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Blog Article (HTML Supported)</label>
+                    <textarea id="formContent" rows="4" required placeholder="Full content..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Upload PDF File (Optional - Leaves existing file if empty)</label>
+                    <input type="file" id="formPdfFile" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button type="submit" id="saveBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm transition">
+                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to GitHub
+                    </button>
+                </div>
+            </form>
         </div>
-
-        <form id="githubAdminForm" onsubmit="handleGitHubSave(event)" class="space-y-4">
-            <input type="hidden" id="editNoteId">
-            
-            <!-- GitHub Credentials -->
-            <div class="p-3 bg-blue-50 dark:bg-gray-900/50 rounded-xl space-y-3 border border-blue-100 dark:border-gray-700">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">GitHub Owner/Repo</label>
-                        <input type="text" id="ghRepo" required placeholder="username/repository" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Personal Access Token</label>
-                        <input type="password" id="ghToken" required placeholder="ghp_xxxxxxxxxxxx" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Blog Selector for Editing -->
-            <div>
-                <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Select Action / Existing Note</label>
-                <select id="selectNoteToEdit" onchange="populateFormForEdit()" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-semibold text-blue-600 dark:text-blue-400">
-                    <option value="">➕ Create New Blog Post</option>
-                </select>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Topic Code</label>
-                    <input type="text" id="formCode" required placeholder="e.g. Topic 1.1" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">FontAwesome Icon</label>
-                    <input type="text" id="formIcon" required placeholder="fa-solid fa-book" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Title</label>
-                <input type="text" id="formTitle" required placeholder="Note Title" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Short Description</label>
-                <input type="text" id="formDesc" required placeholder="Brief preview text" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Blog Article (HTML Supported)</label>
-                <textarea id="formContent" rows="4" required placeholder="Full content..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm"></textarea>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Upload PDF File (Optional - Leaves existing file if empty)</label>
-                <input type="file" id="formPdfFile" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-            </div>
-
-            <div class="flex gap-3 pt-2">
-                <button type="submit" id="saveBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm transition">
-                    <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to GitHub
-                </button>
-            </div>
-        </form>
     </div>
-</div>
+
     <!-- Script Logic -->
     <script>
         let globalNotes = [];
+        let editModeActive = false; // Tracks hidden edit state
 
         // Dark / Light Mode Initialization
         function initTheme() {
@@ -237,6 +254,8 @@
                 const res = await fetch('data/notes.json?t=' + Date.now());
                 globalNotes = await res.json();
                 
+                populateAdminDropdown();
+
                 const urlParams = new URLSearchParams(window.location.search);
                 const noteId = urlParams.get('noteId');
 
@@ -250,7 +269,18 @@
             }
         }
 
-        // Render Main Grid
+        function populateAdminDropdown() {
+            const select = document.getElementById('selectNoteToEdit');
+            select.innerHTML = '<option value="">➕ Create New Blog Post</option>';
+            globalNotes.forEach(n => {
+                const opt = document.createElement('option');
+                opt.value = n.id;
+                opt.textContent = `✏️ ${n.code}: ${n.title}`;
+                select.appendChild(opt);
+            });
+        }
+
+        // Render Main Grid with Secret Edit Button Included
         function renderNotes() {
             document.getElementById('catalogView').classList.remove('hidden');
             document.getElementById('articleView').classList.add('hidden');
@@ -270,7 +300,14 @@
                                 </div>
                                 <span class="text-xs font-bold uppercase tracking-wider text-blue-600">${note.code}</span>
                             </div>
-                            ${note.pdf ? '<span class="text-[11px] text-gray-400 font-medium"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i>PDF</span>' : '<span class="text-[11px] text-gray-400 italic">Article</span>'}
+                            <div class="flex items-center gap-2">
+                                <!-- SECRET EDIT BUTTON -->
+                                <button onclick="editNoteDirectly('${note.id}')" 
+                                        class="secret-edit-btn ${editModeActive ? '' : 'hidden'} text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1 px-2.5 rounded-lg transition shadow-sm flex items-center gap-1">
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                                </button>
+                                ${note.pdf ? '<span class="text-[11px] text-gray-400 font-medium"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i>PDF</span>' : '<span class="text-[11px] text-gray-400 italic">Article</span>'}
+                            </div>
                         </div>
                         <h2 class="font-bold text-base text-gray-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
                         <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
@@ -301,6 +338,10 @@
             document.getElementById('articleContent').innerHTML = note.content;
             document.getElementById('feedbackNoteId').value = note.id;
 
+            // Wire up top article secret edit button
+            const artEditBtn = document.getElementById('articleEditBtn');
+            artEditBtn.onclick = () => editNoteDirectly(note.id);
+
             const pdfBanner = document.getElementById('pdfBanner');
             const pdfBtn = document.getElementById('pdfDownloadBtn');
 
@@ -309,6 +350,38 @@
                 pdfBtn.href = note.pdf;
             } else {
                 pdfBanner.classList.add('hidden');
+            }
+        }
+
+        // Directly Launch Modal & Populate Content for Editing
+        function editNoteDirectly(id) {
+            const note = globalNotes.find(n => n.id === id);
+            if (!note) return;
+
+            openModal('adminModal');
+
+            document.getElementById('selectNoteToEdit').value = note.id;
+            populateFormForEdit();
+        }
+
+        function populateFormForEdit() {
+            const id = document.getElementById('selectNoteToEdit').value;
+            const note = globalNotes.find(n => n.id === id);
+
+            if (note) {
+                document.getElementById('editNoteId').value = note.id;
+                document.getElementById('editNoteId').dataset.pdfPath = note.pdf || '';
+                document.getElementById('formCode').value = note.code;
+                document.getElementById('formIcon').value = note.icon;
+                document.getElementById('formTitle').value = note.title;
+                document.getElementById('formDesc').value = note.desc;
+                document.getElementById('formContent').value = note.content;
+            } else {
+                document.getElementById('editNoteId').value = '';
+                document.getElementById('editNoteId').dataset.pdfPath = '';
+                document.getElementById('githubAdminForm').reset();
+                document.getElementById('ghRepo').value = localStorage.getItem('gh_repo') || '';
+                document.getElementById('ghToken').value = localStorage.getItem('gh_token') || '';
             }
         }
 
@@ -323,7 +396,7 @@
             });
         }
 
-        // FEEDBACK SUBMISSION ENGINE (Appends to data/feedback.json)
+        // FEEDBACK SUBMISSION ENGINE
         async function submitFeedback(e) {
             e.preventDefault();
             const btn = document.getElementById('fbSubmitBtn');
@@ -341,7 +414,6 @@
             }
 
             try {
-                // Fetch existing feedback
                 let existingFeedback = [];
                 let sha = null;
                 try {
@@ -357,7 +429,6 @@
                     console.warn("data/feedback.json file not initialized yet.");
                 }
 
-                // Add new feedback entry
                 const newFeedback = {
                     id: Date.now().toString(),
                     noteId: document.getElementById('feedbackNoteId').value,
@@ -369,7 +440,6 @@
 
                 existingFeedback.push(newFeedback);
 
-                // Commit back to data/feedback.json
                 const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(existingFeedback, null, 2))));
                 await uploadToGitHub(repo, token, 'data/feedback.json', jsonContent, `New feedback for Note #${newFeedback.noteId}`, sha);
 
@@ -483,11 +553,22 @@
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // Shortcut Key: Ctrl + Shift + A
+        // SECRET SHORTCUT LISTENERS
         document.addEventListener('keydown', (e) => {
+            // Shortcut 1: Ctrl + Shift + A -> Open Full Admin Modal
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
                 e.preventDefault();
                 openModal('adminModal');
+            }
+            
+            // Shortcut 2: Ctrl + Shift + E -> Toggle Hidden Inline Edit Buttons
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
+                e.preventDefault();
+                editModeActive = !editModeActive;
+                
+                document.querySelectorAll('.secret-edit-btn').forEach(btn => {
+                    btn.classList.toggle('hidden', !editModeActive);
+                });
             }
         });
 
