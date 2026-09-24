@@ -1,0 +1,11 @@
+[
+  {
+    "id": "1",
+    "code": "Topic 1.1",
+    "icon": "fa-solid fa-earth-asia",
+    "title": "Physical, socio-cultural and economic geography and demography of Nepal",
+    "desc": "Detailed notes on Nepal's terrain divisions, demographic statistics, socio-cultural composition, and economic geographical distribution.",
+    "content": "<p>Nepal is divided into three distinct topographical regions: Mountain, Hill, and Terai regions...</p>",
+    "pdf": "pdfs/1.1_Geography_and_Demography_Nepal.pdf"
+  }
+]
