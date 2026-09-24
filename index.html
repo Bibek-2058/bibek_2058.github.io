@@ -8,13 +8,16 @@
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .select-text { user-select: text; -webkit-user-select: text; }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col font-sans">
 
     <!-- Header -->
     <header class="sticky top-0 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-            <div class="flex items-center space-x-3 cursor-pointer">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showCatalog()">
                 <div class="p-2 bg-blue-600 rounded-lg text-white">
                     <i class="fa-solid fa-graduation-cap text-xl"></i>
                 </div>
@@ -23,14 +26,14 @@
                     <span class="text-[10px] block text-gray-400 -mt-1 font-semibold uppercase tracking-wider">Educational Hub</span>
                 </div>
             </div>
-            <button id="theme-toggle" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+            <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
                 <i class="fa-solid fa-moon"></i>
             </button>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
+    <!-- MAIN CATALOG VIEW -->
+    <main id="catalogView" class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
         <section id="notes-section">
             <div class="mb-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
                 <div>
@@ -43,38 +46,53 @@
                 </div>
             </div>
 
-            <!-- Dynamic Notes Grid -->
+            <!-- Dynamic Notes Grid (No Edit Icons) -->
             <div id="notesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
         </section>
     </main>
 
+    <!-- FULL ARTICLE VIEW (Target for New Tab) -->
+    <main id="articleView" class="hidden flex-grow max-w-4xl w-full mx-auto px-4 py-8">
+        <div class="mb-4 flex items-center justify-between">
+            <a href="index.html" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+                <i class="fa-solid fa-arrow-left"></i> Back to Catalog
+            </a>
+            <span id="articleCode" class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-md text-xs font-bold uppercase"></span>
+        </div>
+
+        <article class="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
+            <!-- Article Header -->
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
+                <div class="flex items-center gap-3 mb-3">
+                    <div id="articleIcon" class="p-3 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-xl text-2xl"></div>
+                    <h1 id="articleTitle" class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white select-text"></h1>
+                </div>
+                <p id="articleDesc" class="text-sm text-gray-500 dark:text-gray-400 italic select-text"></p>
+            </div>
+
+            <!-- Attached PDF Bar -->
+            <div id="pdfBanner" class="hidden mb-8 p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-file-pdf text-red-500 text-2xl"></i>
+                    <div>
+                        <p class="text-xs font-bold text-gray-800 dark:text-gray-200">Reference Document Attached</p>
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400">Download the official PDF material for offline study.</p>
+                    </div>
+                </div>
+                <a id="pdfDownloadBtn" href="#" download target="_blank" class="w-full sm:w-auto text-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-download"></i> Download PDF
+                </a>
+            </div>
+
+            <!-- Article Body (Copyable) -->
+            <div id="articleContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200 space-y-4 select-text"></div>
+        </article>
+    </main>
+
     <!-- Footer -->
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
-        <p>&copy; 2026 Study Assist. Press <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 border rounded"></p>
+        <p>&copy; 2026 Study Assist. Press <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 border rounded">Ctrl + Shift + A</kbd> for Admin Portal.</p>
     </footer>
-
-    <!-- BLOG READ MODAL -->
-    <div id="blogModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 max-w-3xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl flex flex-col justify-between">
-            <div>
-                <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
-                    <div class="flex items-center gap-3">
-                        <div id="modalIcon" class="p-3 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-xl text-xl"></div>
-                        <div>
-                            <span id="modalTopicCode" class="text-xs font-bold text-blue-600 uppercase"></span>
-                            <h2 id="modalTitle" class="text-xl font-bold text-gray-900 dark:text-white"></h2>
-                        </div>
-                    </div>
-                    <button onclick="closeModal('blogModal')" class="text-gray-400 hover:text-gray-600 text-xl"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div id="modalContent" class="text-sm leading-relaxed text-gray-700 dark:text-gray-300 space-y-4 my-4"></div>
-            </div>
-            <div class="border-t border-gray-200 dark:border-gray-700 pt-4 mt-6 flex items-center justify-between">
-                <span class="text-xs text-gray-400">Study Assist Verified Resource</span>
-                <div id="pdfDownloadWrapper"></div>
-            </div>
-        </div>
-    </div>
 
     <!-- GITHUB ADMIN DASHBOARD MODAL -->
     <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
@@ -146,29 +164,41 @@
     <script>
         let globalNotes = [];
 
-        // Load credentials from local storage if available
+        // Credentials
         document.getElementById('ghRepo').value = localStorage.getItem('gh_repo') || '';
         document.getElementById('ghToken').value = localStorage.getItem('gh_token') || '';
 
-        // Fetch notes from JSON file in GitHub
+        // Fetch notes from data/notes.json
         async function loadNotes() {
             try {
                 const res = await fetch('data/notes.json?t=' + Date.now());
                 globalNotes = await res.json();
-                renderNotes();
+                
+                // Route check: check URL parameter ?noteId=1
+                const urlParams = new URLSearchParams(window.location.search);
+                const noteId = urlParams.get('noteId');
+
+                if (noteId) {
+                    renderArticleView(noteId);
+                } else {
+                    renderNotes();
+                }
             } catch (err) {
                 console.error("Could not fetch data/notes.json", err);
             }
         }
 
-        // Render Cards
+        // Render Main Grid (Without Edit Button)
         function renderNotes() {
+            document.getElementById('catalogView').classList.remove('hidden');
+            document.getElementById('articleView').classList.add('hidden');
+
             const container = document.getElementById('notesContainer');
             container.innerHTML = '';
 
             globalNotes.forEach(note => {
                 const card = document.createElement('div');
-                card.className = 'note-card bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between';
+                card.className = 'note-card bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
                 card.innerHTML = `
                     <div>
                         <div class="flex items-center justify-between mb-3">
@@ -183,33 +213,54 @@
                         <h2 class="font-bold text-base text-gray-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
                         <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
                     </div>
-                    <div class="flex items-center gap-2 pt-2 border-t border-gray-100 dark:border-gray-700">
-                        <button onclick="openBlogModal('${note.id}')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-eye"></i> View Note
-                        </button>
-                        <button onclick="editNote('${note.id}')" class="bg-gray-100 dark:bg-gray-700 p-2 rounded-xl text-xs"><i class="fa-solid fa-pen"></i></button>
+                    <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
+                        <a href="index.html?noteId=${note.id}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Note
+                        </a>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        function openBlogModal(id) {
+        // Render Dedicated Article Page
+        function renderArticleView(id) {
             const note = globalNotes.find(n => n.id === id);
             if (!note) return;
 
-            document.getElementById('modalIcon').innerHTML = `<i class="${note.icon}"></i>`;
-            document.getElementById('modalTopicCode').textContent = note.code;
-            document.getElementById('modalTitle').textContent = note.title;
-            document.getElementById('modalContent').innerHTML = note.content;
+            document.getElementById('catalogView').classList.add('hidden');
+            document.getElementById('articleView').classList.remove('hidden');
 
-            const pdfWrapper = document.getElementById('pdfDownloadWrapper');
-            pdfWrapper.innerHTML = note.pdf ? `<a href="${note.pdf}" download class="bg-emerald-600 text-white font-semibold py-2 px-4 rounded-xl text-xs flex items-center gap-2"><i class="fa-solid fa-download"></i> Download PDF</a>` : `<span class="text-xs text-gray-400 italic">No PDF attached.</span>`;
+            document.title = `${note.title} - Study Assist`;
+            document.getElementById('articleCode').textContent = note.code;
+            document.getElementById('articleIcon').innerHTML = `<i class="${note.icon}"></i>`;
+            document.getElementById('articleTitle').textContent = note.title;
+            document.getElementById('articleDesc').textContent = note.desc;
+            document.getElementById('articleContent').innerHTML = note.content;
 
-            openModal('blogModal');
+            const pdfBanner = document.getElementById('pdfBanner');
+            const pdfBtn = document.getElementById('pdfDownloadBtn');
+
+            if (note.pdf) {
+                pdfBanner.classList.remove('hidden');
+                pdfBtn.href = note.pdf;
+            } else {
+                pdfBanner.classList.add('hidden');
+            }
         }
 
-        // GitHub API Integration Functions
+        function showCatalog() {
+            window.location.href = 'index.html';
+        }
+
+        function filterNotes() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.note-card').forEach(c => {
+                c.style.display = c.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+            });
+        }
+
+        // GitHub API Save Handler
         async function handleGitHubSave(e) {
             e.preventDefault();
             const btn = document.getElementById('saveBtn');
@@ -226,7 +277,6 @@
             let pdfPath = document.getElementById('editNoteId').dataset.pdfPath || '';
 
             try {
-                // 1. Upload PDF if selected
                 if (fileInput.files && fileInput.files[0]) {
                     const file = fileInput.files[0];
                     const fileName = `pdfs/${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
@@ -236,7 +286,6 @@
                     pdfPath = fileName;
                 }
 
-                // 2. Prepare JSON Entry
                 const id = document.getElementById('editNoteId').value || Date.now().toString();
                 const noteObj = {
                     id,
@@ -252,7 +301,6 @@
                 if (index > -1) globalNotes[index] = noteObj;
                 else globalNotes.push(noteObj);
 
-                // 3. Commit updated data/notes.json to GitHub
                 const jsonSha = await getFileSHA(repo, token, 'data/notes.json');
                 const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(globalNotes, null, 2))));
 
@@ -269,7 +317,6 @@
             }
         }
 
-        // Helper: Convert File to Raw Base64
         function fileToBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -279,7 +326,6 @@
             });
         }
 
-        // Helper: GitHub REST API Upload
         async function uploadToGitHub(repo, token, path, contentBase64, message, sha = null) {
             const url = `https://api.github.com/repos/${repo}/contents/${path}`;
             const body = { message, content: contentBase64 };
@@ -297,7 +343,6 @@
             return res.json();
         }
 
-        // Helper: Get File SHA for updating existing JSON
         async function getFileSHA(repo, token, path) {
             try {
                 const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
@@ -311,31 +356,14 @@
             return null;
         }
 
-        function editNote(id) {
-            const note = globalNotes.find(n => n.id === id);
-            if (!note) return;
-
-            document.getElementById('editNoteId').value = note.id;
-            document.getElementById('editNoteId').dataset.pdfPath = note.pdf || '';
-            document.getElementById('formCode').value = note.code;
-            document.getElementById('formIcon').value = note.icon;
-            document.getElementById('formTitle').value = note.title;
-            document.getElementById('formDesc').value = note.desc;
-            document.getElementById('formContent').value = note.content;
-
-            openModal('adminModal');
-        }
-
-        function filterNotes() {
-            const q = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.note-card').forEach(c => {
-                c.style.display = c.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
-            });
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
         }
 
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
+        // Keyboard Shortcut for Admin Portal: Ctrl + Shift + A
         document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
                 e.preventDefault();
