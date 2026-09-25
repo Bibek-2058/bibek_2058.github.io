@@ -100,7 +100,7 @@
             </div>
 
             <!-- Article Body -->
-            <div id="articleContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200 space-y-4 select-text"></div>
+            <div id="articleContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200 space-y-4 select-text overflow-x-auto"></div>
 
             <!-- FEEDBACK SECTION -->
             <div class="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
@@ -146,7 +146,7 @@
 
     <!-- GITHUB ADMIN DASHBOARD MODAL -->
     <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
                     <i class="fa-brands fa-github text-blue-600"></i> GitHub Content Admin
@@ -200,9 +200,50 @@
                     <input type="text" id="formDesc" required placeholder="Brief preview text" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
                 </div>
 
+                <!-- OPTIONAL DYNAMIC TABLE BUILDER -->
+                <div class="border border-indigo-200 dark:border-indigo-800 bg-indigo-50/40 dark:bg-indigo-950/20 p-4 rounded-xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-2">
+                            <i class="fa-solid fa-table"></i> Optional Table Generator
+                        </span>
+                        <button type="button" onclick="toggleTableBuilder()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-lg transition">
+                            <i class="fa-solid fa-sliders"></i> Toggle Generator
+                        </button>
+                    </div>
+
+                    <div id="tableBuilderContainer" class="hidden space-y-3 pt-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Rows</label>
+                                <input type="number" id="tblRows" value="2" min="1" max="50" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Columns</label>
+                                <input type="number" id="tblCols" value="2" min="1" max="20" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Border Style</label>
+                                <select id="tblBorder" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
+                                    <option value="bordered">Bordered Table</option>
+                                    <option value="borderless">Borderless Table</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Table Input Grid -->
+                        <div class="overflow-x-auto max-h-60 border border-gray-200 dark:border-gray-700 rounded-lg p-2 bg-white dark:bg-gray-900">
+                            <table id="tblInteractiveGrid" class="w-full text-xs border-collapse"></table>
+                        </div>
+
+                        <button type="button" onclick="insertTableToContent()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Insert Generated Table to Note Body
+                        </button>
+                    </div>
+                </div>
+
                 <div>
                     <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Blog Article (HTML Supported)</label>
-                    <textarea id="formContent" rows="4" required placeholder="Full content..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm"></textarea>
+                    <textarea id="formContent" rows="5" required placeholder="Full content..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-mono"></textarea>
                 </div>
 
                 <div>
@@ -247,6 +288,87 @@
         // Initialize admin credentials
         document.getElementById('ghRepo').value = localStorage.getItem('gh_repo') || '';
         document.getElementById('ghToken').value = localStorage.getItem('gh_token') || '';
+
+        // TABLE GENERATOR ENGINE
+        function toggleTableBuilder() {
+            const container = document.getElementById('tableBuilderContainer');
+            container.classList.toggle('hidden');
+            if (!container.classList.contains('hidden')) {
+                buildTableGrid();
+            }
+        }
+
+        function buildTableGrid() {
+            const rows = parseInt(document.getElementById('tblRows').value) || 1;
+            const cols = parseInt(document.getElementById('tblCols').value) || 1;
+            const table = document.getElementById('tblInteractiveGrid');
+            table.innerHTML = '';
+
+            // Header row inputs
+            const thead = document.createElement('thead');
+            const headTr = document.createElement('tr');
+            for (let c = 0; c < cols; c++) {
+                const th = document.createElement('th');
+                th.className = 'p-1';
+                th.innerHTML = `<input type="text" placeholder="Header ${c + 1}" class="tbl-header-input w-full p-1 border rounded text-xs font-bold bg-gray-100 dark:bg-gray-800 dark:border-gray-700">`;
+                headTr.appendChild(th);
+            }
+            thead.appendChild(headTr);
+            table.appendChild(thead);
+
+            // Body cell inputs
+            const tbody = document.createElement('tbody');
+            for (let r = 0; r < rows; r++) {
+                const tr = document.createElement('tr');
+                for (let c = 0; c < cols; c++) {
+                    const td = document.createElement('td');
+                    td.className = 'p-1';
+                    td.innerHTML = `<input type="text" placeholder="Cell ${r + 1},${c + 1}" class="tbl-cell-input w-full p-1 border rounded text-xs dark:bg-gray-800 dark:border-gray-700" data-row="${r}" data-col="${c}">`;
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+            table.appendChild(tbody);
+        }
+
+        function insertTableToContent() {
+            const rows = parseInt(document.getElementById('tblRows').value) || 1;
+            const cols = parseInt(document.getElementById('tblCols').value) || 1;
+            const borderStyle = document.getElementById('tblBorder').value;
+
+            const headerInputs = document.querySelectorAll('.tbl-header-input');
+            const cellInputs = document.querySelectorAll('.tbl-cell-input');
+
+            const isBordered = borderStyle === 'bordered';
+            const tableClass = isBordered 
+                ? 'w-full text-sm text-left border-collapse border border-gray-300 dark:border-gray-700 my-4' 
+                : 'w-full text-sm text-left border-collapse my-4';
+            const cellBorder = isBordered ? 'border border-gray-300 dark:border-gray-700' : 'border-b border-gray-200 dark:border-gray-800';
+
+            let tableHTML = `\n<div class="overflow-x-auto my-4">\n  <table class="${tableClass}">\n    <thead class="bg-gray-100 dark:bg-gray-800 font-bold">\n      <tr>\n`;
+
+            for (let c = 0; c < cols; c++) {
+                const val = headerInputs[c]?.value || `Header ${c + 1}`;
+                tableHTML += `        <th class="p-2.5 ${cellBorder}">${val}</th>\n`;
+            }
+            tableHTML += `      </tr>\n    </thead>\n    <tbody>\n`;
+
+            for (let r = 0; r < rows; r++) {
+                tableHTML += `      <tr>\n`;
+                for (let c = 0; c < cols; c++) {
+                    const cell = Array.from(cellInputs).find(i => parseInt(i.dataset.row) === r && parseInt(i.dataset.col) === c);
+                    const val = cell?.value || '';
+                    tableHTML += `        <td class="p-2.5 ${cellBorder}">${val}</td>\n`;
+                }
+                tableHTML += `      </tr>\n`;
+            }
+
+            tableHTML += `    </tbody>\n  </table>\n</div>\n`;
+
+            const contentTextarea = document.getElementById('formContent');
+            contentTextarea.value += tableHTML;
+            alert("Table successfully inserted into the note content area!");
+        }
 
         // Fetch notes from data/notes.json
         async function loadNotes() {
