@@ -10,11 +10,20 @@
   },
   {
     "id": "1790255606219",
-    "code": "3. ",
+    "code": "2.",
     "icon": "fa-solid",
     "title": "जगदम्बा श्री पुरस्कार ",
     "desc": "मदन पुरस्कार स्थापना गर्ने रानी जगदम्बा देवीको स्मृतिमा दिन थालिएको ",
     "content": "जगदम्बा श्री पुरस्कार २०८२ विजेता: किरण खरेल \nजगदम्बा श्री पुरस्कार २०८१ विजेता : प्रेमदेव गिरि \nजगदम्बा श्री पुरस्कार २०८० विजेता: प्रा.डा. योगेन्द्रप्रसाद यादव \nस्थापना: बि.सं. २०४५ साल \nपुरस्कार राशी: रु. ४ लाख \nपहिलो जगदम्बा पुरस्कार विजेता: नारायण गोपाल गुरुवाचार्य ",
     "pdf": "pdfs/1790260685023_1790255603267_Nepal_Constitution_Notes.pdf"
+  },
+  {
+    "id": "1790307409234",
+    "code": "3. ",
+    "icon": "fa-solid",
+    "title": "जगदम्बा श्री पुरस्कार २०८२ ",
+    "desc": "मदन पुरस्कार स्थापना गर्ने रानी जगदम्बा देवीको स्मृतिमा दिन थालिएको ",
+    "content": "\n<div class=\"overflow-x-auto my-4\">\n  <table class=\"w-full text-sm text-left border-collapse border border-gray-300 dark:border-gray-700 my-4\">\n    <thead class=\"bg-gray-100 dark:bg-gray-800 font-bold\">\n      <tr>\n        <th class=\"p-2.5 border border-gray-300 dark:border-gray-700\">Header 1</th>\n        <th class=\"p-2.5 border border-gray-300 dark:border-gray-700\">Header 2</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">२०८२ को बिजेता </td>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">किरण खरेल </td>\n      </tr>\n      <tr>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">२०८१ को बिजेता </td>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">प्रेमदेव गिरि </td>\n      </tr>\n      <tr>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">२०८० को बिजेता </td>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">प्रा. डा. योगेन्द्रप्रसाद यादव </td>\n      </tr>\n      <tr>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">स्थापना </td>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">बि.सं. २०४५ साल </td>\n      </tr>\n      <tr>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">पुरस्कार राशी </td>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">रु. ४ लाख </td>\n      </tr>\n      <tr>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">पहिलो जगदम्बा पुरस्कार विजेता </td>\n        <td class=\"p-2.5 border border-gray-300 dark:border-gray-700\">नारायण गोपाल गुरुवाचार्य </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n",
+    "pdf": ""
   }
 ]
