@@ -243,7 +243,41 @@
 
                 <div>
                     <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Blog Article (HTML Supported)</label>
-                    <textarea id="formContent" rows="5" required placeholder="Full content..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-mono"></textarea>
+                    
+                    <!-- Formatting Toolbar -->
+                    <div class="flex flex-wrap gap-1 p-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-t-xl">
+                        <button type="button" onclick="applyFormat('b')" title="Bold" class="p-1.5 px-2 text-xs font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
+                            <i class="fa-solid fa-bold"></i>
+                        </button>
+                        <button type="button" onclick="applyFormat('i')" title="Italic" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
+                            <i class="fa-solid fa-italic"></i>
+                        </button>
+                        <button type="button" onclick="applyFormat('u')" title="Underline" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
+                            <i class="fa-solid fa-underline"></i>
+                        </button>
+                        <button type="button" onclick="applyFormat('s')" title="Strikethrough" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
+                            <i class="fa-solid fa-strikethrough"></i>
+                        </button>
+                        <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-600 self-center mx-1"></div>
+                        <button type="button" onclick="applyFormat('h2')" title="Heading 2" class="p-1.5 px-2 text-xs font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
+                            H2
+                        </button>
+                        <button type="button" onclick="applyFormat('h3')" title="Heading 3" class="p-1.5 px-2 text-xs font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
+                            H3
+                        </button>
+                        <button type="button" onclick="applyFormat('p')" title="Paragraph" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
+                            <i class="fa-solid fa-paragraph"></i>
+                        </button>
+                        <button type="button" onclick="applyFormat('ul')" title="Bullet List" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
+                            <i class="fa-solid fa-list-ul"></i>
+                        </button>
+                        <button type="button" onclick="applyFormat('mark')" title="Highlight" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
+                            <i class="fa-solid fa-highlighter"></i>
+                        </button>
+                    </div>
+
+                    <!-- Blog Content Textarea -->
+                    <textarea id="formContent" rows="6" required placeholder="Write your blog content here..." class="w-full p-2.5 rounded-b-xl border border-t-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-mono focus:outline-none"></textarea>
                 </div>
 
                 <div>
@@ -264,6 +298,30 @@
     <script>
         let globalNotes = [];
         let editModeActive = false; // Tracks hidden edit state
+
+        // Formatting Handler Function for Text Area
+        function applyFormat(tag) {
+            const textarea = document.getElementById('formContent');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+
+            let formattedText = '';
+
+            if (tag === 'ul') {
+                formattedText = `<ul>\n  <li>${selectedText || 'List item'}</li>\n</ul>`;
+            } else if (tag === 'h2') {
+                formattedText = `<h2 class="text-xl font-bold my-2">${selectedText || 'Heading'}</h2>`;
+            } else if (tag === 'h3') {
+                formattedText = `<h3 class="text-lg font-semibold my-2">${selectedText || 'Subheading'}</h3>`;
+            } else {
+                formattedText = `<${tag}>${selectedText || 'text'}</${tag}>`;
+            }
+
+            // Replace selected text or insert tag at cursor
+            textarea.setRangeText(formattedText, start, end, 'select');
+            textarea.focus();
+        }
 
         // Dark / Light Mode Initialization
         function initTheme() {
@@ -310,7 +368,7 @@
             for (let c = 0; c < cols; c++) {
                 const th = document.createElement('th');
                 th.className = 'p-1';
-                th.innerHTML = `<input type="text" placeholder="Header ${c + 1}" class="tbl-header-input w-full p-1 border rounded text-xs font-bold bg-gray-100 dark:bg-gray-800 dark:border-gray-700">`;
+                th.innerHTML = `<input type="text" placeholder="Header ${c + 1} (optional)" class="tbl-header-input w-full p-1 border rounded text-xs font-bold bg-gray-100 dark:bg-gray-800 dark:border-gray-700">`;
                 headTr.appendChild(th);
             }
             thead.appendChild(headTr);
@@ -345,13 +403,28 @@
                 : 'w-full text-sm text-left border-collapse my-4';
             const cellBorder = isBordered ? 'border border-gray-300 dark:border-gray-700' : 'border-b border-gray-200 dark:border-gray-800';
 
-            let tableHTML = `\n<div class="overflow-x-auto my-4">\n  <table class="${tableClass}">\n    <thead class="bg-gray-100 dark:bg-gray-800 font-bold">\n      <tr>\n`;
-
+            // Check if any headers have text entered
+            let hasHeaders = false;
             for (let c = 0; c < cols; c++) {
-                const val = headerInputs[c]?.value || `Header ${c + 1}`;
-                tableHTML += `        <th class="p-2.5 ${cellBorder}">${val}</th>\n`;
+                if (headerInputs[c]?.value.trim() !== '') {
+                    hasHeaders = true;
+                    break;
+                }
             }
-            tableHTML += `      </tr>\n    </thead>\n    <tbody>\n`;
+
+            let tableHTML = `\n<div class="overflow-x-auto my-4">\n  <table class="${tableClass}">\n`;
+
+            // If user typed at least one heading, render <thead> section
+            if (hasHeaders) {
+                tableHTML += `    <thead class="bg-gray-100 dark:bg-gray-800 font-bold">\n      <tr>\n`;
+                for (let c = 0; c < cols; c++) {
+                    const val = headerInputs[c]?.value.trim() || '';
+                    tableHTML += `        <th class="p-2.5 ${cellBorder}">${val}</th>\n`;
+                }
+                tableHTML += `      </tr>\n    </thead>\n`;
+            }
+
+            tableHTML += `    <tbody>\n`;
 
             for (let r = 0; r < rows; r++) {
                 tableHTML += `      <tr>\n`;
