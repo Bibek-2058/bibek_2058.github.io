@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Assist - Educational Notes </title>
+    <title>Study Assist - Educational Hub</title>
     
     <!-- Google AdSense Verification -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
@@ -11,9 +11,7 @@
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class'
-        }
+        tailwind.config = { darkMode: 'class' }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -25,7 +23,7 @@
     <!-- Header -->
     <header class="sticky top-0 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="showCatalog()">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('gk')">
                 <div class="p-2 bg-blue-600 rounded-lg text-white">
                     <i class="fa-solid fa-graduation-cap text-xl"></i>
                 </div>
@@ -34,20 +32,33 @@
                     <span class="text-[10px] block text-gray-400 -mt-1 font-semibold uppercase tracking-wider">Educational Hub</span>
                 </div>
             </div>
-            <!-- Theme Toggle Button -->
-            <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                <i id="theme-icon" class="fa-solid fa-moon"></i>
-            </button>
+
+            <!-- Page Navigation Tabs & Theme Toggle -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button id="nav-gk-btn" onclick="showPage('gk')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-blue-600 text-white">
+                    <i class="fa-solid fa-book"></i> <span class="hidden sm:inline">General</span> Knowledge
+                </button>
+                <button id="nav-iq-btn" onclick="showPage('iq')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600">
+                    <i class="fa-solid fa-brain"></i> IQ <span class="hidden sm:inline">Practice</span>
+                </button>
+                
+                <div class="h-5 w-[1px] bg-gray-300 dark:bg-gray-600 mx-1"></div>
+
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- MAIN CATALOG VIEW -->
-    <main id="catalogView" class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
+    <!-- PAGE 1: GENERAL KNOWLEDGE (CATALOG VIEW) -->
+    <main id="catalogView" class="page-view flex-grow max-w-7xl w-full mx-auto px-4 py-6">
         <section id="notes-section">
             <div class="mb-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
                 <div>
-                    <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white">PSC & General Study Syllabus Notes</h1>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Important General Knowledge and IQ available here.</p>
+                    <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white">PSC & General Knowledge Notes</h1>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Important General Knowledge and PSC syllabus notes available here.</p>
                 </div>
                 <div class="relative w-full md:w-80">
                     <input type="text" id="searchInput" onkeyup="filterNotes()" placeholder="Search topics..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -61,22 +72,15 @@
     </main>
 
     <!-- FULL ARTICLE VIEW -->
-    <main id="articleView" class="hidden flex-grow max-w-4xl w-full mx-auto px-4 py-8">
+    <main id="articleView" class="page-view hidden flex-grow max-w-4xl w-full mx-auto px-4 py-8">
         <div class="mb-4 flex items-center justify-between">
-            <a href="index.html" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+            <button onclick="showPage('gk')" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
                 <i class="fa-solid fa-arrow-left"></i> Back to Catalog
-            </a>
-            <div class="flex items-center gap-2">
-                <!-- Secret Article Edit Button (Hidden by default) -->
-                <button id="articleEditBtn" onclick="" class="secret-edit-btn hidden text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1 px-3 rounded-lg transition shadow-sm flex items-center gap-1">
-                    <i class="fa-solid fa-pen-to-square"></i> Edit Note
-                </button>
-                <span id="articleCode" class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-md text-xs font-bold uppercase"></span>
-            </div>
+            </button>
+            <span id="articleCode" class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-md text-xs font-bold uppercase"></span>
         </div>
 
         <article class="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
-            <!-- Article Header -->
             <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
                 <div class="flex items-center gap-3 mb-3">
                     <div id="articleIcon" class="p-3 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-xl text-2xl"></div>
@@ -84,257 +88,590 @@
                 </div>
                 <p id="articleDesc" class="text-sm text-gray-500 dark:text-gray-400 italic select-text"></p>
             </div>
-
-            <!-- Attached PDF Bar -->
-            <div id="pdfBanner" class="hidden mb-8 p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-file-pdf text-red-500 text-2xl"></i>
-                    <div>
-                        <p class="text-xs font-bold text-gray-800 dark:text-gray-200">Reference Document Attached</p>
-                        <p class="text-[11px] text-gray-500 dark:text-gray-400">Download the official PDF material for offline study.</p>
-                    </div>
-                </div>
-                <a id="pdfDownloadBtn" href="#" download target="_blank" class="w-full sm:w-auto text-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-download"></i> Download PDF
-                </a>
-            </div>
-
-            <!-- Article Body -->
             <div id="articleContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200 space-y-4 select-text overflow-x-auto"></div>
-
-            <!-- FEEDBACK SECTION -->
-            <div class="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
-                <div class="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
-                    <h3 class="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-1">
-                        <i class="fa-regular fa-comment-dots text-blue-600"></i> Leave Feedback
-                    </h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Spotted a typo, have a question, or need improvements on this note? Send your feedback below.</p>
-                    
-                    <form id="feedbackForm" onsubmit="submitFeedback(event)" class="space-y-3">
-                        <input type="hidden" id="feedbackNoteId">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <input type="text" id="fbName" placeholder="Your Name (Optional)" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <select id="fbRating" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-                                <option value="4">⭐⭐⭐⭐ Good</option>
-                                <option value="3">⭐⭐⭐ Needs Improvement</option>
-                                <option value="2">⭐⭐ Poor</option>
-                                <option value="1">⭐ Inaccurate</option>
-                            </select>
-                        </div>
-                        <textarea id="fbMessage" rows="3" required placeholder="Write your feedback or suggestions here..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                        <button type="submit" id="fbSubmitBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-xl text-xs transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Submit Feedback
-                        </button>
-                    </form>
-                </div>
-            </div>
         </article>
     </main>
 
-    <!-- Footer with AdSense Mandatory Policy Links -->
-    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
-        <div class="flex justify-center items-center space-x-4 mb-3">
-            <a href="about.html" class="hover:underline">About Us</a>
-            <span>•</span>
-            <a href="contact.html" class="hover:underline">Contact Us</a>
-            <span>•</span>
-            <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
+    <!-- PAGE 2: IQ PRACTICE SECTION -->
+    <main id="iqView" class="page-view hidden flex-grow max-w-7xl w-full mx-auto px-4 py-6">
+        <!-- 1. Category Bar -->
+        <div class="mb-6 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+            <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white mb-2">IQ & Reasoning Practice</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Choose a category below to browse its topics and practice questions.</p>
+            
+            <div class="flex flex-wrap gap-2">
+                <button onclick="selectIqCategory('verbal')" id="cat-verbal" class="iq-cat-btn bg-blue-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-comments"></i> Verbal Reasoning
+                </button>
+                <button onclick="selectIqCategory('non-verbal')" id="cat-non-verbal" class="iq-cat-btn bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2">
+                    <i class="fa-solid fa-shapes"></i> Non-Verbal Reasoning
+                </button>
+                <button onclick="selectIqCategory('numerical')" id="cat-numerical" class="iq-cat-btn bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2">
+                    <i class="fa-solid fa-calculator"></i> Numerical Reasoning
+                </button>
+            </div>
         </div>
+
+        <!-- 2. Topics Grid View (Shows when a category is selected) -->
+        <div id="iqTopicsSection" class="mb-6">
+            <h2 id="iqCategoryTitle" class="text-lg font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-blue-600"></i> Select a Topic
+            </h2>
+            <div id="iqTopicsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        </div>
+
+        <!-- 3. Questions View (Shows when a specific topic card is clicked) -->
+        <div id="iqQuestionsSection" class="hidden space-y-6">
+            <div class="flex items-center justify-between bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
+                <button onclick="backToTopics()" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Topics
+                </button>
+                <span id="activeTopicBadge" class="px-3 py-1 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 font-bold text-xs rounded-lg"></span>
+            </div>
+            
+            <div id="iqQuestionsContainer" class="space-y-6"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
         <p>&copy; 2026 Study Assist. All rights reserved.</p>
     </footer>
 
-    <!-- GITHUB ADMIN DASHBOARD MODAL -->
+    <!-- GITHUB ADMIN DASHBOARD MODAL (Ctrl+Shift+A) -->
     <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
+            
+            <!-- Modal Header -->
             <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                    <i class="fa-brands fa-github text-blue-600"></i> GitHub Content Admin
+                    <i class="fa-solid fa-sliders text-blue-600"></i> Content Manager & Admin
                 </h3>
                 <button onclick="closeModal('adminModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
 
-            <form id="githubAdminForm" onsubmit="handleGitHubSave(event)" class="space-y-4">
-                <input type="hidden" id="editNoteId">
-                
-                <!-- GitHub Credentials -->
-                <div class="p-3 bg-blue-50 dark:bg-gray-900/50 rounded-xl space-y-3 border border-blue-100 dark:border-gray-700">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">GitHub Owner/Repo</label>
-                            <input type="text" id="ghRepo" required placeholder="username/repository" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Personal Access Token</label>
-                            <input type="password" id="ghToken" required placeholder="ghp_xxxxxxxxxxxx" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                        </div>
+            <!-- Tab Switcher -->
+            <div class="flex border-b border-gray-200 dark:border-gray-700 mb-4">
+                <button onclick="switchAdminTab('notes')" id="admin-tab-notes" class="px-4 py-2 text-xs font-bold border-b-2 border-blue-600 text-blue-600">Manage GK Notes</button>
+                <button onclick="switchAdminTab('iq')" id="admin-tab-iq" class="px-4 py-2 text-xs font-bold border-b-2 border-transparent text-gray-500 hover:text-gray-700">Manage IQ Topics & Questions</button>
+            </div>
+
+            <!-- TAB 1: GK NOTES -->
+            <div id="adminTabNotes" class="space-y-4">
+                <p class="text-xs text-gray-500">Edit or publish blog posts directly to your GitHub repository.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-blue-50 dark:bg-gray-900/50 rounded-xl">
+                    <input type="text" id="ghRepo" placeholder="GitHub Repo (username/repo)" class="p-2 rounded border text-xs">
+                    <input type="password" id="ghToken" placeholder="GitHub Token (ghp_xxx)" class="p-2 rounded border text-xs">
+                </div>
+            </div>
+
+            <!-- TAB 2: IQ MANAGER -->
+            <div id="adminTabIq" class="hidden space-y-6">
+                <!-- Add New Topic Section -->
+                <div class="p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-700 space-y-3">
+                    <h4 class="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider"><i class="fa-solid fa-folder-plus text-blue-600"></i> Add New Topic</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <select id="newTopicCat" class="p-2 rounded-lg border text-xs dark:bg-gray-800">
+                            <option value="verbal">Verbal Reasoning</option>
+                            <option value="non-verbal">Non-Verbal Reasoning</option>
+                            <option value="numerical">Numerical Reasoning</option>
+                        </select>
+                        <input type="text" id="newTopicName" placeholder="Topic Name (e.g. Venn Diagrams)" class="p-2 rounded-lg border text-xs dark:bg-gray-800 sm:col-span-2">
                     </div>
-                </div>
-
-                <!-- Blog Selector for Editing -->
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Select Action / Existing Note</label>
-                    <select id="selectNoteToEdit" onchange="populateFormForEdit()" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-semibold text-blue-600 dark:text-blue-400">
-                        <option value="">➕ Create New Blog Post</option>
-                    </select>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Topic Code</label>
-                        <input type="text" id="formCode" required placeholder="e.g. Topic 1.1" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">FontAwesome Icon</label>
-                        <input type="text" id="formIcon" required placeholder="fa-solid fa-book" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Title</label>
-                    <input type="text" id="formTitle" required placeholder="Note Title" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Short Description</label>
-                    <input type="text" id="formDesc" required placeholder="Brief preview text" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
-                </div>
-
-                <!-- OPTIONAL DYNAMIC TABLE BUILDER -->
-                <div class="border border-indigo-200 dark:border-indigo-800 bg-indigo-50/40 dark:bg-indigo-950/20 p-4 rounded-xl space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-2">
-                            <i class="fa-solid fa-table"></i> Optional Table Generator
-                        </span>
-                        <button type="button" onclick="toggleTableBuilder()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-lg transition">
-                            <i class="fa-solid fa-sliders"></i> Toggle Generator
-                        </button>
-                    </div>
-
-                    <div id="tableBuilderContainer" class="hidden space-y-3 pt-2">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div>
-                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Rows</label>
-                                <input type="number" id="tblRows" value="2" min="1" max="50" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Columns</label>
-                                <input type="number" id="tblCols" value="2" min="1" max="20" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Border Style</label>
-                                <select id="tblBorder" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                                    <option value="bordered">Bordered Table</option>
-                                    <option value="borderless">Borderless Table</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Interactive Table Input Grid -->
-                        <div class="overflow-x-auto max-h-60 border border-gray-200 dark:border-gray-700 rounded-lg p-2 bg-white dark:bg-gray-900">
-                            <table id="tblInteractiveGrid" class="w-full text-xs border-collapse"></table>
-                        </div>
-
-                        <button type="button" onclick="insertTableToContent()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-plus"></i> Insert Generated Table to Note Body
-                        </button>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Blog Article (HTML Supported)</label>
-                    
-                    <!-- Formatting Toolbar -->
-                    <div class="flex flex-wrap gap-1 p-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-t-xl">
-                        <button type="button" onclick="applyFormat('b')" title="Bold" class="p-1.5 px-2 text-xs font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
-                            <i class="fa-solid fa-bold"></i>
-                        </button>
-                        <button type="button" onclick="applyFormat('i')" title="Italic" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
-                            <i class="fa-solid fa-italic"></i>
-                        </button>
-                        <button type="button" onclick="applyFormat('u')" title="Underline" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
-                            <i class="fa-solid fa-underline"></i>
-                        </button>
-                        <button type="button" onclick="applyFormat('s')" title="Strikethrough" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
-                            <i class="fa-solid fa-strikethrough"></i>
-                        </button>
-                        <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-600 self-center mx-1"></div>
-                        <button type="button" onclick="applyFormat('h2')" title="Heading 2" class="p-1.5 px-2 text-xs font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
-                            H2
-                        </button>
-                        <button type="button" onclick="applyFormat('h3')" title="Heading 3" class="p-1.5 px-2 text-xs font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
-                            H3
-                        </button>
-                        <button type="button" onclick="applyFormat('p')" title="Paragraph" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
-                            <i class="fa-solid fa-paragraph"></i>
-                        </button>
-                        <button type="button" onclick="applyFormat('ul')" title="Bullet List" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
-                            <i class="fa-solid fa-list-ul"></i>
-                        </button>
-                        <button type="button" onclick="applyFormat('mark')" title="Highlight" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
-                            <i class="fa-solid fa-highlighter"></i>
-                        </button>
-                    </div>
-
-                    <!-- Blog Content Textarea -->
-                    <textarea id="formContent" rows="6" required placeholder="Write your blog content here..." class="w-full p-2.5 rounded-b-xl border border-t-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-mono focus:outline-none"></textarea>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Upload PDF File (Optional - Leaves existing file if empty)</label>
-                    <input type="file" id="formPdfFile" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                </div>
-
-                <div class="flex gap-3 pt-2">
-                    <button type="submit" id="saveBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm transition">
-                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to GitHub
+                    <button onclick="adminAddTopic()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg text-xs transition">
+                        <i class="fa-solid fa-plus"></i> Add Topic
                     </button>
                 </div>
-            </form>
+
+                <!-- Add New Question Section -->
+                <div class="p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-700 space-y-3">
+                    <h4 class="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider"><i class="fa-solid fa-file-circle-plus text-emerald-600"></i> Add New Question</h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 mb-1">Select Category</label>
+                            <select id="newQCat" onchange="updateAdminTopicDropdown()" class="w-full p-2 rounded-lg border text-xs dark:bg-gray-800">
+                                <option value="verbal">Verbal Reasoning</option>
+                                <option value="non-verbal">Non-Verbal Reasoning</option>
+                                <option value="numerical">Numerical Reasoning</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 mb-1">Select Topic</label>
+                            <select id="newQTopic" class="w-full p-2 rounded-lg border text-xs dark:bg-gray-800"></select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-gray-500 mb-1">Question Text</label>
+                        <textarea id="newQText" rows="2" placeholder="Write your question here..." class="w-full p-2 rounded-lg border text-xs dark:bg-gray-800"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-gray-500 mb-1">Picture / Diagram URL (Optional)</label>
+                        <input type="text" id="newQImage" placeholder="https://example.com/image.png or leave empty" class="w-full p-2 rounded-lg border text-xs dark:bg-gray-800">
+                    </div>
+
+                    <!-- Options Inputs -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <input type="text" id="newOpt0" placeholder="Option A" class="p-2 rounded-lg border text-xs dark:bg-gray-800">
+                        <input type="text" id="newOpt1" placeholder="Option B" class="p-2 rounded-lg border text-xs dark:bg-gray-800">
+                        <input type="text" id="newOpt2" placeholder="Option C" class="p-2 rounded-lg border text-xs dark:bg-gray-800">
+                        <input type="text" id="newOpt3" placeholder="Option D" class="p-2 rounded-lg border text-xs dark:bg-gray-800">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 mb-1">Correct Option</label>
+                            <select id="newQCorrect" class="w-full p-2 rounded-lg border text-xs dark:bg-gray-800">
+                                <option value="0">Option A</option>
+                                <option value="1">Option B</option>
+                                <option value="2">Option C</option>
+                                <option value="3">Option D</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-gray-500 mb-1">Explanation</label>
+                            <input type="text" id="newQExp" placeholder="Reasoning explanation..." class="p-2 rounded-lg border text-xs dark:bg-gray-800 w-full">
+                        </div>
+                    </div>
+
+                    <button onclick="adminAddQuestion()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-lg text-xs transition">
+                        <i class="fa-solid fa-circle-plus"></i> Save Question to Topic
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Script Logic -->
+    <!-- Application Script -->
     <script>
         let globalNotes = [];
-        let editModeActive = false; // Tracks hidden edit state
 
-        // Formatting Handler Function for Text Area
-        function applyFormat(tag) {
-            const textarea = document.getElementById('formContent');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const selectedText = textarea.value.substring(start, end);
-
-            let formattedText = '';
-
-            if (tag === 'ul') {
-                formattedText = `<ul>\n  <li>${selectedText || 'List item'}</li>\n</ul>`;
-            } else if (tag === 'h2') {
-                formattedText = `<h2 class="text-xl font-bold my-2">${selectedText || 'Heading'}</h2>`;
-            } else if (tag === 'h3') {
-                formattedText = `<h3 class="text-lg font-semibold my-2">${selectedText || 'Subheading'}</h3>`;
-            } else {
-                formattedText = `<${tag}>${selectedText || 'text'}</${tag}>`;
+        // Dynamic IQ Data Structure with LocalStorage Persistence
+        const defaultIqData = {
+            verbal: {
+                title: "Verbal Reasoning",
+                topics: [
+                    {
+                        id: "analogy",
+                        name: "Analogy",
+                        questions: [
+                            {
+                                id: "v1",
+                                text: "Book is to Reading as Fork is to ____?",
+                                image: "",
+                                options: ["Eating", "Writing", "Cooking", "Cutting"],
+                                correct: 0,
+                                explanation: "Books are used for reading, and forks are used for eating."
+                            }
+                        ]
+                    }
+                ]
+            },
+            "non-verbal": {
+                title: "Non-Verbal Reasoning",
+                topics: [
+                    {
+                        id: "patterns",
+                        name: "Pattern Series",
+                        questions: [
+                            {
+                                id: "nv1",
+                                text: "Which shape comes next in the logic sequence below?",
+                                image: "https://via.placeholder.com/400x150?text=Pattern+Sequence+Diagram",
+                                options: ["Triangle", "Square", "Circle", "Pentagon"],
+                                correct: 1,
+                                explanation: "The sequence alternates between Square and Circle."
+                            }
+                        ]
+                    }
+                ]
+            },
+            numerical: {
+                title: "Numerical Reasoning",
+                topics: [
+                    {
+                        id: "series",
+                        name: "Number Series",
+                        questions: [
+                            {
+                                id: "n1",
+                                text: "Find the missing number in the sequence: 2, 4, 8, 16, ____?",
+                                image: "",
+                                options: ["20", "24", "32", "64"],
+                                correct: 2,
+                                explanation: "Each number doubles (multiplied by 2) to get the next number."
+                            }
+                        ]
+                    }
+                ]
             }
+        };
 
-            // Replace selected text or insert tag at cursor
-            textarea.setRangeText(formattedText, start, end, 'select');
-            textarea.focus();
+        // Load saved IQ data or fallback to default
+        let iqData = JSON.parse(localStorage.getItem('iqData')) || defaultIqData;
+
+        function saveIqData() {
+            localStorage.setItem('iqData', JSON.stringify(iqData));
         }
 
-        // Dark / Light Mode Initialization
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            
-            if (isDark) {
-                document.documentElement.classList.add('dark');
-                document.getElementById('theme-icon').className = 'fa-solid fa-sun text-amber-400';
-            } else {
-                document.documentElement.classList.remove('dark');
-                document.getElementById('theme-icon').className = 'fa-solid fa-moon text-gray-600';
+        let currentIqCat = 'verbal';
+        let currentIqTopicId = null;
+
+        // SINGLE PAGE ROUTER
+        function showPage(page) {
+            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
+
+            const gkBtn = document.getElementById('nav-gk-btn');
+            const iqBtn = document.getElementById('nav-iq-btn');
+
+            if (page === 'gk') {
+                document.getElementById('catalogView').classList.remove('hidden');
+                gkBtn.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-blue-600 text-white";
+                iqBtn.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600";
+            } else if (page === 'iq') {
+                document.getElementById('iqView').classList.remove('hidden');
+                iqBtn.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-blue-600 text-white";
+                gkBtn.className = "px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600";
+                
+                selectIqCategory(currentIqCat);
             }
+        }
+
+        // 1. SELECT CATEGORY
+        function selectIqCategory(catKey) {
+            currentIqCat = catKey;
+            currentIqTopicId = null;
+
+            document.querySelectorAll('.iq-cat-btn').forEach(btn => {
+                btn.className = 'iq-cat-btn bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2';
+            });
+            const activeBtn = document.getElementById(`cat-${catKey}`);
+            if (activeBtn) activeBtn.className = 'iq-cat-btn bg-blue-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm';
+
+            document.getElementById('iqCategoryTitle').innerHTML = `<i class="fa-solid fa-layer-group text-blue-600"></i> ${iqData[catKey].title} - Topics`;
+            
+            document.getElementById('iqTopicsSection').classList.remove('hidden');
+            document.getElementById('iqQuestionsSection').classList.add('hidden');
+
+            renderIqTopicsGrid();
+        }
+
+        // 2. RENDER TOPICS GRID FOR SELECTED CATEGORY
+        function renderIqTopicsGrid() {
+            const grid = document.getElementById('iqTopicsGrid');
+            grid.innerHTML = '';
+
+            const topics = iqData[currentIqCat].topics;
+
+            if (!topics || topics.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full p-8 text-center bg-white dark:bg-gray-800 rounded-2xl border border-dashed border-gray-300 dark:border-gray-700">
+                        <i class="fa-solid fa-folder-open text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-xs text-gray-500">No topics added under ${iqData[currentIqCat].title} yet.</p>
+                        <p class="text-[11px] text-gray-400 mt-1">Press <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">Ctrl+Shift+A</code> to add topics.</p>
+                    </div>`;
+                return;
+            }
+
+            topics.forEach(topic => {
+                const card = document.createElement('div');
+                card.className = 'bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 shadow-sm transition cursor-pointer flex flex-col justify-between group';
+                card.onclick = () => openTopicQuestions(topic.id);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="p-2 rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 text-xs font-bold">
+                                <i class="fa-solid fa-hashtag"></i>
+                            </span>
+                            <button onclick="event.stopPropagation(); adminDeleteTopic('${topic.id}')" title="Delete Topic" class="text-xs text-rose-500 hover:text-rose-700 p-1 opacity-0 group-hover:opacity-100 transition">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1">${topic.name}</h3>
+                        <p class="text-xs text-gray-400">${topic.questions.length} Question(s)</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between text-xs font-semibold text-blue-600 dark:text-blue-400">
+                        <span>Start Practice</span>
+                        <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 3. OPEN QUESTIONS FOR SPECIFIC TOPIC
+        function openTopicQuestions(topicId) {
+            currentIqTopicId = topicId;
+            const topic = iqData[currentIqCat].topics.find(t => t.id === topicId);
+
+            if (!topic) return;
+
+            document.getElementById('iqTopicsSection').classList.add('hidden');
+            document.getElementById('iqQuestionsSection').classList.remove('hidden');
+            document.getElementById('activeTopicBadge').textContent = topic.name;
+
+            renderIqQuestions();
+        }
+
+        function backToTopics() {
+            document.getElementById('iqQuestionsSection').classList.add('hidden');
+            document.getElementById('iqTopicsSection').classList.remove('hidden');
+        }
+
+        // RENDER QUESTIONS INSIDE TOPIC
+        function renderIqQuestions() {
+            const container = document.getElementById('iqQuestionsContainer');
+            container.innerHTML = '';
+
+            const topic = iqData[currentIqCat].topics.find(t => t.id === currentIqTopicId);
+
+            if (!topic || topic.questions.length === 0) {
+                container.innerHTML = `
+                    <div class="p-8 text-center bg-white dark:bg-gray-800 rounded-2xl border border-dashed border-gray-300 dark:border-gray-700">
+                        <p class="text-xs text-gray-500">No questions available in this topic yet.</p>
+                        <p class="text-[11px] text-gray-400 mt-1">Press <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">Ctrl+Shift+A</code> to add questions.</p>
+                    </div>`;
+                return;
+            }
+
+            topic.questions.forEach((q, qIndex) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm relative group';
+                
+                let imageHTML = q.image ? `<div class="my-3"><img src="${q.image}" alt="Question Image" class="max-h-56 rounded-xl border border-gray-200 dark:border-gray-700 mx-auto object-contain"></div>` : '';
+
+                let optionsHTML = '';
+                q.options.forEach((opt, oIndex) => {
+                    optionsHTML += `
+                        <label id="lbl-${q.id}-${oIndex}" class="option-label flex items-center p-3 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-750 transition text-xs font-medium">
+                            <input type="radio" name="q-${q.id}" value="${oIndex}" class="mr-3 text-blue-600 focus:ring-blue-500">
+                            <span>${String.fromCharCode(65 + oIndex)}. ${opt}</span>
+                        </label>
+                    `;
+                });
+
+                qCard.innerHTML = `
+                    <div class="flex items-start justify-between gap-4 mb-2">
+                        <h3 class="text-sm font-bold text-gray-900 dark:text-white">Q${qIndex + 1}. ${q.text}</h3>
+                        <button onclick="adminDeleteQuestion('${q.id}')" title="Delete Question" class="text-xs text-rose-500 hover:text-rose-700 opacity-0 group-hover:opacity-100 transition">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                    
+                    ${imageHTML}
+
+                    <div class="space-y-2 my-4">
+                        ${optionsHTML}
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-3 border-t border-gray-100 dark:border-gray-700">
+                        <button onclick="checkAnswer('${q.id}', ${q.correct})" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-check-double"></i> Check Answer
+                        </button>
+                        <div id="result-${q.id}" class="hidden text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-2"></div>
+                    </div>
+                    <div id="exp-${q.id}" class="hidden mt-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-xl text-xs text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                        <strong>Explanation:</strong> ${q.explanation || 'No explanation provided.'}
+                    </div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function checkAnswer(questionId, correctIndex) {
+            const selectedOpt = document.querySelector(`input[name="q-${questionId}"]:checked`);
+            const resultDiv = document.getElementById(`result-${questionId}`);
+            const expDiv = document.getElementById(`exp-${questionId}`);
+
+            if (!selectedOpt) {
+                alert("Please select an option first!");
+                return;
+            }
+
+            const selectedValue = parseInt(selectedOpt.value);
+            const options = document.querySelectorAll(`[id^="lbl-${questionId}-"]`);
+
+            options.forEach((lbl, idx) => {
+                lbl.className = 'option-label flex items-center p-3 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer text-xs font-medium';
+                if (idx === correctIndex) {
+                    lbl.classList.add('bg-emerald-50', 'dark:bg-emerald-950/40', 'border-emerald-500', 'text-emerald-700', 'dark:text-emerald-300');
+                }
+                if (idx === selectedValue && selectedValue !== correctIndex) {
+                    lbl.classList.add('bg-rose-50', 'dark:bg-rose-950/40', 'border-rose-500', 'text-rose-700', 'dark:text-rose-300');
+                }
+            });
+
+            resultDiv.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+            if (selectedValue === correctIndex) {
+                resultDiv.classList.add('bg-emerald-100', 'dark:bg-emerald-900/50', 'text-emerald-800', 'dark:text-emerald-300');
+                resultDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i> Correct!`;
+            } else {
+                resultDiv.classList.add('bg-rose-100', 'dark:bg-rose-900/50', 'text-rose-800', 'dark:text-rose-300');
+                resultDiv.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600"></i> Incorrect!`;
+            }
+
+            expDiv.classList.remove('hidden');
+        }
+
+        // ADMIN CONTROLS FOR TOPICS & QUESTIONS
+        function adminAddTopic() {
+            const cat = document.getElementById('newTopicCat').value;
+            const name = document.getElementById('newTopicName').value.trim();
+
+            if (!name) { alert("Topic name cannot be empty."); return; }
+
+            const topicId = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            
+            iqData[cat].topics.push({
+                id: topicId,
+                name: name,
+                questions: []
+            });
+
+            saveIqData();
+            document.getElementById('newTopicName').value = '';
+            alert(`Topic "${name}" added to ${iqData[cat].title}!`);
+            
+            updateAdminTopicDropdown();
+            if (cat === currentIqCat) renderIqTopicsGrid();
+        }
+
+        function adminDeleteTopic(topicId) {
+            if (!confirm("Are you sure you want to delete this topic and all its questions?")) return;
+
+            iqData[currentIqCat].topics = iqData[currentIqCat].topics.filter(t => t.id !== topicId);
+            saveIqData();
+            renderIqTopicsGrid();
+        }
+
+        function adminAddQuestion() {
+            const cat = document.getElementById('newQCat').value;
+            const topicId = document.getElementById('newQTopic').value;
+            const text = document.getElementById('newQText').value.trim();
+            const image = document.getElementById('newQImage').value.trim();
+            const opt0 = document.getElementById('newOpt0').value.trim();
+            const opt1 = document.getElementById('newOpt1').value.trim();
+            const opt2 = document.getElementById('newOpt2').value.trim();
+            const opt3 = document.getElementById('newOpt3').value.trim();
+            const correct = parseInt(document.getElementById('newQCorrect').value);
+            const exp = document.getElementById('newQExp').value.trim();
+
+            if (!topicId) { alert("Please select or create a topic first!"); return; }
+            if (!text || !opt0 || !opt1) { alert("Please fill in question text and at least 2 options."); return; }
+
+            const topic = iqData[cat].topics.find(t => t.id === topicId);
+            if (topic) {
+                topic.questions.push({
+                    id: 'q_' + Date.now(),
+                    text,
+                    image,
+                    options: [opt0, opt1, opt2, opt3].filter(o => o !== ''),
+                    correct,
+                    explanation: exp
+                });
+
+                saveIqData();
+                alert("Question added successfully!");
+
+                // Clear input fields
+                document.getElementById('newQText').value = '';
+                document.getElementById('newQImage').value = '';
+                document.getElementById('newOpt0').value = '';
+                document.getElementById('newOpt1').value = '';
+                document.getElementById('newOpt2').value = '';
+                document.getElementById('newOpt3').value = '';
+                document.getElementById('newQExp').value = '';
+
+                if (topicId === currentIqTopicId) renderIqQuestions();
+            }
+        }
+
+        function adminDeleteQuestion(qId) {
+            if (!confirm("Delete this question?")) return;
+            const topic = iqData[currentIqCat].topics.find(t => t.id === currentIqTopicId);
+            if (topic) {
+                topic.questions = topic.questions.filter(q => q.id !== qId);
+                saveIqData();
+                renderIqQuestions();
+            }
+        }
+
+        function updateAdminTopicDropdown() {
+            const cat = document.getElementById('newQCat').value;
+            const select = document.getElementById('newQTopic');
+            select.innerHTML = '';
+
+            iqData[cat].topics.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.id;
+                opt.textContent = t.name;
+                select.appendChild(opt);
+            });
+        }
+
+        function switchAdminTab(tab) {
+            document.getElementById('adminTabNotes').classList.toggle('hidden', tab !== 'notes');
+            document.getElementById('adminTabIq').classList.toggle('hidden', tab !== 'iq');
+            
+            document.getElementById('admin-tab-notes').className = tab === 'notes' ? 'px-4 py-2 text-xs font-bold border-b-2 border-blue-600 text-blue-600' : 'px-4 py-2 text-xs font-bold border-b-2 border-transparent text-gray-500 hover:text-gray-700';
+            document.getElementById('admin-tab-iq').className = tab === 'iq' ? 'px-4 py-2 text-xs font-bold border-b-2 border-blue-600 text-blue-600' : 'px-4 py-2 text-xs font-bold border-b-2 border-transparent text-gray-500 hover:text-gray-700';
+
+            if (tab === 'iq') updateAdminTopicDropdown();
+        }
+
+        // LOAD NOTES FOR GENERAL KNOWLEDGE
+        async function loadNotes() {
+            try {
+                const res = await fetch('data/notes.json?t=' + Date.now());
+                globalNotes = await res.json();
+                renderNotes();
+            } catch (err) { console.error(err); }
+        }
+
+        function renderNotes() {
+            const container = document.getElementById('notesContainer');
+            container.innerHTML = '';
+            globalNotes.forEach(note => {
+                const card = document.createElement('div');
+                card.className = 'bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <span class="text-xs font-bold text-blue-600">${note.code}</span>
+                        <h2 class="font-bold text-base text-gray-900 dark:text-white my-1">${note.title}</h2>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
+                    </div>
+                    <button onclick="renderArticleView('${note.id}')" class="w-full bg-blue-600 text-white font-semibold py-2 rounded-xl text-xs">View Note</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderArticleView(id) {
+            const note = globalNotes.find(n => n.id === id);
+            if (!note) return;
+            document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
+            document.getElementById('articleView').classList.remove('hidden');
+            document.getElementById('articleCode').textContent = note.code;
+            document.getElementById('articleTitle').textContent = note.title;
+            document.getElementById('articleDesc').textContent = note.desc;
+            document.getElementById('articleContent').innerHTML = note.content;
+        }
+
+        function filterNotes() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('#notesContainer > div').forEach(c => {
+                c.style.display = c.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+            });
+        }
+
+        // THEME TOGGLE
+        function initTheme() {
+            const isDark = localStorage.getItem('theme') === 'dark';
+            document.documentElement.classList.toggle('dark', isDark);
+            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-gray-600';
         }
 
         function toggleTheme() {
@@ -343,427 +680,14 @@
             document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-gray-600';
         }
 
-        // Initialize admin credentials
-        document.getElementById('ghRepo').value = localStorage.getItem('gh_repo') || '';
-        document.getElementById('ghToken').value = localStorage.getItem('gh_token') || '';
-
-        // TABLE GENERATOR ENGINE
-        function toggleTableBuilder() {
-            const container = document.getElementById('tableBuilderContainer');
-            container.classList.toggle('hidden');
-            if (!container.classList.contains('hidden')) {
-                buildTableGrid();
-            }
-        }
-
-        function buildTableGrid() {
-            const rows = parseInt(document.getElementById('tblRows').value) || 1;
-            const cols = parseInt(document.getElementById('tblCols').value) || 1;
-            const table = document.getElementById('tblInteractiveGrid');
-            table.innerHTML = '';
-
-            // Header row inputs
-            const thead = document.createElement('thead');
-            const headTr = document.createElement('tr');
-            for (let c = 0; c < cols; c++) {
-                const th = document.createElement('th');
-                th.className = 'p-1';
-                th.innerHTML = `<input type="text" placeholder="Header ${c + 1} (optional)" class="tbl-header-input w-full p-1 border rounded text-xs font-bold bg-gray-100 dark:bg-gray-800 dark:border-gray-700">`;
-                headTr.appendChild(th);
-            }
-            thead.appendChild(headTr);
-            table.appendChild(thead);
-
-            // Body cell inputs
-            const tbody = document.createElement('tbody');
-            for (let r = 0; r < rows; r++) {
-                const tr = document.createElement('tr');
-                for (let c = 0; c < cols; c++) {
-                    const td = document.createElement('td');
-                    td.className = 'p-1';
-                    td.innerHTML = `<input type="text" placeholder="Cell ${r + 1},${c + 1}" class="tbl-cell-input w-full p-1 border rounded text-xs dark:bg-gray-800 dark:border-gray-700" data-row="${r}" data-col="${c}">`;
-                    tr.appendChild(td);
-                }
-                tbody.appendChild(tr);
-            }
-            table.appendChild(tbody);
-        }
-
-        function insertTableToContent() {
-            const rows = parseInt(document.getElementById('tblRows').value) || 1;
-            const cols = parseInt(document.getElementById('tblCols').value) || 1;
-            const borderStyle = document.getElementById('tblBorder').value;
-
-            const headerInputs = document.querySelectorAll('.tbl-header-input');
-            const cellInputs = document.querySelectorAll('.tbl-cell-input');
-
-            const isBordered = borderStyle === 'bordered';
-            const tableClass = isBordered 
-                ? 'w-full text-sm text-left border-collapse border border-gray-300 dark:border-gray-700 my-4' 
-                : 'w-full text-sm text-left border-collapse my-4';
-            const cellBorder = isBordered ? 'border border-gray-300 dark:border-gray-700' : 'border-b border-gray-200 dark:border-gray-800';
-
-            // Check if any headers have text entered
-            let hasHeaders = false;
-            for (let c = 0; c < cols; c++) {
-                if (headerInputs[c]?.value.trim() !== '') {
-                    hasHeaders = true;
-                    break;
-                }
-            }
-
-            let tableHTML = `\n<div class="overflow-x-auto my-4">\n  <table class="${tableClass}">\n`;
-
-            // If user typed at least one heading, render <thead> section
-            if (hasHeaders) {
-                tableHTML += `    <thead class="bg-gray-100 dark:bg-gray-800 font-bold">\n      <tr>\n`;
-                for (let c = 0; c < cols; c++) {
-                    const val = headerInputs[c]?.value.trim() || '';
-                    tableHTML += `        <th class="p-2.5 ${cellBorder}">${val}</th>\n`;
-                }
-                tableHTML += `      </tr>\n    </thead>\n`;
-            }
-
-            tableHTML += `    <tbody>\n`;
-
-            for (let r = 0; r < rows; r++) {
-                tableHTML += `      <tr>\n`;
-                for (let c = 0; c < cols; c++) {
-                    const cell = Array.from(cellInputs).find(i => parseInt(i.dataset.row) === r && parseInt(i.dataset.col) === c);
-                    const val = cell?.value || '';
-                    tableHTML += `        <td class="p-2.5 ${cellBorder}">${val}</td>\n`;
-                }
-                tableHTML += `      </tr>\n`;
-            }
-
-            tableHTML += `    </tbody>\n  </table>\n</div>\n`;
-
-            const contentTextarea = document.getElementById('formContent');
-            contentTextarea.value += tableHTML;
-            alert("Table successfully inserted into the note content area!");
-        }
-
-        // Fetch notes from data/notes.json
-        async function loadNotes() {
-            try {
-                const res = await fetch('data/notes.json?t=' + Date.now());
-                globalNotes = await res.json();
-                
-                populateAdminDropdown();
-
-                const urlParams = new URLSearchParams(window.location.search);
-                const noteId = urlParams.get('noteId');
-
-                if (noteId) {
-                    renderArticleView(noteId);
-                } else {
-                    renderNotes();
-                }
-            } catch (err) {
-                console.error("Could not fetch data/notes.json", err);
-            }
-        }
-
-        function populateAdminDropdown() {
-            const select = document.getElementById('selectNoteToEdit');
-            select.innerHTML = '<option value="">➕ Create New Blog Post</option>';
-            globalNotes.forEach(n => {
-                const opt = document.createElement('option');
-                opt.value = n.id;
-                opt.textContent = `✏️ ${n.code}: ${n.title}`;
-                select.appendChild(opt);
-            });
-        }
-
-        // Render Main Grid with Secret Edit Button Included
-        function renderNotes() {
-            document.getElementById('catalogView').classList.remove('hidden');
-            document.getElementById('articleView').classList.add('hidden');
-
-            const container = document.getElementById('notesContainer');
-            container.innerHTML = '';
-
-            globalNotes.forEach(note => {
-                const card = document.createElement('div');
-                card.className = 'note-card bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
-                card.innerHTML = `
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-2">
-                                <div class="p-2 bg-blue-50 dark:bg-blue-900/40 text-blue-600 rounded-lg">
-                                    <i class="${note.icon} text-lg"></i>
-                                </div>
-                                <span class="text-xs font-bold uppercase tracking-wider text-blue-600">${note.code}</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <!-- SECRET EDIT BUTTON -->
-                                <button onclick="editNoteDirectly('${note.id}')" 
-                                        class="secret-edit-btn ${editModeActive ? '' : 'hidden'} text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1 px-2.5 rounded-lg transition shadow-sm flex items-center gap-1">
-                                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                                </button>
-                                ${note.pdf ? '<span class="text-[11px] text-gray-400 font-medium"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i>PDF</span>' : '<span class="text-[11px] text-gray-400 italic">Article</span>'}
-                            </div>
-                        </div>
-                        <h2 class="font-bold text-base text-gray-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
-                    </div>
-                    <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
-                        <a href="index.html?noteId=${note.id}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Note
-                        </a>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // Render Dedicated Article Page
-        function renderArticleView(id) {
-            const note = globalNotes.find(n => n.id === id);
-            if (!note) return;
-
-            document.getElementById('catalogView').classList.add('hidden');
-            document.getElementById('articleView').classList.remove('hidden');
-
-            document.title = `${note.title} - Study Assist`;
-            document.getElementById('articleCode').textContent = note.code;
-            document.getElementById('articleIcon').innerHTML = `<i class="${note.icon}"></i>`;
-            document.getElementById('articleTitle').textContent = note.title;
-            document.getElementById('articleDesc').textContent = note.desc;
-            document.getElementById('articleContent').innerHTML = note.content;
-            document.getElementById('feedbackNoteId').value = note.id;
-
-            // Wire up top article secret edit button
-            const artEditBtn = document.getElementById('articleEditBtn');
-            artEditBtn.onclick = () => editNoteDirectly(note.id);
-
-            const pdfBanner = document.getElementById('pdfBanner');
-            const pdfBtn = document.getElementById('pdfDownloadBtn');
-
-            if (note.pdf) {
-                pdfBanner.classList.remove('hidden');
-                pdfBtn.href = note.pdf;
-            } else {
-                pdfBanner.classList.add('hidden');
-            }
-        }
-
-        // Directly Launch Modal & Populate Content for Editing
-        function editNoteDirectly(id) {
-            const note = globalNotes.find(n => n.id === id);
-            if (!note) return;
-
-            openModal('adminModal');
-
-            document.getElementById('selectNoteToEdit').value = note.id;
-            populateFormForEdit();
-        }
-
-        function populateFormForEdit() {
-            const id = document.getElementById('selectNoteToEdit').value;
-            const note = globalNotes.find(n => n.id === id);
-
-            if (note) {
-                document.getElementById('editNoteId').value = note.id;
-                document.getElementById('editNoteId').dataset.pdfPath = note.pdf || '';
-                document.getElementById('formCode').value = note.code;
-                document.getElementById('formIcon').value = note.icon;
-                document.getElementById('formTitle').value = note.title;
-                document.getElementById('formDesc').value = note.desc;
-                document.getElementById('formContent').value = note.content;
-            } else {
-                document.getElementById('editNoteId').value = '';
-                document.getElementById('editNoteId').dataset.pdfPath = '';
-                document.getElementById('githubAdminForm').reset();
-                document.getElementById('ghRepo').value = localStorage.getItem('gh_repo') || '';
-                document.getElementById('ghToken').value = localStorage.getItem('gh_token') || '';
-            }
-        }
-
-        function showCatalog() {
-            window.location.href = 'index.html';
-        }
-
-        function filterNotes() {
-            const q = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.note-card').forEach(c => {
-                c.style.display = c.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
-            });
-        }
-
-        // FEEDBACK SUBMISSION ENGINE
-        async function submitFeedback(e) {
-            e.preventDefault();
-            const btn = document.getElementById('fbSubmitBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
-
-            const repo = localStorage.getItem('gh_repo');
-            const token = localStorage.getItem('gh_token');
-
-            if (!repo || !token) {
-                alert("Feedback service currently requires GitHub configuration. Please open Admin Panel (Ctrl+Shift+A) to configure repository settings.");
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Feedback';
-                return;
-            }
-
-            try {
-                let existingFeedback = [];
-                let sha = null;
-                try {
-                    const res = await fetch(`https://api.github.com/repos/${repo}/contents/data/feedback.json`, {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-                    if (res.ok) {
-                        const fileData = await res.json();
-                        sha = fileData.sha;
-                        existingFeedback = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
-                    }
-                } catch (e) {
-                    console.warn("data/feedback.json file not initialized yet.");
-                }
-
-                const newFeedback = {
-                    id: Date.now().toString(),
-                    noteId: document.getElementById('feedbackNoteId').value,
-                    name: document.getElementById('fbName').value.trim() || 'Anonymous',
-                    rating: document.getElementById('fbRating').value,
-                    message: document.getElementById('fbMessage').value.trim(),
-                    timestamp: new Date().toISOString()
-                };
-
-                existingFeedback.push(newFeedback);
-
-                const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(existingFeedback, null, 2))));
-                await uploadToGitHub(repo, token, 'data/feedback.json', jsonContent, `New feedback for Note #${newFeedback.noteId}`, sha);
-
-                alert("Thank you! Your feedback has been recorded.");
-                document.getElementById('feedbackForm').reset();
-            } catch (err) {
-                alert("Failed to submit feedback: " + err.message);
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Feedback';
-            }
-        }
-
-        // GitHub REST API Upload Helper
-        async function uploadToGitHub(repo, token, path, contentBase64, message, sha = null) {
-            const url = `https://api.github.com/repos/${repo}/contents/${path}`;
-            const body = { message, content: contentBase64 };
-            if (sha) body.sha = sha;
-
-            const res = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            });
-            if (!res.ok) throw new Error(await res.text());
-            return res.json();
-        }
-
-        // GitHub Admin Save Handler
-        async function handleGitHubSave(e) {
-            e.preventDefault();
-            const btn = document.getElementById('saveBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading to GitHub...';
-
-            const repo = document.getElementById('ghRepo').value.trim();
-            const token = document.getElementById('ghToken').value.trim();
-            
-            localStorage.setItem('gh_repo', repo);
-            localStorage.setItem('gh_token', token);
-
-            const fileInput = document.getElementById('formPdfFile');
-            let pdfPath = document.getElementById('editNoteId').dataset.pdfPath || '';
-
-            try {
-                if (fileInput.files && fileInput.files[0]) {
-                    const file = fileInput.files[0];
-                    const fileName = `pdfs/${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
-                    const base64Content = await fileToBase64(file);
-                    
-                    await uploadToGitHub(repo, token, fileName, base64Content, `Upload PDF: ${file.name}`);
-                    pdfPath = fileName;
-                }
-
-                const id = document.getElementById('editNoteId').value || Date.now().toString();
-                const noteObj = {
-                    id,
-                    code: document.getElementById('formCode').value,
-                    icon: document.getElementById('formIcon').value,
-                    title: document.getElementById('formTitle').value,
-                    desc: document.getElementById('formDesc').value,
-                    content: document.getElementById('formContent').value,
-                    pdf: pdfPath
-                };
-
-                const index = globalNotes.findIndex(n => n.id === id);
-                if (index > -1) globalNotes[index] = noteObj;
-                else globalNotes.push(noteObj);
-
-                const jsonSha = await getFileSHA(repo, token, 'data/notes.json');
-                const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(globalNotes, null, 2))));
-
-                await uploadToGitHub(repo, token, 'data/notes.json', jsonContent, `Update note: ${noteObj.title}`, jsonSha);
-
-                alert("Successfully saved to GitHub!");
-                closeModal('adminModal');
-                loadNotes();
-            } catch (err) {
-                alert("GitHub API Error: " + err.message);
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to GitHub';
-            }
-        }
-
-        function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        async function getFileSHA(repo, token, path) {
-            try {
-                const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    return data.sha;
-                }
-            } catch (e) {}
-            return null;
-        }
-
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // SECRET SHORTCUT LISTENERS
+        // Keyboard Shortcut: Ctrl + Shift + A to open Admin Panel
         document.addEventListener('keydown', (e) => {
-            // Shortcut 1: Ctrl + Shift + A -> Open Full Admin Modal
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
                 e.preventDefault();
                 openModal('adminModal');
-            }
-            
-            // Shortcut 2: Ctrl + Shift + E -> Toggle Hidden Inline Edit Buttons
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
-                e.preventDefault();
-                editModeActive = !editModeActive;
-                
-                document.querySelectorAll('.secret-edit-btn').forEach(btn => {
-                    btn.classList.toggle('hidden', !editModeActive);
-                });
             }
         });
 
