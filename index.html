@@ -55,8 +55,8 @@
                 </div>
             </div>
 
-            <!-- Dynamic Notes Grid -->
-            <div id="notesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+            <!-- Dynamic Grouped Notes Container -->
+            <div id="notesContainer" class="space-y-8"></div>
         </section>
     </main>
 
@@ -80,7 +80,10 @@
             <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
                 <div class="flex items-center gap-3 mb-3">
                     <div id="articleIcon" class="p-3 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-xl text-2xl"></div>
-                    <h1 id="articleTitle" class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white select-text"></h1>
+                    <div>
+                        <span id="articleTopic" class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide block mb-1"></span>
+                        <h1 id="articleTitle" class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white select-text"></h1>
+                    </div>
                 </div>
                 <p id="articleDesc" class="text-sm text-gray-500 dark:text-gray-400 italic select-text"></p>
             </div>
@@ -177,6 +180,11 @@
                     <select id="selectNoteToEdit" onchange="populateFormForEdit()" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-semibold text-blue-600 dark:text-blue-400">
                         <option value="">➕ Create New Blog Post</option>
                     </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Related Topic / Category</label>
+                    <input type="text" id="formTopic" required placeholder="e.g. General Knowledge, IQ & Reasoning, History" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -403,7 +411,6 @@
                 : 'w-full text-sm text-left border-collapse my-4';
             const cellBorder = isBordered ? 'border border-gray-300 dark:border-gray-700' : 'border-b border-gray-200 dark:border-gray-800';
 
-            // Check if any headers have text entered
             let hasHeaders = false;
             for (let c = 0; c < cols; c++) {
                 if (headerInputs[c]?.value.trim() !== '') {
@@ -414,7 +421,6 @@
 
             let tableHTML = `\n<div class="overflow-x-auto my-4">\n  <table class="${tableClass}">\n`;
 
-            // If user typed at least one heading, render <thead> section
             if (hasHeaders) {
                 tableHTML += `    <thead class="bg-gray-100 dark:bg-gray-800 font-bold">\n      <tr>\n`;
                 for (let c = 0; c < cols; c++) {
@@ -470,12 +476,12 @@
             globalNotes.forEach(n => {
                 const opt = document.createElement('option');
                 opt.value = n.id;
-                opt.textContent = `✏️ ${n.code}: ${n.title}`;
+                opt.textContent = `✏️ [${n.topic || 'General'}] ${n.code}: ${n.title}`;
                 select.appendChild(opt);
             });
         }
 
-        // Render Main Grid with Secret Edit Button Included
+        // Group notes by Topic and Render Grouped Grid
         function renderNotes() {
             document.getElementById('catalogView').classList.remove('hidden');
             document.getElementById('articleView').classList.add('hidden');
@@ -483,37 +489,64 @@
             const container = document.getElementById('notesContainer');
             container.innerHTML = '';
 
+            // Group notes by topic
+            const grouped = {};
             globalNotes.forEach(note => {
-                const card = document.createElement('div');
-                card.className = 'note-card bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
-                card.innerHTML = `
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-2">
-                                <div class="p-2 bg-blue-50 dark:bg-blue-900/40 text-blue-600 rounded-lg">
-                                    <i class="${note.icon} text-lg"></i>
-                                </div>
-                                <span class="text-xs font-bold uppercase tracking-wider text-blue-600">${note.code}</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <!-- SECRET EDIT BUTTON -->
-                                <button onclick="editNoteDirectly('${note.id}')" 
-                                        class="secret-edit-btn ${editModeActive ? '' : 'hidden'} text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1 px-2.5 rounded-lg transition shadow-sm flex items-center gap-1">
-                                    <i class="fa-solid fa-pen-to-square"></i> Edit
-                                </button>
-                                ${note.pdf ? '<span class="text-[11px] text-gray-400 font-medium"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i>PDF</span>' : '<span class="text-[11px] text-gray-400 italic">Article</span>'}
-                            </div>
-                        </div>
-                        <h2 class="font-bold text-base text-gray-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
+                const topic = note.topic?.trim() || 'General Topics';
+                if (!grouped[topic]) grouped[topic] = [];
+                grouped[topic].push(note);
+            });
+
+            // Render each topic group
+            Object.keys(grouped).forEach(topicName => {
+                const topicSection = document.createElement('div');
+                topicSection.className = 'topic-group space-y-4';
+
+                // Topic Header
+                topicSection.innerHTML = `
+                    <div class="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 pb-2">
+                        <i class="fa-solid fa-folder-open text-blue-600 dark:text-blue-400 text-lg"></i>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">${topicName}</h2>
+                        <span class="text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 font-bold px-2 py-0.5 rounded-full">${grouped[topicName].length}</span>
                     </div>
-                    <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
-                        <a href="index.html?noteId=${note.id}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Note
-                        </a>
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 topic-grid"></div>
                 `;
-                container.appendChild(card);
+
+                const grid = topicSection.querySelector('.topic-grid');
+
+                grouped[topicName].forEach(note => {
+                    const card = document.createElement('div');
+                    card.className = 'note-card bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="p-2 bg-blue-50 dark:bg-blue-900/40 text-blue-600 rounded-lg">
+                                        <i class="${note.icon} text-lg"></i>
+                                    </div>
+                                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">${note.code}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="editNoteDirectly('${note.id}')" 
+                                            class="secret-edit-btn ${editModeActive ? '' : 'hidden'} text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1 px-2.5 rounded-lg transition shadow-sm flex items-center gap-1">
+                                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                                    </button>
+                                    ${note.pdf ? '<span class="text-[11px] text-gray-400 font-medium"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i>PDF</span>' : '<span class="text-[11px] text-gray-400 italic">Article</span>'}
+                                </div>
+                            </div>
+                            <h2 class="font-bold text-base text-gray-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
+                        </div>
+                        <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
+                            <a href="index.html?noteId=${note.id}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> View Note
+                            </a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                container.appendChild(topicSection);
             });
         }
 
@@ -526,6 +559,7 @@
             document.getElementById('articleView').classList.remove('hidden');
 
             document.title = `${note.title} - Study Assist`;
+            document.getElementById('articleTopic').textContent = note.topic || 'General Topic';
             document.getElementById('articleCode').textContent = note.code;
             document.getElementById('articleIcon').innerHTML = `<i class="${note.icon}"></i>`;
             document.getElementById('articleTitle').textContent = note.title;
@@ -533,7 +567,6 @@
             document.getElementById('articleContent').innerHTML = note.content;
             document.getElementById('feedbackNoteId').value = note.id;
 
-            // Wire up top article secret edit button
             const artEditBtn = document.getElementById('articleEditBtn');
             artEditBtn.onclick = () => editNoteDirectly(note.id);
 
@@ -566,6 +599,7 @@
             if (note) {
                 document.getElementById('editNoteId').value = note.id;
                 document.getElementById('editNoteId').dataset.pdfPath = note.pdf || '';
+                document.getElementById('formTopic').value = note.topic || 'General Topics';
                 document.getElementById('formCode').value = note.code;
                 document.getElementById('formIcon').value = note.icon;
                 document.getElementById('formTitle').value = note.title;
@@ -586,8 +620,14 @@
 
         function filterNotes() {
             const q = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.note-card').forEach(c => {
-                c.style.display = c.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+            document.querySelectorAll('.topic-group').forEach(group => {
+                let hasVisibleCards = false;
+                group.querySelectorAll('.note-card').forEach(card => {
+                    const match = card.textContent.toLowerCase().includes(q);
+                    card.style.display = match ? 'flex' : 'none';
+                    if (match) hasVisibleCards = true;
+                });
+                group.style.display = hasVisibleCards ? 'block' : 'none';
             });
         }
 
@@ -695,6 +735,7 @@
                 const id = document.getElementById('editNoteId').value || Date.now().toString();
                 const noteObj = {
                     id,
+                    topic: document.getElementById('formTopic').value.trim(),
                     code: document.getElementById('formCode').value,
                     icon: document.getElementById('formIcon').value,
                     title: document.getElementById('formTitle').value,
@@ -750,13 +791,11 @@
 
         // SECRET SHORTCUT LISTENERS
         document.addEventListener('keydown', (e) => {
-            // Shortcut 1: Ctrl + Shift + A -> Open Full Admin Modal
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
                 e.preventDefault();
                 openModal('adminModal');
             }
             
-            // Shortcut 2: Ctrl + Shift + E -> Toggle Hidden Inline Edit Buttons
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
                 e.preventDefault();
                 editModeActive = !editModeActive;
