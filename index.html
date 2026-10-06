@@ -7,20 +7,22 @@
     
     <!-- Google AdSense Verification -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
-   <!-- hill top ads core-->
+    
+    <!-- Hill Top Ads Core -->
     <script>
-(function(et){
-var d = document,
-    s = d.createElement('script'),
-    l = d.currentScript || d.scripts[d.scripts.length - 1];
-s.settings = et || {};
-s.src = "\/\/shameful-farm.com\/b.XiVzs\/d\/GElq0MYOWMct\/Ge\/mM9EuvZHU\/lqk_PzTYcK0EOjTIA\/0\/NcjSUatSNEzsQ\/5LM\/D\/QE2pOwQH";
-s.async = true;
-s.referrerPolicy = 'no-referrer-when-downgrade';
-l.parentNode.insertBefore(s, l);
-})({})
-</script>
+    (function(et){
+    var d = document,
+        s = d.createElement('script'),
+        l = d.currentScript || d.scripts[d.scripts.length - 1];
+    s.settings = et || {};
+    s.src = "\/\/shameful-farm.com\/b.XiVzs\/d\/GElq0MYOWMct\/Ge\/mM9EuvZHU\/lqk_PzTYcK0EOjTIA\/0\/NcjSUatSNEzsQ\/5LM\/D\/QE2pOwQH";
+    s.async = true;
+    s.referrerPolicy = 'no-referrer-when-downgrade';
+    l.parentNode.insertBefore(s, l);
+    })({})
+    </script>
     <meta name="referrer" content="no-referrer-when-downgrade" />
+    
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -39,11 +41,11 @@ l.parentNode.insertBefore(s, l);
     <header class="sticky top-0 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="showCatalog()">
-                <div class="p-2 bg-blue-600 rounded-lg text-white">
+                <div class="p-2 bg-blue-600 rounded-lg text-white shrink-0">
                     <i class="fa-solid fa-graduation-cap text-xl"></i>
                 </div>
                 <div>
-                    <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">Study Assist</span>
+                    <span class="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">Study Assist</span>
                     <span class="text-[10px] block text-gray-400 -mt-1 font-semibold uppercase tracking-wider">Educational Hub</span>
                 </div>
             </div>
@@ -55,11 +57,11 @@ l.parentNode.insertBefore(s, l);
     </header>
 
     <!-- MAIN CATALOG VIEW -->
-    <main id="catalogView" class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
+    <main id="catalogView" class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6">
         <section id="notes-section">
-            <div class="mb-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+            <div class="mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
                 <div>
-                    <h1 class="text-2xl font-extrabold text-gray-900 dark:text-white">PSC & General Study Syllabus Notes</h1>
+                    <h1 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white">PSC & General Study Syllabus Notes</h1>
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Important General Knowledge and IQ available here.</p>
                 </div>
                 <div class="relative w-full md:w-80">
@@ -74,13 +76,13 @@ l.parentNode.insertBefore(s, l);
     </main>
 
     <!-- FULL ARTICLE VIEW -->
-    <main id="articleView" class="hidden flex-grow max-w-4xl w-full mx-auto px-4 py-8">
+    <main id="articleView" class="hidden flex-grow max-w-4xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-8">
         <div class="mb-4 flex items-center justify-between">
             <a href="index.html" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
                 <i class="fa-solid fa-arrow-left"></i> Back to Catalog
             </a>
             <div class="flex items-center gap-2">
-                <!-- Secret Article Edit Button (Hidden by default) -->
+                <!-- Secret Article Edit Button -->
                 <button id="articleEditBtn" onclick="" class="secret-edit-btn hidden text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1 px-3 rounded-lg transition shadow-sm flex items-center gap-1">
                     <i class="fa-solid fa-pen-to-square"></i> Edit Note
                 </button>
@@ -88,23 +90,45 @@ l.parentNode.insertBefore(s, l);
             </div>
         </div>
 
-        <article class="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
+        <!-- TARGETED AD CONTAINER WITH SKIP OPTION -->
+        <div id="skippableAdContainer" class="relative mb-6 p-4 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-center shadow-sm">
+            <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-200 dark:border-gray-700">
+                <span class="text-[10px] font-bold tracking-wider uppercase text-gray-400">Advertisement</span>
+                <button onclick="skipAd()" class="text-xs bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold py-1 px-3 rounded-lg transition flex items-center gap-1">
+                    <i class="fa-solid fa-xmark"></i> Skip Ad
+                </button>
+            </div>
+            <!-- Ad Placement Zone -->
+            <div id="adSlot" class="min-h-[90px] flex items-center justify-center overflow-hidden">
+                <ins class="adsbygoogle"
+                     style="display:block; width:100%;"
+                     data-ad-client="ca-pub-2333465940330507"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+
+        <article class="bg-white dark:bg-gray-800 rounded-2xl p-5 sm:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
             <!-- Article Header -->
             <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
-                <div class="flex items-center gap-3 mb-3">
-                    <div id="articleIcon" class="p-3 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-xl text-2xl"></div>
+                <div class="flex items-start sm:items-center gap-3 mb-3">
+                    <div id="articleIcon" class="p-3 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-xl text-2xl shrink-0"></div>
                     <div>
                         <span id="articleTopic" class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide block mb-1"></span>
-                        <h1 id="articleTitle" class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white select-text"></h1>
+                        <h1 id="articleTitle" class="text-xl sm:text-3xl font-extrabold text-gray-900 dark:text-white select-text"></h1>
                     </div>
                 </div>
-                <p id="articleDesc" class="text-sm text-gray-500 dark:text-gray-400 italic select-text"></p>
+                <p id="articleDesc" class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic select-text"></p>
             </div>
 
             <!-- Attached PDF Bar -->
-            <div id="pdfBanner" class="hidden mb-8 p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div id="pdfBanner" class="hidden mb-8 p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-file-pdf text-red-500 text-2xl"></i>
+                    <i class="fa-solid fa-file-pdf text-red-500 text-2xl shrink-0"></i>
                     <div>
                         <p class="text-xs font-bold text-gray-800 dark:text-gray-200">Reference Document Attached</p>
                         <p class="text-[11px] text-gray-500 dark:text-gray-400">Download the official PDF material for offline study.</p>
@@ -120,7 +144,7 @@ l.parentNode.insertBefore(s, l);
 
             <!-- FEEDBACK SECTION -->
             <div class="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
-                <div class="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
+                <div class="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-4 sm:p-6 border border-gray-100 dark:border-gray-700">
                     <h3 class="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-1">
                         <i class="fa-regular fa-comment-dots text-blue-600"></i> Leave Feedback
                     </h3>
@@ -139,7 +163,7 @@ l.parentNode.insertBefore(s, l);
                             </select>
                         </div>
                         <textarea id="fbMessage" rows="3" required placeholder="Write your feedback or suggestions here..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                        <button type="submit" id="fbSubmitBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                        <button type="submit" id="fbSubmitBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-xl text-xs transition flex items-center justify-center gap-2 w-full sm:w-auto">
                             <i class="fa-solid fa-paper-plane"></i> Submit Feedback
                         </button>
                     </form>
@@ -148,7 +172,7 @@ l.parentNode.insertBefore(s, l);
         </article>
     </main>
 
-    <!-- Footer with AdSense Mandatory Policy Links -->
+    <!-- Footer -->
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
         <div class="flex justify-center items-center space-x-4 mb-3">
             <a href="about.html" class="hover:underline">About Us</a>
@@ -162,9 +186,9 @@ l.parentNode.insertBefore(s, l);
 
     <!-- GITHUB ADMIN DASHBOARD MODAL -->
     <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
                     <i class="fa-brands fa-github text-blue-600"></i> GitHub Content Admin
                 </h3>
                 <button onclick="closeModal('adminModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -318,7 +342,15 @@ l.parentNode.insertBefore(s, l);
     <!-- Script Logic -->
     <script>
         let globalNotes = [];
-        let editModeActive = false; // Tracks hidden edit state
+        let editModeActive = false;
+
+        // Skip Ad functionality
+        function skipAd() {
+            const container = document.getElementById('skippableAdContainer');
+            if (container) {
+                container.style.display = 'none';
+            }
+        }
 
         // Formatting Handler Function for Text Area
         function applyFormat(tag) {
@@ -339,7 +371,6 @@ l.parentNode.insertBefore(s, l);
                 formattedText = `<${tag}>${selectedText || 'text'}</${tag}>`;
             }
 
-            // Replace selected text or insert tag at cursor
             textarea.setRangeText(formattedText, start, end, 'select');
             textarea.focus();
         }
@@ -383,7 +414,6 @@ l.parentNode.insertBefore(s, l);
             const table = document.getElementById('tblInteractiveGrid');
             table.innerHTML = '';
 
-            // Header row inputs
             const thead = document.createElement('thead');
             const headTr = document.createElement('tr');
             for (let c = 0; c < cols; c++) {
@@ -395,7 +425,6 @@ l.parentNode.insertBefore(s, l);
             thead.appendChild(headTr);
             table.appendChild(thead);
 
-            // Body cell inputs
             const tbody = document.createElement('tbody');
             for (let r = 0; r < rows; r++) {
                 const tr = document.createElement('tr');
@@ -455,7 +484,7 @@ l.parentNode.insertBefore(s, l);
                 tableHTML += `      </tr>\n`;
             }
 
-            tableHTML += `    </tbody>\n  </table>\n</div>\n`;
+            tableHTML += `    </tbody>\n  mtable>\n</div>\n`;
 
             const contentTextarea = document.getElementById('formContent');
             contentTextarea.value += tableHTML;
@@ -502,7 +531,6 @@ l.parentNode.insertBefore(s, l);
             const container = document.getElementById('notesContainer');
             container.innerHTML = '';
 
-            // Group notes by topic
             const grouped = {};
             globalNotes.forEach(note => {
                 const topic = note.topic?.trim() || 'General Topics';
@@ -510,31 +538,29 @@ l.parentNode.insertBefore(s, l);
                 grouped[topic].push(note);
             });
 
-            // Render each topic group
             Object.keys(grouped).forEach(topicName => {
                 const topicSection = document.createElement('div');
                 topicSection.className = 'topic-group space-y-4';
 
-                // Topic Header
                 topicSection.innerHTML = `
                     <div class="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 pb-2">
                         <i class="fa-solid fa-folder-open text-blue-600 dark:text-blue-400 text-lg"></i>
-                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">${topicName}</h2>
+                        <h2 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">${topicName}</h2>
                         <span class="text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 font-bold px-2 py-0.5 rounded-full">${grouped[topicName].length}</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 topic-grid"></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 topic-grid"></div>
                 `;
 
                 const grid = topicSection.querySelector('.topic-grid');
 
                 grouped[topicName].forEach(note => {
                     const card = document.createElement('div');
-                    card.className = 'note-card bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
+                    card.className = 'note-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
                     card.innerHTML = `
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <div class="flex items-center gap-2">
-                                    <div class="p-2 bg-blue-50 dark:bg-blue-900/40 text-blue-600 rounded-lg">
+                                    <div class="p-2 bg-blue-50 dark:bg-blue-900/40 text-blue-600 rounded-lg shrink-0">
                                         <i class="${note.icon} text-lg"></i>
                                     </div>
                                     <span class="text-xs font-bold uppercase tracking-wider text-blue-600">${note.code}</span>
@@ -547,11 +573,11 @@ l.parentNode.insertBefore(s, l);
                                     ${note.pdf ? '<span class="text-[11px] text-gray-400 font-medium"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i>PDF</span>' : '<span class="text-[11px] text-gray-400 italic">Article</span>'}
                                 </div>
                             </div>
-                            <h2 class="font-bold text-base text-gray-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
+                            <h2 class="font-bold text-sm sm:text-base text-gray-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
                             <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
                         </div>
                         <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
-                            <a href="index.html?noteId=${note.id}" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                            <a href="index.html?noteId=${note.id}" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i> View Note
                             </a>
                         </div>
@@ -570,6 +596,12 @@ l.parentNode.insertBefore(s, l);
 
             document.getElementById('catalogView').classList.add('hidden');
             document.getElementById('articleView').classList.remove('hidden');
+
+            // Ensure skippable ad container is visible on view load
+            const skippableAd = document.getElementById('skippableAdContainer');
+            if (skippableAd) {
+                skippableAd.style.display = 'block';
+            }
 
             document.title = `${note.title} - Study Assist`;
             document.getElementById('articleTopic').textContent = note.topic || 'General Topic';
