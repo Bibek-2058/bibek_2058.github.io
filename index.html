@@ -80,7 +80,6 @@
         <section id="notes-section">
             <div class="mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-slate-800 p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
                 
-                <!-- REORDERED CATEGORY BUTTONS (Blogs 1st, PSC Notes 2nd) -->
                 <div class="flex flex-wrap items-center gap-2">
                     <button onclick="setCategoryFilter('English Blogs')" id="btn-cat-blogs" class="px-4 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-indigo-500/20 transition flex items-center gap-1.5">
                         <i class="fa-solid fa-newspaper"></i> English Blogs
@@ -108,8 +107,11 @@
                 <i class="fa-solid fa-arrow-left"></i> Back to Catalog
             </button>
             <div class="flex items-center gap-2">
-                <button id="articleEditBtn" onclick="" class="secret-edit-btn hidden text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1.5 px-3 rounded-xl transition shadow-sm flex items-center gap-1">
+                <button id="articleEditBtn" onclick="quickEditCurrentArticle()" class="secret-edit-btn hidden text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1.5 px-3 rounded-xl transition shadow-sm flex items-center gap-1">
                     <i class="fa-solid fa-pen-to-square"></i> Quick Edit
+                </button>
+                <button id="articleDeleteBtn" onclick="deleteCurrentArticle()" class="secret-edit-btn hidden text-xs bg-red-600 hover:bg-red-700 text-white font-bold py-1.5 px-3 rounded-xl transition shadow-sm flex items-center gap-1">
+                    <i class="fa-solid fa-trash-can"></i> Delete
                 </button>
                 <span id="articleCode" class="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 rounded-lg text-xs font-extrabold uppercase"></span>
             </div>
@@ -135,6 +137,10 @@
                     <span id="articleAuthor" class="font-semibold text-slate-700 dark:text-slate-300"></span>
                     <span id="articleReadTime" class="bg-slate-100 dark:bg-slate-700 px-2.5 py-0.5 rounded-full font-bold"></span>
                 </div>
+                
+                <!-- Display Tags (If Available) -->
+                <div id="articleTagsContainer" class="hidden flex-wrap gap-1.5 mt-3"></div>
+
                 <p id="articleDesc" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 italic select-text mt-3"></p>
             </div>
 
@@ -156,12 +162,106 @@
         </article>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER SECTION WITH POLICY & CONTACT LINKS -->
     <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-6 text-center text-xs text-slate-500 dark:text-slate-400 mt-auto">
-        <p>&copy; 2026 Study Assist. All rights reserved.</p>
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 Study Assist. All rights reserved.</p>
+            <div class="flex items-center gap-4 text-xs font-medium">
+                <button onclick="openModal('aboutModal')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">About Us</button>
+                <span>•</span>
+                <button onclick="openModal('contactModal')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Contact Us</button>
+                <span>•</span>
+                <button onclick="openModal('privacyModal')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Privacy Policy</button>
+            </div>
+        </div>
     </footer>
 
-    <!-- GITHUB ADMIN DASHBOARD MODAL -->
+    <!-- ABOUT US MODAL -->
+    <div id="aboutModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 max-w-lg w-full relative shadow-2xl border border-slate-100 dark:border-slate-700 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-indigo-600"></i> About Study Assist
+                </h3>
+                <button onclick="closeModal('aboutModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Study Assist is a dedicated educational platform designed to provide high-quality study materials, Public Service Commission (PSC) syllabus notes, forestry resources, and informative blogs to empower students and civil service aspirants.
+            </p>
+        </div>
+    </div>
+
+    <!-- CONTACT US MODAL -->
+    <div id="contactModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 max-w-lg w-full relative shadow-2xl border border-slate-100 dark:border-slate-700 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-envelope text-indigo-600"></i> Contact Us
+                </h3>
+                <button onclick="closeModal('contactModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Have questions, recommendations, or content feedback? Reach out to our team:
+            </p>
+            <div class="text-xs space-y-2 font-medium text-slate-700 dark:text-slate-200">
+                <p><i class="fa-solid fa-paper-plane mr-2 text-indigo-600"></i> Email: support@studyassist.com</p>
+                <p><i class="fa-brands fa-github mr-2 text-indigo-600"></i> GitHub: github.com/studyassist</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRIVACY POLICY MODAL -->
+    <div id="privacyModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 max-w-lg w-full relative shadow-2xl border border-slate-100 dark:border-slate-700 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-indigo-600"></i> Privacy Policy
+                </h3>
+                <button onclick="closeModal('privacyModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                At Study Assist, accessible from our domain, visitor privacy is one of our top priorities. We utilize standard analytics tools and Google AdSense / Monetag advertising networks to serve relevant informational content and ads. We do not store or sell personal user identity data.
+            </p>
+        </div>
+    </div>
+
+    <!-- EDITABLE SECRET KEY CONFIGURATION MODAL (CTRL+E) -->
+    <div id="keyConfigModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 max-w-md w-full relative shadow-2xl border border-slate-100 dark:border-slate-700 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-key text-amber-500"></i> Admin Security Settings (Ctrl+E)
+                </h3>
+                <button onclick="closeModal('keyConfigModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Enter Secret Passkey</label>
+                    <input type="password" id="inputSecretPasskey" placeholder="Enter security key..." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm">
+                </div>
+
+                <div id="secretKeyManagementSection" class="hidden pt-2 border-t border-slate-200 dark:border-slate-700 space-y-3">
+                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 block"><i class="fa-solid fa-lock-open mr-1"></i> Passkey Verified - Manage Admin Key</span>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Set New Passkey</label>
+                        <input type="text" id="inputNewPasskey" placeholder="Enter new passkey..." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm">
+                    </div>
+                    <button type="button" onclick="updatePasskey()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl text-xs transition">
+                        Update Secret Security Passkey
+                    </button>
+                </div>
+
+                <div class="flex gap-2">
+                    <button type="button" onclick="verifyPasskeyAccess()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                        Authenticate &amp; Unlock Admin Tools
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GITHUB ADMIN DASHBOARD MODAL (CTRL+A) -->
     <div id="adminModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
         <div class="bg-white dark:bg-slate-800 rounded-3xl p-4 sm:p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-slate-100 dark:border-slate-700">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
@@ -229,10 +329,19 @@
                     <input type="text" id="formDesc" required placeholder="Brief summary preview text" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm">
                 </div>
 
+                <!-- TAGS / KEYWORDS (OPTIONAL) -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">
+                        Tags / Keywords <span class="text-[10px] font-normal text-slate-400">(Optional, Separated by commas)</span>
+                    </label>
+                    <input type="text" id="formTags" placeholder="e.g. Lok Sewa, NFL, Technology, Forestry" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm">
+                </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Cover Image URL (Optional for Blogs)</label>
-                        <input type="text" id="formCover" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs">
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Cover Image URL or Direct File Upload</label>
+                        <input type="text" id="formCover" placeholder="https://images.unsplash.com/..." class="w-full p-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs mb-1">
+                        <input type="file" id="formCoverFile" accept="image/*" onchange="uploadCoverImageDirect(this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Estimated Read Time / Author</label>
@@ -240,56 +349,103 @@
                     </div>
                 </div>
 
-                <!-- TABLE GENERATOR ENGINE -->
+                <!-- CONTENT HELPER TOOLS -->
                 <div class="border border-indigo-200 dark:border-indigo-800 bg-indigo-50/40 dark:bg-indigo-950/20 p-4 rounded-2xl space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="text-xs font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-2">
-                            <i class="fa-solid fa-table"></i> Table Builder Tool
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Content Helper Tools (Table / Image / YouTube)
                         </span>
                         <button type="button" onclick="toggleTableBuilder()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-lg transition">
-                            Toggle Builder
+                            Toggle Tools
                         </button>
                     </div>
 
-                    <div id="tableBuilderContainer" class="hidden space-y-3 pt-2">
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                            <div>
-                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Rows</label>
-                                <input type="number" id="tblRows" value="2" min="1" max="50" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+                    <div id="tableBuilderContainer" class="hidden space-y-4 pt-2">
+                        <!-- Table Builder Tool -->
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-indigo-100 dark:border-indigo-900 space-y-3">
+                            <span class="text-xs font-bold text-indigo-700 dark:text-indigo-300 block"><i class="fa-solid fa-table mr-1"></i> Table Builder</span>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Rows</label>
+                                    <input type="number" id="tblRows" value="2" min="1" max="50" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Columns</label>
+                                    <input type="number" id="tblCols" value="2" min="1" max="20" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Header Row</label>
+                                    <select id="tblHeaderToggle" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+                                        <option value="yes">With Header</option>
+                                        <option value="no">Without Header</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Borders</label>
+                                    <select id="tblBorder" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+                                        <option value="bordered">Bordered Grid</option>
+                                        <option value="borderless">Simple Divider</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Columns</label>
-                                <input type="number" id="tblCols" value="2" min="1" max="20" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+
+                            <div class="overflow-x-auto max-h-60 border border-slate-200 dark:border-slate-700 rounded-xl p-2 bg-white dark:bg-slate-900">
+                                <table id="tblInteractiveGrid" class="w-full text-xs border-collapse"></table>
                             </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Header Row</label>
-                                <select id="tblHeaderToggle" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
-                                    <option value="yes">With Header</option>
-                                    <option value="no">Without Header</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Borders</label>
-                                <select id="tblBorder" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
-                                    <option value="bordered">Bordered Grid</option>
-                                    <option value="borderless">Simple Divider</option>
-                                </select>
-                            </div>
+
+                            <button type="button" onclick="insertTableToContent()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Insert Table into Article Content
+                            </button>
                         </div>
 
-                        <div class="overflow-x-auto max-h-60 border border-slate-200 dark:border-slate-700 rounded-xl p-2 bg-white dark:bg-slate-900">
-                            <table id="tblInteractiveGrid" class="w-full text-xs border-collapse"></table>
+                        <!-- Direct Image In-Article Inserter Tool -->
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-indigo-100 dark:border-indigo-900 space-y-3">
+                            <span class="text-xs font-bold text-indigo-700 dark:text-indigo-300 block"><i class="fa-solid fa-image mr-1"></i> Insert In-Article Image (Direct Upload)</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Select Image File</label>
+                                    <input type="file" id="articleImageFile" accept="image/*" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-indigo-100 file:text-indigo-700">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Caption / Image Description</label>
+                                    <input type="text" id="articleImageCaption" placeholder="e.g. Photo at press conference" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 text-xs dark:bg-slate-800">
+                                </div>
+                            </div>
+                            <button type="button" onclick="uploadAndInsertArticleImage()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-upload"></i> Upload &amp; Insert Image Into Article
+                            </button>
                         </div>
 
-                        <button type="button" onclick="insertTableToContent()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-plus"></i> Insert Table into Article Content
-                        </button>
+                        <!-- YouTube Video Embedder Tool -->
+                        <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-indigo-100 dark:border-indigo-900 space-y-3">
+                            <span class="text-xs font-bold text-indigo-700 dark:text-indigo-300 block"><i class="fa-brands fa-youtube text-red-500 mr-1"></i> YouTube Video Embedder</span>
+                            <div class="flex gap-2">
+                                <input type="text" id="ytVideoUrl" placeholder="Paste YouTube link (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ)" class="flex-grow p-2 rounded-lg border border-slate-300 dark:border-slate-600 text-xs dark:bg-slate-800">
+                                <button type="button" onclick="insertYouTubeVideo()" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1.5 shrink-0">
+                                    <i class="fa-solid fa-plus"></i> Add Video
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- CONTENT EDITOR -->
+                <!-- CONTENT EDITOR WITH RICH TEXT FORMATTING TOOLBAR -->
                 <div>
-                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Content Body (HTML Supported)</label>
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase">Content Body (HTML Supported)</label>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-700 p-1 rounded-lg">
+                            <select onchange="applyTextFormat('size', this.value); this.value='';" class="text-xs p-1 rounded bg-white dark:bg-slate-800 border dark:border-slate-600 font-semibold">
+                                <option value="">Font Size</option>
+                                <option value="small">Small</option>
+                                <option value="normal">Normal</option>
+                                <option value="h2">Heading 2</option>
+                                <option value="h3">Heading 3</option>
+                            </select>
+                            <button type="button" onclick="applyTextFormat('bold')" title="Bold" class="px-2 py-1 bg-white dark:bg-slate-800 rounded font-extrabold text-xs hover:bg-indigo-50 border dark:border-slate-600">B</button>
+                            <button type="button" onclick="applyTextFormat('italic')" title="Italic" class="px-2 py-1 bg-white dark:bg-slate-800 rounded italic text-xs hover:bg-indigo-50 border dark:border-slate-600">I</button>
+                            <button type="button" onclick="applyTextFormat('underline')" title="Underline" class="px-2 py-1 bg-white dark:bg-slate-800 rounded underline text-xs hover:bg-indigo-50 border dark:border-slate-600">U</button>
+                        </div>
+                    </div>
                     <textarea id="formContent" rows="8" required placeholder="Write your content here..." class="w-full p-2.5 rounded-2xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm font-mono focus:outline-none"></textarea>
                 </div>
 
@@ -299,6 +455,9 @@
                 </div>
 
                 <div class="flex gap-3 pt-2">
+                    <button type="button" id="deleteModalBtn" onclick="deleteEntryFromModal()" class="hidden bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-5 rounded-2xl text-sm transition shadow-md">
+                        <i class="fa-solid fa-trash-can mr-1"></i> Delete Entry
+                    </button>
                     <button type="submit" id="saveBtn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-2xl text-sm transition shadow-md shadow-indigo-500/20">
                         <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Selected JSON File
                     </button>
@@ -312,8 +471,13 @@
         let pscNotes = [];
         let englishBlogs = [];
         let globalNotes = [];
-        let currentCategory = 'English Blogs'; // DEFAULT TAB: English Blogs First
-        let editModeActive = false;
+        let currentCategory = 'English Blogs';
+        let activeNoteId = null;
+
+        // Default Security Passkey is "admin123" unless modified by user
+        function getStoredPasskey() {
+            return localStorage.getItem('admin_secret_key') || 'admin123';
+        }
 
         function updateNepalClock() {
             const now = new Date();
@@ -342,6 +506,114 @@
             const container = document.getElementById('tableBuilderContainer');
             container.classList.toggle('hidden');
             if (!container.classList.contains('hidden')) buildTableGrid();
+        }
+
+        function applyTextFormat(type, value = '') {
+            const textarea = document.getElementById('formContent');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end) || 'Sample text';
+            let formattedText = '';
+
+            if (type === 'bold') formattedText = `<strong>${selectedText}</strong>`;
+            else if (type === 'italic') formattedText = `<em>${selectedText}</em>`;
+            else if (type === 'underline') formattedText = `<u>${selectedText}</u>`;
+            else if (type === 'size') {
+                if (value === 'small') formattedText = `<small>${selectedText}</small>`;
+                else if (value === 'h2') formattedText = `\n<h2>${selectedText}</h2>\n`;
+                else if (value === 'h3') formattedText = `\n<h3>${selectedText}</h3>\n`;
+                else if (value === 'normal') formattedText = `<p>${selectedText}</p>`;
+            }
+
+            if (formattedText) {
+                textarea.setRangeText(formattedText, start, end, 'end');
+                textarea.focus();
+            }
+        }
+
+        function insertYouTubeVideo() {
+            const input = document.getElementById('ytVideoUrl');
+            const url = input.value.trim();
+            if (!url) return alert("Please enter a valid YouTube URL!");
+
+            let videoId = '';
+            const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+            if (match && match[1]) {
+                videoId = match[1];
+            } else {
+                return alert("Could not extract YouTube Video ID.");
+            }
+
+            const embedHTML = `\n<div class="video-container my-4">\n  <iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n</div>\n`;
+
+            const textarea = document.getElementById('formContent');
+            const start = textarea.selectionStart;
+            textarea.setRangeText(embedHTML, start, textarea.selectionEnd, 'end');
+            input.value = '';
+            alert("YouTube video embedded into content!");
+        }
+
+        async function uploadCoverImageDirect(fileInput) {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const repo = document.getElementById('ghRepo').value.trim();
+            const token = document.getElementById('ghToken').value.trim();
+            if (!repo || !token) return alert("Please fill in your GitHub Repo and Access Token first!");
+
+            const fileName = `cover_${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+            const path = `assets/images/${fileName}`;
+
+            try {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const base64Content = e.target.result.split(',')[1];
+                    await uploadToGitHub(repo, token, path, base64Content, `Upload cover image ${fileName}`);
+                    document.getElementById('formCover').value = `./${path}`;
+                    alert("Cover image uploaded and path linked!");
+                };
+                reader.readAsDataURL(file);
+            } catch (err) {
+                alert("Image Upload Error: " + err.message);
+            }
+        }
+
+        async function uploadAndInsertArticleImage() {
+            const fileInput = document.getElementById('articleImageFile');
+            const captionInput = document.getElementById('articleImageCaption');
+            const file = fileInput.files[0];
+
+            if (!file) return alert("Please select an image file first.");
+
+            const repo = document.getElementById('ghRepo').value.trim();
+            const token = document.getElementById('ghToken').value.trim();
+            if (!repo || !token) return alert("Please fill in your GitHub Repo and Access Token first!");
+
+            const fileName = `img_${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+            const path = `assets/images/${fileName}`;
+            const caption = captionInput.value.trim();
+
+            try {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const base64Content = e.target.result.split(',')[1];
+                    await uploadToGitHub(repo, token, path, base64Content, `Upload article image ${fileName}`);
+                    const imgUrl = `./${path}`;
+
+                    const imgHTML = `\n<figure class="blog-image my-4 text-center">\n  <img src="${imgUrl}" alt="${caption || 'Article image'}" class="w-full max-w-2xl mx-auto rounded-2xl shadow-md my-2" />\n  ${caption ? `<figcaption class="text-xs text-slate-500 dark:text-slate-400 mt-1">${caption}</figcaption>` : ''}\n</figure>\n`;
+
+                    const textarea = document.getElementById('formContent');
+                    const start = textarea.selectionStart;
+                    textarea.setRangeText(imgHTML, start, textarea.selectionEnd, 'end');
+
+                    fileInput.value = '';
+                    captionInput.value = '';
+                    alert("Image uploaded and inserted into content!");
+                };
+                reader.readAsDataURL(file);
+            } catch (err) {
+                alert("Image Upload Error: " + err.message);
+            }
         }
 
         function buildTableGrid() {
@@ -419,10 +691,9 @@
             const textarea = document.getElementById('formContent');
             const start = textarea.selectionStart;
             textarea.setRangeText(tableHTML, start, textarea.selectionEnd, 'end');
-            alert("Table inserted into content area!");
+            alert("Table inserted into content!");
         }
 
-        // LOAD FROM BOTH data/blogs.json AND data/pscnotes.json
         async function loadNotes() {
             try {
                 const ts = Date.now();
@@ -463,10 +734,8 @@
 
         function setCategoryFilter(category) {
             currentCategory = category;
-            
             document.getElementById('btn-cat-blogs').className = category === 'English Blogs' ? 'px-4 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-indigo-500/20 transition flex items-center gap-1.5' : 'px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition flex items-center gap-1.5';
             document.getElementById('btn-cat-psc').className = category === 'PSC Notes' ? 'px-4 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-indigo-500/20 transition flex items-center gap-1.5' : 'px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition flex items-center gap-1.5';
-
             renderNotes();
         }
 
@@ -485,7 +754,6 @@
             }
 
             if (currentCategory === 'English Blogs') {
-                // MAGAZINE EDITORIAL BLOG LAYOUT
                 const blogGrid = document.createElement('div');
                 blogGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
 
@@ -525,7 +793,6 @@
                 });
                 container.appendChild(blogGrid);
             } else {
-                // CLASSIC HIGH-DENSITY PSC NOTES GRID
                 const grouped = {};
                 filtered.forEach(note => {
                     const topic = note.topic?.trim() || 'General Topics';
@@ -580,6 +847,7 @@
             const note = globalNotes.find(n => n.id === id);
             if (!note) return;
 
+            activeNoteId = note.id;
             document.getElementById('catalogView').classList.add('hidden');
             document.getElementById('articleView').classList.remove('hidden');
 
@@ -590,6 +858,18 @@
             document.getElementById('articleTitle').textContent = note.title;
             document.getElementById('articleDesc').textContent = note.desc;
             document.getElementById('articleContent').innerHTML = note.content;
+
+            // Render Tags
+            const tagsContainer = document.getElementById('articleTagsContainer');
+            if (note.tags && note.tags.length > 0) {
+                const tagsArray = Array.isArray(note.tags) ? note.tags : note.tags.split(',').map(t => t.trim());
+                tagsContainer.innerHTML = tagsArray.filter(t => t).map(t => `<span class="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-md"><i class="fa-solid fa-tag text-[9px] mr-1"></i>${t}</span>`).join('');
+                tagsContainer.classList.remove('hidden');
+                tagsContainer.classList.add('flex');
+            } else {
+                tagsContainer.classList.add('hidden');
+                tagsContainer.classList.remove('flex');
+            }
 
             const coverContainer = document.getElementById('articleCoverContainer');
             if (note.cover) {
@@ -612,9 +892,18 @@
 
         function showCatalog() { window.location.href = 'index.html'; }
 
+        function quickEditCurrentArticle() {
+            if (!activeNoteId) return;
+            document.getElementById('selectNoteToEdit').value = activeNoteId;
+            populateFormForEdit();
+            openModal('adminModal');
+        }
+
         function populateFormForEdit() {
             const id = document.getElementById('selectNoteToEdit').value;
             const note = globalNotes.find(n => n.id === id);
+            const delBtn = document.getElementById('deleteModalBtn');
+
             if (note) {
                 document.getElementById('editNoteId').value = note.id;
                 document.getElementById('formCategory').value = note.category;
@@ -626,9 +915,12 @@
                 document.getElementById('formContent').value = note.content;
                 document.getElementById('formCover').value = note.cover || '';
                 document.getElementById('formReadTime').value = note.readTime || '';
+                document.getElementById('formTags').value = Array.isArray(note.tags) ? note.tags.join(', ') : (note.tags || '');
+                delBtn.classList.remove('hidden');
             } else {
                 document.getElementById('editNoteId').value = '';
                 document.getElementById('githubAdminForm').reset();
+                delBtn.classList.add('hidden');
             }
         }
 
@@ -649,6 +941,9 @@
                 let targetArray = selectedCat === 'English Blogs' ? englishBlogs : pscNotes;
 
                 const id = document.getElementById('editNoteId').value || Date.now().toString();
+                const tagsRaw = document.getElementById('formTags').value.trim();
+                const tagsArray = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(t => t) : [];
+
                 const noteObj = {
                     id,
                     category: selectedCat,
@@ -660,6 +955,7 @@
                     content: document.getElementById('formContent').value,
                     cover: document.getElementById('formCover').value.trim(),
                     readTime: document.getElementById('formReadTime').value.trim(),
+                    tags: tagsArray,
                     pdf: ""
                 };
 
@@ -680,6 +976,56 @@
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Selected JSON File';
+            }
+        }
+
+        // SECURE DELETION FEATURE
+        async function deleteCurrentArticle() {
+            if (!activeNoteId) return;
+            const key = prompt("⚠️ SECURE DELETION: Enter your Secret Security Passkey to confirm deletion:");
+            if (key === getStoredPasskey()) {
+                await executeDeleteNote(activeNoteId);
+            } else if (key !== null) {
+                alert("❌ Incorrect security passkey!");
+            }
+        }
+
+        async function deleteEntryFromModal() {
+            const id = document.getElementById('editNoteId').value;
+            if (!id) return;
+            const key = prompt("⚠️ SECURE DELETION: Enter your Secret Security Passkey to confirm deletion:");
+            if (key === getStoredPasskey()) {
+                await executeDeleteNote(id);
+                closeModal('adminModal');
+            } else if (key !== null) {
+                alert("❌ Incorrect security passkey!");
+            }
+        }
+
+        async function executeDeleteNote(id) {
+            const note = globalNotes.find(n => n.id === id);
+            if (!note) return;
+
+            const repo = document.getElementById('ghRepo').value.trim() || localStorage.getItem('gh_repo');
+            const token = document.getElementById('ghToken').value.trim() || localStorage.getItem('gh_token');
+            if (!repo || !token) return alert("GitHub repository credentials missing!");
+
+            const selectedCat = note.category;
+            const targetPath = selectedCat === 'English Blogs' ? 'data/blogs.json' : 'data/pscnotes.json';
+            let targetArray = selectedCat === 'English Blogs' ? englishBlogs : pscNotes;
+
+            const updatedArray = targetArray.filter(n => n.id !== id);
+
+            try {
+                const jsonSha = await getFileSHA(repo, token, targetPath);
+                const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(updatedArray, null, 2))));
+
+                await uploadToGitHub(repo, token, targetPath, jsonContent, `Delete ${selectedCat}: ${note.title}`, jsonSha);
+
+                alert("Entry permanently deleted!");
+                showCatalog();
+            } catch (err) {
+                alert("Deletion error: " + err.message);
             }
         }
 
@@ -710,13 +1056,45 @@
             return null;
         }
 
+        function verifyPasskeyAccess() {
+            const entered = document.getElementById('inputSecretPasskey').value;
+            if (entered === getStoredPasskey()) {
+                document.getElementById('secretKeyManagementSection').classList.remove('hidden');
+                document.querySelectorAll('.secret-edit-btn').forEach(b => b.classList.remove('hidden'));
+                alert("🔓 Passkey authenticated! Admin tools unlocked.");
+            } else {
+                alert("❌ Invalid security passkey!");
+            }
+        }
+
+        function updatePasskey() {
+            const newKey = document.getElementById('inputNewPasskey').value.trim();
+            if (!newKey) return alert("Passkey cannot be empty!");
+            localStorage.setItem('admin_secret_key', newKey);
+            alert("✅ Secret passkey updated successfully!");
+            document.getElementById('inputNewPasskey').value = '';
+        }
+
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
+        // SHORTCUT KEY LISTENERS: CTRL+A & CTRL+E
         document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
-                e.preventDefault();
-                openModal('adminModal');
+            const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+            const isInputOrTextArea = activeTag === 'input' || activeTag === 'textarea';
+
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'a') {
+                if (!isInputOrTextArea) {
+                    e.preventDefault();
+                    openModal('adminModal');
+                }
+            }
+
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'e') {
+                if (!isInputOrTextArea) {
+                    e.preventDefault();
+                    openModal('keyConfigModal');
+                }
             }
         });
 
