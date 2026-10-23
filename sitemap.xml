@@ -1,23 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Homepage -->
-  <url>
-    <loc>https://bibek-2058.github.io/</loc>
-    <lastmod>2026-10-23</lastmod>
-    <priority>1.0</priority>
-  </url>
+async function generateAndLogSitemap() {
+  const DOMAIN = 'https://pandeybibek.com.np';
+  
+  try {
+    const [blogsRes, notesRes] = await Promise.all([
+      fetch('./data/blogs.json'),
+      fetch('./data/pscnotes.json')
+    ]);
+    
+    const blogs = await blogsRes.json();
+    const notes = await notesRes.json();
+    
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+    
+    // Main static pages (edit or add yours if needed)
+    const staticPages = ['', '/blogs.html', '/pscnotes.html', '/study-assist.html'];
+    staticPages.forEach(page => {
+      xml += `  <url>\n    <loc>${DOMAIN}${page}</loc>\n    <changefreq>weekly</changefreq>\n  </url>\n`;
+    });
+    
+    // Blog posts
+    blogs.forEach(blog => {
+      const identifier = blog.id || blog.slug; 
+      xml += `  <url>\n    <loc>${DOMAIN}/blog.html?id=${identifier}</loc>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+    });
+    
+    // PSC Notes
+    notes.forEach(note => {
+      const identifier = note.id || note.slug;
+      xml += `  <url>\n    <loc>${DOMAIN}/note.html?id=${identifier}</loc>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+    });
+    
+    xml += `</urlset>`;
+    
+    navigator.clipboard.writeText(xml);
+    console.log(xml);
+    console.log('%c SUCCESS: Sitemap generated and copied to clipboard!', 'color: green; font-weight: bold; font-size: 14px;');
+    
+  } catch (error) {
+    console.error('Error generating sitemap. Check if ./data/blogs.json and ./data/pscnotes.json paths are valid:', error);
+  }
+}
 
-  <!-- blogs.json -->
-  <url>
-    <loc>https://bibek-2058.github.io/data/blogs.json</loc>
-    <lastmod>2026-10-23</lastmod>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- notes.json -->
-  <url>
-    <loc>https://bibek-2058.github.io/pscnotes.json</loc>
-    <lastmod>2026-10-23</lastmod>
-    <priority>0.5</priority>
-  </url>
-</urlset>
+generateAndLogSitemap();
