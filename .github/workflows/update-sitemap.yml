@@ -1,0 +1,33 @@
+name: Generate Sitemap
+
+on:
+  push:
+    branches:
+      - main  # (If your main branch is named 'master' instead of 'main', change it here)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Gives GitHub Actions permission to write the updated sitemap back to your repo
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Generate Sitemap
+        run: node generate-sitemap.js
+
+      - name: Commit and push if sitemap changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate sitemap.xml [skip ci]" && git push)
