@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronicle - Modern English Insights & Essays</title>
-    
+    <title>Study Assist — PSC Notes & Blogs</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -14,37 +14,74 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0f7ff',
-                            100: '#e0effe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            500: '#4f46e5',
+                            600: '#4338ca',
+                            700: '#3730a3',
+                            900: '#1e1b4b',
                         }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
         }
     </script>
-    
+
     <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .select-text { user-select: text; -webkit-user-select: text; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        .select-text {
+            user-select: text;
+            -webkit-user-select: text;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .dark .glass-nav {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Video Embed Aspect Container */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             max-width: 100%;
-            border-radius: 0.75rem;
+            border-radius: 1rem;
             margin: 1.5rem 0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
         .video-container iframe, .video-container video {
             position: absolute;
@@ -52,8 +89,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 0.75rem;
+            border-radius: 1rem;
         }
+
+        /* Line Clamp Utilities */
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -66,504 +105,761 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        /* Glassmorphism effects */
-        .glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-        .dark .glass {
-            background: rgba(17, 24, 39, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Long Form Typography Overrides */
+        .prose-article h1, .prose-article h2, .prose-article h3 {
+            color: inherit;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .prose-article h2 {
+            font-size: 1.35rem;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.35rem;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        .dark .prose-article h2 {
+            border-bottom-color: rgba(51, 65, 85, 0.6);
+        }
+        .prose-article h3 {
+            font-size: 1.15rem;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .prose-article p {
+            margin-bottom: 1.1rem;
+            line-height: 1.75;
+        }
+        .prose-article ul {
+            list-style-type: disc;
+            padding-left: 1.25rem;
+            margin-bottom: 1.1rem;
+        }
+        .prose-article ol {
+            list-style-type: decimal;
+            padding-left: 1.25rem;
+            margin-bottom: 1.1rem;
+        }
+        .prose-article li {
+            margin-bottom: 0.35rem;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col selection:bg-blue-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
 
-    <!-- NAVIGATION HEADER -->
-            <!-- Search & Filter Controls -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-8">
-                <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
-                    <!-- Category Tabs -->
-                    <div class="flex flex-wrap gap-2 w-full md:w-auto" id="categoryTabs">
-                        <button onclick="filterCategory('all')" id="cat-all" class="cat-btn active px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-indigo-600 text-white shadow-sm">All Content</button>
-                        <button onclick="filterCategory('psc')" id="cat-psc" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">PSC Notes</button>
-                        <button onclick="filterCategory('blog')" id="cat-blog" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">English Blogs</button>
+    <!-- TOP NAVIGATION HEADER -->
+    <header class="sticky top-0 z-40 w-full glass-nav border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            
+            <!-- Brand & Badge -->
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="showCatalog()">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-slate-900 via-indigo-950 to-indigo-700 dark:from-white dark:via-indigo-100 dark:to-indigo-300 bg-clip-text text-transparent">
+                            Study Assist
+                        </h1>
+                        <span class="px-2 py-0.5 text-[9px] font-extrabold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-950/80 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 uppercase tracking-wider hidden sm:inline-block">
+                            PRO Portal
+                        </span>
                     </div>
-
-                    <!-- Search Input -->
-                    <div class="relative w-full md:w-72">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search notes & blogs..." class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
-                    </div>
+                    <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium -mt-0.5 hidden sm:block">Lok Sewa Aayog & English Writing Hub</p>
                 </div>
             </div>
 
-            <!-- Central Categories Navigation (Desktop) -->
-            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-xs font-semibold">
-                <button onclick="filterByCategory('All')" class="nav-cat-btn px-3 py-2 rounded-lg text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 transition">All</button>
-                <button onclick="filterByCategory('Technology')" class="nav-cat-btn px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition">Technology</button>
-                <button onclick="filterByCategory('Productivity')" class="nav-cat-btn px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition">Productivity</button>
-                <button onclick="filterByCategory('Study & Learning')" class="nav-cat-btn px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition">Study & Learning</button>
-                <button onclick="filterByCategory('Lifestyle')" class="nav-cat-btn px-3 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition">Lifestyle</button>
+            <!-- Central Section Tabs -->
+            <nav class="flex items-center p-1 bg-slate-100/80 dark:bg-slate-900/80 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 text-xs font-semibold">
+                <button onclick="filterCategory('all')" id="nav-all" class="nav-btn px-3 sm:px-4 py-1.5 rounded-xl transition-all bg-indigo-600 text-white shadow-sm flex items-center gap-1.5">
+                    <i class="fa-solid fa-layer-group text-[11px]"></i>
+                    <span>All</span>
+                    <span id="navBadgeAll" class="px-1.5 py-0.2 text-[9px] rounded-md bg-white/20 text-white font-mono">0</span>
+                </button>
+                <button onclick="filterCategory('psc')" id="nav-psc" class="nav-btn px-3 sm:px-4 py-1.5 rounded-xl transition-all text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-bookmark text-[11px]"></i>
+                    <span class="hidden md:inline">PSC Notes</span>
+                    <span class="md:hidden">PSC</span>
+                    <span id="navBadgePsc" class="px-1.5 py-0.2 text-[9px] rounded-md bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono">0</span>
+                </button>
+                <button onclick="filterCategory('blog')" id="nav-blog" class="nav-btn px-3 sm:px-4 py-1.5 rounded-xl transition-all text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-pen-nib text-[11px]"></i>
+                    <span class="hidden md:inline">English Blogs</span>
+                    <span class="md:hidden">Blogs</span>
+                    <span id="navBadgeBlog" class="px-1.5 py-0.2 text-[9px] rounded-md bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono">0</span>
+                </button>
             </nav>
 
-            <!-- Right Controls: Clock, Theme, Admin -->
-            <div class="flex items-center space-x-2 sm:space-x-3">
-                <!-- Real-Time Clock Widget -->
-                <div class="hidden sm:flex items-center space-x-2 bg-gray-100 dark:bg-gray-800/80 px-3 py-1.5 rounded-xl border border-gray-200/80 dark:border-gray-700/80 text-xs font-medium text-gray-600 dark:text-gray-300">
-                    <i class="fa-regular fa-clock text-blue-600 dark:text-blue-400"></i>
-                    <div class="flex items-center space-x-1.5 font-mono text-[11px]">
-                        <span id="liveClock">--:--:--</span>
+            <!-- Controls: Nepal Live Clock & Theme Switcher -->
+            <div class="flex items-center space-x-2">
+                <!-- Nepal Live Clock Widget -->
+                <div class="hidden lg:flex items-center space-x-2 bg-slate-100/90 dark:bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-200/80 dark:border-slate-800/80 text-xs font-medium text-slate-600 dark:text-slate-300 shadow-inner">
+                    <i class="fa-regular fa-clock text-indigo-600 dark:text-indigo-400 animate-pulse"></i>
+                    <div class="flex items-center space-x-1 font-mono text-[11px] font-semibold">
+                        <span id="nepalTime">--:--:--</span>
+                        <span class="text-[9px] text-indigo-600 dark:text-indigo-400 font-bold ml-1 px-1 bg-indigo-50 dark:bg-indigo-950/60 rounded">NPT</span>
                     </div>
                 </div>
 
-                <!-- Create Post Button -->
-                <button onclick="openCreateModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs px-3.5 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5">
-                    <i class="fa-solid fa-pen-nib"></i>
-                    <span class="hidden sm:inline">Write Post</span>
-                </button>
-
-                <!-- Theme Toggle Button -->
-                <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition" border="border border-gray-200 dark:border-gray-700">
+                <!-- Dark / Light Theme Toggle -->
+                <button id="theme-toggle" onclick="toggleTheme()" title="Toggle Theme (Light/Dark)" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition border border-slate-200 dark:border-slate-700/80">
                     <i id="theme-icon" class="fa-solid fa-moon"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- MAIN CATALOG & HERO VIEW -->
-    <main id="catalogView" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-10">
+    <!-- SPONSOR ANNOUNCEMENT BANNER -->
+    <div id="adContainer" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 hidden">
+        <div class="relative bg-gradient-to-r from-amber-500/10 via-indigo-500/10 to-blue-500/10 border border-indigo-200/60 dark:border-indigo-900/40 rounded-2xl p-3.5 sm:p-4 flex items-center justify-between text-xs text-slate-700 dark:text-slate-300 shadow-sm backdrop-blur-md">
+            <div class="flex items-center space-x-3">
+                <span class="px-2.5 py-1 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-extrabold rounded-lg text-[10px] uppercase tracking-wider shadow-sm">
+                    Announcement
+                </span>
+                <p id="adMessage" class="text-xs font-medium leading-relaxed">
+                    Preparing for Lok Sewa Officer & Subba? Review newly added 2026 Constitution & Essay drafting templates!
+                </p>
+            </div>
+            <button onclick="dismissAd()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-bold ml-4 p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CATALOG VIEW -->
+    <main id="catalogView" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
         
-        <!-- HERO FEATURED ARTICLE BANNER -->
-        <section id="heroBanner" class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-gray-900 via-indigo-950 to-blue-950 text-white shadow-xl">
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-500/20 via-transparent to-transparent"></div>
-            <div id="heroContent" class="relative z-10 p-6 sm:p-10 lg:p-12 max-w-3xl flex flex-col items-start justify-center space-y-4">
-                <!-- Populated dynamically via JS -->
+        <!-- HERO SPOTLIGHT SECTION -->
+        <section class="relative overflow-hidden rounded-3xl bg-slate-900 text-white shadow-2xl border border-slate-800">
+            <!-- Gradient Layer -->
+            <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/90 via-slate-900/95 to-blue-950/90"></div>
+            <div class="absolute -right-20 -top-20 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 p-6 sm:p-10 lg:p-12 max-w-4xl flex flex-col items-start space-y-5">
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-extrabold text-[10px] uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5">
+                        <i class="fa-solid fa-sparkles text-amber-300"></i> Lok Sewa Prep & English Excellence
+                    </span>
+                </div>
+                <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-white">
+                    Master Syllabus Notes & Masterful English Writing.
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
+                    High-yield Lok Sewa Aayog notes on governance, constitutional law, public administration, along with curated English essay guides, vocabulary builders, and precise grammar summaries.
+                </p>
+                
+                <!-- Hero Quick Stats & CTAs -->
+                <div class="pt-3 w-full flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/80">
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="filterCategory('psc')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-5 py-3 rounded-2xl transition shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                            <i class="fa-solid fa-book-open"></i> Browse PSC Notes
+                        </button>
+                        <button onclick="filterCategory('blog')" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-5 py-3 rounded-2xl transition backdrop-blur-md flex items-center gap-2 border border-white/15">
+                            <i class="fa-solid fa-pen-fancy"></i> Explore English Blogs
+                        </button>
+                    </div>
+
+                    <div class="hidden sm:flex items-center space-x-6 text-slate-400 text-xs">
+                        <div>
+                            <span class="block text-white font-extrabold text-base font-mono">100%</span>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider">Free Access</span>
+                        </div>
+                        <div class="w-px h-8 bg-slate-800"></div>
+                        <div>
+                            <span class="block text-white font-extrabold text-base font-mono">Updated</span>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-wider">2026 Syllabus</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SEARCH & CATEGORY FILTER BAR -->
-        <section class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-gray-900 p-4 sm:p-5 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-sm">
-            
-            <!-- Category Pills (Mobile/Desktop Scrollable) -->
-            <div class="flex items-center space-x-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none text-xs font-semibold">
-                <button onclick="filterByCategory('All')" class="cat-pill active-pill px-4 py-2 rounded-xl bg-blue-600 text-white shadow-sm transition shrink-0">All Topics</button>
-                <button onclick="filterByCategory('Technology')" class="cat-pill px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition shrink-0">Technology</button>
-                <button onclick="filterByCategory('Productivity')" class="cat-pill px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition shrink-0">Productivity</button>
-                <button onclick="filterByCategory('Study & Learning')" class="cat-pill px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition shrink-0">Study & Learning</button>
-                <button onclick="filterByCategory('Lifestyle')" class="cat-pill px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition shrink-0">Lifestyle</button>
-            </div>
+        <!-- SEARCH & CATEGORY FILTER CONTROL BAR -->
+        <section class="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+            <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-2 w-full md:w-auto" id="categoryTabs">
+                    <button onclick="filterCategory('all')" id="cat-all" class="cat-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-indigo-600 text-white shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-grid-2"></i> All Topics
+                    </button>
+                    <button onclick="filterCategory('psc')" id="cat-psc" class="cat-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap"></i> PSC Notes
+                    </button>
+                    <button onclick="filterCategory('blog')" id="cat-blog" class="cat-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-2">
+                        <i class="fa-solid fa-feather"></i> English Blogs
+                    </button>
+                </div>
 
-            <!-- Live Search Bar -->
-            <div class="relative w-full md:w-80">
-                <input type="text" id="searchInput" onkeyup="filterPosts()" placeholder="Search articles, tags, authors..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-xs"></i>
+                <!-- Search Input Box -->
+                <div class="relative w-full md:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" id="searchInput" oninput="filterNotes()" placeholder="Search topics, keywords, tags..." class="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                </div>
             </div>
         </section>
 
-        <!-- POSTS GRID -->
+        <!-- CONTENT GRID SECTION -->
         <section>
             <div class="flex items-center justify-between mb-6">
-                <h2 id="sectionTitle" class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-newspaper text-blue-600"></i> Latest Articles
+                <h2 id="sectionTitle" class="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2 tracking-tight">
+                    <i class="fa-solid fa-folder-open text-indigo-600"></i> All Study Materials
                 </h2>
-                <span id="articleCount" class="text-xs font-semibold text-gray-500 dark:text-gray-400">Showing 0 articles</span>
+                <span id="articleCount" class="text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full border border-slate-200/80 dark:border-slate-700/80">
+                    Showing 0 items
+                </span>
             </div>
 
-            <!-- Dynamic Articles Container -->
-            <div id="postsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <!-- Cards injected dynamically -->
+            <!-- Dynamic Articles Grid -->
+            <div id="postsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Content Injected via Script -->
             </div>
 
             <!-- Empty Search Results Placeholder -->
-            <div id="noResults" class="hidden text-center py-16 bg-white dark:bg-gray-900 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800">
-                <i class="fa-solid fa-book-open text-4xl text-gray-300 dark:text-gray-700 mb-3"></i>
-                <h3 class="text-base font-bold text-gray-800 dark:text-gray-200">No matching articles found</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Try adjusting your search terms or selecting a different category.</p>
+            <div id="noResults" class="hidden text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 shadow-inner">
+                <div class="w-16 h-16 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">No study material found</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+                    Try adjusting your search query or switching category tabs.
+                </p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow hover:bg-indigo-700 transition">
+                    Clear Search Filter
+                </button>
             </div>
         </section>
     </main>
 
-    <!-- FULL ARTICLE DETAIL VIEW -->
+    <!-- FULL ARTICLE DETAIL READING VIEW -->
     <main id="articleView" class="hidden flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10">
         
-        <!-- Back Navigation & Edit controls -->
+        <!-- Back Button & Secret Edit Controls Bar -->
         <div class="mb-6 flex items-center justify-between">
-            <button onclick="showCatalog()" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline bg-blue-50 dark:bg-blue-900/30 px-3 py-1.5 rounded-lg transition">
-                <i class="fa-solid fa-arrow-left"></i> Back to Articles
+            <button onclick="showCatalog()" class="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-900/50 px-4 py-2 rounded-2xl transition shadow-sm">
+                <i class="fa-solid fa-arrow-left"></i> Back to Catalog
             </button>
 
-            <div class="flex items-center gap-2">
-                <button id="editArticleBtn" onclick="" class="text-xs bg-amber-500 hover:bg-amber-600 text-white font-semibold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1">
-                    <i class="fa-solid fa-pen-to-square"></i> Edit Post
+            <div id="secretEditControls" class="hidden flex items-center gap-2">
+                <span class="text-[10px] font-mono text-amber-500 font-bold uppercase tracking-wider px-2 py-1 bg-amber-50 dark:bg-amber-950/50 rounded-lg border border-amber-200 dark:border-amber-800">Secret Mode Active</span>
+                <button id="editArticleBtn" onclick="" class="text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold px-3.5 py-1.5 rounded-xl transition shadow-sm flex items-center gap-1.5">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit
                 </button>
-                <button id="deleteArticleBtn" onclick="" class="text-xs bg-red-500 hover:bg-red-600 text-white font-semibold px-3 py-1.5 rounded-lg transition shadow-sm flex items-center gap-1">
+                <button id="deleteArticleBtn" onclick="" class="text-xs bg-red-500 hover:bg-red-600 text-white font-bold px-3.5 py-1.5 rounded-xl transition shadow-sm flex items-center gap-1.5">
                     <i class="fa-solid fa-trash-can"></i> Delete
                 </button>
             </div>
         </div>
 
-        <!-- Article Article Container -->
-        <article class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-10 shadow-sm border border-gray-200/80 dark:border-gray-800">
+        <!-- Article Container -->
+        <article class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-200/80 dark:border-slate-800/80">
             
-            <!-- Category & Reading Time Badge -->
-            <div class="flex items-center space-x-3 mb-4 text-xs">
-                <span id="artCategory" class="px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-bold rounded-full uppercase tracking-wider text-[10px]"></span>
-                <span class="text-gray-400">•</span>
-                <span id="artReadTime" class="text-gray-500 dark:text-gray-400 font-medium"></span>
+            <!-- Category Tag & Read Time -->
+            <div class="flex flex-wrap items-center space-x-3 mb-4 text-xs">
+                <span id="artCategory" class="px-3.5 py-1 bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 font-extrabold rounded-full uppercase tracking-wider text-[10px] border border-indigo-200 dark:border-indigo-800"></span>
+                <span class="text-slate-300 dark:text-slate-700">•</span>
+                <span id="artReadTime" class="text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1">
+                    <i class="fa-regular fa-clock text-[11px]"></i>
+                </span>
             </div>
 
-            <!-- Title -->
-            <h1 id="artTitle" class="text-2xl sm:text-4xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4 select-text"></h1>
+            <!-- Main Title -->
+            <h1 id="artTitle" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight mb-6 select-text tracking-tight"></h1>
 
-            <!-- Author & Date Header -->
-            <div class="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 pb-6 mb-6">
+            <!-- Author & Metadata Block -->
+            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-6 mb-8">
                 <div class="flex items-center space-x-3">
-                    <img id="artAuthorAvatar" src="" alt="Author Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-blue-500">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-user-graduate text-base"></i>
+                    </div>
                     <div>
-                        <h4 id="artAuthorName" class="text-xs font-bold text-gray-900 dark:text-white"></h4>
-                        <p id="artAuthorRole" class="text-[11px] text-gray-500 dark:text-gray-400"></p>
+                        <h4 id="artAuthorName" class="text-xs font-bold text-slate-900 dark:text-white">Study Assist Editorial</h4>
+                        <p id="artAuthorRole" class="text-[11px] text-slate-500 dark:text-slate-400">Verified Study Material</p>
                     </div>
                 </div>
                 <div class="text-right">
-                    <p id="artDate" class="text-xs font-medium text-gray-500 dark:text-gray-400"></p>
+                    <p id="artDate" class="text-xs font-semibold text-slate-500 dark:text-slate-400 font-mono"></p>
                 </div>
             </div>
 
-            <!-- Cover Image -->
-            <div id="artCoverContainer" class="mb-8 rounded-2xl overflow-hidden hidden">
+            <!-- PDF Download Banner Block (Triggered if pdfUrl exists) -->
+            <div id="pdfDownloadBanner" class="hidden mb-8 p-4 rounded-2xl bg-gradient-to-r from-red-50 to-indigo-50 dark:from-red-950/30 dark:to-indigo-950/30 border border-red-200/80 dark:border-red-900/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-300 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-extrabold text-slate-900 dark:text-slate-100">PDF Reference Attachment Included</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">Download syllabus resource, past papers, or offline notes.</p>
+                    </div>
+                </div>
+                <a id="pdfDownloadLink" href="#" target="_blank" download class="w-full sm:w-auto text-center px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl shadow transition flex items-center justify-center gap-2 shrink-0">
+                    <i class="fa-solid fa-download"></i> Download PDF Attachment
+                </a>
+            </div>
+
+            <!-- Cover Image Container -->
+            <div id="artCoverContainer" class="mb-8 rounded-2xl overflow-hidden hidden shadow-lg">
                 <img id="artCoverImage" src="" alt="Cover Image" class="w-full h-auto max-h-[420px] object-cover">
             </div>
 
-            <!-- Article Body Content -->
-            <div id="artContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200 space-y-4 select-text"></div>
+            <!-- Long-Form Article Body -->
+            <div id="artContent" class="prose-article text-sm leading-relaxed text-slate-800 dark:text-slate-200 select-text"></div>
 
-            <!-- Tags Section -->
-            <div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
-                <h4 class="text-xs font-bold uppercase text-gray-400 mb-2">Topics & Tags</h4>
-                <div id="artTags" class="flex flex-wrap gap-2"></div>
-            </div>
-
-            <!-- COMMENTS & FEEDBACK SECTION -->
-            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                    <i class="fa-regular fa-comments text-blue-600"></i>
-                    Discussion (<span id="commentCount">0</span>)
+            <!-- DISCUSSION & FEEDBACK SECTION -->
+            <div class="mt-14 pt-8 border-t border-slate-200/80 dark:border-slate-800/80">
+                <h3 class="text-base font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                    <i class="fa-regular fa-comments text-indigo-600"></i>
+                    Reader Feedback & Queries (<span id="commentCount">0</span>)
                 </h3>
 
-                <!-- Add Comment Form -->
-                <form id="commentForm" onsubmit="submitComment(event)" class="mb-8 bg-gray-50 dark:bg-gray-800/50 p-4 sm:p-5 rounded-2xl border border-gray-200/80 dark:border-gray-700 space-y-3">
+                <!-- Submit Comment Form -->
+                <form id="commentForm" onsubmit="submitComment(event)" class="mb-8 bg-slate-50 dark:bg-slate-800/40 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 space-y-3.5">
                     <input type="hidden" id="commentPostId">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <input type="text" id="commAuthor" placeholder="Your Name" required class="p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <input type="email" id="commEmail" placeholder="Your Email (optional)" class="p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="text" id="commAuthor" placeholder="Your Name" required class="p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <input type="email" id="commEmail" placeholder="Your Email (Optional)" class="p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     </div>
-                    <textarea id="commText" rows="3" required placeholder="Share your thoughts or feedback on this article..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-xl text-xs transition flex items-center gap-2">
-                        <i class="fa-solid fa-paper-plane"></i> Post Comment
+                    <textarea id="commText" rows="3" required placeholder="Submit feedback, request additional notes, or ask a question..." class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition shadow flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Feedback
                     </button>
                 </form>
 
                 <!-- Comments List -->
-                <div id="commentsList" class="space-y-4">
-                    <!-- Dynamic Comments Injected -->
+                <div id="commentsList" class="space-y-3.5">
+                    <!-- Comments injected dynamically -->
                 </div>
             </div>
         </article>
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-8 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 space-y-4">
-            <div class="flex justify-center items-center space-x-6">
-                <a href="#" class="hover:text-blue-600 transition">About Chronicle</a>
-                <a href="#" class="hover:text-blue-600 transition">Editorial Guidelines</a>
-                <a href="#" class="hover:text-blue-600 transition">Privacy Policy</a>
-                <a href="#" class="hover:text-blue-600 transition">Contact Us</a>
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800/80 py-8 text-center text-xs text-slate-500 dark:text-slate-400 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
+            <div class="flex justify-center items-center space-x-6 font-semibold">
+                <a href="#" onclick="filterCategory('all'); return false;" class="hover:text-indigo-600 transition">All Materials</a>
+                <a href="#" onclick="filterCategory('psc'); return false;" class="hover:text-indigo-600 transition">PSC Notes</a>
+                <a href="#" onclick="filterCategory('blog'); return false;" class="hover:text-indigo-600 transition">English Blogs</a>
+                <a href="#" onclick="toggleAdminModal(); return false;" class="text-slate-400 hover:text-indigo-600 transition">Admin Portal</a>
             </div>
-            <p>&copy; 2026 Chronicle English Publishing. Designed for thought-provoking content.</p>
+            <p>&copy; 2026 Study Assist Nepal. Dedicated Lok Sewa Aayog & Language Portal.</p>
         </div>
     </footer>
 
-    <!-- CREATE / EDIT ARTICLE MODAL -->
-    <div id="adminModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-white dark:bg-gray-900 rounded-3xl p-5 sm:p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-200 dark:border-gray-800">
+    <!-- GITHUB CONTENT ADMIN DASHBOARD MODAL (Triggered via Ctrl+Shift+A) -->
+    <div id="adminModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800">
             
-            <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-800 pb-4 mb-5">
-                <h3 id="modalHeading" class="text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-file-pen text-blue-600"></i> Create New Article
-                </h3>
-                <button onclick="closeModal('adminModal')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                    <i class="fa-solid fa-xmark text-xl"></i>
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-sm font-bold shadow-md">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 dark:text-white text-base">GitHub Content Manager</h3>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Dual File Routing: data/psc.json vs data/blogs.json</p>
+                    </div>
+                </div>
+                <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-
-            <form id="postForm" onsubmit="savePost(event)" class="space-y-4">
-                <input type="hidden" id="formPostId">
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto space-y-4 text-xs">
+                
+                <!-- Category Select & Target File Notice -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Title</label>
-                        <input type="text" id="formTitle" required placeholder="Article Title" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Category</label>
-                        <select id="formCategory" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs font-medium">
-                            <option value="Technology">Technology</option>
-                            <option value="Productivity">Productivity</option>
-                            <option value="Study & Learning">Study & Learning</option>
-                            <option value="Lifestyle">Lifestyle</option>
+                        <label class="block font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Section Type (Routing)</label>
+                        <select id="adminType" onchange="updateTargetJsonNotice()" class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-900 dark:text-white">
+                            <option value="psc">PSC Note (data/psc.json)</option>
+                            <option value="blog">English Blog (data/blogs.json)</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Author Name</label>
-                        <input type="text" id="formAuthor" required placeholder="e.g. Sarah Jenkins" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs">
+                        <label class="block font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Sub-Category Tag</label>
+                        <input type="text" id="adminCategory" placeholder="e.g. Governance, Grammar, Constitution" class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Author Role/Title</label>
-                        <input type="text" id="formAuthorRole" placeholder="e.g. Senior Tech Journalist" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs">
+                        <label class="block font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Reading Time Estimate</label>
+                        <input type="text" id="adminReadTime" placeholder="e.g. 5 min read" class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Cover Image URL</label>
-                    <input type="url" id="formImage" placeholder="https://images.unsplash.com/photo-..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs">
+                    <label class="block font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Title</label>
+                    <input type="text" id="adminTitle" placeholder="Title for note or blog post..." class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-xs font-bold text-slate-900 dark:text-white">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Short Excerpt / Description</label>
-                    <input type="text" id="formExcerpt" required placeholder="Brief 1-2 sentence preview" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs">
+                    <label class="block font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">PDF Attachment (Upload PDF file)</label>
+                    <input type="file" id="adminPdfFile" accept="application/pdf" class="w-full p-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-white">
                 </div>
 
-                <!-- Rich Text Formatting Area -->
+                <!-- Formatting Toolbar & Editor -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Article Body (HTML Supported)</label>
-                    
-                    <!-- Toolbar -->
-                    <div class="flex flex-wrap gap-1 p-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-t-xl">
-                        <button type="button" onclick="applyFormat('b')" class="p-1.5 px-2 text-xs font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600"><i class="fa-solid fa-bold"></i></button>
-                        <button type="button" onclick="applyFormat('i')" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600"><i class="fa-solid fa-italic"></i></button>
-                        <button type="button" onclick="applyFormat('h2')" class="p-1.5 px-2 text-xs font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">H2</button>
-                        <button type="button" onclick="applyFormat('h3')" class="p-1.5 px-2 text-xs font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">H3</button>
-                        <button type="button" onclick="applyFormat('p')" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600"><i class="fa-solid fa-paragraph"></i></button>
-                        <button type="button" onclick="applyFormat('ul')" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600"><i class="fa-solid fa-list-ul"></i></button>
-                        <button type="button" onclick="insertImagePrompt()" class="p-1.5 px-2 text-xs bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded border border-blue-200 dark:border-blue-700 font-medium"><i class="fa-solid fa-image"></i> Media</button>
+                    <label class="block font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">Article Body Content (HTML Supported)</label>
+                    <div class="border border-slate-300 dark:border-slate-700 rounded-2xl overflow-hidden shadow-sm">
+                        <div class="bg-slate-100 dark:bg-slate-800 border-b border-slate-300 dark:border-slate-700 p-2 flex flex-wrap gap-1.5 items-center">
+                            <button type="button" onclick="formatDoc('b')" title="Bold" class="p-1.5 px-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg font-bold">B</button>
+                            <button type="button" onclick="formatDoc('i')" title="Italic" class="p-1.5 px-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg italic">I</button>
+                            <button type="button" onclick="formatDoc('h2')" title="Heading 2" class="p-1.5 px-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg font-bold">H2</button>
+                            <button type="button" onclick="formatDoc('h3')" title="Heading 3" class="p-1.5 px-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg font-bold">H3</button>
+                            <button type="button" onclick="insertTableBuilder()" class="p-1.5 px-2.5 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-700 rounded-lg font-semibold flex items-center gap-1">
+                                <i class="fa-solid fa-table"></i> Insert Table
+                            </button>
+                            <button type="button" onclick="promptMedia('img')" class="p-1.5 px-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg"><i class="fa-solid fa-image"></i> Image</button>
+                            <button type="button" onclick="promptMedia('youtube')" class="p-1.5 px-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-red-600"><i class="fa-brands fa-youtube"></i> YouTube</button>
+                            <button type="button" onclick="promptMedia('mp4')" class="p-1.5 px-2.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-blue-600"><i class="fa-solid fa-video"></i> MP4 Video</button>
+                        </div>
+                        <textarea id="adminContent" rows="10" placeholder="Write HTML content or paste text..." class="w-full p-3.5 bg-slate-50 dark:bg-slate-900 text-xs font-mono focus:outline-none text-slate-900 dark:text-slate-100 leading-relaxed"></textarea>
                     </div>
-
-                    <!-- Textarea -->
-                    <textarea id="formContent" rows="8" required placeholder="Write your full article HTML content here..." class="w-full p-2.5 rounded-b-xl border border-t-0 border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs font-mono focus:outline-none"></textarea>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 uppercase mb-1">Tags (Comma-separated)</label>
-                    <input type="text" id="formTags" placeholder="English, Learning, Technology" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-xs">
+                <!-- GitHub Integration Credentials -->
+                <div class="p-4 bg-slate-100 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                            <i class="fa-brands fa-github text-lg"></i> Direct GitHub Commit Sync
+                        </h4>
+                        <span id="targetJsonNotice" class="text-[10px] font-mono bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 font-bold px-2 py-0.5 rounded">
+                            Targeting: data/psc.json
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <input type="text" id="ghRepo" placeholder="username/repository (e.g. user/study-assist)" class="p-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl">
+                        <input type="password" id="ghToken" placeholder="GitHub Personal Access Token" class="p-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl">
+                    </div>
                 </div>
+            </div>
 
-                <div class="flex justify-end gap-3 pt-3">
-                    <button type="button" onclick="closeModal('adminModal')" class="px-5 py-2.5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700">Cancel</button>
-                    <button type="submit" class="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md">Publish Article</button>
-                </div>
-            </form>
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex justify-end gap-3">
+                <button onclick="toggleAdminModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">Cancel</button>
+                <button onclick="savePostAdmin()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-lg transition flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Save & Sync To GitHub
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT LOGIC -->
+    <!-- MAIN SCRIPT ENGINE -->
     <script>
-        // DEFAULT INITIAL BLOG POSTS DATA
-        const initialPosts = [
+        // MOCK INITIAL FALLBACK DATA
+        const fallbackPscPosts = [
             {
-                id: '1',
-                title: 'Mastering the Art of Deep Focus in a Distracted World',
-                category: 'Productivity',
-                excerpt: 'Explore cognitive strategies and daily routines to eliminate digital friction and build an impenetrable focus muscle.',
-                content: `<p class="text-lg font-medium text-gray-700 dark:text-gray-300">In an era dominated by rapid notifications and endless content feeds, our ability to maintain uninterrupted focus has become a rare superpower.</p>
-                <h2 class="text-xl font-bold my-3 text-gray-900 dark:text-white">1. The Cognitive Cost of Context Switching</h2>
-                <p>Every time you glance at a phone alert while writing or analyzing data, your brain pays a heavy penalty known as 'attention residue'. Even after returning to your primary task, fragments of your focus remain tethered to the distraction.</p>
-                <h2 class="text-xl font-bold my-3 text-gray-900 dark:text-white">2. Time-Blocking & Deep Work Sessions</h2>
-                <p>Top performers treat their focus time as non-negotiable appointments. By establishing 90-minute blocks of distraction-free work, you align with your body natural ultradian rhythms.</p>
-                <ul class="list-disc pl-5 space-y-1 my-3">
-                    <li>Disable non-essential notifications on desktop and mobile.</li>
-                    <li>Work in dedicated 60 to 90-minute sprints.</li>
-                    <li>Incorporate deliberate rest, such as short walks without screens.</li>
-                </ul>`,
-                author: 'Elena Rostova',
-                authorRole: 'Cognitive Science Researcher',
-                authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-                image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80',
-                date: 'Oct 20, 2026',
-                readTime: '5 min read',
-                tags: ['Focus', 'Productivity', 'Mindfulness'],
-                featured: true,
-                comments: [
-                    { id: 'c1', author: 'David K.', text: 'This changed how I structure my morning routine completely!', date: 'Oct 21, 2026' }
-                ]
-            },
-            {
-                id: '2',
-                title: 'The Evolution of Natural Language Processing & AI Assistants',
-                category: 'Technology',
-                excerpt: 'How transformer architectures and nuanced language modeling are redefining human-computer collaboration.',
-                content: `<p>Generative AI and large language models have reshaped how we query knowledge, write prose, and automate routine technical workflows.</p>
-                <h2 class="text-xl font-bold my-3">Bridging Human Expression & Machine Logic</h2>
-                <p>Modern NLP engines go beyond simple keyword matching. They comprehend semantic nuances, tone, contextual references, and multi-turn reasoning.</p>`,
-                author: 'Marcus Vance',
-                authorRole: 'AI Systems Architect',
-                authorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
-                image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
-                date: 'Oct 18, 2026',
-                readTime: '7 min read',
-                tags: ['AI', 'Technology', 'NLP'],
-                featured: false,
+                id: 'psc-1',
+                type: 'psc',
+                category: 'Constitution & Governance',
+                title: 'Overview of Fundamental Rights & Constitutional Duties in Nepal',
+                readTime: '6 min read',
+                date: 'Oct 23, 2026',
+                excerpt: 'Comprehensive summary of fundamental rights under Part 3 of the Constitution of Nepal 2072 for Lok Sewa examinations.',
+                content: `<h2 class="text-xl font-bold text-indigo-600 dark:text-indigo-400 my-3">1. Background & Importance</h2>
+                <p>Part 3 (Articles 16 to 46) of the Constitution of Nepal establishes 31 fundamental rights guaranteed to citizens. Master these core rights for Section Officer and Nayab Subba paper requirements.</p>
+                <h2 class="text-xl font-bold text-indigo-600 dark:text-indigo-400 my-3">2. Core Articles & Provisions</h2>
+                <div class="overflow-x-auto my-4">
+                    <table class="w-full text-left border-collapse border border-slate-300 dark:border-slate-700 text-xs">
+                        <thead>
+                            <tr class="bg-indigo-50 dark:bg-indigo-950 text-indigo-900 dark:text-indigo-200">
+                                <th class="border border-slate-300 dark:border-slate-700 p-2 font-bold">Article</th>
+                                <th class="border border-slate-300 dark:border-slate-700 p-2 font-bold">Fundamental Right</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="border border-slate-300 dark:border-slate-700 p-2 font-mono">Article 16</td><td class="border border-slate-300 dark:border-slate-700 p-2">Right to Live with Dignity</td></tr>
+                            <tr><td class="border border-slate-300 dark:border-slate-700 p-2 font-mono">Article 17</td><td class="border border-slate-300 dark:border-slate-700 p-2">Right to Freedom</td></tr>
+                            <tr><td class="border border-slate-300 dark:border-slate-700 p-2 font-mono">Article 18</td><td class="border border-slate-300 dark:border-slate-700 p-2">Right to Equality</td></tr>
+                            <tr><td class="border border-slate-300 dark:border-slate-700 p-2 font-mono">Article 27</td><td class="border border-slate-300 dark:border-slate-700 p-2">Right to Information (RTI)</td></tr>
+                        </tbody>
+                    </table>
+                </div>`,
+                pdfUrl: '',
                 comments: []
             },
             {
-                id: '3',
-                title: 'Effective Techniques for Expanding Your English Vocabulary',
-                category: 'Study & Learning',
-                excerpt: 'Proven linguistic methods, spaced repetition systems, and contextual reading habits for learners.',
-                content: `<p>Building a rich, versatile vocabulary isn't about memorizing dictionary lists; it is about active engagement and contextual usage.</p>
-                <h2 class="text-xl font-bold my-3">1. Read Active & Varied Literature</h2>
-                <p>Exposure to diverse literary genres—from journalistic essays to fiction—forces your mind to encounter idioms and specialized phrasing naturally.</p>`,
-                author: 'Sophia Chen',
-                authorRole: 'Linguistics Educator',
-                authorAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
-                image: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=800&q=80',
-                date: 'Oct 15, 2026',
-                readTime: '4 min read',
-                tags: ['English', 'Education', 'Learning'],
-                featured: false,
+                id: 'psc-2',
+                type: 'psc',
+                category: 'Public Administration',
+                title: 'Principles of Good Governance & Civil Service Reform in Nepal',
+                readTime: '8 min read',
+                date: 'Oct 20, 2026',
+                excerpt: 'Detailed framework of public management, accountability mechanisms, and transparency policies in civil service.',
+                content: `<h2 class="text-xl font-bold text-indigo-600 dark:text-indigo-400 my-3">Pillars of Good Governance</h2>
+                <p>Civil service reforms aim to make public administration results-oriented, accountable, and transparent.</p>
+                <ul class="list-disc pl-5 space-y-2 my-3">
+                    <li>Transparency and Accountability in official decisions</li>
+                    <li>Rule of Law and Equal Access to State Services</li>
+                    <li>Inclusivity and Citizen Participation in Policy Making</li>
+                </ul>`,
+                pdfUrl: '',
                 comments: []
             }
         ];
 
-        // GLOBAL APP STATE
-        let posts = [];
-        let currentCategory = 'All';
+        const fallbackBlogPosts = [
+            {
+                id: 'blog-1',
+                type: 'blog',
+                category: 'English Grammar & Writing',
+                title: 'Mastering Subject-Verb Agreement for English Competitive Essays',
+                readTime: '5 min read',
+                date: 'Oct 22, 2026',
+                excerpt: 'Key grammatical rules, common pitfalls, and sentence structure guidelines to boost your Lok Sewa English paper score.',
+                content: `<p class="text-base font-medium">Subject-verb agreement is one of the most tested domains in competitive English examination essays and sentence correction tasks.</p>
+                <h2 class="text-xl font-bold text-indigo-600 dark:text-indigo-400 my-3">Rule 1: Collective Nouns & Context</h2>
+                <p>When collective nouns (e.g., committee, board, jury) act as a single unit, use a singular verb. When individuals act independently, use a plural verb.</p>
+                <h2 class="text-xl font-bold text-indigo-600 dark:text-indigo-400 my-3">Rule 2: Either / Or & Neither / Nor</h2>
+                <p>The verb must agree with the subject closest to it in the sentence.</p>`,
+                pdfUrl: '',
+                comments: []
+            }
+        ];
+
+        // GLOBAL APPLICATION STATE
+        let pscPosts = [];
+        let blogPosts = [];
+        let allPosts = [];
+        let currentCategory = 'all'; // 'all', 'psc', 'blog'
+        let secretEditMode = false;
+        let editingPostId = null;
 
         // INITIALIZATION
-        function initApp() {
-            const storedPosts = localStorage.getItem('chronicle_posts');
-            if (storedPosts) {
-                try {
-                    posts = JSON.parse(storedPosts);
-                } catch (e) {
-                    posts = initialPosts;
-                }
-            } else {
-                posts = initialPosts;
-                saveToLocalStorage();
-            }
-
+        window.onload = async function() {
             initTheme();
-            startLiveClock();
-            
-            // Check URL query for direct article link
-            const urlParams = new URLSearchParams(window.location.search);
-            const articleId = urlParams.get('id');
-            if (articleId) {
-                renderArticleView(articleId);
+            updateNepalClock();
+            setInterval(updateNepalClock, 1000);
+
+            // Fetch JSON Data from data/psc.json & data/blogs.json or use storage / fallback
+            await loadDualArchitectureData();
+
+            // Secret keyboard shortcuts
+            document.addEventListener('keydown', handleGlobalShortcuts);
+
+            // Direct URL link check
+            const params = new URLSearchParams(window.location.search);
+            const artId = params.get('id');
+            if (artId) {
+                renderArticleView(artId);
             } else {
                 renderCatalog();
             }
+        };
+
+        // DUAL ARCHITECTURE LOAD: data/psc.json & data/blogs.json
+        async function loadDualArchitectureData() {
+            // Check localStorage first
+            const storedPsc = localStorage.getItem('study_assist_psc_posts');
+            const storedBlog = localStorage.getItem('study_assist_blog_posts');
+
+            if (storedPsc && storedBlog) {
+                try {
+                    pscPosts = JSON.parse(storedPsc);
+                    blogPosts = JSON.parse(storedBlog);
+                } catch(e) {
+                    pscPosts = fallbackPscPosts;
+                    blogPosts = fallbackBlogPosts;
+                }
+            } else {
+                // Try fetching from dual files
+                try {
+                    const [pscRes, blogRes] = await Promise.all([
+                        fetch('data/psc.json').catch(() => null),
+                        fetch('data/blogs.json').catch(() => null)
+                    ]);
+
+                    if (pscRes && pscRes.ok) {
+                        pscPosts = await pscRes.json();
+                    } else {
+                        pscPosts = fallbackPscPosts;
+                    }
+
+                    if (blogRes && blogRes.ok) {
+                        blogPosts = await blogRes.json();
+                    } else {
+                        blogPosts = fallbackBlogPosts;
+                    }
+                } catch(err) {
+                    pscPosts = fallbackPscPosts;
+                    blogPosts = fallbackBlogPosts;
+                }
+
+                saveToStorage();
+            }
+
+            combineAllPosts();
+            updateNavBadges();
         }
 
-        function saveToLocalStorage() {
-            localStorage.setItem('chronicle_posts', JSON.stringify(posts));
+        function combineAllPosts() {
+            allPosts = [...pscPosts, ...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
         }
 
-        // REAL-TIME CLOCK ENGINE
-        function startLiveClock() {
-            function updateClock() {
-                const now = new Date();
-                const clockEl = document.getElementById('liveClock');
-                if (clockEl) {
-                    clockEl.textContent = now.toLocaleTimeString('en-US', { hour12: true });
+        function saveToStorage() {
+            localStorage.setItem('study_assist_psc_posts', JSON.stringify(pscPosts));
+            localStorage.setItem('study_assist_blog_posts', JSON.stringify(blogPosts));
+        }
+
+        function updateNavBadges() {
+            document.getElementById('navBadgeAll').textContent = allPosts.length;
+            document.getElementById('navBadgePsc').textContent = pscPosts.length;
+            document.getElementById('navBadgeBlog').textContent = blogPosts.length;
+        }
+
+        // SECRET KEYBOARD SHORTCUTS
+        function handleGlobalShortcuts(e) {
+            const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+            const modifier = isMac ? e.metaKey : e.ctrlKey;
+
+            // Ctrl + Shift + A -> Open Admin Modal
+            if (modifier && e.shiftKey && e.code === 'KeyA') {
+                e.preventDefault();
+                toggleAdminModal();
+            }
+
+            // Ctrl + Shift + E -> Toggle Secret Edit Controls
+            if (modifier && e.shiftKey && e.code === 'KeyE') {
+                e.preventDefault();
+                secretEditMode = !secretEditMode;
+                alert(secretEditMode ? 'Secret edit mode ENABLED' : 'Secret edit mode DISABLED');
+                renderCatalog();
+                const secCtrl = document.getElementById('secretEditControls');
+                if (secCtrl) {
+                    if (secretEditMode) secCtrl.classList.remove('hidden');
+                    else secCtrl.classList.add('hidden');
                 }
             }
-            setInterval(updateClock, 1000);
-            updateClock();
+        }
+
+        // NEPAL LIVE CLOCK
+        function updateNepalClock() {
+            const options = {
+                timeZone: 'Asia/Kathmandu',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+            const timeEl = document.getElementById('nepalTime');
+            if (timeEl) timeEl.textContent = formatter.format(new Date());
         }
 
         // THEME MANAGEMENT
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            const saved = localStorage.getItem('theme');
+            const isDark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
             if (isDark) {
                 document.documentElement.classList.add('dark');
                 document.getElementById('theme-icon').className = 'fa-solid fa-sun text-amber-400';
             } else {
                 document.documentElement.classList.remove('dark');
-                document.getElementById('theme-icon').className = 'fa-solid fa-moon text-gray-600';
+                document.getElementById('theme-icon').className = 'fa-solid fa-moon text-slate-600';
             }
         }
 
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-gray-600';
+            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-slate-600';
         }
 
-        // RENDER CATALOG & HERO VIEW
+        // CATEGORY & SEARCH FILTERING
+        function filterCategory(cat) {
+            currentCategory = cat;
+
+            // Header Nav Styling
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-600', 'dark:text-slate-300');
+            });
+            const activeNav = document.getElementById(`nav-${cat}`);
+            if (activeNav) {
+                activeNav.classList.remove('text-slate-600', 'dark:text-slate-300');
+                activeNav.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+            }
+
+            // Inner Tab Styling
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-300');
+            });
+            const activeTab = document.getElementById(`cat-${cat}`);
+            if (activeTab) {
+                activeTab.classList.remove('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-300');
+                activeTab.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+            }
+
+            // Title Update
+            const titleEl = document.getElementById('sectionTitle');
+            if (cat === 'psc') {
+                titleEl.innerHTML = '<i class="fa-solid fa-graduation-cap text-indigo-600"></i> PSC Study Notes';
+            } else if (cat === 'blog') {
+                titleEl.innerHTML = '<i class="fa-solid fa-pen-nib text-indigo-600"></i> English Language & Writing Blogs';
+            } else {
+                titleEl.innerHTML = '<i class="fa-solid fa-folder-open text-indigo-600"></i> All Study Materials';
+            }
+
+            renderCatalog();
+        }
+
+        function filterNotes() {
+            renderCatalog();
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            filterCategory('all');
+        }
+
+        // CATALOG RENDER
         function renderCatalog() {
             document.getElementById('catalogView').classList.remove('hidden');
             document.getElementById('articleView').classList.add('hidden');
-            document.title = "Chronicle - Modern English Insights & Essays";
+            document.title = "Study Assist — PSC Notes & English Blogs";
 
-            renderHero();
-            renderGrid();
-        }
-
-        function renderHero() {
-            const heroPost = posts.find(p => p.featured) || posts[0];
-            const heroContainer = document.getElementById('heroContent');
-            if (!heroPost || !heroContainer) return;
-
-            heroContainer.innerHTML = `
-                <span class="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 font-extrabold text-[10px] uppercase tracking-wider">
-                    Featured Insight
-                </span>
-                <h1 class="text-2xl sm:text-4xl font-extrabold leading-tight cursor-pointer hover:text-blue-200 transition" onclick="openArticle('${heroPost.id}')">
-                    ${heroPost.title}
-                </h1>
-                <p class="text-xs sm:text-sm text-gray-300 line-clamp-2">
-                    ${heroPost.excerpt}
-                </p>
-                <div class="pt-2 flex items-center space-x-4 text-xs font-medium">
-                    <span class="text-gray-300">${heroPost.author}</span>
-                    <span class="text-gray-500">•</span>
-                    <span class="text-gray-400">${heroPost.readTime}</span>
-                </div>
-                <button onclick="openArticle('${heroPost.id}')" class="mt-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg flex items-center gap-2">
-                    Read Full Article <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            `;
-        }
-
-        function renderGrid() {
             const grid = document.getElementById('postsGrid');
             const noResults = document.getElementById('noResults');
             const countEl = document.getElementById('articleCount');
             grid.innerHTML = '';
 
-            const searchQ = document.getElementById('searchInput').value.toLowerCase().trim();
+            const searchQ = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
 
-            const filtered = posts.filter(post => {
-                const matchesCat = currentCategory === 'All' || post.category === currentCategory;
+            const sourcePosts = currentCategory === 'psc' ? pscPosts : currentCategory === 'blog' ? blogPosts : allPosts;
+
+            const filtered = sourcePosts.filter(p => {
                 const matchesSearch = !searchQ || 
-                    post.title.toLowerCase().includes(searchQ) ||
-                    post.excerpt.toLowerCase().includes(searchQ) ||
-                    post.author.toLowerCase().includes(searchQ) ||
-                    (post.tags && post.tags.some(t => t.toLowerCase().includes(searchQ)));
-
-                return matchesCat && matchesSearch;
+                    p.title.toLowerCase().includes(searchQ) ||
+                    (p.category && p.category.toLowerCase().includes(searchQ)) ||
+                    (p.excerpt && p.excerpt.toLowerCase().includes(searchQ));
+                return matchesSearch;
             });
 
-            countEl.textContent = `Showing ${filtered.length} article${filtered.length === 1 ? '' : 's'}`;
+            countEl.textContent = `Showing ${filtered.length} item${filtered.length === 1 ? '' : 's'}`;
 
             if (filtered.length === 0) {
                 noResults.classList.remove('hidden');
@@ -573,75 +869,66 @@
             }
 
             filtered.forEach(post => {
-                const card = document.createElement('article');
-                card.className = "bg-white dark:bg-gray-900 rounded-3xl overflow-hidden border border-gray-200/80 dark:border-gray-800 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between group cursor-pointer";
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800/80 p-5 sm:p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group cursor-pointer relative";
+                
                 card.onclick = (e) => {
                     if (!e.target.closest('button')) openArticle(post.id);
                 };
 
+                const isBlog = post.type === 'blog';
+
                 card.innerHTML = `
                     <div>
-                        <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
-                            <img src="${post.image || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=600&q=80'}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <span class="absolute top-3 left-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md text-blue-600 dark:text-blue-400 font-bold text-[10px] uppercase px-3 py-1 rounded-full shadow-sm">
-                                ${post.category}
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-3 py-1 text-[10px] font-extrabold rounded-full ${isBlog ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : 'bg-indigo-100 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800'} uppercase tracking-wider">
+                                ${isBlog ? 'English Blog' : 'PSC Note'} • ${post.category || 'General'}
+                            </span>
+                            <span class="text-[11px] text-slate-400 font-medium flex items-center gap-1">
+                                <i class="fa-regular fa-clock"></i>${post.readTime || '5 min'}
                             </span>
                         </div>
-                        <div class="p-5 sm:p-6">
-                            <div class="flex items-center space-x-2 text-[11px] text-gray-400 mb-2 font-medium">
-                                <span>${post.date}</span>
-                                <span>•</span>
-                                <span>${post.readTime}</span>
-                            </div>
-                            <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
-                                ${post.title}
-                            </h3>
-                            <p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-3 leading-relaxed mb-4">
-                                ${post.excerpt}
-                            </p>
-                        </div>
+                        <h3 class="font-extrabold text-slate-900 dark:text-white text-base mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                            ${post.title}
+                        </h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed mb-4">
+                            ${post.excerpt || 'Click to view complete syllabus material...'}
+                        </p>
                     </div>
-                    <div class="px-5 sm:px-6 pb-5 pt-2 border-t border-gray-100 dark:border-gray-800/60 flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <img src="${post.authorAvatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80'}" class="w-6 h-6 rounded-full object-cover">
-                            <span class="text-xs font-semibold text-gray-700 dark:text-gray-300">${post.author}</span>
+                    <div>
+                        ${post.pdfUrl ? '<div class="mb-3 text-[11px] text-red-500 font-extrabold flex items-center gap-1.5"><i class="fa-solid fa-file-pdf"></i> PDF Resource Attached</div>' : ''}
+                        <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                            <span class="font-mono text-[11px]">${post.date}</span>
+                            <span class="text-indigo-600 dark:text-indigo-400 font-extrabold group-hover:translate-x-1 transition flex items-center gap-1">
+                                Read Resource <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </span>
                         </div>
-                        <span class="text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition flex items-center gap-1">
-                            Read <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </span>
                     </div>
                 `;
+
+                if (secretEditMode) {
+                    const editBtn = document.createElement('button');
+                    editBtn.className = "absolute top-3 right-3 bg-amber-500 text-white p-2 rounded-xl text-xs font-bold shadow hover:bg-amber-600";
+                    editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
+                    editBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        openAdminForEdit(post.id);
+                    };
+                    card.appendChild(editBtn);
+                }
+
                 grid.appendChild(card);
             });
         }
 
-        // CATEGORY & SEARCH FILTER HANDLERS
-        function filterByCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.cat-pill, .nav-cat-btn').forEach(btn => {
-                if (btn.textContent.trim().includes(cat) || (cat === 'All' && btn.textContent.trim().includes('All'))) {
-                    btn.classList.add('bg-blue-600', 'text-white');
-                    btn.classList.remove('bg-gray-100', 'text-gray-600');
-                } else {
-                    btn.classList.remove('bg-blue-600', 'text-white');
-                }
-            });
-            document.getElementById('sectionTitle').innerHTML = `<i class="fa-solid fa-newspaper text-blue-600"></i> ${cat === 'All' ? 'Latest Articles' : cat + ' Articles'}`;
-            renderGrid();
-        }
-
-        function filterPosts() {
-            renderGrid();
-        }
-
-        // ARTICLE DETAIL VIEW
+        // ARTICLE VIEW RENDER
         function openArticle(id) {
             window.history.pushState({}, '', `?id=${id}`);
             renderArticleView(id);
         }
 
         function renderArticleView(id) {
-            const post = posts.find(p => p.id === id);
+            const post = allPosts.find(p => p.id === id);
             if (!post) {
                 showCatalog();
                 return;
@@ -651,44 +938,34 @@
             document.getElementById('articleView').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            document.title = `${post.title} - Chronicle`;
-            document.getElementById('artCategory').textContent = post.category;
-            document.getElementById('artReadTime').textContent = post.readTime;
+            document.title = `${post.title} — Study Assist`;
+            document.getElementById('artCategory').textContent = `${post.type === 'blog' ? 'English Blog' : 'PSC Note'} • ${post.category || 'General'}`;
+            document.getElementById('artReadTime').textContent = post.readTime || '5 min read';
             document.getElementById('artTitle').textContent = post.title;
-            document.getElementById('artAuthorName').textContent = post.author;
-            document.getElementById('artAuthorRole').textContent = post.authorRole || 'Contributor';
-            document.getElementById('artAuthorAvatar').src = post.authorAvatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80';
             document.getElementById('artDate').textContent = post.date;
             document.getElementById('artContent').innerHTML = post.content;
             document.getElementById('commentPostId').value = post.id;
 
-            // Cover Image
-            const coverContainer = document.getElementById('artCoverContainer');
-            const coverImage = document.getElementById('artCoverImage');
-            if (post.image) {
-                coverImage.src = post.image;
-                coverContainer.classList.remove('hidden');
+            // PDF Download Banner Handling
+            const pdfBanner = document.getElementById('pdfDownloadBanner');
+            const pdfLink = document.getElementById('pdfDownloadLink');
+            if (post.pdfUrl) {
+                pdfLink.href = post.pdfUrl;
+                pdfBanner.classList.remove('hidden');
             } else {
-                coverContainer.classList.add('hidden');
+                pdfBanner.classList.add('hidden');
             }
 
-            // Tags
-            const tagsContainer = document.getElementById('artTags');
-            tagsContainer.innerHTML = '';
-            if (post.tags && post.tags.length > 0) {
-                post.tags.forEach(tag => {
-                    const pill = document.createElement('span');
-                    pill.className = "px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-semibold rounded-lg text-xs";
-                    pill.textContent = `#${tag}`;
-                    tagsContainer.appendChild(pill);
-                });
+            // Secret controls setup
+            const secCtrl = document.getElementById('secretEditControls');
+            if (secretEditMode) {
+                secCtrl.classList.remove('hidden');
+                document.getElementById('editArticleBtn').onclick = () => openAdminForEdit(post.id);
+                document.getElementById('deleteArticleBtn').onclick = () => deletePost(post.id);
+            } else {
+                secCtrl.classList.add('hidden');
             }
 
-            // Action Buttons
-            document.getElementById('editArticleBtn').onclick = () => openEditModal(post.id);
-            document.getElementById('deleteArticleBtn').onclick = () => deletePost(post.id);
-
-            // Comments
             renderComments(post);
         }
 
@@ -707,167 +984,255 @@
             count.textContent = comments.length;
 
             if (comments.length === 0) {
-                list.innerHTML = `<p class="text-xs text-gray-400 italic">No comments yet. Be the first to share your perspective!</p>`;
+                list.innerHTML = `<p class="text-xs text-slate-400 italic">No feedback submitted yet. Be the first to start a conversation!</p>`;
                 return;
             }
 
             comments.forEach(c => {
                 const commentEl = document.createElement('div');
-                commentEl.className = "bg-gray-50 dark:bg-gray-800/40 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 space-y-1";
+                commentEl.className = "bg-slate-50 dark:bg-slate-800/40 p-4 rounded-2xl border border-slate-100 dark:border-slate-800/80 space-y-1.5 text-xs";
                 commentEl.innerHTML = `
-                    <div class="flex items-center justify-between">
-    <!-- Admin Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
-            <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-                <h3 class="font-bold text-slate-800 flex items-center gap-2 text-lg"><i class="fa-solid fa-square-plus text-indigo-600"></i> Post Content / Editor</h3>
-                <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600 text-lg p-1"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="p-6 overflow-y-auto space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Type / Section</label>
-                        <select id="adminType" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500">
-                            <option value="psc">PSC Note</option>
-                            <option value="blog">English Blog</option>
-                        </select>
+                    <div class="flex items-center justify-between font-bold text-slate-800 dark:text-slate-200">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-user text-indigo-500"></i>${c.author}</span>
+                        <span class="text-[10px] text-slate-400 font-mono">${c.date}</span>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Category Tag</label>
-                        <input type="text" id="adminCategory" placeholder="e.g. Grammar, GK, Tech, Essay" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Reading Time</label>
-                        <input type="text" id="adminReadTime" placeholder="e.g. 5 min read" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Title</label>
-                    <input type="text" id="adminTitle" placeholder="Article or blog title" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500">
-                </div>
-                
-                <!-- Formatting Toolbar -->
-                <div class="border border-slate-200 rounded-xl overflow-hidden">
-                    <div class="bg-slate-100 border-b border-slate-200 p-2 flex flex-wrap gap-2 items-center">
-                        <button type="button" onclick="formatDoc('bold')" class="p-1.5 px-3 bg-white border rounded hover:bg-slate-50 text-xs font-bold" title="Bold">B</button>
-                        <button type="button" onclick="formatDoc('italic')" class="p-1.5 px-3 bg-white border rounded hover:bg-slate-50 text-xs italic" title="Italic">I</button>
-                        <button type="button" onclick="formatDoc('h2')" class="p-1.5 px-3 bg-white border rounded hover:bg-slate-50 text-xs font-semibold" title="Heading">H2</button>
-                        <button type="button" onclick="insertTable()" class="p-1.5 px-3 bg-white border border-indigo-200 text-indigo-600 rounded hover:bg-indigo-50 text-xs font-semibold flex items-center gap-1"><i class="fa-solid fa-table"></i> Insert Table</button>
-                    </div>
-                    <textarea id="adminContent" rows="10" placeholder="Write html/markdown formatted content here..." class="w-full p-3 text-sm focus:outline-none font-mono"></textarea>
-                </div>
-            </div>
-            <div class="p-4 border-t border-slate-100 bg-slate-50 flex justify-end gap-3">
-                <button onclick="toggleAdminModal()" class="px-4 py-2 rounded-xl text-sm text-slate-600 font-medium hover:bg-slate-200">Cancel</button>
-                <button onclick="savePost()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold shadow-md transition-all">Save & Publish</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // ... existing clock and state code ...
-        let currentCategory = 'all';
-        let postsData = [
-            {
-                id: 1,
-                type: 'psc',
-                category: 'GK & Governance',
-                title: 'Nepal Constitution: Rights & Duties Summary',
-                readTime: '6 min read',
-                date: 'Oct 20, 2026',
-                content: '<h2>Key Fundamental Rights</h2><p>Overview of Constitutional Rights in Nepal under the 2072 Constitution...</p>'
-            },
-            {
-                id: 2,
-                type: 'blog',
-                category: 'English Grammar',
-                title: 'Mastering Subject-Verb Agreement in English Essays',
-                readTime: '4 min read',
-                date: 'Oct 22, 2026',
-                content: '<h2>Understanding Core Rules</h2><p>Subject-verb agreement is vital for clear writing in competitive exams and general blogging...</p>'
-            }
-        ];
-
-        function filterCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
-                btn.classList.add('bg-slate-100', 'text-slate-600');
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed pl-5">${c.text}</p>
+                `;
+                list.appendChild(commentEl);
             });
-            const activeBtn = document.getElementById(`cat-${cat}`);
-            if(activeBtn) {
-                activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
-                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
-            }
-            renderPosts();
         }
 
-        function renderPosts() {
-            const grid = document.getElementById('postsGrid');
-            const searchVal = (document.getElementById('searchInput')?.value || '').toLowerCase();
-            
-            const filtered = postsData.filter(post => {
-                const matchesCat = currentCategory === 'all' || post.type === currentCategory;
-                const matchesSearch = post.title.toLowerCase().includes(searchVal) || post.category.toLowerCase().includes(searchVal);
-                return matchesCat && matchesSearch;
+        function submitComment(e) {
+            e.preventDefault();
+            const postId = document.getElementById('commentPostId').value;
+            const author = document.getElementById('commAuthor').value.trim();
+            const text = document.getElementById('commText').value.trim();
+
+            const post = allPosts.find(p => p.id === postId);
+            if (!post) return;
+
+            if (!post.comments) post.comments = [];
+            post.comments.push({
+                id: Date.now().toString(),
+                author: author,
+                text: text,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
             });
 
-            if(filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">No posts or blogs found matching your criteria.</div>`;
-                return;
-            }
+            saveToStorage();
+            renderComments(post);
 
-            grid.innerHTML = filtered.map(post => `
-                <div class="bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-lg transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="px-2.5 py-1 text-xs font-semibold rounded-lg ${post.type === 'blog' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-indigo-50 text-indigo-600 border border-indigo-100'}">
-                                ${post.type === 'blog' ? 'English Blog' : 'PSC Note'} • ${post.category}
-                            </span>
-                            <span class="text-xs text-slate-400"><i class="fa-regular fa-clock mr-1"></i>${post.readTime}</span>
-                        </div>
-                        <h3 class="font-bold text-slate-800 text-lg mb-2 hover:text-indigo-600 transition-colors cursor-pointer" onclick="openArticle(${post.id})">${post.title}</h3>
-                    </div>
-                    <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <span>${post.date}</span>
-                        <button onclick="openArticle(${post.id})" class="text-indigo-600 font-semibold hover:text-indigo-700 flex items-center gap-1">Read Post <i class="fa-solid fa-arrow-right"></i></button>
-                    </div>
-                </div>
-            `).join('');
+            document.getElementById('commAuthor').value = '';
+            document.getElementById('commEmail').value = '';
+            document.getElementById('commText').value = '';
         }
 
-        function savePost() {
+        // ADMIN MODAL & DUAL JSON ROUTING
+        function toggleAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.toggle('hidden');
+            updateTargetJsonNotice();
+        }
+
+        function updateTargetJsonNotice() {
             const type = document.getElementById('adminType').value;
-            const category = document.getElementById('adminCategory').value || 'General';
-            const title = document.getElementById('adminTitle').value;
-            const readTime = document.getElementById('adminReadTime').value || '3 min read';
-            const content = document.getElementById('adminContent').value;
+            const notice = document.getElementById('targetJsonNotice');
+            if (notice) {
+                notice.textContent = `Targeting: data/${type === 'psc' ? 'psc.json' : 'blogs.json'}`;
+            }
+        }
 
-            if(!title || !content) {
-                alert('Please fill out both title and content.');
+        function openAdminForEdit(id) {
+            const post = allPosts.find(p => p.id === id);
+            if (!post) return;
+            editingPostId = id;
+
+            document.getElementById('adminType').value = post.type || 'psc';
+            document.getElementById('adminCategory').value = post.category || '';
+            document.getElementById('adminReadTime').value = post.readTime || '';
+            document.getElementById('adminTitle').value = post.title || '';
+            document.getElementById('adminContent').value = post.content || '';
+
+            toggleAdminModal();
+        }
+
+        function savePostAdmin() {
+            const type = document.getElementById('adminType').value; // 'psc' or 'blog'
+            const category = document.getElementById('adminCategory').value || 'General';
+            const readTime = document.getElementById('adminReadTime').value || '5 min read';
+            const title = document.getElementById('adminTitle').value.trim();
+            const content = document.getElementById('adminContent').value.trim();
+            const pdfFileInput = document.getElementById('adminPdfFile');
+
+            if (!title || !content) {
+                alert('Title and Article Body Content are required.');
                 return;
             }
 
-            const newPost = {
-                id: Date.now(),
-                type: type,
-                category: category,
-                title: title,
-                readTime: readTime,
-                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-                content: content
-            };
+            let pdfUrl = '';
+            if (pdfFileInput && pdfFileInput.files.length > 0) {
+                const file = pdfFileInput.files[0];
+                pdfUrl = URL.createObjectURL(file);
+            }
 
-            postsData.unshift(newPost);
+            const targetArray = type === 'psc' ? pscPosts : blogPosts;
+
+            if (editingPostId) {
+                let post = allPosts.find(p => p.id === editingPostId);
+                if (post) {
+                    post.type = type;
+                    post.category = category;
+                    post.readTime = readTime;
+                    post.title = title;
+                    post.content = content;
+                    if (pdfUrl) post.pdfUrl = pdfUrl;
+                }
+                editingPostId = null;
+            } else {
+                const newPost = {
+                    id: `${type}-${Date.now()}`,
+                    type: type,
+                    category: category,
+                    readTime: readTime,
+                    title: title,
+                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                    excerpt: content.replace(/<[^>]*>?/gm, '').substring(0, 120) + '...',
+                    content: content,
+                    pdfUrl: pdfUrl,
+                    comments: []
+                };
+                targetArray.unshift(newPost);
+            }
+
+            saveToStorage();
+            combineAllPosts();
+            updateNavBadges();
             toggleAdminModal();
-            renderPosts();
-            
-            // Reset form
-            document.getElementById('adminTitle').value = '';
-            document.getElementById('adminContent').value = '';
+            filterCategory(type);
+
+            // GitHub Sync Push if Credentials provided
+            const repo = document.getElementById('ghRepo').value.trim();
+            const token = document.getElementById('ghToken').value.trim();
+            if (repo && token) {
+                syncToGitHub(repo, token, type);
+            }
         }
 
-        // ... existing helper script functions ...
+        function deletePost(id) {
+            if (confirm('Are you sure you want to delete this study item?')) {
+                pscPosts = pscPosts.filter(p => p.id !== id);
+                blogPosts = blogPosts.filter(p => p.id !== id);
+                saveToStorage();
+                combineAllPosts();
+                updateNavBadges();
+                showCatalog();
+            }
+        }
+
+        // TOOLBAR HELPER TOOLS
+        function formatDoc(cmd) {
+            const textarea = document.getElementById('adminContent');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const sel = textarea.value.substring(start, end);
+
+            let tag = '';
+            if (cmd === 'b') tag = `<b>${sel || 'Bold Text'}</b>`;
+            if (cmd === 'i') tag = `<i>${sel || 'Italic Text'}</i>`;
+            if (cmd === 'h2') tag = `\n<h2 class="text-xl font-bold my-3">${sel || 'Heading 2'}</h2>\n`;
+            if (cmd === 'h3') tag = `\n<h3 class="text-lg font-bold my-2">${sel || 'Heading 3'}</h3>\n`;
+
+            textarea.value = textarea.value.substring(0, start) + tag + textarea.value.substring(end);
+        }
+
+        function insertTableBuilder() {
+            const rows = prompt("Enter number of rows:", "3");
+            const cols = prompt("Enter number of columns:", "2");
+            if (!rows || !cols) return;
+
+            let tableHtml = '\n<div class="overflow-x-auto my-4">\n<table class="w-full text-left border-collapse border border-slate-300 dark:border-slate-700 text-xs">\n<thead>\n<tr class="bg-indigo-50 dark:bg-indigo-950 text-indigo-900 dark:text-indigo-200">\n';
+            for (let c = 0; c < cols; c++) {
+                tableHtml += `<th class="border border-slate-300 dark:border-slate-700 p-2 font-bold">Header ${c + 1}</th>\n`;
+            }
+            tableHtml += '</tr>\n</thead>\n<tbody>\n';
+
+            for (let r = 0; r < rows; r++) {
+                tableHtml += '<tr>\n';
+                for (let c = 0; c < cols; c++) {
+                    tableHtml += `<td class="border border-slate-300 dark:border-slate-700 p-2">Data ${r + 1}-${c + 1}</td>\n`;
+                }
+                tableHtml += '</tr>\n';
+            }
+            tableHtml += '</tbody>\n</table>\n</div>\n';
+
+            const textarea = document.getElementById('adminContent');
+            textarea.value += tableHtml;
+        }
+
+        function promptMedia(type) {
+            const textarea = document.getElementById('adminContent');
+            if (type === 'img') {
+                const url = prompt("Enter Image URL:");
+                if (url) textarea.value += `\n<img src="${url}" class="rounded-2xl max-h-96 w-full object-cover my-4 shadow-md" alt="Article media">\n`;
+            } else if (type === 'youtube') {
+                const url = prompt("Enter YouTube Embed/Watch URL:");
+                if (url) {
+                    let embedUrl = url;
+                    if (url.includes('watch?v=')) embedUrl = url.replace('watch?v=', 'embed/');
+                    textarea.value += `\n<div class="video-container"><iframe src="${embedUrl}" frameborder="0" allowfullscreen></iframe></div>\n`;
+                }
+            } else if (type === 'mp4') {
+                const url = prompt("Enter Direct MP4 Video URL:");
+                if (url) {
+                    textarea.value += `\n<div class="video-container"><video src="${url}" controls class="w-full rounded-2xl"></video></div>\n`;
+                }
+            }
+        }
+
+        // GITHUB DUAL FILE COMMIT SYNC
+        async function syncToGitHub(repo, token, type) {
+            try {
+                const filePath = type === 'psc' ? 'data/psc.json' : 'data/blogs.json';
+                const dataset = type === 'psc' ? pscPosts : blogPosts;
+                const apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+
+                let sha = '';
+                const getRes = await fetch(apiUrl, {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                }
+
+                const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(dataset, null, 2))));
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: `Sync ${filePath} via Study Assist Admin`,
+                        content: contentEncoded,
+                        sha: sha || undefined
+                    })
+                });
+
+                if (putRes.ok) {
+                    alert(`Successfully committed and synced dataset with GitHub (${filePath})!`);
+                } else {
+                    alert(`GitHub Sync failed for ${filePath}. Check repository permissions.`);
+                }
+            } catch(e) {
+                console.error('GitHub Sync Error:', e);
+            }
+        }
+
+        function dismissAd() {
+            const ad = document.getElementById('adContainer');
+            if (ad) ad.style.display = 'none';
+        }
     </script>
 </body>
 </html>
