@@ -21,9 +21,7 @@
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class'
-        }
+        tailwind.config = { darkMode: 'class' }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -38,24 +36,7 @@
             margin: 1rem 0;
         }
         .video-container iframe, .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 0.75rem;
-        }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 0.75rem;
         }
     </style>
 </head>
@@ -94,20 +75,19 @@
     <!-- MAIN CATALOG VIEW -->
     <main id="catalogView" class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6">
         <section id="notes-section">
-            <!-- Filter Bar -->
             <div class="mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
                 <div class="flex flex-wrap items-center gap-2">
-                    <button onclick="setCategoryFilter('All')" id="btn-cat-all" class="px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition">All Topics</button>
-                    <button onclick="setCategoryFilter('PSC Notes')" id="btn-cat-psc" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">PSC Notes</button>
-                    <button onclick="setCategoryFilter('English Blogs')" id="btn-cat-blogs" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">English Blogs</button>
+                    <button onclick="setCategoryFilter('All')" id="btn-cat-all" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition">All Resources</button>
+                    <button onclick="setCategoryFilter('PSC Notes')" id="btn-cat-psc" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">PSC Notes</button>
+                    <button onclick="setCategoryFilter('English Blogs')" id="btn-cat-blogs" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">English Blogs</button>
                 </div>
                 <div class="relative w-full md:w-80">
-                    <input type="text" id="searchInput" onkeyup="filterNotes()" placeholder="Search notes and articles..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="searchInput" onkeyup="filterNotes()" placeholder="Search notes and blogs..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
                 </div>
             </div>
 
-            <!-- Dynamic Grouped Notes Container -->
+            <!-- Dynamic Container -->
             <div id="notesContainer" class="space-y-8"></div>
         </section>
     </main>
@@ -126,57 +106,16 @@
             </div>
         </div>
 
-        <!-- AD CONTAINER -->
-        <div id="skippableAdContainer" class="relative mb-6 p-4 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-center shadow-sm">
-            <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-200 dark:border-gray-700">
-                <span class="text-[10px] font-bold tracking-wider uppercase text-gray-400">Advertisement</span>
-                <button onclick="skipAd()" class="text-xs bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold py-1 px-3 rounded-lg transition flex items-center gap-1">
-                    <i class="fa-solid fa-xmark"></i> Skip Ad
-                </button>
-            </div>
-            <div id="adSlot" class="min-h-[90px] flex flex-col items-center justify-center overflow-hidden gap-3">
-                <ins class="adsbygoogle"
-                     style="display:block; width:100%;"
-                     data-ad-client="ca-pub-2333465940330507"
-                     data-ad-slot="auto"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
-
-        <article class="bg-white dark:bg-gray-800 rounded-2xl p-5 sm:p-10 shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
-            <!-- Blog Cover Image Header (if applicable) -->
-            <div id="articleCoverContainer" class="hidden -mx-5 -mt-5 sm:-mx-10 sm:-mt-10 mb-8 overflow-hidden">
-                <img id="articleCoverImage" src="" alt="Article Banner" class="w-full max-h-[380px] object-cover">
-            </div>
-
+        <article class="bg-white dark:bg-gray-800 rounded-2xl p-5 sm:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
             <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
-                <div class="flex flex-wrap items-center gap-2 mb-3">
-                    <span id="articleCategoryBadge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 uppercase tracking-wide"></span>
-                    <span id="articleReadTime" class="text-xs text-gray-400 font-medium flex items-center gap-1"><i class="fa-regular fa-clock"></i> <span></span></span>
-                </div>
-                
                 <div class="flex items-start sm:items-center gap-3 mb-3">
                     <div id="articleIcon" class="p-3 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-xl text-2xl shrink-0"></div>
                     <div>
                         <span id="articleTopic" class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide block mb-1"></span>
-                        <h1 id="articleTitle" class="text-2xl sm:text-4xl font-extrabold text-gray-900 dark:text-white select-text leading-tight"></h1>
+                        <h1 id="articleTitle" class="text-xl sm:text-3xl font-extrabold text-gray-900 dark:text-white select-text"></h1>
                     </div>
                 </div>
-                
-                <!-- Editorial Author Signature -->
-                <div id="articleAuthorBar" class="flex items-center gap-3 mt-4 pt-4 border-t border-gray-100 dark:border-gray-700/60">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold flex items-center justify-center text-xs">SA</div>
-                    <div>
-                        <p id="articleAuthor" class="text-xs font-bold text-gray-800 dark:text-gray-200">By Study Assist Editorial</p>
-                        <p id="articleDate" class="text-[11px] text-gray-400">Published Educational Article</p>
-                    </div>
-                </div>
-
-                <p id="articleDesc" class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic select-text mt-3"></p>
+                <p id="articleDesc" class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic select-text"></p>
             </div>
 
             <!-- Attached PDF Bar -->
@@ -193,48 +132,12 @@
                 </a>
             </div>
 
-            <!-- Article Body -->
             <div id="articleContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200 space-y-4 select-text overflow-x-auto"></div>
-
-            <!-- Feedback Form -->
-            <div class="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
-                <div class="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-4 sm:p-6 border border-gray-100 dark:border-gray-700">
-                    <h3 class="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-1">
-                        <i class="fa-regular fa-comment-dots text-blue-600"></i> Leave Feedback
-                    </h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">Spotted a typo or have suggestions? Send your feedback below.</p>
-                    
-                    <form id="feedbackForm" onsubmit="submitFeedback(event)" class="space-y-3">
-                        <input type="hidden" id="feedbackNoteId">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <input type="text" id="fbName" placeholder="Your Name (Optional)" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <select id="fbRating" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-                                <option value="4">⭐⭐⭐⭐ Good</option>
-                                <option value="3">⭐⭐⭐ Needs Improvement</option>
-                                <option value="2">⭐⭐ Poor</option>
-                                <option value="1">⭐ Inaccurate</option>
-                            </select>
-                        </div>
-                        <textarea id="fbMessage" rows="3" required placeholder="Write your feedback..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                        <button type="submit" id="fbSubmitBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-xl text-xs transition flex items-center justify-center gap-2 w-full sm:w-auto">
-                            <i class="fa-solid fa-paper-plane"></i> Submit Feedback
-                        </button>
-                    </form>
-                </div>
-            </div>
         </article>
     </main>
 
     <!-- Footer -->
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
-        <div class="flex justify-center items-center space-x-4 mb-3">
-            <a href="about us.html" class="hover:underline">About Us</a>
-            <span>•</span>
-            <a href="contact us.html" class="hover:underline">Contact Us</a>
-            <span>•</span>
-            <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
-        </div>
         <p>&copy; 2026 Study Assist. All rights reserved.</p>
     </footer>
 
@@ -243,7 +146,7 @@
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">
                 <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                    <i class="fa-brands fa-github text-blue-600"></i> GitHub Content Admin
+                    <i class="fa-brands fa-github text-blue-600"></i> Dual-File GitHub Admin
                 </h3>
                 <button onclick="closeModal('adminModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
@@ -266,48 +169,33 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Select Existing Entry to Edit</label>
+                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Select Existing Entry</label>
                         <select id="selectNoteToEdit" onchange="populateFormForEdit()" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-xs font-semibold text-blue-600 dark:text-blue-400">
                             <option value="">➕ Create New Entry</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Resource Category</label>
+                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Target Category (Determines Destination File)</label>
                         <select id="formCategory" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-xs font-semibold text-gray-800 dark:text-gray-200">
-                            <option value="PSC Notes">PSC Notes</option>
-                            <option value="English Blogs">English Blogs</option>
+                            <option value="PSC Notes">PSC Notes (Saves to pscnotes.json)</option>
+                            <option value="English Blogs">English Blogs (Saves to blogs.json)</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Topic / Chapter Name</label>
-                    <input type="text" id="formTopic" required placeholder="e.g. इतिहास, Livelihood, Essays" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                    <input type="text" id="formTopic" required placeholder="e.g. इतिहास, आर्थिक विकास, Technology" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Code / Sequence</label>
-                        <input type="text" id="formCode" required placeholder="e.g. 1., Topic 1.1" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                        <input type="text" id="formCode" required placeholder="e.g. 1., Blog 1.1" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">FontAwesome Icon</label>
                         <input type="text" id="formIcon" required placeholder="fa-solid fa-book" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
-                    </div>
-                </div>
-
-                <!-- Blog Editorial Meta Fields -->
-                <div class="p-3 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 space-y-3">
-                    <span class="text-xs font-bold text-gray-700 dark:text-gray-300 flex items-center gap-1.5"><i class="fa-solid fa-newspaper text-blue-600"></i> Blog / Editorial Styling Extras</span>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="sm:col-span-2">
-                            <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Cover Image URL (Blogs)</label>
-                            <input type="text" id="formCover" placeholder="https://images.unsplash.com/photo-..." class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Est. Read Time</label>
-                            <input type="text" id="formReadTime" placeholder="e.g. 5 min read" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                        </div>
                     </div>
                 </div>
 
@@ -321,99 +209,10 @@
                     <input type="text" id="formDesc" required placeholder="Brief preview text" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
                 </div>
 
-                <!-- TABLE BUILDER -->
-                <div class="border border-indigo-200 dark:border-indigo-800 bg-indigo-50/40 dark:bg-indigo-950/20 p-4 rounded-xl space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-2">
-                            <i class="fa-solid fa-table"></i> Interactive Table Generator
-                        </span>
-                        <button type="button" onclick="toggleTableBuilder()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-lg transition">
-                            <i class="fa-solid fa-sliders"></i> Toggle Generator
-                        </button>
-                    </div>
-
-                    <div id="tableBuilderContainer" class="hidden space-y-3 pt-2">
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                            <div>
-                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Rows</label>
-                                <input type="number" id="tblRows" value="2" min="1" max="50" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Columns</label>
-                                <input type="number" id="tblCols" value="2" min="1" max="20" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Table Header</label>
-                                <select id="tblHeaderToggle" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                                    <option value="yes">Include Header</option>
-                                    <option value="no">No Header</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 mb-1">Border Style</label>
-                                <select id="tblBorder" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
-                                    <option value="bordered">Bordered</option>
-                                    <option value="borderless">Borderless</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="overflow-x-auto max-h-60 border border-gray-200 dark:border-gray-700 rounded-lg p-2 bg-white dark:bg-gray-900">
-                            <table id="tblInteractiveGrid" class="w-full text-xs border-collapse"></table>
-                        </div>
-
-                        <button type="button" onclick="insertTableToContent()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-plus"></i> Insert Table into Content Area
-                        </button>
-                    </div>
-                </div>
-
-                <!-- RICH EDITOR SECTION -->
+                <!-- CONTENT EDITOR -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Content Body (HTML & Rich Media Supported)</label>
-                    
-                    <!-- Toolbar Controls -->
-                    <div class="flex flex-wrap gap-1.5 p-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-t-xl text-xs">
-                        <button type="button" onclick="applyFormat('b')" title="Bold" class="p-1.5 px-2 bg-white dark:bg-gray-700 hover:bg-gray-200 rounded border border-gray-200 dark:border-gray-600 font-bold"><i class="fa-solid fa-bold"></i></button>
-                        <button type="button" onclick="applyFormat('i')" title="Italic" class="p-1.5 px-2 bg-white dark:bg-gray-700 hover:bg-gray-200 rounded border border-gray-200 dark:border-gray-600"><i class="fa-solid fa-italic"></i></button>
-                        <button type="button" onclick="applyFormat('u')" title="Underline" class="p-1.5 px-2 bg-white dark:bg-gray-700 hover:bg-gray-200 rounded border border-gray-200 dark:border-gray-600"><i class="fa-solid fa-underline"></i></button>
-                        <button type="button" onclick="applyFormat('s')" title="Strikethrough" class="p-1.5 px-2 bg-white dark:bg-gray-700 hover:bg-gray-200 rounded border border-gray-200 dark:border-gray-600"><i class="fa-solid fa-strikethrough"></i></button>
-
-                        <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-600 self-center mx-1"></div>
-
-                        <!-- FONT FAMILY -->
-                        <select onchange="applyFontFamily(this.value); this.value='';" title="Font Family" class="p-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded text-xs">
-                            <option value="">Font Family</option>
-                            <option value="sans-serif">Sans-Serif (Standard)</option>
-                            <option value="serif">Serif (Classic)</option>
-                            <option value="monospace">Monospace (Code)</option>
-                            <option value="'Mukta', sans-serif">Devanagari / Nepali</option>
-                        </select>
-
-                        <!-- FONT SIZE -->
-                        <select onchange="applyFontSize(this.value); this.value='';" title="Font Size" class="p-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded text-xs">
-                            <option value="">Font Size</option>
-                            <option value="text-xs">Small</option>
-                            <option value="text-sm">Normal</option>
-                            <option value="text-lg">Large</option>
-                            <option value="text-xl">Extra Large</option>
-                        </select>
-
-                        <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-600 self-center mx-1"></div>
-
-                        <button type="button" onclick="applyFormat('h2')" title="Heading 2" class="p-1.5 px-2 font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 rounded border border-gray-200 dark:border-gray-600">H2</button>
-                        <button type="button" onclick="applyFormat('h3')" title="Heading 3" class="p-1.5 px-2 font-bold bg-white dark:bg-gray-700 hover:bg-gray-200 rounded border border-gray-200 dark:border-gray-600">H3</button>
-                        <button type="button" onclick="applyFormat('ul')" title="Bullet List" class="p-1.5 px-2 bg-white dark:bg-gray-700 hover:bg-gray-200 rounded border border-gray-200 dark:border-gray-600"><i class="fa-solid fa-list-ul"></i></button>
-                        
-                        <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-600 self-center mx-1"></div>
-
-                        <!-- LINK & MEDIA TOOLS -->
-                        <button type="button" onclick="insertLinkPrompt()" title="Insert URL Link" class="p-1.5 px-2 bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 rounded border border-indigo-200 dark:border-indigo-700 font-semibold"><i class="fa-solid fa-link"></i> Link</button>
-                        <button type="button" onclick="insertImagePrompt()" title="Insert Image" class="p-1.5 px-2 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded border border-blue-200 dark:border-blue-700 font-semibold"><i class="fa-solid fa-image"></i> Image</button>
-                        <button type="button" onclick="insertYoutubePrompt()" title="Insert YouTube Video" class="p-1.5 px-2 bg-red-50 dark:bg-red-900/40 text-red-600 dark:text-red-300 rounded border border-red-200 dark:border-red-700 font-semibold"><i class="fa-solid fa-video"></i> YouTube</button>
-                    </div>
-
-                    <textarea id="formContent" rows="8" required placeholder="Write your content HTML here..." class="w-full p-2.5 rounded-b-xl border border-t-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-mono focus:outline-none"></textarea>
+                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Content Body (HTML Supported)</label>
+                    <textarea id="formContent" rows="8" required placeholder="Write your content here..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-mono focus:outline-none"></textarea>
                 </div>
 
                 <div>
@@ -423,7 +222,7 @@
 
                 <div class="flex gap-3 pt-2">
                     <button type="submit" id="saveBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm transition">
-                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to data/notes.json
+                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Target JSON File
                     </button>
                 </div>
             </form>
@@ -432,97 +231,22 @@
 
     <!-- SCRIPT ENGINE -->
     <script>
+        let pscNotes = [];
+        let englishBlogs = [];
         let globalNotes = [];
         let currentCategory = 'All';
         let editModeActive = false;
 
-        // LIVE NEPAL TIME (UTC+5:45)
         function updateNepalClock() {
             const now = new Date();
             const timeStr = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kathmandu', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }).format(now);
             const dateStr = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kathmandu', month: 'short', day: '2-digit', year: 'numeric' }).format(now);
-
-            const timeEl = document.getElementById('nepalTime');
-            const dateEl = document.getElementById('nepalDate');
-            if (timeEl) timeEl.textContent = timeStr;
-            if (dateEl) dateEl.textContent = dateStr;
+            if (document.getElementById('nepalTime')) document.getElementById('nepalTime').textContent = timeStr;
+            if (document.getElementById('nepalDate')) document.getElementById('nepalDate').textContent = dateStr;
         }
         setInterval(updateNepalClock, 1000);
         updateNepalClock();
 
-        function skipAd() {
-            const container = document.getElementById('skippableAdContainer');
-            if (container) container.style.display = 'none';
-        }
-
-        // TEXT FORMATTING TOOLS
-        function applyFormat(tag) {
-            const textarea = document.getElementById('formContent');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const selectedText = textarea.value.substring(start, end);
-            let formattedText = '';
-
-            if (tag === 'ul') formattedText = `<ul>\n  <li>${selectedText || 'List item'}</li>\n</ul>`;
-            else if (tag === 'h2') formattedText = `<h2 class="text-xl font-bold my-2">${selectedText || 'Heading'}</h2>`;
-            else if (tag === 'h3') formattedText = `<h3 class="text-lg font-semibold my-2">${selectedText || 'Subheading'}</h3>`;
-            else formattedText = `<${tag}>${selectedText || 'text'}</${tag}>`;
-
-            textarea.setRangeText(formattedText, start, end, 'select');
-            textarea.focus();
-        }
-
-        function applyFontFamily(font) {
-            if (!font) return;
-            const textarea = document.getElementById('formContent');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const text = textarea.value.substring(start, end) || 'Sample text';
-            insertAtCursor(`<span style="font-family: ${font};">${text}</span>`);
-        }
-
-        function applyFontSize(sizeClass) {
-            if (!sizeClass) return;
-            const textarea = document.getElementById('formContent');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            const text = textarea.value.substring(start, end) || 'Sample text';
-            insertAtCursor(`<span class="${sizeClass}">${text}</span>`);
-        }
-
-        function insertLinkPrompt() {
-            const url = prompt("Enter Target URL (e.g. https://example.com):");
-            if (!url) return;
-            const text = prompt("Enter Link Display Text:", "Click Here") || "Link";
-            insertAtCursor(`<a href="${url}" target="_blank" class="text-blue-600 dark:text-blue-400 font-semibold underline hover:text-blue-800">${text}</a>`);
-        }
-
-        function insertImagePrompt() {
-            const url = prompt("Enter Image URL or path (e.g. https://example.com/photo.jpg):");
-            if (!url) return;
-            const alt = prompt("Enter image description (alt text):", "Image") || "Image";
-            insertAtCursor(`\n<div class="my-4 text-center">\n  <img src="${url}" alt="${alt}" class="rounded-xl shadow-md max-w-full h-auto mx-auto border border-gray-200 dark:border-gray-700">\n  <span class="text-xs text-gray-500 dark:text-gray-400 mt-1 block">${alt}</span>\n</div>\n`);
-        }
-
-        function insertYoutubePrompt() {
-            const input = prompt("Enter YouTube Video URL or Embed ID:");
-            if (!input) return;
-            let videoId = input;
-            if (input.includes("v=")) videoId = input.split("v=")[1].split("&")[0];
-            else if (input.includes("youtu.be/")) videoId = input.split("youtu.be/")[1].split("?")[0];
-
-            insertAtCursor(`\n<div class="video-container">\n  <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>\n</div>\n`);
-        }
-
-        function insertAtCursor(text) {
-            const textarea = document.getElementById('formContent');
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
-            textarea.setRangeText(text, start, end, 'end');
-            textarea.focus();
-        }
-
-        // DARK MODE INITIALIZATION
         function initTheme() {
             const savedTheme = localStorage.getItem('theme');
             const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -536,99 +260,23 @@
             document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-gray-600';
         }
 
-        // TABLE BUILDER ENGINE
-        function toggleTableBuilder() {
-            const container = document.getElementById('tableBuilderContainer');
-            container.classList.toggle('hidden');
-            if (!container.classList.contains('hidden')) buildTableGrid();
-        }
-
-        function buildTableGrid() {
-            const rows = parseInt(document.getElementById('tblRows').value) || 1;
-            const cols = parseInt(document.getElementById('tblCols').value) || 1;
-            const includeHeader = document.getElementById('tblHeaderToggle').value === 'yes';
-            const table = document.getElementById('tblInteractiveGrid');
-            table.innerHTML = '';
-
-            if (includeHeader) {
-                const thead = document.createElement('thead');
-                const headTr = document.createElement('tr');
-                for (let c = 0; c < cols; c++) {
-                    const th = document.createElement('th');
-                    th.className = 'p-1';
-                    th.innerHTML = `<input type="text" placeholder="Header ${c + 1}" class="tbl-header-input w-full p-1 border rounded text-xs font-bold bg-gray-100 dark:bg-gray-800 dark:border-gray-700">`;
-                    headTr.appendChild(th);
-                }
-                thead.appendChild(headTr);
-                table.appendChild(thead);
-            }
-
-            const tbody = document.createElement('tbody');
-            for (let r = 0; r < rows; r++) {
-                const tr = document.createElement('tr');
-                for (let c = 0; c < cols; c++) {
-                    const td = document.createElement('td');
-                    td.className = 'p-1';
-                    td.innerHTML = `<input type="text" placeholder="Cell ${r + 1},${c + 1}" class="tbl-cell-input w-full p-1 border rounded text-xs dark:bg-gray-800 dark:border-gray-700" data-row="${r}" data-col="${c}">`;
-                    tr.appendChild(td);
-                }
-                tbody.appendChild(tr);
-            }
-            table.appendChild(tbody);
-        }
-
-        function insertTableToContent() {
-            const rows = parseInt(document.getElementById('tblRows').value) || 1;
-            const cols = parseInt(document.getElementById('tblCols').value) || 1;
-            const includeHeader = document.getElementById('tblHeaderToggle').value === 'yes';
-            const borderStyle = document.getElementById('tblBorder').value;
-
-            const headerInputs = document.querySelectorAll('.tbl-header-input');
-            const cellInputs = document.querySelectorAll('.tbl-cell-input');
-
-            const isBordered = borderStyle === 'bordered';
-            const tableClass = isBordered 
-                ? 'w-full text-sm text-left border-collapse border border-gray-300 dark:border-gray-700 my-4' 
-                : 'w-full text-sm text-left border-collapse my-4';
-            const cellBorder = isBordered ? 'border border-gray-300 dark:border-gray-700' : 'border-b border-gray-200 dark:border-gray-800';
-
-            let tableHTML = `\n<div class="overflow-x-auto my-4">\n  <table class="${tableClass}">\n`;
-
-            if (includeHeader) {
-                tableHTML += `    <thead class="bg-gray-100 dark:bg-gray-800 font-bold">\n      <tr>\n`;
-                for (let c = 0; c < cols; c++) {
-                    const val = headerInputs[c]?.value.trim() || `Header ${c + 1}`;
-                    tableHTML += `        <th class="p-2.5 ${cellBorder}">${val}</th>\n`;
-                }
-                tableHTML += `      </tr>\n    </thead>\n`;
-            }
-
-            tableHTML += `    <tbody>\n`;
-            for (let r = 0; r < rows; r++) {
-                tableHTML += `      <tr>\n`;
-                for (let c = 0; c < cols; c++) {
-                    const cell = Array.from(cellInputs).find(i => parseInt(i.dataset.row) === r && parseInt(i.dataset.col) === c);
-                    const val = cell?.value || '';
-                    tableHTML += `        <td class="p-2.5 ${cellBorder}">${val}</td>\n`;
-                }
-                tableHTML += `      </tr>\n`;
-            }
-            tableHTML += `    </tbody>\n  </table>\n</div>\n`;
-
-            insertAtCursor(tableHTML);
-            alert("Table inserted into content!");
-        }
-
-        // LOAD DATA DIRECTLY FROM data/notes.json
+        // FETCH BOTH pscnotes.json AND blogs.json CONCURRENTLY
         async function loadNotes() {
             try {
-                const res = await fetch('data/notes.json?t=' + Date.now());
-                if (res.ok) {
-                    globalNotes = await res.json();
-                } else {
-                    console.warn("data/notes.json not found.");
-                    globalNotes = [];
-                }
+                const ts = Date.now();
+                const [pscRes, blogRes] = await Promise.all([
+                    fetch(`data/pscnotes.json?t=${ts}`).catch(() => null),
+                    fetch(`data/blogs.json?t=${ts}`).catch(() => null)
+                ]);
+
+                pscNotes = (pscRes && pscRes.ok) ? await pscRes.json() : [];
+                englishBlogs = (blogRes && blogRes.ok) ? await blogRes.json() : [];
+
+                // Attach category tags if missing
+                pscNotes.forEach(n => n.category = n.category || 'PSC Notes');
+                englishBlogs.forEach(n => n.category = n.category || 'English Blogs');
+
+                globalNotes = [...pscNotes, ...englishBlogs];
 
                 populateAdminDropdown();
 
@@ -637,7 +285,7 @@
                 if (noteId) renderArticleView(noteId);
                 else renderNotes();
             } catch (err) {
-                console.error("Failed to load data/notes.json:", err);
+                console.error("Failed loading data files:", err);
             }
         }
 
@@ -647,23 +295,19 @@
             globalNotes.forEach(n => {
                 const opt = document.createElement('option');
                 opt.value = n.id;
-                opt.textContent = `✏️ [${n.category || 'PSC Notes'}] ${n.title}`;
+                opt.textContent = `✏️ [${n.category}] ${n.title}`;
                 select.appendChild(opt);
             });
         }
 
         function setCategoryFilter(category) {
             currentCategory = category;
-            
-            // Update Tab active styling
-            document.getElementById('btn-cat-all').className = category === 'All' ? 'px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition' : 'px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition';
-            document.getElementById('btn-cat-psc').className = category === 'PSC Notes' ? 'px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition' : 'px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition';
-            document.getElementById('btn-cat-blogs').className = category === 'English Blogs' ? 'px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition' : 'px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition';
-
+            document.getElementById('btn-cat-all').className = category === 'All' ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition' : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition';
+            document.getElementById('btn-cat-psc').className = category === 'PSC Notes' ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition' : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition';
+            document.getElementById('btn-cat-blogs').className = category === 'English Blogs' ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition' : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition';
             renderNotes();
         }
 
-        // RENDER CATALOG WITH DUAL ENGINE
         function renderNotes() {
             document.getElementById('catalogView').classList.remove('hidden');
             document.getElementById('articleView').classList.add('hidden');
@@ -673,184 +317,63 @@
 
             let filtered = globalNotes;
             if (currentCategory !== 'All') {
-                filtered = globalNotes.filter(n => (n.category || 'PSC Notes') === currentCategory);
+                filtered = globalNotes.filter(n => n.category === currentCategory);
             }
 
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center py-12 text-gray-400 text-sm">No materials available under this section.</div>`;
+                container.innerHTML = `<div class="text-center py-12 text-gray-400 text-sm">No notes or blogs found in this section.</div>`;
                 return;
             }
 
-            // SEPARATE ITEMS INTO PSC NOTES AND ENGLISH BLOGS
-            const pscItems = filtered.filter(n => (n.category || 'PSC Notes') === 'PSC Notes');
-            const blogItems = filtered.filter(n => (n.category || 'PSC Notes') === 'English Blogs');
+            const grouped = {};
+            filtered.forEach(note => {
+                const topic = note.topic?.trim() || 'General Topics';
+                if (!grouped[topic]) grouped[topic] = [];
+                grouped[topic].push(note);
+            });
 
-            // 1. RENDER PSC NOTES IN CLASSIC COMPACT GRID
-            if (pscItems.length > 0) {
-                const pscWrapper = document.createElement('div');
-                pscWrapper.className = 'space-y-6';
-
-                if (currentCategory === 'All') {
-                    pscWrapper.innerHTML = `
-                        <div class="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">
-                            <i class="fa-solid fa-graduation-cap text-blue-600 text-xl"></i>
-                            <h2 class="text-xl font-bold text-gray-900 dark:text-white">PSC Study Notes</h2>
-                        </div>
-                    `;
-                }
-
-                const grouped = {};
-                pscItems.forEach(note => {
-                    const topic = note.topic?.trim() || 'General PSC Topics';
-                    if (!grouped[topic]) grouped[topic] = [];
-                    grouped[topic].push(note);
-                });
-
-                Object.keys(grouped).forEach(topicName => {
-                    const topicSection = document.createElement('div');
-                    topicSection.className = 'topic-group space-y-3 mb-6';
-
-                    topicSection.innerHTML = `
-                        <div class="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700/60 pb-1.5">
-                            <i class="fa-solid fa-folder-open text-blue-600 text-sm"></i>
-                            <h3 class="text-base font-bold text-gray-800 dark:text-gray-200">${topicName}</h3>
-                            <span class="text-[11px] bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 font-bold px-2 py-0.5 rounded-full">${grouped[topicName].length}</span>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 topic-grid"></div>
-                    `;
-
-                    const grid = topicSection.querySelector('.topic-grid');
-
-                    grouped[topicName].forEach(note => {
-                        const card = document.createElement('div');
-                        card.className = 'note-card bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
-                        card.innerHTML = `
-                            <div>
-                                <div class="flex items-center justify-between mb-2">
-                                    <div class="flex items-center gap-2">
-                                        <div class="p-1.5 bg-blue-50 dark:bg-blue-900/40 text-blue-600 rounded-lg shrink-0 text-sm">
-                                            <i class="${note.icon || 'fa-solid fa-book'}"></i>
-                                        </div>
-                                        <span class="text-[11px] font-bold uppercase tracking-wider text-blue-600">${note.code}</span>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                        <button onclick="editNoteDirectly('${note.id}')" 
-                                                class="secret-edit-btn ${editModeActive ? '' : 'hidden'} text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1 px-2.5 rounded-lg transition shadow-sm flex items-center gap-1">
-                                            <i class="fa-solid fa-pen-to-square"></i> Edit
-                                        </button>
-                                        ${note.pdf ? '<span class="text-[11px] text-gray-400 font-medium"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i>PDF</span>' : ''}
-                                    </div>
-                                </div>
-                                <h3 class="font-bold text-sm text-gray-900 dark:text-white mb-1.5 line-clamp-2">${note.title}</h3>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-3 line-clamp-3">${note.desc}</p>
-                            </div>
-                            <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
-                                <a href="index.html?noteId=${note.id}" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1.5">
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Read Material
-                                </a>
-                            </div>
-                        `;
-                        grid.appendChild(card);
-                    });
-
-                    pscWrapper.appendChild(topicSection);
-                });
-
-                container.appendChild(pscWrapper);
-            }
-
-            // 2. RENDER ENGLISH BLOGS IN MODERN EDITORIAL / MAGAZINE LAYOUT
-            if (blogItems.length > 0) {
-                const blogWrapper = document.createElement('div');
-                blogWrapper.className = 'space-y-6 pt-2';
-
-                if (currentCategory === 'All') {
-                    blogWrapper.innerHTML = `
-                        <div class="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 pb-2 mb-6">
-                            <i class="fa-solid fa-newspaper text-indigo-600 text-xl"></i>
-                            <h2 class="text-xl font-bold text-gray-900 dark:text-white">English Blogs & Articles</h2>
-                        </div>
-                    `;
-                }
-
-                // FEATURED TOP HERO BLOG POST (First Item)
-                const featuredBlog = blogItems[0];
-                const fallbackCover = 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80';
-                
-                const heroCard = document.createElement('div');
-                heroCard.className = 'note-card bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-12 mb-8 hover:shadow-lg transition duration-300';
-                heroCard.innerHTML = `
-                    <div class="md:col-span-7 relative min-h-[220px] md:min-h-[320px] bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                        <img src="${featuredBlog.cover || fallbackCover}" alt="Cover" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
-                        <span class="absolute top-3 left-3 bg-indigo-600 text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full shadow">Featured Story</span>
+            Object.keys(grouped).forEach(topicName => {
+                const topicSection = document.createElement('div');
+                topicSection.className = 'topic-group space-y-4';
+                topicSection.innerHTML = `
+                    <div class="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 pb-2">
+                        <i class="fa-solid fa-folder-open text-blue-600 dark:text-blue-400 text-lg"></i>
+                        <h2 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">${topicName}</h2>
+                        <span class="text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 font-bold px-2 py-0.5 rounded-full">${grouped[topicName].length}</span>
                     </div>
-                    <div class="md:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between gap-2 mb-3">
-                                <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">${featuredBlog.topic || 'Article'}</span>
-                                <span class="text-xs text-gray-400 font-medium"><i class="fa-regular fa-clock"></i> ${featuredBlog.readTime || '5 min read'}</span>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white mb-3 hover:text-indigo-600 transition">${featuredBlog.title}</h3>
-                            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6 line-clamp-3">${featuredBlog.desc}</p>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2 mb-4">
-                                <div class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-[10px]">SA</div>
-                                <span class="text-xs text-gray-600 dark:text-gray-300 font-semibold">By Study Assist Editorial</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <a href="index.html?noteId=${featuredBlog.id}" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-center font-bold py-2.5 px-4 rounded-xl text-xs transition">
-                                    Read Full Article <i class="fa-solid fa-arrow-right ml-1"></i>
-                                </a>
-                                <button onclick="editNoteDirectly('${featuredBlog.id}')" class="secret-edit-btn ${editModeActive ? '' : 'hidden'} text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 px-3 rounded-xl transition">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 topic-grid"></div>
                 `;
-                blogWrapper.appendChild(heroCard);
 
-                // REMAINING BLOG POSTS GRID
-                if (blogItems.length > 1) {
-                    const blogGrid = document.createElement('div');
-                    blogGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
-
-                    blogItems.slice(1).forEach(blog => {
-                        const card = document.createElement('div');
-                        card.className = 'note-card bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition';
-                        card.innerHTML = `
-                            <div>
-                                <div class="relative h-44 bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                                    <img src="${blog.cover || fallbackCover}" alt="Blog Image" class="w-full h-full object-cover">
-                                    <span class="absolute top-3 left-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-md">${blog.topic || 'Blog'}</span>
-                                </div>
-                                <div class="p-5">
-                                    <div class="flex items-center justify-between text-xs text-gray-400 mb-2">
-                                        <span><i class="fa-regular fa-clock mr-1"></i>${blog.readTime || '4 min read'}</span>
-                                        <button onclick="editNoteDirectly('${blog.id}')" class="secret-edit-btn ${editModeActive ? '' : 'hidden'} text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-0.5 px-2 rounded transition">Edit</button>
+                const grid = topicSection.querySelector('.topic-grid');
+                grouped[topicName].forEach(note => {
+                    const card = document.createElement('div');
+                    card.className = 'note-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="p-2 bg-blue-50 dark:bg-blue-900/40 text-blue-600 rounded-lg shrink-0">
+                                        <i class="${note.icon || 'fa-solid fa-book'} text-lg"></i>
                                     </div>
-                                    <h3 class="font-bold text-base text-gray-900 dark:text-white mb-2 line-clamp-2 hover:text-indigo-600 transition">${blog.title}</h3>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-3 mb-4">${blog.desc}</p>
+                                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">${note.code}</span>
                                 </div>
+                                <span class="text-[10px] bg-gray-100 dark:bg-gray-700 text-gray-500 font-bold px-2 py-0.5 rounded">${note.category}</span>
                             </div>
-                            <div class="px-5 pb-5 pt-0">
-                                <a href="index.html?noteId=${blog.id}" class="w-full inline-block text-center bg-gray-100 dark:bg-gray-700 hover:bg-indigo-600 hover:text-white text-gray-700 dark:text-gray-200 font-bold py-2 rounded-xl text-xs transition">
-                                    Read Article <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i>
-                                </a>
-                            </div>
-                        `;
-                        blogGrid.appendChild(card);
-                    });
-
-                    blogWrapper.appendChild(blogGrid);
-                }
-
-                container.appendChild(blogWrapper);
-            }
+                            <h2 class="font-bold text-sm sm:text-base text-gray-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
+                        </div>
+                        <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
+                            <a href="index.html?noteId=${note.id}" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Read Content
+                            </a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+                container.appendChild(topicSection);
+            });
         }
 
-        // RENDER DEDICATED ARTICLE VIEW
         function renderArticleView(id) {
             const note = globalNotes.find(n => n.id === id);
             if (!note) return;
@@ -858,150 +381,91 @@
             document.getElementById('catalogView').classList.add('hidden');
             document.getElementById('articleView').classList.remove('hidden');
 
-            const isBlog = (note.category || 'PSC Notes') === 'English Blogs';
-
             document.title = `${note.title} - Study Assist`;
-            document.getElementById('articleTopic').textContent = note.topic || 'General Topic';
-            document.getElementById('articleCategoryBadge').textContent = note.category || 'PSC Notes';
-            document.getElementById('articleReadTime').querySelector('span').textContent = note.readTime || (isBlog ? '5 min read' : 'Study Note');
-            
-            document.getElementById('articleCode').textContent = note.code || 'DOC';
+            document.getElementById('articleTopic').textContent = `${note.category} • ${note.topic}`;
+            document.getElementById('articleCode').textContent = note.code;
             document.getElementById('articleIcon').innerHTML = `<i class="${note.icon || 'fa-solid fa-book'}"></i>`;
             document.getElementById('articleTitle').textContent = note.title;
             document.getElementById('articleDesc').textContent = note.desc;
             document.getElementById('articleContent').innerHTML = note.content;
-            document.getElementById('feedbackNoteId').value = note.id;
-
-            // Cover Image logic for English Blogs
-            const coverContainer = document.getElementById('articleCoverContainer');
-            const coverImg = document.getElementById('articleCoverImage');
-            if (isBlog && (note.cover || true)) {
-                coverImg.src = note.cover || 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80';
-                coverContainer.classList.remove('hidden');
-            } else {
-                coverContainer.classList.add('hidden');
-            }
-
-            const artEditBtn = document.getElementById('articleEditBtn');
-            artEditBtn.onclick = () => editNoteDirectly(note.id);
 
             const pdfBanner = document.getElementById('pdfBanner');
-            const pdfBtn = document.getElementById('pdfDownloadBtn');
-
             if (note.pdf) {
                 pdfBanner.classList.remove('hidden');
-                pdfBtn.href = note.pdf;
+                document.getElementById('pdfDownloadBtn').href = note.pdf;
             } else {
                 pdfBanner.classList.add('hidden');
             }
         }
 
-        function editNoteDirectly(id) {
-            const note = globalNotes.find(n => n.id === id);
-            if (!note) return;
-            openModal('adminModal');
-            document.getElementById('selectNoteToEdit').value = note.id;
-            populateFormForEdit();
-        }
+        function showCatalog() { window.location.href = 'index.html'; }
 
         function populateFormForEdit() {
             const id = document.getElementById('selectNoteToEdit').value;
             const note = globalNotes.find(n => n.id === id);
-
             if (note) {
                 document.getElementById('editNoteId').value = note.id;
-                document.getElementById('editNoteId').dataset.pdfPath = note.pdf || '';
-                document.getElementById('formCategory').value = note.category || 'PSC Notes';
-                document.getElementById('formTopic').value = note.topic || '';
-                document.getElementById('formCode').value = note.code || '';
-                document.getElementById('formIcon').value = note.icon || 'fa-solid fa-book';
-                document.getElementById('formCover').value = note.cover || '';
-                document.getElementById('formReadTime').value = note.readTime || '';
-                document.getElementById('formTitle').value = note.title || '';
-                document.getElementById('formDesc').value = note.desc || '';
-                document.getElementById('formContent').value = note.content || '';
+                document.getElementById('formCategory').value = note.category;
+                document.getElementById('formTopic').value = note.topic;
+                document.getElementById('formCode').value = note.code;
+                document.getElementById('formIcon').value = note.icon;
+                document.getElementById('formTitle').value = note.title;
+                document.getElementById('formDesc').value = note.desc;
+                document.getElementById('formContent').value = note.content;
             } else {
                 document.getElementById('editNoteId').value = '';
-                document.getElementById('editNoteId').dataset.pdfPath = '';
                 document.getElementById('githubAdminForm').reset();
             }
         }
 
-        function showCatalog() {
-            window.location.href = 'index.html';
-        }
-
-        function filterNotes() {
-            const q = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.note-card').forEach(card => {
-                const match = card.textContent.toLowerCase().includes(q);
-                card.style.display = match ? 'flex' : 'none';
-            });
-        }
-
-        // SAVE DATA TO GITHUB (data/notes.json)
+        // TARGETED SAVE TO pscnotes.json OR blogs.json
         async function handleGitHubSave(e) {
             e.preventDefault();
             const btn = document.getElementById('saveBtn');
             btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
 
             const repo = document.getElementById('ghRepo').value.trim();
             const token = document.getElementById('ghToken').value.trim();
             localStorage.setItem('gh_repo', repo);
             localStorage.setItem('gh_token', token);
 
-            const fileInput = document.getElementById('formPdfFile');
-            let pdfPath = document.getElementById('editNoteId').dataset.pdfPath || '';
-
             try {
-                if (fileInput.files && fileInput.files[0]) {
-                    const file = fileInput.files[0];
-                    const fileName = `pdfs/${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
-                    const base64Content = await fileToBase64(file);
-                    await uploadToGitHub(repo, token, fileName, base64Content, `Upload PDF: ${file.name}`);
-                    pdfPath = fileName;
-                }
+                const selectedCat = document.getElementById('formCategory').value;
+                const targetPath = selectedCat === 'English Blogs' ? 'data/blogs.json' : 'data/pscnotes.json';
+                let targetArray = selectedCat === 'English Blogs' ? englishBlogs : pscNotes;
 
                 const id = document.getElementById('editNoteId').value || Date.now().toString();
                 const noteObj = {
                     id,
-                    category: document.getElementById('formCategory').value,
+                    category: selectedCat,
                     topic: document.getElementById('formTopic').value.trim(),
                     code: document.getElementById('formCode').value,
                     icon: document.getElementById('formIcon').value,
-                    cover: document.getElementById('formCover').value.trim(),
-                    readTime: document.getElementById('formReadTime').value.trim(),
                     title: document.getElementById('formTitle').value,
                     desc: document.getElementById('formDesc').value,
                     content: document.getElementById('formContent').value,
-                    pdf: pdfPath
+                    pdf: ""
                 };
 
-                const index = globalNotes.findIndex(n => n.id === id);
-                if (index > -1) globalNotes[index] = noteObj;
-                else globalNotes.push(noteObj);
+                const index = targetArray.findIndex(n => n.id === id);
+                if (index > -1) targetArray[index] = noteObj;
+                else targetArray.push(noteObj);
 
-                const jsonSha = await getFileSHA(repo, token, 'data/notes.json');
-                const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(globalNotes, null, 2))));
+                const jsonSha = await getFileSHA(repo, token, targetPath);
+                const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(targetArray, null, 2))));
 
-                await uploadToGitHub(repo, token, 'data/notes.json', jsonContent, `Update entry: ${noteObj.title}`, jsonSha);
+                await uploadToGitHub(repo, token, targetPath, jsonContent, `Update ${selectedCat}: ${noteObj.title}`, jsonSha);
 
-                alert("Successfully published to data/notes.json!");
+                alert(`Successfully saved to ${targetPath}!`);
                 closeModal('adminModal');
                 loadNotes();
             } catch (err) {
-                alert("API Error: " + err.message);
+                alert("GitHub API Error: " + err.message);
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to data/notes.json';
+                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Target JSON File';
             }
-        }
-
-        async function submitFeedback(e) {
-            e.preventDefault();
-            alert("Feedback recorded!");
-            document.getElementById('feedbackForm').reset();
         }
 
         async function uploadToGitHub(repo, token, path, contentBase64, message, sha = null) {
@@ -1016,15 +480,6 @@
             });
             if (!res.ok) throw new Error(await res.text());
             return res.json();
-        }
-
-        function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = error => reject(error);
-            });
         }
 
         async function getFileSHA(repo, token, path) {
@@ -1043,16 +498,10 @@
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // SECRET SHORTCUT LISTENERS
         document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
                 e.preventDefault();
                 openModal('adminModal');
-            }
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
-                e.preventDefault();
-                editModeActive = !editModeActive;
-                document.querySelectorAll('.secret-edit-btn').forEach(btn => btn.classList.toggle('hidden', !editModeActive));
             }
         });
 
