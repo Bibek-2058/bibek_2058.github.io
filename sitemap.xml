@@ -7,24 +7,17 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- About Page -->
+  <!-- blogs.json -->
   <url>
-    <loc>https://bibek-2058.github.io/about.html</loc>
+    <loc>https://bibek-2058.github.io/data/blogs.json</loc>
     <lastmod>2026-10-23</lastmod>
     <priority>0.5</priority>
   </url>
 
-  <!-- Contact Page -->
+  <!-- notes.json -->
   <url>
-    <loc>https://bibek-2058.github.io/contact.html</loc>
+    <loc>https://bibek-2058.github.io/pscnotes.json</loc>
     <lastmod>2026-10-23</lastmod>
     <priority>0.5</priority>
-  </url>
-
-  <!-- Privacy Policy Page -->
-  <url>
-    <loc>https://bibek-2058.github.io/privacy-policy.html</loc>
-    <lastmod>2026-10-23</lastmod>
-    <priority>0.3</priority>
   </url>
 </urlset>
