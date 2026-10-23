@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Assist - Loksewa Notes </title>
+    <title>Study Assist - Educational Notes</title>
     
     <!-- Google AdSense Verification -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
@@ -61,10 +61,23 @@
                     <span class="text-[10px] block text-gray-400 -mt-1 font-semibold uppercase tracking-wider">Educational Hub</span>
                 </div>
             </div>
-            <!-- Theme Toggle Button -->
-            <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                <i id="theme-icon" class="fa-solid fa-moon"></i>
-            </button>
+
+            <!-- Right Header Controls: Nepal Clock & Theme Toggle -->
+            <div class="flex items-center space-x-3">
+                <!-- Live Nepal Clock & Date Widget -->
+                <div class="flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-600 text-xs text-gray-700 dark:text-gray-200 font-medium">
+                    <i class="fa-solid fa-clock text-blue-600 dark:text-blue-400"></i>
+                    <div class="flex flex-col sm:flex-row sm:space-x-2 text-[11px] sm:text-xs">
+                        <span id="nepalTime" class="font-bold font-mono">--:--:-- --</span>
+                        <span id="nepalDate" class="hidden sm:inline text-gray-500 dark:text-gray-400">--- --, ----</span>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -188,9 +201,9 @@
     <!-- Footer -->
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
         <div class="flex justify-center items-center space-x-4 mb-3">
-            <a href="about us.html" class="hover:underline">About Us</a>
+            <a href="about.html" class="hover:underline">About Us</a>
             <span>•</span>
-            <a href="contact us.html" class="hover:underline">Contact Us</a>
+            <a href="contact.html" class="hover:underline">Contact Us</a>
             <span>•</span>
             <a href="privacy-policy.html" class="hover:underline">Privacy Policy</a>
         </div>
@@ -369,6 +382,41 @@
     <script>
         let globalNotes = [];
         let editModeActive = false;
+
+        // LIVE NEPAL TIME & DATE ENGINE (UTC+5:45)
+        function updateNepalClock() {
+            const now = new Date();
+            
+            // Format Time in Asia/Kathmandu timezone
+            const timeOptions = {
+                timeZone: 'Asia/Kathmandu',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            
+            // Format Date in Asia/Kathmandu timezone
+            const dateOptions = {
+                timeZone: 'Asia/Kathmandu',
+                month: 'short',
+                day: '2-digit',
+                year: 'numeric'
+            };
+
+            const timeStr = new Intl.DateTimeFormat('en-US', timeOptions).format(now);
+            const dateStr = new Intl.DateTimeFormat('en-US', dateOptions).format(now);
+
+            const timeEl = document.getElementById('nepalTime');
+            const dateEl = document.getElementById('nepalDate');
+
+            if (timeEl) timeEl.textContent = timeStr;
+            if (dateEl) dateEl.textContent = dateStr;
+        }
+
+        // Start Clock Listener
+        setInterval(updateNepalClock, 1000);
+        updateNepalClock();
 
         // Skip Ad functionality
         function skipAd() {
@@ -755,7 +803,7 @@
             const token = localStorage.getItem('gh_token');
 
             if (!repo || !token) {
-                alert("Feedback service currently requires GitHub configuration. Please open Admin Panel (Ctrl+Shift+A) to configure repository settings.");
+                alert("Feedback service currently requires configuration. Please open Admin Panel (Ctrl+Shift+A) to configure settings.");
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Feedback';
                 return;
@@ -801,7 +849,7 @@
             }
         }
 
-        // GitHub REST API Upload Helper
+        // REST API Upload Helper
         async function uploadToGitHub(repo, token, path, contentBase64, message, sha = null) {
             const url = `https://api.github.com/repos/${repo}/contents/${path}`;
             const body = { message, content: contentBase64 };
@@ -819,12 +867,12 @@
             return res.json();
         }
 
-        // GitHub Admin Save Handler
+        // Admin Save Handler
         async function handleGitHubSave(e) {
             e.preventDefault();
             const btn = document.getElementById('saveBtn');
             btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading to GitHub...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading...';
 
             const repo = document.getElementById('ghRepo').value.trim();
             const token = document.getElementById('ghToken').value.trim();
@@ -866,14 +914,14 @@
 
                 await uploadToGitHub(repo, token, 'data/notes.json', jsonContent, `Update note: ${noteObj.title}`, jsonSha);
 
-                alert("Successfully saved to GitHub!");
+                alert("Successfully saved!");
                 closeModal('adminModal');
                 loadNotes();
             } catch (err) {
-                alert("GitHub API Error: " + err.message);
+                alert("API Error: " + err.message);
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish to GitHub';
+                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Publish';
             }
         }
 
