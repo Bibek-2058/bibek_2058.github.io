@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Assist - Educational Hub</title>
+    <title>Study Assist - Educational Hub & Blogs</title>
     
     <!-- Google AdSense Verification -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
@@ -38,34 +38,37 @@
         .video-container iframe, .video-container video {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 0.75rem;
         }
+        .gradient-brand {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%);
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col font-sans">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col font-sans">
 
     <!-- Header -->
-    <header class="sticky top-0 z-40 bg-white/95 dark:bg-gray-800/95 backdrop-blur border-b border-gray-200 dark:border-gray-700 shadow-sm">
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-800/95 backdrop-blur border-b border-slate-200 dark:border-slate-700 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="showCatalog()">
-                <div class="p-2 bg-blue-600 rounded-lg text-white shrink-0">
+                <div class="p-2.5 gradient-brand rounded-xl text-white shadow-md shadow-indigo-500/20 shrink-0">
                     <i class="fa-solid fa-graduation-cap text-xl"></i>
                 </div>
                 <div>
-                    <span class="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">Study Assist</span>
-                    <span class="text-[10px] block text-gray-400 -mt-1 font-semibold uppercase tracking-wider">Educational Hub</span>
+                    <span class="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 dark:from-indigo-400 dark:to-blue-400 bg-clip-text text-transparent">Study Assist</span>
+                    <span class="text-[10px] block text-indigo-500 dark:text-indigo-400 -mt-1 font-bold uppercase tracking-wider">Educational Hub</span>
                 </div>
             </div>
 
             <!-- Right Controls: Nepal Clock & Theme Toggle -->
             <div class="flex items-center space-x-3">
-                <div class="flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-600 text-xs text-gray-700 dark:text-gray-200 font-medium">
-                    <i class="fa-solid fa-clock text-blue-600 dark:text-blue-400"></i>
+                <div class="flex items-center space-x-2 bg-indigo-50 dark:bg-slate-700/60 px-3 py-1.5 rounded-xl border border-indigo-100 dark:border-slate-600 text-xs text-indigo-900 dark:text-indigo-200 font-medium">
+                    <i class="fa-solid fa-clock text-indigo-600 dark:text-indigo-400"></i>
                     <div class="flex flex-col sm:flex-row sm:space-x-2 text-[11px] sm:text-xs">
                         <span id="nepalTime" class="font-bold font-mono">--:--:-- --</span>
-                        <span id="nepalDate" class="hidden sm:inline text-gray-500 dark:text-gray-400">--- --, ----</span>
+                        <span id="nepalDate" class="hidden sm:inline text-indigo-600/70 dark:text-indigo-300/70">--- --, ----</span>
                     </div>
                 </div>
 
-                <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition shadow-sm">
                     <i id="theme-icon" class="fa-solid fa-moon"></i>
                 </button>
             </div>
@@ -75,15 +78,21 @@
     <!-- MAIN CATALOG VIEW -->
     <main id="catalogView" class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6">
         <section id="notes-section">
-            <div class="mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+            <div class="mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-slate-800 p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                
+                <!-- REORDERED CATEGORY BUTTONS (Blogs 1st, PSC Notes 2nd) -->
                 <div class="flex flex-wrap items-center gap-2">
-                    <button onclick="setCategoryFilter('All')" id="btn-cat-all" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition">All Resources</button>
-                    <button onclick="setCategoryFilter('PSC Notes')" id="btn-cat-psc" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">PSC Notes</button>
-                    <button onclick="setCategoryFilter('English Blogs')" id="btn-cat-blogs" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">English Blogs</button>
+                    <button onclick="setCategoryFilter('English Blogs')" id="btn-cat-blogs" class="px-4 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-indigo-500/20 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-newspaper"></i> English Blogs
+                    </button>
+                    <button onclick="setCategoryFilter('PSC Notes')" id="btn-cat-psc" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-book-bookmark"></i> PSC Notes
+                    </button>
                 </div>
+
                 <div class="relative w-full md:w-80">
-                    <input type="text" id="searchInput" onkeyup="filterNotes()" placeholder="Search notes and blogs..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
+                    <input type="text" id="searchInput" onkeyup="filterNotes()" placeholder="Search articles or notes..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
                 </div>
             </div>
 
@@ -95,134 +104,203 @@
     <!-- FULL ARTICLE VIEW -->
     <main id="articleView" class="hidden flex-grow max-w-4xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-8">
         <div class="mb-4 flex items-center justify-between">
-            <button onclick="showCatalog()" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+            <button onclick="showCatalog()" class="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
                 <i class="fa-solid fa-arrow-left"></i> Back to Catalog
             </button>
             <div class="flex items-center gap-2">
-                <button id="articleEditBtn" onclick="" class="secret-edit-btn hidden text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1 px-3 rounded-lg transition shadow-sm flex items-center gap-1">
-                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                <button id="articleEditBtn" onclick="" class="secret-edit-btn hidden text-xs bg-amber-500 hover:bg-amber-600 text-white font-bold py-1.5 px-3 rounded-xl transition shadow-sm flex items-center gap-1">
+                    <i class="fa-solid fa-pen-to-square"></i> Quick Edit
                 </button>
-                <span id="articleCode" class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-md text-xs font-bold uppercase"></span>
+                <span id="articleCode" class="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 rounded-lg text-xs font-extrabold uppercase"></span>
             </div>
         </div>
 
-        <article class="bg-white dark:bg-gray-800 rounded-2xl p-5 sm:p-10 shadow-sm border border-gray-100 dark:border-gray-700">
-            <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
+        <article class="bg-white dark:bg-slate-800 rounded-3xl p-5 sm:p-10 shadow-sm border border-slate-100 dark:border-slate-700">
+            
+            <!-- Optional Blog Cover Banner -->
+            <div id="articleCoverContainer" class="hidden mb-6 rounded-2xl overflow-hidden max-h-80 w-full shadow-md">
+                <img id="articleCoverImg" src="" alt="Blog Cover" class="w-full h-full object-cover">
+            </div>
+
+            <div class="border-b border-slate-200 dark:border-slate-700 pb-6 mb-6">
                 <div class="flex items-start sm:items-center gap-3 mb-3">
-                    <div id="articleIcon" class="p-3 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-xl text-2xl shrink-0"></div>
+                    <div id="articleIcon" class="p-3 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-2xl text-2xl shrink-0"></div>
                     <div>
-                        <span id="articleTopic" class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide block mb-1"></span>
-                        <h1 id="articleTitle" class="text-xl sm:text-3xl font-extrabold text-gray-900 dark:text-white select-text"></h1>
+                        <span id="articleTopic" class="text-xs font-extrabold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block mb-1"></span>
+                        <h1 id="articleTitle" class="text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white select-text"></h1>
                     </div>
                 </div>
-                <p id="articleDesc" class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic select-text"></p>
+                
+                <div class="flex flex-wrap items-center gap-3 mt-3 text-xs text-slate-500 dark:text-slate-400">
+                    <span id="articleAuthor" class="font-semibold text-slate-700 dark:text-slate-300"></span>
+                    <span id="articleReadTime" class="bg-slate-100 dark:bg-slate-700 px-2.5 py-0.5 rounded-full font-bold"></span>
+                </div>
+                <p id="articleDesc" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 italic select-text mt-3"></p>
             </div>
 
             <!-- Attached PDF Bar -->
-            <div id="pdfBanner" class="hidden mb-8 p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div id="pdfBanner" class="hidden mb-8 p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-file-pdf text-red-500 text-2xl shrink-0"></i>
+                    <i class="fa-solid fa-file-pdf text-red-500 text-3xl shrink-0"></i>
                     <div>
-                        <p class="text-xs font-bold text-gray-800 dark:text-gray-200">Reference Document Attached</p>
-                        <p class="text-[11px] text-gray-500 dark:text-gray-400">Download the official PDF material for offline study.</p>
+                        <p class="text-xs font-bold text-slate-800 dark:text-slate-200">Reference Material Attached</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">Download the official PDF file for offline studying.</p>
                     </div>
                 </div>
-                <a id="pdfDownloadBtn" href="#" download target="_blank" class="w-full sm:w-auto text-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                <a id="pdfDownloadBtn" href="#" download target="_blank" class="w-full sm:w-auto text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
                     <i class="fa-solid fa-download"></i> Download PDF
                 </a>
             </div>
 
-            <div id="articleContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-gray-800 dark:text-gray-200 space-y-4 select-text overflow-x-auto"></div>
+            <div id="articleContent" class="prose dark:prose-invert max-w-none text-sm sm:text-base leading-relaxed text-slate-800 dark:text-slate-200 space-y-4 select-text overflow-x-auto"></div>
         </article>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-xs text-gray-500 dark:text-gray-400 mt-auto">
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-6 text-center text-xs text-slate-500 dark:text-slate-400 mt-auto">
         <p>&copy; 2026 Study Assist. All rights reserved.</p>
     </footer>
 
     <!-- GITHUB ADMIN DASHBOARD MODAL -->
-    <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-100 dark:border-gray-700">
-            <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">
-                <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                    <i class="fa-brands fa-github text-blue-600"></i> Dual-File GitHub Admin
+    <div id="adminModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-4 sm:p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-slate-100 dark:border-slate-700">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">
+                <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-brands fa-github text-indigo-600"></i> Admin Content Publisher
                 </h3>
-                <button onclick="closeModal('adminModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="closeModal('adminModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
 
             <form id="githubAdminForm" onsubmit="handleGitHubSave(event)" class="space-y-4">
                 <input type="hidden" id="editNoteId">
                 
-                <div class="p-3 bg-blue-50 dark:bg-gray-900/50 rounded-xl space-y-3 border border-blue-100 dark:border-gray-700">
+                <div class="p-3 bg-indigo-50 dark:bg-slate-900/50 rounded-2xl space-y-3 border border-indigo-100 dark:border-slate-700">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">GitHub Owner/Repo</label>
-                            <input type="text" id="ghRepo" required placeholder="username/repository" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
+                            <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">GitHub Owner/Repo</label>
+                            <input type="text" id="ghRepo" required placeholder="username/repository" class="w-full p-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
                         </div>
                         <div>
-                            <label class="block text-[11px] font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Personal Access Token</label>
-                            <input type="password" id="ghToken" required placeholder="ghp_xxxxxxxxxxxx" class="w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-xs">
+                            <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Personal Access Token</label>
+                            <input type="password" id="ghToken" required placeholder="ghp_xxxxxxxxxxxx" class="w-full p-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
                         </div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Select Existing Entry</label>
-                        <select id="selectNoteToEdit" onchange="populateFormForEdit()" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-xs font-semibold text-blue-600 dark:text-blue-400">
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Select Existing Entry</label>
+                        <select id="selectNoteToEdit" onchange="populateFormForEdit()" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs font-semibold text-indigo-600 dark:text-indigo-400">
                             <option value="">➕ Create New Entry</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Target Category (Determines Destination File)</label>
-                        <select id="formCategory" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-xs font-semibold text-gray-800 dark:text-gray-200">
-                            <option value="PSC Notes">PSC Notes (Saves to pscnotes.json)</option>
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Target Category &amp; Destination File</label>
+                        <select id="formCategory" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs font-bold text-slate-800 dark:text-slate-200">
                             <option value="English Blogs">English Blogs (Saves to blogs.json)</option>
+                            <option value="PSC Notes">PSC Notes (Saves to pscnotes.json)</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Topic / Chapter Name</label>
-                    <input type="text" id="formTopic" required placeholder="e.g. इतिहास, आर्थिक विकास, Technology" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Topic / Chapter Name</label>
+                    <input type="text" id="formTopic" required placeholder="e.g. Technology, इतिहास, आर्थिक विकास" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Code / Sequence</label>
-                        <input type="text" id="formCode" required placeholder="e.g. 1., Blog 1.1" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Code / Sequence</label>
+                        <input type="text" id="formCode" required placeholder="e.g. Blog 1.1, 1." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">FontAwesome Icon</label>
-                        <input type="text" id="formIcon" required placeholder="fa-solid fa-book" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">FontAwesome Icon</label>
+                        <input type="text" id="formIcon" required placeholder="fa-solid fa-code" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Title</label>
-                    <input type="text" id="formTitle" required placeholder="Entry Title" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Title</label>
+                    <input type="text" id="formTitle" required placeholder="Entry Title" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Short Description</label>
-                    <input type="text" id="formDesc" required placeholder="Brief preview text" class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm">
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Short Description</label>
+                    <input type="text" id="formDesc" required placeholder="Brief summary preview text" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Cover Image URL (Optional for Blogs)</label>
+                        <input type="text" id="formCover" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Estimated Read Time / Author</label>
+                        <input type="text" id="formReadTime" placeholder="e.g. 5 min read • By Bibek Pandey" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-xs">
+                    </div>
+                </div>
+
+                <!-- TABLE GENERATOR ENGINE -->
+                <div class="border border-indigo-200 dark:border-indigo-800 bg-indigo-50/40 dark:bg-indigo-950/20 p-4 rounded-2xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-2">
+                            <i class="fa-solid fa-table"></i> Table Builder Tool
+                        </span>
+                        <button type="button" onclick="toggleTableBuilder()" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-lg transition">
+                            Toggle Builder
+                        </button>
+                    </div>
+
+                    <div id="tableBuilderContainer" class="hidden space-y-3 pt-2">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Rows</label>
+                                <input type="number" id="tblRows" value="2" min="1" max="50" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Columns</label>
+                                <input type="number" id="tblCols" value="2" min="1" max="20" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Header Row</label>
+                                <select id="tblHeaderToggle" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+                                    <option value="yes">With Header</option>
+                                    <option value="no">Without Header</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Borders</label>
+                                <select id="tblBorder" class="w-full p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs">
+                                    <option value="bordered">Bordered Grid</option>
+                                    <option value="borderless">Simple Divider</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto max-h-60 border border-slate-200 dark:border-slate-700 rounded-xl p-2 bg-white dark:bg-slate-900">
+                            <table id="tblInteractiveGrid" class="w-full text-xs border-collapse"></table>
+                        </div>
+
+                        <button type="button" onclick="insertTableToContent()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Insert Table into Article Content
+                        </button>
+                    </div>
                 </div>
 
                 <!-- CONTENT EDITOR -->
                 <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Content Body (HTML Supported)</label>
-                    <textarea id="formContent" rows="8" required placeholder="Write your content here..." class="w-full p-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-mono focus:outline-none"></textarea>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Content Body (HTML Supported)</label>
+                    <textarea id="formContent" rows="8" required placeholder="Write your content here..." class="w-full p-2.5 rounded-2xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-sm font-mono focus:outline-none"></textarea>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Upload PDF Attachment (Optional)</label>
-                    <input type="file" id="formPdfFile" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase mb-1">Upload PDF Attachment (Optional)</label>
+                    <input type="file" id="formPdfFile" accept="application/pdf" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
                 </div>
 
                 <div class="flex gap-3 pt-2">
-                    <button type="submit" id="saveBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm transition">
-                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Target JSON File
+                    <button type="submit" id="saveBtn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-2xl text-sm transition shadow-md shadow-indigo-500/20">
+                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Selected JSON File
                     </button>
                 </div>
             </form>
@@ -234,7 +312,7 @@
         let pscNotes = [];
         let englishBlogs = [];
         let globalNotes = [];
-        let currentCategory = 'All';
+        let currentCategory = 'English Blogs'; // DEFAULT TAB: English Blogs First
         let editModeActive = false;
 
         function updateNepalClock() {
@@ -251,32 +329,115 @@
             const savedTheme = localStorage.getItem('theme');
             const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
             document.documentElement.classList.toggle('dark', isDark);
-            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-gray-600';
+            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-slate-600';
         }
 
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-gray-600';
+            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-slate-600';
         }
 
-        // FETCH BOTH pscnotes.json AND blogs.json CONCURRENTLY
+        function toggleTableBuilder() {
+            const container = document.getElementById('tableBuilderContainer');
+            container.classList.toggle('hidden');
+            if (!container.classList.contains('hidden')) buildTableGrid();
+        }
+
+        function buildTableGrid() {
+            const rows = parseInt(document.getElementById('tblRows').value) || 1;
+            const cols = parseInt(document.getElementById('tblCols').value) || 1;
+            const includeHeader = document.getElementById('tblHeaderToggle').value === 'yes';
+            const table = document.getElementById('tblInteractiveGrid');
+            table.innerHTML = '';
+
+            if (includeHeader) {
+                const thead = document.createElement('thead');
+                const headTr = document.createElement('tr');
+                for (let c = 0; c < cols; c++) {
+                    const th = document.createElement('th');
+                    th.className = 'p-1';
+                    th.innerHTML = `<input type="text" placeholder="Header ${c + 1}" class="tbl-header-input w-full p-1 border rounded text-xs font-bold bg-slate-100 dark:bg-slate-800 dark:border-slate-700">`;
+                    headTr.appendChild(th);
+                }
+                thead.appendChild(headTr);
+                table.appendChild(thead);
+            }
+
+            const tbody = document.createElement('tbody');
+            for (let r = 0; r < rows; r++) {
+                const tr = document.createElement('tr');
+                for (let c = 0; c < cols; c++) {
+                    const td = document.createElement('td');
+                    td.className = 'p-1';
+                    td.innerHTML = `<input type="text" placeholder="Cell ${r + 1},${c + 1}" class="tbl-cell-input w-full p-1 border rounded text-xs dark:bg-slate-800 dark:border-slate-700" data-row="${r}" data-col="${c}">`;
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+            table.appendChild(tbody);
+        }
+
+        function insertTableToContent() {
+            const rows = parseInt(document.getElementById('tblRows').value) || 1;
+            const cols = parseInt(document.getElementById('tblCols').value) || 1;
+            const includeHeader = document.getElementById('tblHeaderToggle').value === 'yes';
+            const borderStyle = document.getElementById('tblBorder').value;
+
+            const headerInputs = document.querySelectorAll('.tbl-header-input');
+            const cellInputs = document.querySelectorAll('.tbl-cell-input');
+
+            const isBordered = borderStyle === 'bordered';
+            const tableClass = isBordered 
+                ? 'w-full text-sm text-left border-collapse border border-slate-300 dark:border-slate-700 my-4' 
+                : 'w-full text-sm text-left border-collapse my-4';
+            const cellBorder = isBordered ? 'border border-slate-300 dark:border-slate-700' : 'border-b border-slate-200 dark:border-slate-800';
+
+            let tableHTML = `\n<div class="overflow-x-auto my-4">\n  <table class="${tableClass}">\n`;
+
+            if (includeHeader) {
+                tableHTML += `    <thead class="bg-slate-100 dark:bg-slate-800 font-bold">\n      <tr>\n`;
+                for (let c = 0; c < cols; c++) {
+                    const val = headerInputs[c]?.value.trim() || `Header ${c + 1}`;
+                    tableHTML += `        <th class="p-2.5 ${cellBorder}">${val}</th>\n`;
+                }
+                tableHTML += `      </tr>\n    </thead>\n`;
+            }
+
+            tableHTML += `    <tbody>\n`;
+            for (let r = 0; r < rows; r++) {
+                tableHTML += `      <tr>\n`;
+                for (let c = 0; c < cols; c++) {
+                    const cell = Array.from(cellInputs).find(i => parseInt(i.dataset.row) === r && parseInt(i.dataset.col) === c);
+                    const val = cell?.value || '';
+                    tableHTML += `        <td class="p-2.5 ${cellBorder}">${val}</td>\n`;
+                }
+                tableHTML += `      </tr>\n`;
+            }
+            tableHTML += `    </tbody>\n  </table>\n</div>\n`;
+
+            const textarea = document.getElementById('formContent');
+            const start = textarea.selectionStart;
+            textarea.setRangeText(tableHTML, start, textarea.selectionEnd, 'end');
+            alert("Table inserted into content area!");
+        }
+
+        // LOAD FROM BOTH data/blogs.json AND data/pscnotes.json
         async function loadNotes() {
             try {
                 const ts = Date.now();
-                const [pscRes, blogRes] = await Promise.all([
-                    fetch(`data/pscnotes.json?t=${ts}`).catch(() => null),
-                    fetch(`data/blogs.json?t=${ts}`).catch(() => null)
+                const [blogRes, pscRes] = await Promise.all([
+                    fetch(`data/blogs.json?t=${ts}`).catch(() => null),
+                    fetch(`data/pscnotes.json?t=${ts}`).catch(() => null)
                 ]);
 
-                pscNotes = (pscRes && pscRes.ok) ? await pscRes.json() : [];
                 englishBlogs = (blogRes && blogRes.ok) ? await blogRes.json() : [];
+                pscNotes = (pscRes && pscRes.ok) ? await pscRes.json() : [];
 
-                // Attach category tags if missing
-                pscNotes.forEach(n => n.category = n.category || 'PSC Notes');
-                englishBlogs.forEach(n => n.category = n.category || 'English Blogs');
+                englishBlogs.forEach(n => n.category = 'English Blogs');
+                pscNotes.forEach(n => n.category = 'PSC Notes');
 
-                globalNotes = [...pscNotes, ...englishBlogs];
+                globalNotes = [...englishBlogs, ...pscNotes];
 
                 populateAdminDropdown();
 
@@ -285,7 +446,7 @@
                 if (noteId) renderArticleView(noteId);
                 else renderNotes();
             } catch (err) {
-                console.error("Failed loading data files:", err);
+                console.error("Error loading JSON files:", err);
             }
         }
 
@@ -302,9 +463,10 @@
 
         function setCategoryFilter(category) {
             currentCategory = category;
-            document.getElementById('btn-cat-all').className = category === 'All' ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition' : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition';
-            document.getElementById('btn-cat-psc').className = category === 'PSC Notes' ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition' : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition';
-            document.getElementById('btn-cat-blogs').className = category === 'English Blogs' ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition' : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 transition';
+            
+            document.getElementById('btn-cat-blogs').className = category === 'English Blogs' ? 'px-4 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-indigo-500/20 transition flex items-center gap-1.5' : 'px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition flex items-center gap-1.5';
+            document.getElementById('btn-cat-psc').className = category === 'PSC Notes' ? 'px-4 py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-indigo-500/20 transition flex items-center gap-1.5' : 'px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition flex items-center gap-1.5';
+
             renderNotes();
         }
 
@@ -315,63 +477,103 @@
             const container = document.getElementById('notesContainer');
             container.innerHTML = '';
 
-            let filtered = globalNotes;
-            if (currentCategory !== 'All') {
-                filtered = globalNotes.filter(n => n.category === currentCategory);
-            }
+            let filtered = globalNotes.filter(n => n.category === currentCategory);
 
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center py-12 text-gray-400 text-sm">No notes or blogs found in this section.</div>`;
+                container.innerHTML = `<div class="text-center py-16 text-slate-400 text-sm font-medium">No published entries found in this section yet.</div>`;
                 return;
             }
 
-            const grouped = {};
-            filtered.forEach(note => {
-                const topic = note.topic?.trim() || 'General Topics';
-                if (!grouped[topic]) grouped[topic] = [];
-                grouped[topic].push(note);
-            });
+            if (currentCategory === 'English Blogs') {
+                // MAGAZINE EDITORIAL BLOG LAYOUT
+                const blogGrid = document.createElement('div');
+                blogGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
 
-            Object.keys(grouped).forEach(topicName => {
-                const topicSection = document.createElement('div');
-                topicSection.className = 'topic-group space-y-4';
-                topicSection.innerHTML = `
-                    <div class="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 pb-2">
-                        <i class="fa-solid fa-folder-open text-blue-600 dark:text-blue-400 text-lg"></i>
-                        <h2 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">${topicName}</h2>
-                        <span class="text-xs bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 font-bold px-2 py-0.5 rounded-full">${grouped[topicName].length}</span>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 topic-grid"></div>
-                `;
-
-                const grid = topicSection.querySelector('.topic-grid');
-                grouped[topicName].forEach(note => {
+                filtered.forEach(blog => {
                     const card = document.createElement('div');
-                    card.className = 'note-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-2xl border border-gray-100 dark:border-gray-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
+                    card.className = 'bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group';
+                    
+                    const coverHTML = blog.cover 
+                        ? `<div class="h-48 overflow-hidden relative">
+                             <img src="${blog.cover}" alt="${blog.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                             <span class="absolute top-3 left-3 bg-indigo-600/90 backdrop-blur text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">${blog.topic || 'Article'}</span>
+                           </div>`
+                        : `<div class="h-32 gradient-brand p-4 flex flex-col justify-between relative">
+                             <span class="bg-white/20 backdrop-blur text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider w-max">${blog.topic || 'Article'}</span>
+                             <i class="${blog.icon || 'fa-solid fa-newspaper'} text-white/30 text-5xl absolute right-4 bottom-2"></i>
+                           </div>`;
+
                     card.innerHTML = `
                         <div>
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center gap-2">
-                                    <div class="p-2 bg-blue-50 dark:bg-blue-900/40 text-blue-600 rounded-lg shrink-0">
-                                        <i class="${note.icon || 'fa-solid fa-book'} text-lg"></i>
-                                    </div>
-                                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">${note.code}</span>
+                            ${coverHTML}
+                            <div class="p-5">
+                                <div class="flex items-center justify-between text-xs text-slate-400 mb-2 font-medium">
+                                    <span>${blog.readTime || '3 min read'}</span>
+                                    <span class="font-bold text-indigo-600 dark:text-indigo-400">${blog.code}</span>
                                 </div>
-                                <span class="text-[10px] bg-gray-100 dark:bg-gray-700 text-gray-500 font-bold px-2 py-0.5 rounded">${note.category}</span>
+                                <h2 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white mb-2 line-clamp-2 group-hover:text-indigo-600 transition">${blog.title}</h2>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">${blog.desc}</p>
                             </div>
-                            <h2 class="font-bold text-sm sm:text-base text-gray-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
-                            <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
                         </div>
-                        <div class="pt-2 border-t border-gray-100 dark:border-gray-700">
-                            <a href="index.html?noteId=${note.id}" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Read Content
+                        <div class="p-5 pt-0">
+                            <a href="index.html?noteId=${blog.id}" class="w-full bg-slate-100 hover:bg-indigo-600 hover:text-white text-slate-700 font-bold py-2.5 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                                Read Article <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </a>
                         </div>
                     `;
-                    grid.appendChild(card);
+                    blogGrid.appendChild(card);
                 });
-                container.appendChild(topicSection);
-            });
+                container.appendChild(blogGrid);
+            } else {
+                // CLASSIC HIGH-DENSITY PSC NOTES GRID
+                const grouped = {};
+                filtered.forEach(note => {
+                    const topic = note.topic?.trim() || 'General Topics';
+                    if (!grouped[topic]) grouped[topic] = [];
+                    grouped[topic].push(note);
+                });
+
+                Object.keys(grouped).forEach(topicName => {
+                    const topicSection = document.createElement('div');
+                    topicSection.className = 'topic-group space-y-4';
+                    topicSection.innerHTML = `
+                        <div class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
+                            <i class="fa-solid fa-folder-open text-indigo-600 dark:text-indigo-400 text-lg"></i>
+                            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">${topicName}</h2>
+                            <span class="text-xs bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 font-bold px-2 py-0.5 rounded-full">${grouped[topicName].length}</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 topic-grid"></div>
+                    `;
+
+                    const grid = topicSection.querySelector('.topic-grid');
+                    grouped[topicName].forEach(note => {
+                        const card = document.createElement('div');
+                        card.className = 'note-card bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-700/80 shadow-sm flex flex-col justify-between hover:shadow-md transition';
+                        card.innerHTML = `
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center gap-2">
+                                        <div class="p-2 bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 rounded-lg shrink-0">
+                                            <i class="${note.icon || 'fa-solid fa-book'} text-lg"></i>
+                                        </div>
+                                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">${note.code}</span>
+                                    </div>
+                                    ${note.pdf ? '<span class="text-[11px] text-slate-400 font-medium"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i>PDF</span>' : ''}
+                                </div>
+                                <h2 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white mb-2 line-clamp-2">${note.title}</h2>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">${note.desc}</p>
+                            </div>
+                            <div class="pt-2 border-t border-slate-100 dark:border-slate-700">
+                                <a href="index.html?noteId=${note.id}" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Notes
+                                </a>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                    container.appendChild(topicSection);
+                });
+            }
         }
 
         function renderArticleView(id) {
@@ -388,6 +590,16 @@
             document.getElementById('articleTitle').textContent = note.title;
             document.getElementById('articleDesc').textContent = note.desc;
             document.getElementById('articleContent').innerHTML = note.content;
+
+            const coverContainer = document.getElementById('articleCoverContainer');
+            if (note.cover) {
+                coverContainer.classList.remove('hidden');
+                document.getElementById('articleCoverImg').src = note.cover;
+            } else {
+                coverContainer.classList.add('hidden');
+            }
+
+            document.getElementById('articleAuthor').textContent = note.readTime ? note.readTime : '';
 
             const pdfBanner = document.getElementById('pdfBanner');
             if (note.pdf) {
@@ -412,13 +624,14 @@
                 document.getElementById('formTitle').value = note.title;
                 document.getElementById('formDesc').value = note.desc;
                 document.getElementById('formContent').value = note.content;
+                document.getElementById('formCover').value = note.cover || '';
+                document.getElementById('formReadTime').value = note.readTime || '';
             } else {
                 document.getElementById('editNoteId').value = '';
                 document.getElementById('githubAdminForm').reset();
             }
         }
 
-        // TARGETED SAVE TO pscnotes.json OR blogs.json
         async function handleGitHubSave(e) {
             e.preventDefault();
             const btn = document.getElementById('saveBtn');
@@ -445,6 +658,8 @@
                     title: document.getElementById('formTitle').value,
                     desc: document.getElementById('formDesc').value,
                     content: document.getElementById('formContent').value,
+                    cover: document.getElementById('formCover').value.trim(),
+                    readTime: document.getElementById('formReadTime').value.trim(),
                     pdf: ""
                 };
 
@@ -457,14 +672,14 @@
 
                 await uploadToGitHub(repo, token, targetPath, jsonContent, `Update ${selectedCat}: ${noteObj.title}`, jsonSha);
 
-                alert(`Successfully saved to ${targetPath}!`);
+                alert(`Successfully published to ${targetPath}!`);
                 closeModal('adminModal');
                 loadNotes();
             } catch (err) {
                 alert("GitHub API Error: " + err.message);
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Target JSON File';
+                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Selected JSON File';
             }
         }
 
