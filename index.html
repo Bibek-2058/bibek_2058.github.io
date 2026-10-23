@@ -7,13 +7,16 @@
     
     <!-- Google AdSense Verification -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2333465940330507" crossorigin="anonymous"></script>
-    <!--monetag ads site code -->
-self.options = {
-    "domain": "3nbf4.com",
-    "zoneId": 12100976
-}
-self.lary = ""
-importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
+    
+    <!-- Monetag Ads Service Worker Setup -->
+    <script>
+        self.options = {
+            "domain": "3nbf4.com",
+            "zoneId": 12100976
+        };
+        self.lary = "";
+    </script>
+    <script async src="https://3nbf4.com/act/files/service-worker.min.js?r=sw"></script>
     
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,6 +28,23 @@ importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .select-text { user-select: text; -webkit-user-select: text; }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+        }
+        .video-container iframe, .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col font-sans">
@@ -82,7 +102,7 @@ importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
             </div>
         </div>
 
-        <!-- TARGETED AD CONTAINER WITH SKIP OPTION -->
+        <!-- TARGETED AD CONTAINER FOR ALL AD NETWORKS -->
         <div id="skippableAdContainer" class="relative mb-6 p-4 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-center shadow-sm">
             <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-200 dark:border-gray-700">
                 <span class="text-[10px] font-bold tracking-wider uppercase text-gray-400">Advertisement</span>
@@ -90,8 +110,9 @@ importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
                     <i class="fa-solid fa-xmark"></i> Skip Ad
                 </button>
             </div>
-            <!-- Ad Placement Zone -->
-            <div id="adSlot" class="min-h-[90px] flex items-center justify-center overflow-hidden">
+            <!-- Combined Ad Placement Zone -->
+            <div id="adSlot" class="min-h-[90px] flex flex-col items-center justify-center overflow-hidden gap-3">
+                <!-- Google AdSense Unit -->
                 <ins class="adsbygoogle"
                      style="display:block; width:100%;"
                      data-ad-client="ca-pub-2333465940330507"
@@ -279,7 +300,7 @@ importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Blog Article (HTML Supported)</label>
+                    <label class="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase mb-1">Blog Article (HTML & Media Supported)</label>
                     
                     <!-- Formatting Toolbar -->
                     <div class="flex flex-wrap gap-1 p-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-t-xl">
@@ -311,10 +332,23 @@ importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
                         <button type="button" onclick="applyFormat('mark')" title="Highlight" class="p-1.5 px-2 text-xs bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded border border-gray-200 dark:border-gray-600">
                             <i class="fa-solid fa-highlighter"></i>
                         </button>
+                        
+                        <div class="h-4 w-[1px] bg-gray-300 dark:bg-gray-600 self-center mx-1"></div>
+                        
+                        <!-- MEDIA INSERT BUTTONS -->
+                        <button type="button" onclick="insertImagePrompt()" title="Insert Image" class="p-1.5 px-2 text-xs bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-800 rounded border border-blue-200 dark:border-blue-700 font-semibold">
+                            <i class="fa-solid fa-image"></i> Image
+                        </button>
+                        <button type="button" onclick="insertYoutubePrompt()" title="Insert YouTube Video" class="p-1.5 px-2 text-xs bg-red-50 dark:bg-red-900/40 text-red-600 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-800 rounded border border-red-200 dark:border-red-700 font-semibold">
+                            <i class="fa-solid fa-video"></i> YouTube
+                        </button>
+                        <button type="button" onclick="insertVideoPrompt()" title="Insert Video URL" class="p-1.5 px-2 text-xs bg-purple-50 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-800 rounded border border-purple-200 dark:border-purple-700 font-semibold">
+                            <i class="fa-solid fa-film"></i> Video File
+                        </button>
                     </div>
 
                     <!-- Blog Content Textarea -->
-                    <textarea id="formContent" rows="6" required placeholder="Write your blog content here..." class="w-full p-2.5 rounded-b-xl border border-t-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-mono focus:outline-none"></textarea>
+                    <textarea id="formContent" rows="8" required placeholder="Write your blog content here..." class="w-full p-2.5 rounded-b-xl border border-t-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 text-sm font-mono focus:outline-none"></textarea>
                 </div>
 
                 <div>
@@ -364,6 +398,49 @@ importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
             }
 
             textarea.setRangeText(formattedText, start, end, 'select');
+            textarea.focus();
+        }
+
+        // Media Prompts for Blog Posts
+        function insertImagePrompt() {
+            const url = prompt("Enter Image URL or path (e.g. https://example.com/image.jpg or images/photo.jpg):");
+            if (!url) return;
+            const alt = prompt("Enter image description (alt text):", "Blog Image") || "Blog Image";
+            const imgHTML = `\n<div class="my-4 text-center">\n  <img src="${url}" alt="${alt}" class="rounded-xl shadow-md max-w-full h-auto mx-auto border border-gray-200 dark:border-gray-700">\n  <span class="text-xs text-gray-500 dark:text-gray-400 mt-1 block">${alt}</span>\n</div>\n`;
+            
+            insertAtCursor(imgHTML);
+        }
+
+        function insertYoutubePrompt() {
+            const input = prompt("Enter YouTube Video URL or Embed ID (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ):");
+            if (!input) return;
+            
+            let videoId = input;
+            if (input.includes("v=")) {
+                videoId = input.split("v=")[1].split("&")[0];
+            } else if (input.includes("youtu.be/")) {
+                videoId = input.split("youtu.be/")[1].split("?")[0];
+            }
+
+            const embedHTML = `\n<div class="video-container">\n  <iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n</div>\n`;
+            
+            insertAtCursor(embedHTML);
+        }
+
+        function insertVideoPrompt() {
+            const url = prompt("Enter direct MP4/Video URL (e.g. https://example.com/video.mp4):");
+            if (!url) return;
+            
+            const videoHTML = `\n<div class="video-container">\n  <video controls class="w-full rounded-xl">\n    <source src="${url}" type="video/mp4">\n    Your browser does not support the video tag.\n  </video>\n</div>\n`;
+            
+            insertAtCursor(videoHTML);
+        }
+
+        function insertAtCursor(text) {
+            const textarea = document.getElementById('formContent');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            textarea.setRangeText(text, start, end, 'end');
             textarea.focus();
         }
 
@@ -476,10 +553,9 @@ importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
                 tableHTML += `      </tr>\n`;
             }
 
-            tableHTML += `    </tbody>\n  mtable>\n</div>\n`;
+            tableHTML += `    </tbody>\n  </table>\n</div>\n`;
 
-            const contentTextarea = document.getElementById('formContent');
-            contentTextarea.value += tableHTML;
+            insertAtCursor(tableHTML);
             alert("Table successfully inserted into the note content area!");
         }
 
