@@ -223,7 +223,7 @@
         let englishBlogs = [];
         let globalNotes = [];
 
-        async function loadAdminNotes() {
+       async function loadNotes() {
             try {
                 const ts = Date.now();
                 const [blogRes, pscRes] = await Promise.all([
@@ -236,9 +236,17 @@
 
                 englishBlogs.forEach(n => n.category = 'English Blogs');
                 pscNotes.forEach(n => n.category = 'PSC Notes');
+
+                // 👇 SORT BY NEWEST FIRST (Assuming IDs are timestamps or numeric strings)
+                englishBlogs.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+                pscNotes.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+
                 globalNotes = [...englishBlogs, ...pscNotes];
 
-                populateAdminDropdown();
+                const urlParams = new URLSearchParams(window.location.search);
+                const noteId = urlParams.get('noteId');
+                if (noteId) renderArticleView(noteId);
+                else renderNotes();
             } catch (err) {
                 console.error("Error loading JSON files:", err);
             }
