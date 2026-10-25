@@ -154,69 +154,28 @@
         </article>
     </main>
 
-    <!-- FOOTER SECTION WITH POLICY & CONTACT LINKS -->
+   
+   
+<!-- FOOTER SECTION WITH POLICY & CONTACT LINKS -->
     <footer class="bg-white dark:bg-slate-900 border-t-2 border-slate-300 dark:border-slate-800 py-6 text-center text-xs text-slate-700 dark:text-slate-300 font-bold mt-auto shadow-inner">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p>&copy; 2026 Study Assist. All rights reserved.</p>
             <div class="flex items-center gap-4 text-xs">
-                <button onclick="openModal('aboutModal')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition underline font-extrabold">About Us</button>
+                <a href="about.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition underline font-extrabold">About Us</a>
                 <span>•</span>
-                <button onclick="openModal('contactModal')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition underline font-extrabold">Contact Us</button>
+                <a href="contact.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition underline font-extrabold">Contact Us</a>
                 <span>•</span>
-                <button onclick="openModal('privacyModal')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition underline font-extrabold">Privacy Policy</button>
+                <a href="privacy.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition underline font-extrabold">Privacy Policy</a>
             </div>
         </div>
     </footer>
+   
 
-    <!-- ABOUT US MODAL -->
-    <div id="aboutModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-lg w-full relative shadow-2xl border-2 border-slate-300 dark:border-slate-700 space-y-4">
-            <div class="flex items-center justify-between border-b-2 border-slate-200 dark:border-slate-800 pb-3">
-                <h3 class="text-base font-extrabold text-slate-950 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-indigo-600"></i> About Study Assist
-                </h3>
-                <button onclick="closeModal('aboutModal')" class="text-slate-500 hover:text-slate-800 dark:hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
-                Study Assist is a dedicated educational platform designed to provide high-quality study materials, Public Service Commission (PSC) syllabus notes, forestry resources, and informative blogs to empower students and civil service aspirants.
-            </p>
-        </div>
-    </div>
+   
+          
 
-    <!-- CONTACT US MODAL -->
-    <div id="contactModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-lg w-full relative shadow-2xl border-2 border-slate-300 dark:border-slate-700 space-y-4">
-            <div class="flex items-center justify-between border-b-2 border-slate-200 dark:border-slate-800 pb-3">
-                <h3 class="text-base font-extrabold text-slate-950 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-envelope text-indigo-600"></i> Contact Us
-                </h3>
-                <button onclick="closeModal('contactModal')" class="text-slate-500 hover:text-slate-800 dark:hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
-                Have questions, recommendations, or content feedback? Reach out to our team:
-            </p>
-            <div class="text-xs space-y-2 font-bold text-slate-800 dark:text-slate-200">
-                <p><i class="fa-solid fa-paper-plane mr-2 text-indigo-600"></i> Email: support@studyassist.com</p>
-                <p><i class="fa-brands fa-github mr-2 text-indigo-600"></i> GitHub: github.com/studyassist</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- PRIVACY POLICY MODAL -->
-    <div id="privacyModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-50 hidden p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-lg w-full relative shadow-2xl border-2 border-slate-300 dark:border-slate-700 space-y-4">
-            <div class="flex items-center justify-between border-b-2 border-slate-200 dark:border-slate-800 pb-3">
-                <h3 class="text-base font-extrabold text-slate-950 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-indigo-600"></i> Privacy Policy
-                </h3>
-                <button onclick="closeModal('privacyModal')" class="text-slate-500 hover:text-slate-800 dark:hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
-                At Study Assist, visitor privacy is our top priority. We utilize standard analytics and ad networks to serve informative content and ads. We do not store or sell personal user identity data.
-            </p>
-        </div>
-    </div>
-
+   
+ 
     <!-- SCRIPT ENGINE -->
     <script>
         let pscNotes = [];
