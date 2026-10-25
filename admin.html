@@ -1,1 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Publisher - Study Assist</title>
+    
+    <!-- Tailwind CSS & FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans p-4 sm:p-8">
 
+    <div class="max-w-3xl w-full mx-auto bg-slate-900 rounded-3xl p-6 shadow-2xl border-2 border-slate-700">
+        <div class="flex items-center justify-between border-b-2 border-slate-800 pb-3 mb-6">
+            <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                <i class="fa-brands fa-github text-indigo-500"></i> Admin Content Publisher
+            </h3>
+            <a href="index.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-indigo-300 font-bold py-2 px-4 rounded-xl transition">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Back to Website
+            </a>
+        </div>
+
+        <form id="githubAdminForm" onsubmit="handleGitHubSave(event)" class="space-y-4">
+            <input type="hidden" id="editNoteId">
+            
+            <div class="p-3 bg-indigo-950/40 rounded-2xl space-y-3 border-2 border-indigo-900">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-extrabold text-indigo-300 uppercase mb-1">GitHub Owner/Repo</label>
+                        <input type="text" id="ghRepo" required placeholder="username/repository" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-900 text-xs font-bold text-white">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-extrabold text-indigo-300 uppercase mb-1">Personal Access Token</label>
+                        <input type="password" id="ghToken" required placeholder="ghp_xxxxxxxxxxxx" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-900 text-xs font-bold text-white">
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">Select Existing Entry</label>
+                    <select id="selectNoteToEdit" onchange="populateFormForEdit()" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-xs font-bold text-indigo-400">
+                        <option value="">➕ Create New Entry</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">Target Category &amp; Destination File</label>
+                    <select id="formCategory" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-xs font-bold text-white">
+                        <option value="English Blogs">English Blogs (Saves to blogs.json)</option>
+                        <option value="PSC Notes">PSC Notes (Saves to pscnotes.json)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">Topic / Chapter Name</label>
+                <input type="text" id="formTopic" required placeholder="e.g. Technology, इतिहास, आर्थिक विकास" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-sm font-bold text-white">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">Code / Sequence</label>
+                    <input type="text" id="formCode" required placeholder="e.g. Blog 1.1, 1." class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-sm font-bold text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">FontAwesome Icon</label>
+                    <input type="text" id="formIcon" required placeholder="fa-solid fa-code" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-sm font-bold text-white">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">Title</label>
+                <input type="text" id="formTitle" required placeholder="Entry Title" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-sm font-bold text-white">
+            </div>
+
+            <div>
+                <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">Short Description</label>
+                <input type="text" id="formDesc" required placeholder="Brief summary preview text" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-sm font-bold text-white">
+            </div>
+
+            <div>
+                <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">
+                    Tags / Keywords <span class="text-[10px] font-normal text-slate-400">(Optional, Separated by commas)</span>
+                </label>
+                <input type="text" id="formTags" placeholder="e.g. Lok Sewa, NFL, Technology, Forestry" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-sm font-bold text-white">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">Cover Image (Direct Upload)</label>
+                    <input type="file" id="formCoverFile" accept="image/*" onchange="uploadCoverImageDirect(this)" class="w-full text-xs text-slate-300 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-extrabold file:bg-indigo-600 file:text-white cursor-pointer">
+                </div>
+                <div>
+                    <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">Cover URL</label>
+                    <input type="text" id="formCover" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-xs font-bold text-white">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-extrabold text-slate-200 uppercase mb-1">Estimated Read Time / Author</label>
+                <input type="text" id="formReadTime" placeholder="e.g. 5 min read • By Bibek Pandey" class="w-full p-2.5 rounded-xl border-2 border-slate-700 bg-slate-950 text-xs font-bold text-white">
+            </div>
+
+            <!-- CONTENT HELPER TOOLS -->
+            <div class="border-2 border-indigo-900 bg-indigo-950/20 p-4 rounded-2xl space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-indigo-300 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Content Helper Tools (Table / Image / YouTube)
+                    </span>
+                    <button type="button" onclick="toggleTableBuilder()" class="text-xs bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-1 px-3 rounded-lg transition shadow">
+                        Toggle Tools
+                    </button>
+                </div>
+
+                <div id="tableBuilderContainer" class="hidden space-y-4 pt-2">
+                    <!-- Table Builder Tool -->
+                    <div class="p-3 bg-slate-900 rounded-xl border-2 border-indigo-900 space-y-3">
+                        <span class="text-xs font-extrabold text-indigo-300 block"><i class="fa-solid fa-table mr-1"></i> Table Builder</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-300 mb-1">Rows</label>
+                                <input type="number" id="tblRows" value="2" min="1" max="50" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border-2 border-slate-700 bg-slate-950 text-xs font-bold text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-300 mb-1">Columns</label>
+                                <input type="number" id="tblCols" value="2" min="1" max="20" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border-2 border-slate-700 bg-slate-950 text-xs font-bold text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-300 mb-1">Header Row</label>
+                                <select id="tblHeaderToggle" onchange="buildTableGrid()" class="w-full p-2 rounded-lg border-2 border-slate-700 bg-slate-950 text-xs font-bold text-white">
+                                    <option value="yes">With Header</option>
+                                    <option value="no">Without Header</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-300 mb-1">Borders</label>
+                                <select id="tblBorder" class="w-full p-2 rounded-lg border-2 border-slate-700 bg-slate-950 text-xs font-bold text-white">
+                                    <option value="bordered">Bordered Grid</option>
+                                    <option value="borderless">Simple Divider</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto max-h-60 border-2 border-slate-700 rounded-xl p-2 bg-slate-950">
+                            <table id="tblInteractiveGrid" class="w-full text-xs border-collapse"></table>
+                        </div>
+
+                        <button type="button" onclick="insertTableToContent()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow">
+                            <i class="fa-solid fa-plus"></i> Insert Table into Article Content
+                        </button>
+                    </div>
+
+                    <!-- Direct In-Article Image Inserter Tool -->
+                    <div class="p-3 bg-slate-900 rounded-xl border-2 border-indigo-900 space-y-3">
+                        <span class="text-xs font-extrabold text-indigo-300 block"><i class="fa-solid fa-image mr-1"></i> Insert In-Article Image</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-300 mb-1">Select Image File</label>
+                                <input type="file" id="articleImageFile" accept="image/*" class="w-full text-xs text-slate-300 file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-indigo-600 file:text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-300 mb-1">Caption</label>
+                                <input type="text" id="articleImageCaption" placeholder="Photo caption" class="w-full p-2 rounded-lg border-2 border-slate-700 text-xs bg-slate-950 font-bold text-white">
+                            </div>
+                        </div>
+                        <button type="button" onclick="uploadAndInsertArticleImage()" class="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow">
+                            <i class="fa-solid fa-upload"></i> Upload &amp; Insert Image Into Article
+                        </button>
+                    </div>
+
+                    <!-- YouTube Video Embedder Tool -->
+                    <div class="p-3 bg-slate-900 rounded-xl border-2 border-indigo-900 space-y-3">
+                        <span class="text-xs font-extrabold text-indigo-300 block"><i class="fa-brands fa-youtube text-red-600 mr-1"></i> YouTube Video Embedder</span>
+                        <div class="flex gap-2">
+                            <input type="text" id="ytVideoUrl" placeholder="Paste YouTube link..." class="flex-grow p-2 rounded-lg border-2 border-slate-700 text-xs bg-slate-950 font-bold text-white">
+                            <button type="button" onclick="insertYouTubeVideo()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-1.5 shrink-0 shadow">
+                                <i class="fa-solid fa-plus"></i> Add Video
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENT EDITOR -->
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <label class="block text-xs font-extrabold text-slate-200 uppercase">Content Body (HTML Supported)</label>
+                    <div class="flex items-center gap-1 bg-slate-800 p-1 rounded-lg border border-slate-700">
+                        <select onchange="applyTextFormat('size', this.value); this.value='';" class="text-xs p-1 rounded bg-slate-900 border border-slate-700 font-bold text-white">
+                            <option value="">Font Size</option>
+                            <option value="small">Small</option>
+                            <option value="normal">Normal</option>
+                            <option value="h2">Heading 2</option>
+                            <option value="h3">Heading 3</option>
+                        </select>
+                        <button type="button" onclick="applyTextFormat('bold')" title="Bold" class="px-2 py-1 bg-slate-900 rounded font-black text-xs hover:bg-indigo-950 border border-slate-700">B</button>
+                        <button type="button" onclick="applyTextFormat('italic')" title="Italic" class="px-2 py-1 bg-slate-900 rounded italic font-bold text-xs hover:bg-indigo-950 border border-slate-700">I</button>
+                        <button type="button" onclick="applyTextFormat('underline')" title="Underline" class="px-2 py-1 bg-slate-900 rounded underline font-bold text-xs hover:bg-indigo-950 border border-slate-700">U</button>
+                    </div>
+                </div>
+                <textarea id="formContent" rows="8" required placeholder="Write your content here..." class="w-full p-2.5 rounded-2xl border-2 border-slate-700 bg-slate-950 text-sm font-mono font-medium text-white focus:outline-none"></textarea>
+            </div>
+
+            <div class="flex gap-3 pt-2">
+                <button type="button" id="deleteModalBtn" onclick="deleteEntryFromModal()" class="hidden bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-5 rounded-2xl text-sm transition shadow">
+                    <i class="fa-solid fa-trash-can mr-1"></i> Delete Entry
+                </button>
+                <button type="submit" id="saveBtn" class="flex-1 bg-indigo-700 hover:bg-indigo-800 text-white font-extrabold py-3 rounded-2xl text-sm transition shadow-md shadow-indigo-500/30">
+                    <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Selected JSON File
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ADMIN JS ENGINE -->
+    <script>
+        let pscNotes = [];
+        let englishBlogs = [];
+        let globalNotes = [];
+
+        async function loadAdminNotes() {
+            try {
+                const ts = Date.now();
+                const [blogRes, pscRes] = await Promise.all([
+                    fetch(`data/blogs.json?t=${ts}`).catch(() => null),
+                    fetch(`data/pscnotes.json?t=${ts}`).catch(() => null)
+                ]);
+
+                englishBlogs = (blogRes && blogRes.ok) ? await blogRes.json() : [];
+                pscNotes = (pscRes && pscRes.ok) ? await pscRes.json() : [];
+
+                englishBlogs.forEach(n => n.category = 'English Blogs');
+                pscNotes.forEach(n => n.category = 'PSC Notes');
+                globalNotes = [...englishBlogs, ...pscNotes];
+
+                populateAdminDropdown();
+            } catch (err) {
+                console.error("Error loading JSON files:", err);
+            }
+        }
+
+        function populateAdminDropdown() {
+            const select = document.getElementById('selectNoteToEdit');
+            select.innerHTML = '<option value="">➕ Create New Entry</option>';
+            globalNotes.forEach(n => {
+                const opt = document.createElement('option');
+                opt.value = n.id;
+                opt.textContent = `✏️ [${n.category}] ${n.title}`;
+                select.appendChild(opt);
+            });
+        }
+
+        function populateFormForEdit() {
+            const id = document.getElementById('selectNoteToEdit').value;
+            const note = globalNotes.find(n => n.id === id);
+            const delBtn = document.getElementById('deleteModalBtn');
+
+            if (note) {
+                document.getElementById('editNoteId').value = note.id;
+                document.getElementById('formCategory').value = note.category;
+                document.getElementById('formTopic').value = note.topic;
+                document.getElementById('formCode').value = note.code;
+                document.getElementById('formIcon').value = note.icon;
+                document.getElementById('formTitle').value = note.title;
+                document.getElementById('formDesc').value = note.desc;
+                document.getElementById('formContent').value = note.content;
+                document.getElementById('formCover').value = note.cover || '';
+                document.getElementById('formReadTime').value = note.readTime || '';
+                document.getElementById('formTags').value = Array.isArray(note.tags) ? note.tags.join(', ') : (note.tags || '');
+                delBtn.classList.remove('hidden');
+            } else {
+                document.getElementById('editNoteId').value = '';
+                document.getElementById('githubAdminForm').reset();
+                delBtn.classList.add('hidden');
+            }
+        }
+
+        function toggleTableBuilder() {
+            const container = document.getElementById('tableBuilderContainer');
+            container.classList.toggle('hidden');
+            if (!container.classList.contains('hidden')) buildTableGrid();
+        }
+
+        function applyTextFormat(type, value = '') {
+            const textarea = document.getElementById('formContent');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end) || 'Sample text';
+            let formattedText = '';
+
+            if (type === 'bold') formattedText = `<strong>${selectedText}</strong>`;
+            else if (type === 'italic') formattedText = `<em>${selectedText}</em>`;
+            else if (type === 'underline') formattedText = `<u>${selectedText}</u>`;
+            else if (type === 'size') {
+                if (value === 'small') formattedText = `<small>${selectedText}</small>`;
+                else if (value === 'h2') formattedText = `\n<h2>${selectedText}</h2>\n`;
+                else if (value === 'h3') formattedText = `\n<h3>${selectedText}</h3>\n`;
+                else if (value === 'normal') formattedText = `<p>${selectedText}</p>`;
+            }
+
+            if (formattedText) {
+                textarea.setRangeText(formattedText, start, end, 'end');
+                textarea.focus();
+            }
+        }
+
+        function insertYouTubeVideo() {
+            const input = document.getElementById('ytVideoUrl');
+            const url = input.value.trim();
+            if (!url) return alert("Please enter a valid YouTube URL!");
+
+            let videoId = '';
+            const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+            if (match && match[1]) {
+                videoId = match[1];
+            } else {
+                return alert("Could not extract YouTube Video ID.");
+            }
+
+            const embedHTML = `\n<div class="video-container my-4">\n  <iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n</div>\n`;
+
+            const textarea = document.getElementById('formContent');
+            const start = textarea.selectionStart;
+            textarea.setRangeText(embedHTML, start, textarea.selectionEnd, 'end');
+            input.value = '';
+            alert("YouTube video embedded into content!");
+        }
+
+        async function uploadCoverImageDirect(fileInput) {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const repo = document.getElementById('ghRepo').value.trim();
+            const token = document.getElementById('ghToken').value.trim();
+            if (!repo || !token) return alert("Please fill in your GitHub Repo and Access Token first!");
+
+            const fileName = `cover_${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+            const path = `assets/images/${fileName}`;
+
+            try {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const base64Content = e.target.result.split(',')[1];
+                    await uploadToGitHub(repo, token, path, base64Content, `Upload cover image ${fileName}`);
+                    document.getElementById('formCover').value = `./${path}`;
+                    alert("Cover image uploaded and path linked!");
+                };
+                reader.readAsDataURL(file);
+            } catch (err) {
+                alert("Image Upload Error: " + err.message);
+            }
+        }
+
+        async function uploadAndInsertArticleImage() {
+            const fileInput = document.getElementById('articleImageFile');
+            const captionInput = document.getElementById('articleImageCaption');
+            const file = fileInput.files[0];
+
+            if (!file) return alert("Please select an image file first.");
+
+            const repo = document.getElementById('ghRepo').value.trim();
+            const token = document.getElementById('ghToken').value.trim();
+            if (!repo || !token) return alert("Please fill in your GitHub Repo and Access Token first!");
+
+            const fileName = `img_${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+            const path = `assets/images/${fileName}`;
+            const caption = captionInput.value.trim();
+
+            try {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const base64Content = e.target.result.split(',')[1];
+                    await uploadToGitHub(repo, token, path, base64Content, `Upload article image ${fileName}`);
+                    const imgUrl = `./${path}`;
+
+                    const imgHTML = `\n<figure class="blog-image my-4 text-center">\n  <img src="${imgUrl}" alt="${caption || 'Article image'}" class="w-full max-w-2xl mx-auto rounded-2xl shadow-md my-2" />\n  ${caption ? `<figcaption class="text-xs text-slate-400 mt-1 font-bold">${caption}</figcaption>` : ''}\n</figure>\n`;
+
+                    const textarea = document.getElementById('formContent');
+                    const start = textarea.selectionStart;
+                    textarea.setRangeText(imgHTML, start, textarea.selectionEnd, 'end');
+
+                    fileInput.value = '';
+                    captionInput.value = '';
+                    alert("Image uploaded and inserted into content!");
+                };
+                reader.readAsDataURL(file);
+            } catch (err) {
+                alert("Image Upload Error: " + err.message);
+            }
+        }
+
+        function buildTableGrid() {
+            const rows = parseInt(document.getElementById('tblRows').value) || 1;
+            const cols = parseInt(document.getElementById('tblCols').value) || 1;
+            const includeHeader = document.getElementById('tblHeaderToggle').value === 'yes';
+            const table = document.getElementById('tblInteractiveGrid');
+            table.innerHTML = '';
+
+            if (includeHeader) {
+                const thead = document.createElement('thead');
+                const headTr = document.createElement('tr');
+                for (let c = 0; c < cols; c++) {
+                    const th = document.createElement('th');
+                    th.className = 'p-1';
+                    th.innerHTML = `<input type="text" placeholder="Header ${c + 1}" class="tbl-header-input w-full p-1 border rounded text-xs font-bold bg-slate-900 border-slate-700 text-white">`;
+                    headTr.appendChild(th);
+                }
+                thead.appendChild(headTr);
+                table.appendChild(thead);
+            }
+
+            const tbody = document.createElement('tbody');
+            for (let r = 0; r < rows; r++) {
+                const tr = document.createElement('tr');
+                for (let c = 0; c < cols; c++) {
+                    const td = document.createElement('td');
+                    td.className = 'p-1';
+                    td.innerHTML = `<input type="text" placeholder="Cell ${r + 1},${c + 1}" class="tbl-cell-input w-full p-1 border rounded text-xs bg-slate-900 border-slate-700 font-bold text-white" data-row="${r}" data-col="${c}">`;
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+            table.appendChild(tbody);
+        }
+
+        function insertTableToContent() {
+            const rows = parseInt(document.getElementById('tblRows').value) || 1;
+            const cols = parseInt(document.getElementById('tblCols').value) || 1;
+            const includeHeader = document.getElementById('tblHeaderToggle').value === 'yes';
+            const borderStyle = document.getElementById('tblBorder').value;
+
+            const headerInputs = document.querySelectorAll('.tbl-header-input');
+            const cellInputs = document.querySelectorAll('.tbl-cell-input');
+
+            const isBordered = borderStyle === 'bordered';
+            const tableClass = isBordered 
+                ? 'w-full text-sm text-left border-collapse border-2 border-slate-700 my-4' 
+                : 'w-full text-sm text-left border-collapse my-4';
+            const cellBorder = isBordered ? 'border-2 border-slate-700' : 'border-b-2 border-slate-800';
+
+            let tableHTML = `\n<div class="overflow-x-auto my-4">\n  <table class="${tableClass}">\n`;
+
+            if (includeHeader) {
+                tableHTML += `    <thead class="bg-slate-800 font-extrabold">\n      <tr>\n`;
+                for (let c = 0; c < cols; c++) {
+                    const val = headerInputs[c]?.value.trim() || `Header ${c + 1}`;
+                    tableHTML += `        <th class="p-2.5 ${cellBorder}">${val}</th>\n`;
+                }
+                tableHTML += `      </tr>\n    </thead>\n`;
+            }
+
+            tableHTML += `    <tbody>\n`;
+            for (let r = 0; r < rows; r++) {
+                tableHTML += `      <tr>\n`;
+                for (let c = 0; c < cols; c++) {
+                    const cell = Array.from(cellInputs).find(i => parseInt(i.dataset.row) === r && parseInt(i.dataset.col) === c);
+                    const val = cell?.value || '';
+                    tableHTML += `        <td class="p-2.5 ${cellBorder}">${val}</td>\n`;
+                }
+                tableHTML += `      </tr>\n`;
+            }
+            tableHTML += `    </tbody>\n  </table>\n</div>\n`;
+
+            const textarea = document.getElementById('formContent');
+            const start = textarea.selectionStart;
+            textarea.setRangeText(tableHTML, start, textarea.selectionEnd, 'end');
+            alert("Table inserted into content!");
+        }
+
+        async function handleGitHubSave(e) {
+            e.preventDefault();
+            const btn = document.getElementById('saveBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+            const repo = document.getElementById('ghRepo').value.trim();
+            const token = document.getElementById('ghToken').value.trim();
+            localStorage.setItem('gh_repo', repo);
+            localStorage.setItem('gh_token', token);
+
+            try {
+                const selectedCat = document.getElementById('formCategory').value;
+                const targetPath = selectedCat === 'English Blogs' ? 'data/blogs.json' : 'data/pscnotes.json';
+                let targetArray = selectedCat === 'English Blogs' ? englishBlogs : pscNotes;
+
+                const id = document.getElementById('editNoteId').value || Date.now().toString();
+                const tagsRaw = document.getElementById('formTags').value.trim();
+                const tagsArray = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(t => t) : [];
+
+                const noteObj = {
+                    id,
+                    category: selectedCat,
+                    topic: document.getElementById('formTopic').value.trim(),
+                    code: document.getElementById('formCode').value,
+                    icon: document.getElementById('formIcon').value,
+                    title: document.getElementById('formTitle').value,
+                    desc: document.getElementById('formDesc').value,
+                    content: document.getElementById('formContent').value,
+                    cover: document.getElementById('formCover').value.trim(),
+                    readTime: document.getElementById('formReadTime').value.trim(),
+                    tags: tagsArray,
+                    pdf: ""
+                };
+
+                const index = targetArray.findIndex(n => n.id === id);
+                if (index > -1) targetArray[index] = noteObj;
+                else targetArray.push(noteObj);
+
+                const jsonSha = await getFileSHA(repo, token, targetPath);
+                const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(targetArray, null, 2))));
+
+                await uploadToGitHub(repo, token, targetPath, jsonContent, `Update ${selectedCat}: ${noteObj.title}`, jsonSha);
+
+                alert(`Successfully published to ${targetPath}!`);
+                loadAdminNotes();
+            } catch (err) {
+                alert("GitHub API Error: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save to Selected JSON File';
+            }
+        }
+
+        async function deleteEntryFromModal() {
+            const id = document.getElementById('editNoteId').value;
+            if (!id) return;
+            if (confirm("⚠️ Are you sure you want to permanently delete this entry?")) {
+                await executeDeleteNote(id);
+            }
+        }
+
+        async function executeDeleteNote(id) {
+            const note = globalNotes.find(n => n.id === id);
+            if (!note) return;
+
+            const repo = document.getElementById('ghRepo').value.trim() || localStorage.getItem('gh_repo');
+            const token = document.getElementById('ghToken').value.trim() || localStorage.getItem('gh_token');
+            if (!repo || !token) return alert("GitHub repository credentials missing!");
+
+            const selectedCat = note.category;
+            const targetPath = selectedCat === 'English Blogs' ? 'data/blogs.json' : 'data/pscnotes.json';
+            let targetArray = selectedCat === 'English Blogs' ? englishBlogs : pscNotes;
+
+            const updatedArray = targetArray.filter(n => n.id !== id);
+
+            try {
+                const jsonSha = await getFileSHA(repo, token, targetPath);
+                const jsonContent = btoa(unescape(encodeURIComponent(JSON.stringify(updatedArray, null, 2))));
+
+                await uploadToGitHub(repo, token, targetPath, jsonContent, `Delete ${selectedCat}: ${note.title}`, jsonSha);
+
+                alert("Entry permanently deleted!");
+                document.getElementById('githubAdminForm').reset();
+                document.getElementById('editNoteId').value = '';
+                loadAdminNotes();
+            } catch (err) {
+                alert("Deletion error: " + err.message);
+            }
+        }
+
+        async function uploadToGitHub(repo, token, path, contentBase64, message, sha = null) {
+            const url = `https://api.github.com/repos/${repo}/contents/${path}`;
+            const body = { message, content: contentBase64 };
+            if (sha) body.sha = sha;
+
+            const res = await fetch(url, {
+                method: 'PUT',
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+            if (!res.ok) throw new Error(await res.text());
+            return res.json();
+        }
+
+        async function getFileSHA(repo, token, path) {
+            try {
+                const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    return data.sha;
+                }
+            } catch (e) {}
+            return null;
+        }
+
+        window.onload = () => {
+            document.getElementById('ghRepo').value = localStorage.getItem('gh_repo') || '';
+            document.getElementById('ghToken').value = localStorage.getItem('gh_token') || '';
+            loadAdminNotes();
+        };
+    </script>
+</body>
+</html>
