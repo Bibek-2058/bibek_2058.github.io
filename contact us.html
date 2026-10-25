@@ -1,14 +1,80 @@
-<h3>Contact Us</h3>
-<p>
-    We value your questions, feedback, and suggestions. Whether you have content inquiries, technical issues, or recommendations for new study topics, please feel free to reach out to us.
-</p>
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Study Assist</title>
+    
+    <!-- Tailwind CSS & FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-brand {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col font-sans">
 
-<div style="margin-top: 1rem;">
-    <p><strong>Publisher & Lead Editor:</strong> Bibek Pandey</p>
-    <p><strong>Official Email:</strong> <a href="mailto:bibekpandey2080@gmail.com">bibekpandey2080@gmail.com</a></p>
-    <p><strong>Website:</strong> <a href="https://pandeybibek.com.np" target="_blank">pandeybibek.com.np</a></p>
-</div>
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b-2 border-slate-300 dark:border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="p-2.5 gradient-brand rounded-xl text-white shadow-md shadow-indigo-500/30 shrink-0">
+                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-lg sm:text-xl font-extrabold bg-gradient-to-r from-indigo-700 via-purple-700 to-blue-700 dark:from-indigo-400 dark:to-blue-400 bg-clip-text text-transparent">Study Assist</span>
+                    <span class="text-[10px] block text-indigo-700 dark:text-indigo-400 -mt-1 font-extrabold uppercase tracking-wider">Educational Hub</span>
+                </div>
+            </a>
+            <a href="index.html" class="text-xs bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded-xl transition shadow">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Back to Home
+            </a>
+        </div>
+    </header>
 
-<p style="margin-top: 1rem;">
-    We aim to respond to all inquiries within 24 to 48 hours. Thank you for using Study Assist!
-</p>
+    <!-- Main Content -->
+    <main class="flex-grow max-w-3xl w-full mx-auto px-4 py-10">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 shadow-md border-2 border-slate-200 dark:border-slate-800 space-y-6">
+            <div class="border-b-2 border-slate-200 dark:border-slate-800 pb-4">
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white flex items-center gap-3">
+                    <i class="fa-solid fa-envelope text-indigo-600"></i> Contact Us
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 font-medium">
+                    We value your questions, feedback, and recommendations. Reach out to our team anytime.
+                </p>
+            </div>
+
+            <div class="space-y-4 text-sm font-bold text-slate-800 dark:text-slate-200">
+                <div class="p-4 bg-indigo-50 dark:bg-slate-950 rounded-2xl border-2 border-indigo-200 dark:border-slate-800 space-y-3">
+                    <p class="flex items-center gap-3">
+                        <i class="fa-solid fa-user-tie text-indigo-600 text-lg w-6"></i> 
+                        <span><strong>Publisher &amp; Lead Editor:</strong> Bibek Pandey</span>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fa-solid fa-paper-plane text-indigo-600 text-lg w-6"></i> 
+                        <span><strong>Official Email:</strong> <a href="mailto:bibekpandey2080@gmail.com" class="text-indigo-600 dark:text-indigo-400 hover:underline">bibekpandey2080@gmail.com</a></span>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fa-solid fa-globe text-indigo-600 text-lg w-6"></i> 
+                        <span><strong>Website:</strong> <a href="https://pandeybibek.com.np" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">pandeybibek.com.np</a></span>
+                    </p>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">
+                    We aim to respond to all inquiries within 24 to 48 hours. Thank you for using Study Assist!
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-900 border-t-2 border-slate-300 dark:border-slate-800 py-6 text-center text-xs text-slate-700 dark:text-slate-300 font-bold mt-auto shadow-inner">
+        <p>&copy; 2026 Study Assist. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
